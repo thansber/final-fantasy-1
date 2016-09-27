@@ -1,0 +1,29 @@
+<link rel="import" href="/bower_components/iron-selector/iron-multi-selectable.html">
+
+<dom-module id="ff-selector">
+  <template>
+    <style>
+      :host ::content .iron-selected {
+        position: relative;
+      }
+      :host ::content .iron-selected:before {
+        background-image: url('cursor.png');
+        content: ' ';
+        height: 32px;
+        left: -44px;
+        position: absolute;
+        top: 4px;
+        width: 32px;
+      }
+    </style>
+    <content></content>
+  </template>
+  <script>
+    Polymer({
+      is: 'ff-selector',
+      behaviors: [
+        Polymer.IronMultiSelectableBehavior
+      ]
+    });
+  </script>
+</dom-module>

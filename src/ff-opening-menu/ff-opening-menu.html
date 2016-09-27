@@ -1,0 +1,27 @@
+<link rel="import" href="../ff-bordered/ff-bordered.html">
+<link rel="import" href="../ff-selector/ff-selector.html">
+<link rel="import" href="ff-opening-menu-css.html">
+
+<dom-module id="ff-opening-menu">
+  <template>
+    <style include="ff-opening-menu-css"></style>
+
+    <ff-selector selector attr-for-selected="name">
+      <ff-bordered name="continue">CONTINUE</ff-bordered>
+      <ff-bordered name="new">NEW GAME</ff-bordered>
+      <ff-bordered name="respondRate">RESPOND RATE {{respondRate}}</ff-bordered>
+    </ff-selector>
+  </template>
+
+  <script>
+    Polymer({
+      is: 'ff-opening-menu',
+      properties: {
+        respondRate: {
+          type: Number,
+          value: 8
+        }
+      }
+    });
+  </script>
+</dom-module>

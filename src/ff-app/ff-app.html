@@ -1,13 +1,11 @@
-<link rel="import" href="../../bower_components/polymer/polymer.html">
+<link rel="import" href="/bower_components/polymer/polymer.html">
+<link rel="import" href="../ff-opening-menu/ff-opening-menu.html">
+<link rel="import" href="ff-app-css.html">
 
 <dom-module id="ff-app">
   <template>
-    <style>
-      :host {
-        display: block;
-      }
-    </style>
-    <h2>Hello [[prop1]]</h2>
+    <style include="ff-app-css"></style>
+    <ff-opening-menu></ff-opening-menu>
   </template>
 
   <script>
@@ -16,10 +14,7 @@
       is: 'ff-app',
 
       properties: {
-        prop1: {
-          type: String,
-          value: 'ff-app',
-        },
+       
       },
 
     });
