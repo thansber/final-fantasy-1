@@ -1,3 +1,4 @@
+<link rel="import" href="/bower_components/iron-a11y-keys/iron-a11y-keys.html">
 <link rel="import" href="/bower_components/iron-selector/iron-multi-selectable.html">
 
 <dom-module id="ff-selector">
@@ -16,14 +17,43 @@
         width: 32px;
       }
     </style>
+
     <content></content>
+
+    <iron-a11y-keys keys="up" on-keys-pressed="selectPrevious"></iron-a11y-keys>
+    <iron-a11y-keys keys="down" on-keys-pressed="selectNext"></iron-a11y-keys>
+    <iron-a11y-keys keys="left" on-keys-pressed="_leftPressed"></iron-a11y-keys>
+    <iron-a11y-keys keys="right" on-keys-pressed="_rightPressed"></iron-a11y-keys>
+    <iron-a11y-keys keys="enter space" on-keys-pressed="_go"></iron-a11y-keys>
+
   </template>
   <script>
     Polymer({
       is: 'ff-selector',
       behaviors: [
         Polymer.IronMultiSelectableBehavior
-      ]
+      ],
+
+      ready: function() {
+        Polymer.dom(this.root).querySelectorAll("[keys]").forEach(function(keyHandler) {
+          keyHandler.target = document.body;
+        });
+      },
+
+      _go: function() {
+        this.fire('ff-selected', {
+          value: this.selected
+        });
+      },
+
+      _leftPressed: function() {
+        this.fire('ff-left');
+      },
+
+      _rightPressed: function() {
+        this.fire('ff-right');
+      }
+
     });
   </script>
 </dom-module>

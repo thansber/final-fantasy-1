@@ -6,11 +6,18 @@
   <template>
     <style include="ff-opening-menu-css"></style>
 
-    <ff-selector selector attr-for-selected="name">
+    <ff-selector id="selector"
+      attr-for-selected="name"
+      selected="continue"
+      on-ff-selected="_next"
+      on-ff-left="_respondRateLower"
+      on-ff-right="_respondRateRaise">
       <ff-bordered name="continue">CONTINUE</ff-bordered>
       <ff-bordered name="new">NEW GAME</ff-bordered>
-      <ff-bordered name="respondRate">RESPOND RATE {{respondRate}}</ff-bordered>
     </ff-selector>
+
+    <ff-bordered name="respondRate">RESPOND RATE {{respondRate}}</ff-bordered>
+
   </template>
 
   <script>
@@ -18,10 +25,40 @@
       is: 'ff-opening-menu',
       properties: {
         respondRate: {
+          notify: true,
           type: Number,
           value: 8
         }
+      },
+
+      _next: function(e, detail) {
+        if (detail.value === 'continue') {
+          // TODO: check for existing saved game, load it
+          // TODO: if no saved game go to new game
+        } else if (detail.value === 'new') {
+          // TODO: go to new game
+        }
+      },
+
+      _respondRateChange: function(amount) {
+        var newRespondRate = this.respondRate + amount;
+        if (newRespondRate < 1) {
+          newRespondRate = 8;
+        }
+        if (newRespondRate > 8) {
+          newRespondRate = 1;
+        }
+        this.set('respondRate', newRespondRate);
+      },
+
+      _respondRateLower: function() {
+        this._respondRateChange(-1);
+      },
+
+      _respondRateRaise: function() {
+        this._respondRateChange(1);
       }
+
     });
   </script>
 </dom-module>
