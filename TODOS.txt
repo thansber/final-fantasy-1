@@ -1,0 +1,4 @@
+- allow selector to treat left/right as up/down with boolean property
+- add intro screen w/fade in effect
+- add party creation screen
+- add name enter screen
