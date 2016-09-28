@@ -4,7 +4,8 @@
   "dependencies": {
     "polymer": "Polymer/polymer#^1.4.0",
     "iron-selector": "^1.5.2",
-    "iron-a11y-keys": "^1.0.6"
+    "iron-a11y-keys": "^1.0.6",
+    "neon-animation": "^1.2.4"
   },
   "devDependencies": {
     "iron-component-page": "PolymerElements/iron-component-page#^1.0.0",

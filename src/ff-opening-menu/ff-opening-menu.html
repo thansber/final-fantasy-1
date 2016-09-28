@@ -1,3 +1,4 @@
+<link rel="import" href="../behaviors/ff-screen-behavior.html">
 <link rel="import" href="../ff-bordered/ff-bordered.html">
 <link rel="import" href="../ff-selector/ff-selector.html">
 <link rel="import" href="ff-opening-menu-css.html">
@@ -23,12 +24,21 @@
   <script>
     Polymer({
       is: 'ff-opening-menu',
+
+      behaviors: [
+        FF.ScreenBehavior
+      ],
+
       properties: {
         respondRate: {
           notify: true,
           type: Number,
           value: 8
         }
+      },
+
+      onScreenClosed: function() {
+        console.log('opening menu onScreenClosed');
       },
 
       _next: function(e, detail) {

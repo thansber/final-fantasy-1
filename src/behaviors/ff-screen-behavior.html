@@ -1,0 +1,26 @@
+<script>
+(function(scope) {
+  scope.FF = scope.FF || {};
+
+  scope.FF.ScreenBehavior = {
+    properties: {
+      currentScreen: {
+        observer: 'onScreenChange',
+        reflectToAttribute: true,
+        type: Boolean,
+        value: false
+      }
+    },
+
+    onScreenChange: function(value) {
+      if (value === false) {
+        this.onScreenClosed.call(this);
+      }
+      this.hidden = !this.currentScreen;
+    },
+
+    onScreenClosed: function() {}
+
+  };
+}(window));
+</script>

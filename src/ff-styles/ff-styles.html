@@ -1,0 +1,22 @@
+<dom-module id="ff-styles">
+  <template>
+    <style is="custom-style">
+      @font-face {
+        font-family: FinalFantasy;
+        font-style: normal;
+        font-weight: normal;
+        src: url('/fonts/Final Fantasy 1.woff') format('woff');
+      }
+
+      :root {
+        --ff-blue: rgb(36, 24, 140);
+        --ff-white: rgb(255, 255, 255);
+
+        --ff-font: {
+          color: var(--ff-white);
+          font-family: FinalFantasy;
+        };
+      }
+    </style>
+  </template>
+</dom-module>

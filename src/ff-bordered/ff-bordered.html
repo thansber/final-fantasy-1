@@ -1,25 +1,19 @@
+<link rel="import" href="../ff-styles/ff-styles.html">
+
 <dom-module id="ff-bordered">
 	<template>
-		<style>
-      @font-face {
-        font-family: FinalFantasy;
-        font-style: normal;
-        font-weight: normal;
-        src: url('/fonts/Final Fantasy 1.woff') format('woff');
-      } 
-
+		<style include="ff-styles" is="custom-style">
       :host {
-        background-color: rgba(36, 24, 140, 1.0); 
+        background-color: var(--ff-blue);
         border-color: transparent;
         border-radius: 14px;
         border-style: solid;
         border-width: 10px;
         border-image: url('/images/border.png') 10 repeat;
-        color: rgba(255, 255, 255, 1.0);
         display: block;
-        font-family: FinalFantasy;
-        padding: 20px 8px 8px;        
-      }  
+        padding: 20px 8px 8px;
+        @apply(--ff-font);
+      }
     </style>
 		<content></content>
 	</template>

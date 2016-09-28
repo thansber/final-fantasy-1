@@ -1,11 +1,16 @@
 <link rel="import" href="/bower_components/polymer/polymer.html">
+<link rel="import" href="../ff-intro/ff-intro.html">
 <link rel="import" href="../ff-opening-menu/ff-opening-menu.html">
 <link rel="import" href="ff-app-css.html">
 
 <dom-module id="ff-app">
   <template>
     <style include="ff-app-css"></style>
-    <ff-opening-menu id="openingMenu"></ff-opening-menu>
+
+    <div id="screens">
+      <ff-intro id="intro"></ff-intro>
+      <ff-opening-menu id="openingMenu"></ff-opening-menu>
+    </div>
   </template>
 
   <script>
@@ -14,8 +19,25 @@
       is: 'ff-app',
 
       properties: {
-       
+
+      },
+
+      ready: function() {
+        this.screenChanged('intro');
+      },
+
+      screenChanged: function(screen) {
+        var content = Polymer.dom(this.$.content);
+        var oldScreen = content.querySelector('[current-screen]');
+        var newScreen = this.$[screen];
+
+        if (oldScreen) {
+          oldScreen.set('currentScreen', false);
+        }
+
+        newScreen.set('currentScreen', true);
       }
+
 
     });
   </script>
