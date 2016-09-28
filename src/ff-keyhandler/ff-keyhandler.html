@@ -1,0 +1,13 @@
+<link rel="import" href="/bower_components/iron-a11y-keys/iron-a11y-keys.html">
+
+<dom-module id="ff-keyhandler">
+  <template>
+    <iron-a11y-keys keys="up" on-keys-pressed="_pressedUp"></iron-a11y-keys>
+    <iron-a11y-keys keys="down" on-keys-pressed="_pressedDown"></iron-a11y-keys>
+    <iron-a11y-keys keys="left" on-keys-pressed="_pressedLeft"></iron-a11y-keys>
+    <iron-a11y-keys keys="right" on-keys-pressed="_pressedRight"></iron-a11y-keys>
+    <iron-a11y-keys keys="enter space" on-keys-pressed="_go"></iron-a11y-keys>
+  </template>
+
+  <script src="ff-keyhandler.js"></script>
+</dom-module>

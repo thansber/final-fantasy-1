@@ -1,5 +1,5 @@
-<link rel="import" href="/bower_components/iron-a11y-keys/iron-a11y-keys.html">
 <link rel="import" href="/bower_components/iron-selector/iron-multi-selectable.html">
+<link rel="import" href="../ff-keyhandler/ff-keyhandler.html">
 
 <dom-module id="ff-selector">
   <template>
@@ -20,11 +20,10 @@
 
     <content></content>
 
-    <iron-a11y-keys keys="up" on-keys-pressed="selectPrevious"></iron-a11y-keys>
-    <iron-a11y-keys keys="down" on-keys-pressed="selectNext"></iron-a11y-keys>
-    <iron-a11y-keys keys="left" on-keys-pressed="_leftPressed"></iron-a11y-keys>
-    <iron-a11y-keys keys="right" on-keys-pressed="_rightPressed"></iron-a11y-keys>
-    <iron-a11y-keys keys="enter space" on-keys-pressed="_go"></iron-a11y-keys>
+    <ff-keyhandler id="keyHandler"
+      on-ff-go="_go"
+      on-ff-up="selectPrevious"
+      on-ff-down="selectNext"></ff-keyhandler>
 
   </template>
   <script>
@@ -34,24 +33,18 @@
         Polymer.IronMultiSelectableBehavior
       ],
 
-      ready: function() {
-        Polymer.dom(this.root).querySelectorAll("[keys]").forEach(function(keyHandler) {
-          keyHandler.target = document.body;
-        });
+      activate: function() {
+        this.$.keyHandler.activate();
+      },
+
+      deactivate: function() {
+        this.$.keyHandler.deactivate();
       },
 
       _go: function() {
         this.fire('ff-selected', {
           value: this.selected
         });
-      },
-
-      _leftPressed: function() {
-        this.fire('ff-left');
-      },
-
-      _rightPressed: function() {
-        this.fire('ff-right');
       }
 
     });

@@ -14,12 +14,46 @@
 
     onScreenChange: function(value) {
       if (value === false) {
-        this.onScreenClosed.call(this);
+        this._onScreenClosed();
+      } else {
+        this._onScreenOpened();
       }
       this.hidden = !this.currentScreen;
     },
 
-    onScreenClosed: function() {}
+    onScreenClosed: function() {},
+    onScreenOpened: function() {},
+
+    _activateKeyHandler: function() {
+      this._keyHandler().activate();
+    },
+
+    _deactivateKeyHandler: function() {
+      this._keyHandler().deactivate();
+    },
+
+    _keyHandler: function() {
+      return Polymer.dom(this.root).querySelector('ff-keyhandler') ||
+        Polymer.dom(this.root).querySelector('ff-selector') ||
+        this._noopKeyHandler();
+    },
+
+    _noopKeyHandler: function() {
+      return {
+        activate: function() {},
+        deactivate: function() {}
+      };
+    },
+
+    _onScreenClosed: function() {
+      this._deactivateKeyHandler();
+      this.onScreenClosed.call(this);
+    },
+
+    _onScreenOpened: function() {
+      this._activateKeyHandler();
+      this.onScreenOpened.call(this);
+    }
 
   };
 }(window));

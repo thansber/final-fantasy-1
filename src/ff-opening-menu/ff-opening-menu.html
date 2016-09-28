@@ -18,59 +18,7 @@
     </ff-selector>
 
     <ff-bordered name="respondRate">RESPOND RATE {{respondRate}}</ff-bordered>
-
   </template>
 
-  <script>
-    Polymer({
-      is: 'ff-opening-menu',
-
-      behaviors: [
-        FF.ScreenBehavior
-      ],
-
-      properties: {
-        respondRate: {
-          notify: true,
-          type: Number,
-          value: 8
-        }
-      },
-
-      onScreenClosed: function() {
-        console.log('opening menu onScreenClosed');
-      },
-
-      _next: function(e, detail) {
-        if (detail.value === 'continue') {
-          // TODO: check for existing saved game, load it
-          // TODO: if no saved game go to new game
-          console.log('continuing');
-        } else if (detail.value === 'new') {
-          // TODO: go to new game
-          console.log('new game');
-        }
-      },
-
-      _respondRateChange: function(amount) {
-        var newRespondRate = this.respondRate + amount;
-        if (newRespondRate < 1) {
-          newRespondRate = 8;
-        }
-        if (newRespondRate > 8) {
-          newRespondRate = 1;
-        }
-        this.set('respondRate', newRespondRate);
-      },
-
-      _respondRateLower: function() {
-        this._respondRateChange(-1);
-      },
-
-      _respondRateRaise: function() {
-        this._respondRateChange(1);
-      }
-
-    });
-  </script>
+  <script src="ff-opening-menu.js"></script>
 </dom-module>

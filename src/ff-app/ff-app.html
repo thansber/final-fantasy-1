@@ -8,37 +8,10 @@
     <style include="ff-app-css"></style>
 
     <div id="screens">
-      <ff-intro id="intro"></ff-intro>
-      <ff-opening-menu id="openingMenu"></ff-opening-menu>
+      <ff-intro screen="intro"></ff-intro>
+      <ff-opening-menu screen="openingMenu"></ff-opening-menu>
     </div>
   </template>
 
-  <script>
-    Polymer({
-
-      is: 'ff-app',
-
-      properties: {
-
-      },
-
-      ready: function() {
-        this.screenChanged('intro');
-      },
-
-      screenChanged: function(screen) {
-        var content = Polymer.dom(this.$.content);
-        var oldScreen = content.querySelector('[current-screen]');
-        var newScreen = this.$[screen];
-
-        if (oldScreen) {
-          oldScreen.set('currentScreen', false);
-        }
-
-        newScreen.set('currentScreen', true);
-      }
-
-
-    });
-  </script>
+  <script src="ff-app.js"></script>
 </dom-module>
