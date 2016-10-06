@@ -1,0 +1,102 @@
+<dom-module id="ff-char-image-css">
+  <template>
+    <style>
+      :host {
+        display: block;
+      }
+
+      #charImage {
+        background-image: url('char-sheet.png');
+        background-repeat: no-repeat;
+        height: 50px;
+        width: 36px;
+      }
+
+      :host[char-class='fighter'] #charImage {
+        background-position-y: 0px;
+      }
+
+      :host[char-class='thief'] #charImage {
+        background-position-y: -50px;
+      }
+
+      :host[char-class='blackbelt'] #charImage {
+        background-position-y: -100px;
+      }
+
+      :host[char-class='redmage'] #charImage {
+        background-position-y: -150px;
+      }
+
+      :host[char-class='whitemage'] #charImage {
+        background-position-y: -200px;
+      }
+
+      :host[char-class='blackmage'] #charImage {
+        background-position-y: -250px;
+      }
+
+      :host[char-class='knight'] #charImage {
+        background-position-y: -300px;
+      }
+
+      :host[char-class='ninja'] #charImage {
+        background-position-y: -350px;
+      }
+
+      :host[char-class='master'] #charImage {
+        background-position-y: -400px;
+      }
+
+      :host[char-class='redwizard'] #charImage {
+        background-position-y: -450px;
+      }
+
+      :host[char-class='whitewizard'] #charImage {
+        background-position-y: -500px;
+      }
+
+      :host[char-class='blackwizard'] #charImage {
+        background-position-y: -550px;
+      }
+
+      :host[action='swing-forward'] #charImage {
+        background-position-x: 0px;
+      }
+
+      :host[action='swing-back'] #charImage {
+        background-position-x: -36px;
+      }
+
+      :host[action='arms-up'] #charImage {
+        background-position-x: -72px;
+      }
+
+      :host[action='normal'] #charImage {
+        background-position-x: -108x;
+      }
+
+      :host[action='critical'] #charImage {
+        background-position-x: -144px;
+      }
+
+      :host[action='stone'] #charImage {
+        background-position-x: -180px;
+      }
+
+      :host[action='dead'] #charImage {
+        background-position-x: -216px;
+        width: 52px;
+      }
+
+      :host[action='run-critical'] #charImage {
+        background-position-x: -268px;
+      }
+
+      :host[action='run'] #charImage {
+        background-position-x: -304px;
+      }
+
+    </style>
+  </template>
+</dom-module>

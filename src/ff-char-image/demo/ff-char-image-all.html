@@ -1,0 +1,70 @@
+<link rel="import" href="/bower_components/polymer/polymer.html">
+<link rel="import" href="../ff-char-image.html">
+
+<dom-module id="ff-char-image-all">
+  <template>
+    <style>
+      :host {
+        color: white;
+        display: block;
+      }
+
+      table {
+        border-collapse: collapse;
+        border-color: white;
+        border-style: solid;
+        border-width: 0 1px 1px 0;
+      }
+
+      th, td {
+        border-color: white;
+        border-style: solid;
+        border-width: 1px 0 0 1px;
+        text-align: center;
+        width: 7em;
+      }
+
+      th.empty {
+        border-width: 0;
+      }
+    </style>
+
+    <table>
+      <thead>
+        <tr>
+          <th class="empty"></th>
+          <template is="dom-repeat" items="[[actions]]" as="action">
+            <th>[[action]]</th>
+          </template>
+        </tr>
+      </thead>
+      <tbody>
+        <template is="dom-repeat" items="[[charClasses]]" as="charClass">
+          <tr>
+            <td>[[charClass]]</td>
+            <template is="dom-repeat" items="[[actions]]" as="action">
+              <td><ff-char-image char-class="[[charClass]]" action="[[action]]"></ff-char-image></td>
+            </template>
+          </tr>
+        </template>
+      </tbody>
+    </table>
+
+  </template>
+  <script>
+    Polymer({
+      is: 'ff-char-image-all',
+      properties: {
+        actions: {
+          type: Array,
+          value: ['swing-back', 'swing-forward', 'arms-up', 'normal', 'critical', 'stone', 'dead', 'run-critical', 'run']
+        },
+        charClasses: {
+          type: Array,
+          value: ['fighter', 'thief', 'blackbelt', 'redmage', 'whitemage', 'blackmage']
+        },
+
+      }
+    });
+  </script>
+</dom-module>
