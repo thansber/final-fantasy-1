@@ -1,0 +1,30 @@
+
+<link rel="import" href="/bower_components/iron-flex-layout/iron-flex-layout.html">
+<link rel="import" href="../ff-bordered/ff-bordered.html">
+<link rel="import" href="../ff-char-image/ff-char-image.html">
+
+<dom-module id="ff-char-selector">
+  <style>
+    :host {
+      display: inline-block;
+    }
+
+    #label {
+      margin-bottom: 1.5em;
+    }
+
+    ff-char-image {
+      @apply(--layout);
+      @apply(--layout-horizontal);
+      @apply(--layout-center-justified);
+    }
+  </style>
+  <template>
+    <ff-bordered>
+      <div id="label">[[label]]</div>
+      <ff-char-image char-class="[[selected]]"></ff-char-image>
+    </ff-bordered>
+  </template>
+
+  <script src="ff-char-selector.js"></script>
+</dom-module>
