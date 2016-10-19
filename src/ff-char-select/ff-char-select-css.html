@@ -2,11 +2,24 @@
   <template>
     <style>
     :host {
+      --ff-selector-cursor: {
+        left: 40px;
+        top: 70px;
+      };
+      margin-top: 40px;
+    }
+
+    #selector {
+      @apply(--layout-horizontal);
+      @apply(--layout-wrap);
+      @apply(--layout-center-justified);
     }
 
     ff-char-selector {
       height: 180px;
+      margin: 25px 40px;
       width: 180px;
+
     }
     </style>
   </template>

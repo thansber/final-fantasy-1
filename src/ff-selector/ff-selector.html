@@ -15,15 +15,16 @@
         position: absolute;
         top: 4px;
         width: 32px;
+
+        @apply(--ff-selector-cursor);
       }
     </style>
 
     <content></content>
 
-    <ff-keyhandler id="keyHandler"
-      on-ff-go="_go"
-      on-ff-up="selectPrevious"
-      on-ff-down="selectNext"></ff-keyhandler>
+    <ff-keyhandler
+      id="keyHandler"
+      on-ff-go="_go"></ff-keyhandler>
 
   </template>
   <script>
@@ -32,6 +33,14 @@
       behaviors: [
         Polymer.IronMultiSelectableBehavior
       ],
+
+      observers: [
+        '_upDownSelectsChanged(upDownSelects)'
+      ],
+
+      properties: {
+        upDownSelects: Boolean
+      },
 
       activate: function() {
         this.$.keyHandler.activate();
@@ -45,6 +54,12 @@
         this.fire('ff-selected', {
           value: this.selected
         });
+      },
+
+      _upDownSelectsChanged: function(upDownSelects) {
+        var listenFunction = upDownSelects ? this.listen : this.unlisten;
+        listenFunction.call(this, this.$.keyHandler, 'ff-up', 'selectPrevious');
+        listenFunction.call(this, this.$.keyHandler, 'ff-down', 'selectNext');
       }
 
     });

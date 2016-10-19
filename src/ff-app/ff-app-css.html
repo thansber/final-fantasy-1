@@ -4,11 +4,16 @@
   <template>
     <style is="custom-style">
       :host {
+        height: 100%;
+
         @apply(--layout-horizontal);
         @apply(--layout-center);
         @apply(--layout-center-justified);
+      }
 
-        height: 100%;
+      #screens {
+        height: 544px;
+        width: 612px;
       }
 
       #screens [screen] {
@@ -19,6 +24,9 @@
         display: block;
       }
 
+      #screens [screen][current-screen][flex] {
+        display: flex;
+      }
     </style>
   </template>
 </dom-module>

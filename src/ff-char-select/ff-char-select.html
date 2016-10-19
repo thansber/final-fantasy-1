@@ -1,29 +1,23 @@
 
+<link rel="import" href="../ff-selector/ff-selector.html">
 <link rel="import" href="ff-char-selector.html">
 <link rel="import" href="ff-char-select-css.html">
 
 <dom-module id="ff-char-select">
   <style include="ff-char-select-css"></style>
   <template>
-    <ff-char-selector name="char1"></ff-char-selector>
-    <ff-char-selector name="char2"></ff-char-selector>
-    <ff-char-selector name="char3"></ff-char-selector>
-    <ff-char-selector name="char4"></ff-char-selector>
+    <ff-selector id="selector"
+      attr-for-selected="name"
+      selected="char1"
+      up-down-selects
+      on-ff-left="_prevCharClass"
+      on-ff-right="_nextCharClass">
+      <ff-char-selector name="char1"></ff-char-selector>
+      <ff-char-selector name="char2" selected="thief"></ff-char-selector>
+      <ff-char-selector name="char3" selected="blackbelt"></ff-char-selector>
+      <ff-char-selector name="char4" selected="redmage"></ff-char-selector>
+    </ff-selector>
   </template>
-  <script>
-  (function(scope) {
 
-    scope.FF = scope.FF || {};
-
-    Polymer({
-      is: 'ff-char-select',
-      behaviors: [
-        FF.ScreenBehavior
-      ],
-      properties: {
-
-      }
-    });
-  }(window));
-  </script>
+  <script src="ff-char-select.js"></script>
 </dom-module>
