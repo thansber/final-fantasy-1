@@ -1,4 +1,4 @@
-- allow selector to treat left/right as up/down with boolean property
-- add intro screen w/fade in effect
-- add party creation screen
+- add screen selection menu (debug)
+- after selecting char, go to name enter screen
 - add name enter screen
+- add intro screen w/fade in effect
