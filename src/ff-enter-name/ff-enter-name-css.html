@@ -1,0 +1,27 @@
+<dom-module id="ff-enter-name-css">
+  <template>
+    <style is="custom-style">
+    :host {
+      width: 500px;
+
+      --ff-selector-cursor: {
+        left: -40px;
+        top: 0px;
+      };
+    }
+
+    #selector {
+      @apply(--layout);
+      @apply(--layout-horizontal);
+      @apply(--layout-wrap);
+      padding-left: 1.5vw;
+      padding-top: 0.5vw;
+    }
+
+    [letter] {
+      height: 2.75vw;
+      width: 2.75vw;
+    }
+    </style>
+  </template>
+</dom-module>

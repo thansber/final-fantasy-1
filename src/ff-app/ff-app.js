@@ -12,7 +12,7 @@ Polymer({
     ready: function() {
       //this.screenChanged('intro');
       //this.screenChanged('openingMenu');
-      this.screenChanged('charSelect');
+      this.screenChanged('enterName');
     },
 
     screenChanged: function(screen) {
