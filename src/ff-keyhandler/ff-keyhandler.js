@@ -13,6 +13,10 @@ Polymer({
     });
   },
 
+  _back: function() {
+    this.fire('ff-back');
+  },
+
   _go: function() {
     this.fire('ff-go');
   },

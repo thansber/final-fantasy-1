@@ -2,7 +2,9 @@
   <template>
     <style is="custom-style">
     :host {
-      width: 500px;
+      width: 460px;
+      @apply(--layout-vertical);
+      @apply(--layout-center);
 
       --ff-selector-cursor: {
         left: -40px;
@@ -10,17 +12,36 @@
       };
     }
 
+    ff-bordered {
+      padding-top: 20px;
+    }
+
+    #name {
+      height: 60px;
+      margin-bottom: 40px;
+      width: 110px;
+    }
+
+    [letters] {
+      padding-left: 20px;
+    }
+
     #selector {
       @apply(--layout);
       @apply(--layout-horizontal);
       @apply(--layout-wrap);
-      padding-left: 1.5vw;
-      padding-top: 0.5vw;
     }
 
     [letter] {
-      height: 2.75vw;
-      width: 2.75vw;
+      height: 40px;
+      width: 40px;
+    }
+
+    #selectName {
+      @apply(--layout);
+      @apply(--layout-horizontal);
+      @apply(--layout-center-justified);
+      margin-top: 32px;
     }
     </style>
   </template>

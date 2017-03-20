@@ -12,7 +12,30 @@
       itemsPerRow: {
         type: Number,
         value: 10
+      },
+      maxChars: {
+        type: Number,
+        value: 4
+      },
+      name: {
+        type: String,
+        value: ''
       }
+    },
+
+    cancel: function(e, detail) {
+      if (!this.name.length) {
+        return;
+      }
+      this.name = this.name.substring(0, this.name.length - 1);
+    },
+
+    letterSelected: function(e, detail) {
+      if (this.name.length >= this.maxChars) {
+        // TODO: set name and back to char select
+        return;
+      }
+      this.name += detail.value;
     },
 
     nextLetter: function() {
