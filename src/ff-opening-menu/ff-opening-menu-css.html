@@ -1,8 +1,14 @@
 <link rel="import" href="/bower_components/iron-flex-layout/iron-flex-layout.html">
+<link rel="import" href="../ff-styles/ff-styles.html">
 
 <dom-module id="ff-opening-menu-css">
   <template>
-    <style is="custom-style">
+    <style include="ff-styles" is="custom-style">
+      :host {
+        @apply(--layout-vertical);
+        @apply(--layout-center);
+      }
+
       #selector {
         @apply(--layout-vertical);
         @apply(--layout-center);
@@ -10,6 +16,16 @@
 
       ff-bordered {
         margin-bottom: 2em;
+      }
+
+      .copyright {
+        background-color: var(--ff-blue);
+        width: 275px;
+        @apply(--ff-font);
+      }
+
+      .copyright.square {
+        padding-bottom: 2px;
       }
     </style>
   </template>
