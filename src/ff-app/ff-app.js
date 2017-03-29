@@ -2,7 +2,29 @@ Polymer({
     is: 'ff-app',
 
     properties: {
-
+      charIndex: {
+        type: Number,
+        value: 0
+      },
+      party: {
+        notify: true,
+        type: Array,
+        value: function() {
+          return [{
+            charClass: 'fighter',
+            name: ''
+          }, {
+            charClass: 'thief',
+            name: ''
+          }, {
+            charClass: 'blackmage',
+            name: ''
+          }, {
+            charClass: 'redmage',
+            name: ''
+          }];
+        }
+      }
     },
 
     listeners: {
@@ -11,8 +33,6 @@ Polymer({
 
     ready: function() {
       this.screenChanged('intro');
-      //this.screenChanged('openingMenu');
-      //this.screenChanged('enterName');
     },
 
     screenChanged: function(screen) {
@@ -25,6 +45,22 @@ Polymer({
       }
 
       newScreen.set('currentScreen', true);
+    },
+
+    _currentChar: function() {
+      return this.party[this.charIndex];
+    },
+
+    _onCharClassSelected: function(e, detail) {
+      this.party[this.charIndex].charClass = detail.charClass;
+      this.screenChanged('enterName');
+    },
+
+    _onCharNameEntered: function(e, detail) {
+      this.party[this.charIndex].name = detail.name;
+      // TODO: check if 4th char, start game
+      this.charIndex++;
+      this.screenChanged('charSelect');
     },
 
     _onScreenChange: function(e, detail) {

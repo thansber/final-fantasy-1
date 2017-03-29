@@ -23,8 +23,9 @@
         // TODO: if no saved game go to new game
         this.fire('ff-screen', { screen: 'intro' });
       } else if (detail.value === 'new') {
-        // TODO: go to new game
-        console.log('new game');
+        this.fire('ff-screen', {
+          screen: 'charSelect'
+        })
       }
     },
 

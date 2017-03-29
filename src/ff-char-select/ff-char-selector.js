@@ -14,11 +14,15 @@ Polymer({
         ]
       }
     },
+    charName: {
+      type: String
+    },
     label: {
       type: String,
       computed: '_labelFor(selected)'
     },
     selected: {
+      notify: true,
       type: String,
       value: 'fighter'
     }

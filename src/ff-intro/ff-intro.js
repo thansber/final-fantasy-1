@@ -40,7 +40,6 @@
     },
 
     _toMenu: function() {
-      console.log('ENTER hit in intro');
       this.fire('ff-screen', {
         screen: 'openingMenu'
       });

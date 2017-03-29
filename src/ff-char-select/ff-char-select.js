@@ -8,6 +8,18 @@
       FF.ScreenBehavior
     ],
 
+    properties: {
+      party: {
+        type: Array
+      }
+    },
+
+    _next: function() {
+      this.fire('ff-char-class-done', {
+        charClass: this._selectedCharSelector().selected
+      });
+    },
+
     _nextCharClass: function() {
       this._selectedCharSelector().next();
     },

@@ -32,7 +32,9 @@
 
     letterSelected: function(e, detail) {
       if (this.name.length >= this.maxChars) {
-        // TODO: set name and back to char select
+        this.fire('ff-char-name-done', {
+          name: this.name
+        });
         return;
       }
       this.name += detail.value;

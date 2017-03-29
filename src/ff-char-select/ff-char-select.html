@@ -11,11 +11,20 @@
       selected="char1"
       up-down-selects
       on-ff-left="_prevCharClass"
-      on-ff-right="_nextCharClass">
-      <ff-char-selector name="char1"></ff-char-selector>
-      <ff-char-selector name="char2" selected="thief"></ff-char-selector>
-      <ff-char-selector name="char3" selected="blackbelt"></ff-char-selector>
-      <ff-char-selector name="char4" selected="redmage"></ff-char-selector>
+      on-ff-right="_nextCharClass"
+      on-ff-selected="_next">
+      <ff-char-selector name="char1"
+        selected="[[party.0.charClass]]"
+        char-name="[[party.0.name]]"></ff-char-selector>
+      <ff-char-selector name="char2"
+        selected="[[party.1.charClass]]"
+        char-name="[[party.1.name]]"></ff-char-selector>
+      <ff-char-selector name="char3"
+        selected="[[party.2.charClass]]"
+        char-name="[[party.2.name]]"></ff-char-selector>
+      <ff-char-selector name="char4"
+        selected="[[party.3.charClass]]"
+         char-name="[[party.3.name]]"></ff-char-selector>
     </ff-selector>
   </template>
 

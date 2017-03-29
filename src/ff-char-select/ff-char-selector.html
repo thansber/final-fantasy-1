@@ -9,6 +9,11 @@
       display: inline-block;
     }
 
+    ff-bordered {
+      @apply(--layout-vertical);
+      @apply(--layout-center);
+    }
+
     #label {
       margin-bottom: 1.5em;
     }
@@ -18,11 +23,16 @@
       @apply(--layout-horizontal);
       @apply(--layout-center-justified);
     }
+
+    #name {
+      padding-top: 2em;
+    }
   </style>
   <template>
     <ff-bordered>
       <div id="label">[[label]]</div>
       <ff-char-image char-class="[[selected]]"></ff-char-image>
+      <div id="name">[[charName]]</div>
     </ff-bordered>
   </template>
 
