@@ -9,9 +9,18 @@
     ],
 
     properties: {
+      charIndex: {
+        readonly: true,
+        type: Number
+      },
       party: {
+        notify: true,
         type: Array
       }
+    },
+
+    _charProperty: function(change, index, property) {
+      return this.get(property, change.base[index]);
     },
 
     _next: function() {

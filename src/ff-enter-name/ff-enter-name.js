@@ -35,6 +35,7 @@
         this.fire('ff-char-name-done', {
           name: this.name
         });
+        this.name = '';
         return;
       }
       this.name += detail.value;

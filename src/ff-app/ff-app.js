@@ -3,6 +3,7 @@ Polymer({
 
     properties: {
       charIndex: {
+        notify: true,
         type: Number,
         value: 0
       },
@@ -17,7 +18,7 @@ Polymer({
             charClass: 'thief',
             name: ''
           }, {
-            charClass: 'blackmage',
+            charClass: 'blackbelt',
             name: ''
           }, {
             charClass: 'redmage',
@@ -53,14 +54,21 @@ Polymer({
 
     _onCharClassSelected: function(e, detail) {
       this.party[this.charIndex].charClass = detail.charClass;
+      this.notifyPath('party.' + this.charIndex + '.charClass');
       this.screenChanged('enterName');
     },
 
     _onCharNameEntered: function(e, detail) {
       this.party[this.charIndex].name = detail.name;
-      // TODO: check if 4th char, start game
-      this.charIndex++;
-      this.screenChanged('charSelect');
+      this.notifyPath('party.' + this.charIndex + '.name');
+
+      if (this.charIndex < 3) {
+        this.charIndex++;
+        this.screenChanged('charSelect');
+      } else {
+        // TODO: check if 4th char, start game
+        console.log('START GAME');
+      }
     },
 
     _onScreenChange: function(e, detail) {
