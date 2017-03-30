@@ -51,6 +51,10 @@
       }
     },
 
+    onScreenClosed: function() {
+      this.$.selector.selected = 'A';
+    },
+
     prevLetter: function() {
       this.$.selector.selectPrevious();
     },
