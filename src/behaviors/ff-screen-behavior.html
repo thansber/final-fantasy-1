@@ -25,17 +25,26 @@
     onScreenOpened: function() {},
 
     _activateKeyHandler: function() {
-      this._keyHandler().activate();
+      this._findKeyHandler().activate();
     },
 
     _deactivateKeyHandler: function() {
-      this._keyHandler().deactivate();
+      this._findKeyHandler().deactivate();
+    },
+
+    _findKeyHandler: function() {
+      return this._keyHandler() || this._keyHandlerInSelector() || this._noopKeyHandler();
     },
 
     _keyHandler: function() {
-      return Polymer.dom(this.root).querySelector('ff-keyhandler') ||
-        Polymer.dom(this.root).querySelector('ff-selector') ||
-        this._noopKeyHandler();
+      return Polymer.dom(this.root).querySelector('ff-keyhandler');
+    },
+
+    _keyHandlerInSelector() {
+      var selector = Polymer.dom(this.root).querySelector('ff-selector');
+      if (selector) {
+        return selector.$.keyHandler;
+      }
     },
 
     _noopKeyHandler: function() {

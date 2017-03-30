@@ -42,14 +42,6 @@
         upDownSelects: Boolean
       },
 
-      activate: function() {
-        this.$.keyHandler.activate();
-      },
-
-      deactivate: function() {
-        this.$.keyHandler.deactivate();
-      },
-
       _go: function() {
         this.fire('ff-selected', {
           value: this.selected
