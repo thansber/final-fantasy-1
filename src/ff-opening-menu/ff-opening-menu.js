@@ -13,7 +13,7 @@
       respondRate: {
         notify: true,
         type: Number,
-        value: 8
+        value: 6
       }
     },
 
@@ -21,11 +21,9 @@
       if (detail.value === 'continue') {
         // TODO: check for existing saved game, load it
         // TODO: if no saved game go to new game
-        this.fire('ff-screen', { screen: 'intro' });
+        this.fire('ff-screen', { screen: 'charSelect' });
       } else if (detail.value === 'new') {
-        this.fire('ff-screen', {
-          screen: 'charSelect'
-        })
+        this.fire('ff-screen', { screen: 'charSelect' });
       }
     },
 
