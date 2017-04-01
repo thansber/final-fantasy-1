@@ -2,9 +2,9 @@
   "name": "final-fantasy-1",
   "main": "index.html",
   "dependencies": {
-    "polymer": "Polymer/polymer#^1.4.0",
+    "polymer": "Polymer/polymer#^1.8.0",
     "iron-selector": "^1.5.2",
-    "iron-a11y-keys": "^1.0.6",
+    "iron-a11y-keys": "^1.0.7",
     "neon-animation": "^1.2.4"
   },
   "devDependencies": {
