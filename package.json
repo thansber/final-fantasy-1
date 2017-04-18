@@ -1,0 +1,11 @@
+{
+  "name": "final-fantasy-1",
+  "version": "0.1.0",
+  "devDependencies": {
+    "grunt": "~0.4.5",
+    "grunt-contrib-watch": "^1.0.0"
+  },
+  "dependencies": {
+    "grunt-concat-json": "SpringRoll/grunt-concat-json#master"
+  }
+}
