@@ -1,0 +1,32 @@
+{
+  "sprites": [
+    "W5 W  W  W  W  W  W  W  W  W  W  W  W  W  W  tt r  tt W  W  W  W  W  W  W  W  W  W  W  W  W  W5",
+    "W6 tt t  t  .  .  .  .  .  .  .  t  t  t  t  t  r  t  tt tt tt tt t  t  t  t  t  tt tt tt tt W6",
+    "W6 t  Rt Rt Rt .  Rt Rt Rt .  .  .  t  w  t  .  r  .  tt tt tt tt .  Rt Rt Rt .  tt tt t  t  W6",
+    "W6 .  Rb BM Rb .2 Rb WM Rb .1 .  .  .  w  .  .  r  .  tt tt tt t  .  Rb CL Rb .1 t  tt w  .  W6",
+    "W6 .  H1 D  H1 .2 H1 D  H1 .2 .  r1 r  Bh r  r  r  .  t  t  t  .  .  H1 D  H1 .2 .  t  w  .  W6",
+    "W6 .  .  r  .  .  .  r  .  .  .  r  .  w  .  .  r  .  .  .  .  .  .  .  r  .  .  .  .  w  .  W6",
+    "W6 .  .  r2 r  r  r  r  r  r  r  r3 .  w  .  .  r  .  .  .  .  FN FN .  r  .  FN FN .  w  .  W6",
+    "W6 .  .  .  .  .  .  .  .  .  .  .  .  w  w  w  Bv w  w  w  w  w  w  w  Bv w  w  w  w  w  .  W6",
+    "W6 .  .  .  Rt Rt Rt Rt .  Rt Rt Rt Rt .  .  .  r  .  .  .  .  .  .  .  r  .  Rt Rt Rt w  .  W6",
+    "W6 tt .  .  Rb Rb AR Rb .1 Rb Rb WP Rb .1 .  t  r  t  .  .  .  .  .  .  r  .  Rb IT Rb w1 .  W6",
+    "W6 tt tt .  H2 H2 D  H2 .2 H2 H2 D  H2 .2 r1 r  r  r  r  .  .  .  .  .  r  .  H2 D  H2 w2 .  t",
+    "W6 tt tt tt .  .  r  .  .  .  .  r  .  t  r  r  r  r  r  t  .  .  .  .  r  .  .  r  .  w  .  t",
+    "W6 tt t  t  .  .  r2 r  r  r  r  r  r  r  r  r  F  r  r  r  r  r  r  r  r  r  r  r  r  Bh .  .",
+    "W6 tt WL .  .  .  .  .  .  .  .  .  .  t  r  r  r  r  r  t  .  .  .  .  .  .  .  .  .  w  .  t",
+    "W6 t  .  .  .  .  .  .  .  .  .  .  .  .  r2 r  r  r  r3 .  .  w  w  w  w  w  w  w  w  w  .  t",
+    "W  W  W  W  W  W  W  W  W5 Rt Rt Rt Rt Rt .  t  r  t  .  .  .  w  .  W1 W  W  W  W  W  W  W  W",
+    ".  .  .  .  .  .  .  .  W6 Rb Rb Rb Rb Rb .  .  r  .  .  .  .  w  .  W1 .1 .  .  .  .  .  .  .",
+    ".  .  .  .  .  .  .  .  W6 H2 H2 IN H2 H2 .1 t  r  t  .  .  .  w  .  W1 .1 .  .  .  .  .  .  .",
+    ".  .  .  .  .  .  .  .  W6 H2 H2 D  H2 H2 .2 .  r  .  .  .  .  w  .  W1 .1 .  .  .  .  .  .  .",
+    ".  .  .  .  .  .  .  .  W6 .  .  r  .  .  .  t  r  t  .  .  .  w  .  W1 .1 .  .  .  .  .  .  .",
+    ".  .  .  .  .  .  .  .  W6 .  FN r  FN .  .  .  r  .  .  .  .  w  .  W1 .1 .  .  .  .  .  .  .",
+    ".  .  .  .  .  .  .  .  W6 .  .  r2 r  r  r  r  r  .  .  .  tt w  tt W1 .1 .  .  .  .  .  .  .",
+    ".  .  .  .  .  .  .  .  W6 .  .  .  .  .  .  t  r  t  .  .  t  t  t  W1 .1 .  .  .  .  .  .  .",
+    ".  .  .  .  .  .  .  .  W  W  W  W  W  W  t  t  r  t  t  W  W  W  W  W  .2 .  .  .  .  .  .  ."
+  ],
+  "start": { "y": 23, "x": 16 },
+  "definition": "town",
+  "sheet": "town",
+  "filler": "."
+}

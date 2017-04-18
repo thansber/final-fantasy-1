@@ -1,0 +1,31 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=yes">
+    <title>ff-char-selector Demo</title>
+    <script src="/bower_components/webcomponentsjs/webcomponents-lite.js"></script>
+    <link rel="import" href="../ff-maps.html">
+    <link rel="import" href="../ff-map.html">
+
+    <style>
+      ff-maps {
+        height: 180px;
+        width: 180px;
+      }
+    </style>
+  </head>
+  <body>
+
+    <template is="dom-bind">
+      <ff-maps map-id="towns.coneria" map="{{map}}"></ff-maps>
+      <ff-map map="{{map}}"></ff-map>
+    </template>
+
+    <script>
+    window.addEventListener('WebComponentsReady', function(e) {
+
+    });
+    </script>
+  </body>
+</html>

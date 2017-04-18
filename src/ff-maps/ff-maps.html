@@ -1,0 +1,22 @@
+<link rel="import" href="/bower_components/iron-ajax/iron-ajax.html">
+
+<dom-module id="ff-maps">
+  <template>
+
+    <iron-ajax
+      auto
+      url="map-data.json"
+      last-response="{{ mapData }}"></iron-ajax>
+    <iron-ajax
+      auto
+      url="map-definitions.json"
+      last-response="{{ mapDefinitions }}"></iron-ajax>
+    <iron-ajax
+      auto
+      url="map-sheets.json"
+      last-response="{{ mapSheets }}"></iron-ajax>
+
+  </template>
+
+  <script src="ff-maps.js"></script>
+</dom-module>
