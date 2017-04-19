@@ -25,6 +25,16 @@
       '_onMapChange(mapId, mapsLoaded)'
     ],
 
+    _buildMap: function(mapData, e) {
+      this.map = {
+        data: this._parseSprites(mapData.sprites),
+        definition: this.mapDefinitions[mapData.definition],
+        filler: mapData.filler,
+        start: mapData.start,
+        sheet: e.currentTarget
+      };
+    },
+
     _nestedValue: function(path) {
       var paths = path.split('.');
       return paths.reduce(function(o, p) {
@@ -41,15 +51,7 @@
       var sheet = this.mapSheets.sheets[data.sheet];
       var sheetImage = new Image();
       sheetImage.src = sheet;
-      sheetImage.onload = function() {
-        this.map = {
-          data: this._parseSprites(data.sprites),
-          definition: this.mapDefinitions[data.definition],
-          filler: data.filler,
-          start: data.start,
-          sheet: sheetImage
-        };
-      }.bind(this);
+      sheetImage.onload = this._buildMap.bind(this, data);
     },
 
     _onMapsLoaded: function(mapData, mapDefinitions, mapSheets) {
