@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=yes">
-    <title>ff-char-selector Demo</title>
+    <title>ff-map Demo</title>
     <script src="/bower_components/webcomponentsjs/webcomponents-lite.js"></script>
     <link rel="import" href="../ff-maps.html">
     <link rel="import" href="../ff-map.html">
@@ -19,12 +19,23 @@
 
     <template is="dom-bind">
       <ff-maps map-id="towns.coneria" map="{{map}}"></ff-maps>
-      <ff-map map="{{map}}"></ff-map>
+      <ff-map id="map" map="{{map}}"></ff-map>
+
+      <button id="up">Up</button>
+      <button id="down">Down</button>
+      <button id="left">Left</button>
+      <button id="right">Right</button>
     </template>
 
     <script>
     window.addEventListener('WebComponentsReady', function(e) {
-
+      var $map = document.getElementById('map');
+      var buttons = document.getElementsByTagName('button');
+      for (var i = 0; i < buttons.length; i++) {
+        buttons.item(i).addEventListener('click', function(e) {
+          $map.moving = e.target.id;
+        });
+      }
     });
     </script>
   </body>
