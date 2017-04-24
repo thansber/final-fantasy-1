@@ -33,7 +33,8 @@
       },
       "definition": "town",
       "sheet": "town",
-      "filler": "."
+      "filler": ".",
+      "exitOnOutOfBounds": true
     },
     "elfland": {
       "sprites": [

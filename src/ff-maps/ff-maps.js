@@ -26,13 +26,23 @@
     ],
 
     _buildMap: function(mapData, e) {
-      this.map = {
+      var map = {
         data: this._parseSprites(mapData.sprites),
         definition: this.mapDefinitions[mapData.definition],
-        filler: mapData.filler,
-        start: mapData.start,
         sheet: e.currentTarget
       };
+
+      var doNotCopy = /sprites|definition|sheet/;
+      var excludeFields = function(f) {
+        return !doNotCopy.test(f);
+      };
+      var copyField = function(copied, field) {
+        copied[field] = mapData[field];
+        return copied;
+      };
+
+      Object.assign(map, Object.keys(mapData).filter(excludeFields).reduce(copyField, {}));
+      this.map = map;
     },
 
     _nestedValue: function(path) {

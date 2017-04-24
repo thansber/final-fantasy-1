@@ -28,5 +28,6 @@
   "start": { "y": 23, "x": 16 },
   "definition": "town",
   "sheet": "town",
-  "filler": "."
+  "filler": ".",
+  "exitOnOutOfBounds": true
 }
