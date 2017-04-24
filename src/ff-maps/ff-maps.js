@@ -2,7 +2,7 @@
 
   scope.FF = scope.FF || {};
 
-   Polymer({
+  Polymer({
     is: 'ff-maps',
 
     behaviors: [

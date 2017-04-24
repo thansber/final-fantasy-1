@@ -71,7 +71,15 @@
         ".  .  .  .  .  .  .  .  t  tt tt tt tt tt tt tt tt tt tt tt tt tt tt tt tt tt tt tt tt tt tt tt tt .  .  .  .  .  tt tt .  .",
         ".  .  .  .  .  .  .  .  .  t  t  t  t  t  t  t  t  t  t  tt tt tt tt tt tt tt tt tt tt tt tt tt tt tt tt .  .  tt tt tt .  .",
         ".  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  t  t  t  t  t  t  t  t  t  t  t  t  t  t  t  t  t  t  t  t  t  .  ."
-      ]
+      ],
+      "start": {
+        "y": 22,
+        "x": 41
+      },
+      "definition": "town",
+      "sheet": "town",
+      "filler": ".",
+      "exitOnOutOfBounds": true
     },
     "pravoka": {
       "sprites": [
@@ -108,7 +116,15 @@
         "W1 w1 w  w  w  w  w  w  w  w  w  w  w  w  W6 t  .  .  r  r  r  .  .  t  W1 w1 w  w  w  w  w  w  w  w  w  w  w  w  W6",
         "W2 W3 W3 W3 W3 W3 W3 W3 W3 W3 W3 W3 W3 W3 W4 t  .  .  r  r  r  .  .  t  W2 W3 W3 W3 W3 W3 W3 W3 W3 W3 W3 W3 W3 W3 W4",
         ".  .  .  .  .  .  .  .  .  .  .  .  .  .  .  t  .  .  r  r  r  .  .  t  .  .  .  .  .  .  .  .  .  .  .  .  .  .  ."
-      ]
+      ],
+      "start": {
+        "y": 31,
+        "x": 19
+      },
+      "definition": "town",
+      "sheet": "town",
+      "filler": ".",
+      "exitOnOutOfBounds": true
     }
   }
 }
