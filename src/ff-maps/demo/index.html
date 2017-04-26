@@ -13,18 +13,63 @@
         height: 180px;
         width: 180px;
       }
+
+      label {
+        font-size: 125%;
+        width: 6em;
+      }
+
+      #posX, #posY {
+        font-size: 125%;
+        width: 2em;
+      }
+
+      #directions {
+        display: flex;
+        flex-wrap: wrap;
+        margin-top: 1em;
+        width: 10em;
+      }
+
+      [direction] {
+        display: flex;
+        flex: 0 0 100%;
+        justify-content: center;
+        margin-top: 0.5em;
+      }
+
+      [direction="left-right"] {
+        justify-content: space-around;
+      }
+
     </style>
   </head>
   <body>
 
     <template is="dom-bind">
-      <ff-maps map-id="world" map="{{map}}"></ff-maps>
+      <ff-maps map-id="world"
+        map="{{map}}"
+        position-x="{{posX}}"
+        position-y="{{posY}}"></ff-maps>
       <ff-map id="map" map="{{map}}"></ff-map>
 
-      <button id="up">Up</button>
-      <button id="down">Down</button>
-      <button id="left">Left</button>
-      <button id="right">Right</button>
+      <div>
+        <label for="posX">X position</label>
+        <input id="posX" value="{{posX}}" maxlength="3" />
+      </div>
+      <div>
+        <label for="posY">Y position</label>
+        <input id="posY" value="{{posY}}" maxlength="3" />
+      </div>
+
+      <div id="directions">
+        <div direction="up"><button id="up">Up</button></div>
+        <div direction="left-right">
+          <button id="left">Left</button>
+          <button id="right">Right</button>
+        </div>
+        <div direction="down"><button id="down">Down</button></div>
+      </div>
     </template>
 
     <script>

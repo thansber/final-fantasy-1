@@ -32,7 +32,8 @@
 
     observers: [
       '_onMap(map)',
-      '_onMove(moving)'
+      '_onMove(moving)',
+      '_onPosition(positionY, positionX)'
     ],
 
     ready: function() {
@@ -83,20 +84,8 @@
     },
 
     _drawMap: function() {
-      this._resizeCanvas(16, 14);
-
       this.positionX = this.map.start.x;
       this.positionY = this.map.start.y;
-
-      var upperLeftX = this.map.start.x - 7;
-      var upperLeftY = this.map.start.y - 7;
-      var sheet = this.map.sheet;
-
-      for (var y = 0; y < 16; y++) { // for now, treat y like x, even though y uses halves
-        for (var x = 0; x < 16; x++) {
-          this._drawTile(sheet, this._tileCoords(upperLeftY + y, upperLeftX + x), { x: x, y: y });
-        }
-      }
     },
 
     _drawTile: function(sheet, whereToPullFrom, whereToDraw) {
@@ -187,6 +176,24 @@
 
     _onMovingDone: function(directionOptions) {
 
+    },
+
+    _onPosition: function(posY, posX) {
+      if (this.moving) {
+        return;
+      }
+
+      this._resizeCanvas(16, 14);
+
+      var upperLeftX = this.positionX - 7;
+      var upperLeftY = this.positionY - 7;
+      var sheet = this.map.sheet;
+
+      for (var y = 0; y < 16; y++) { // for now, treat y like x, even though y uses halves
+        for (var x = 0; x < 16; x++) {
+          this._drawTile(sheet, this._tileCoords(upperLeftY + y, upperLeftX + x), { x: x, y: y });
+        }
+      }
     },
 
     _resizeCanvas: function(w, h) {
