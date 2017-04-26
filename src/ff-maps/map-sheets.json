@@ -1,5 +1,6 @@
 {
   "sheets": {
-    "town": "/src/ff-maps/sheets/town-sheet.png"
+    "town": "/src/ff-maps/sheets/town-sheet.png",
+    "world": "/src/ff-maps/sheets/world-map-sheet.png"
   }
 }
