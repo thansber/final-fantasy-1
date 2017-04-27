@@ -6,7 +6,7 @@
 
     behaviors: [
       Polymer.NeonAnimationRunnerBehavior,
-      FF.ScreenBehavior
+      scope.FF.ScreenBehavior
     ],
 
     properties: {
