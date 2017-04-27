@@ -21,7 +21,7 @@
         type: Number
       },
       positionY: {
-        notidy: true,
+        notify: true,
         type: Number
       },
       scale: {
@@ -179,7 +179,7 @@
     },
 
     _onPosition: function(posY, posX) {
-      if (this.moving) {
+      if (this.moving || isNaN(parseInt(posY, 10)) || isNaN(parseInt(posX, 10))) {
         return;
       }
 

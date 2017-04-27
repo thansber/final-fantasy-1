@@ -48,18 +48,19 @@
 
     <template is="dom-bind">
       <ff-maps map-id="world"
+        map="{{map}}"></ff-maps>
+      <ff-map id="map"
         map="{{map}}"
         position-x="{{posX}}"
-        position-y="{{posY}}"></ff-maps>
-      <ff-map id="map" map="{{map}}"></ff-map>
+        position-y="{{posY}}"></ff-map>
 
       <div>
         <label for="posX">X position</label>
-        <input id="posX" value="{{posX}}" maxlength="3" />
+        <input id="posX" value="{{posX::input}}" maxlength="3" />
       </div>
       <div>
         <label for="posY">Y position</label>
-        <input id="posY" value="{{posY}}" maxlength="3" />
+        <input id="posY" value="{{posY::input}}" maxlength="3" />
       </div>
 
       <div id="directions">
