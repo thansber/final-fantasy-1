@@ -19,6 +19,11 @@ Polymer({
     },
     scale: {
       type: Number,
+      value: 32
+    },
+    sheetIconSize: {
+      readonly: true,
+      type: Number,
       value: 16
     }
   },
@@ -83,10 +88,10 @@ Polymer({
 
   _drawTile: function(sheet, whereToPullFrom, whereToDraw) {
     this.ctx.drawImage(sheet,
-        this.scale * whereToPullFrom.x, // x in source sheet
-        this.scale * whereToPullFrom.y, // y in source sheet
-        this.scale, // x-scale on source sheet
-        this.scale, // y-sacle on source sheet
+        this.sheetIconSize * whereToPullFrom.x, // x in source sheet
+        this.sheetIconSize * whereToPullFrom.y, // y in source sheet
+        this.sheetIconSize, // x-scale on source sheet
+        this.sheetIconSize, // y-sacle on source sheet
         this.scale * whereToDraw.x, // x on canvas
         this.scale * whereToDraw.y, // y on canvas
         this.scale,  // x-scale on canvas
