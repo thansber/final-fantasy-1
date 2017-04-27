@@ -1,0 +1,35 @@
+<dom-module id="ff-char-walking-css">
+  <template>
+    <style>
+      :host {
+      }
+      #char {
+        background-image: url(sheets/char-walking.png);
+        background-position: 1000em 1000em;
+        background-repeat: no-repeat;
+        height: 16px;
+        width: 16px;
+      }
+
+      #char[direction="down"] { background-position-x: 0; }
+      #char[direction="left"] { background-position-x: -32px; }
+      #char[direction="up"] { background-position-x: -64px; }
+      #char[direction="right"] { background-position-x: -112px; }
+
+      #char[char-class="fighter"] { background-position-y: 0; }
+      #char[char-class="thief"] { background-position-y: -16px; }
+      #char[char-class="blackbelt"] { background-position-y: -32px; }
+      #char[char-class="redmage"] { background-position-y: -48px; }
+      #char[char-class="whitemage"] { background-position-y: -64px; }
+      #char[char-class="blackmage"] { background-position-y: -80px; }
+
+      #char[char-class="knight"] { background-position-y: -96px; }
+      #char[char-class="ninja"] { background-position-y: -112px; }
+      #char[char-class="master"] { background-position-y: -128px; }
+      #char[char-class="redwizard"] { background-position-y: -144px; }
+      #char[char-class="whitewizard"] { background-position-y: -160px; }
+      #char[char-class="blackwizard"] { background-position-y: -176px; }
+
+    </style>
+  </template>
+</dom-module>

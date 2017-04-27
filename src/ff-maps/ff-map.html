@@ -1,12 +1,20 @@
+<link rel="import" href="ff-char-walking.html">
+
 <dom-module id="ff-map">
   <template>
     <style>
-      #map {
-        background-color: green;
+      #char {
+        left: 120px;
+        position: absolute;
+        top: 112px;
       }
     </style>
 
     <canvas id="canvas"></canvas>
+    <ff-char-walking
+      id="char"
+      char-class="fighter"
+      direction="[[facing]]"></ff-char-walking>
 
   </template>
 
