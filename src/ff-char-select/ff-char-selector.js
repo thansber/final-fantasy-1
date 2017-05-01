@@ -3,23 +3,7 @@
 
   Polymer({
     is: 'ff-char-selector',
-    behaviors: [
-      scope.FF.CharClassBehavior
-    ],
     properties: {
-      charClassData: {
-        type: Array,
-        value: function() {
-          return [
-            { charClass: 'fighter', label: 'FIGHTER' },
-            { charClass: 'thief', label: 'THIEF' },
-            { charClass: 'blackbelt', label: 'Bl.BELT' },
-            { charClass: 'redmage', label: 'RedMAGE' },
-            { charClass: 'whitemage', label: 'Wh.MAGE' },
-            { charClass: 'blackmage', label: 'Bl.MAGE' }
-          ]
-        }
-      },
       charName: {
         type: String
       },
@@ -36,30 +20,26 @@
 
     next: function() {
       var index = this._indexOf(this.selected) + 1;
-      if (index === this.basicClasses.length) {
+      if (index === FF.CharClasses.basicClasses.length) {
         index = 0;
       }
-      this.selected = this.basicClasses[index].charClass;
+      this.selected = FF.CharClasses.basicClasses[index].id;
     },
 
     prev: function() {
       var index = this._indexOf(this.selected) - 1;
       if (index < 0) {
-        index = this.basicClasses.length - 1;
+        index = FF.CharClasses.basicClasses.length - 1;
       }
-      this.selected = this.basicClasses[index].charClass;
-    },
-
-    _byCharClass: function(selectedCharClass, data) {
-      return data.charClass === selectedCharClass;
+      this.selected = FF.CharClasses.basicClasses[index].id;
     },
 
     _indexOf: function(charClass) {
-      return this.basicClasses.findIndex(this._byCharClass.bind(this, charClass));
+      return FF.CharClasses.basicClassIndex(charClass);
     },
 
     _labelFor: function(selectedCharClass) {
-      return (this.basicClasses.find(this._byCharClass.bind(this, selectedCharClass)) || {}).label;
+      return FF.CharClasses.fromId(selectedCharClass).label;
     }
   });
 }(window));
