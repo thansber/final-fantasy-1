@@ -1,0 +1,40 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=yes">
+    <title>ff-char-walking Demo</title>
+    <script src="/bower_components/webcomponentsjs/webcomponents-lite.js"></script>
+    <link rel="import" href="../ff-char-walking.html">
+
+    <style>
+      ff-char-walking {
+        height: 180px;
+        width: 180px;
+      }
+
+
+    </style>
+  </head>
+  <body>
+
+    <template is="dom-bind">
+      <ff-char-walking
+        char-class="whitemage"
+        direction="right"></ff-char-walking>
+
+    </template>
+
+    <script>
+    window.addEventListener('WebComponentsReady', function(e) {
+      /*var $map = document.getElementById('map');
+      var buttons = document.getElementsByTagName('button');
+      for (var i = 0; i < buttons.length; i++) {
+        buttons.item(i).addEventListener('click', function(e) {
+          $map.moving = e.target.id;
+        });
+      }*/
+    });
+    </script>
+  </body>
+</html>
