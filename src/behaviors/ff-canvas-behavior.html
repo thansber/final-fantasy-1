@@ -1,0 +1,26 @@
+<script>
+(function(scope) {
+  scope.FF = scope.FF || {};
+
+  scope.FF.CanvasBehavior = {
+    properties: {
+      scale: {
+        type: Number,
+        value: 32
+      }
+    },
+
+    _resizeCanvas: function(canvas, w, h) {
+      var canvasWidth = w * this.scale;
+      var canvasHeight = h * this.scale;
+
+      canvas.width = canvasWidth;
+      canvas.height = canvasHeight;
+      canvas.style.width = canvasWidth + "px";
+      canvas.style.height = canvasHeight + "px";
+    }
+  };
+
+
+}(window));
+</script>
