@@ -38,8 +38,8 @@
     },
 
     observers: [
-      '_onSheetLoaded(sheetLoaded)',
-      '_somethingChanged(charClass, direction)'
+      '_onCharacterSetup(charClass, direction)',
+      '_onSheetLoaded(sheetLoaded)'
     ],
 
     ready: function() {
@@ -48,6 +48,10 @@
 
       this._resizeCanvas(this.canvas, 1, 1);
       this._loadSheet();
+    },
+
+    walk: function() {
+
     },
 
     _drawChar: function(isStepping) {
@@ -71,18 +75,19 @@
       this.sheet.src = this.resolveUrl('char-walking.png');
     },
 
+    _onCharacterSetup: function(charClass, direction) {
+      this.set('walkRow', scope.FF.CharClasses.fromId(charClass).walkRow);
+      this.set('walkCol', this.walkColsByDirection[direction]);
+      this._onSheetLoaded(this.sheetLoaded);
+    },
+
     _onSheetLoaded: function(sheetLoaded) {
       if (!sheetLoaded) {
         return;
       }
 
       this._drawChar();
-    },
-
-    _somethingChanged: function(charClass, direction) {
-      this.set('walkRow', scope.FF.CharClasses.fromId(charClass).walkRow);
-      this.set('walkCol', this.walkColsByDirection[direction]);
-      this._onSheetLoaded(this.sheetLoaded);
     }
+
   });
 }(window));

@@ -22,18 +22,30 @@
       <ff-char-walking
         char-class="whitemage"
         direction="right"></ff-char-walking>
-
+      <button id="animate">Animate!</button>
+      <div id="output"></div>
     </template>
 
     <script>
     window.addEventListener('WebComponentsReady', function(e) {
-      /*var $map = document.getElementById('map');
-      var buttons = document.getElementsByTagName('button');
-      for (var i = 0; i < buttons.length; i++) {
-        buttons.item(i).addEventListener('click', function(e) {
-          $map.moving = e.target.id;
-        });
-      }*/
+      var $animate = document.getElementById('animate');
+      var $output = document.getElementById('output');
+      var animation = new FF.Animation();
+
+      animation.add(function(i) {
+        $output.insertAdjacentHTML('beforeend', '<p>Received ' + i + '</p>');
+      }, [123]);
+      animation.delay(3000);
+      animation.add(function(i, j) {
+        $output.insertAdjacentHTML('beforeend', '<p>' + i + ',' + j + '</p>');
+      }, [456, 789]);
+      animation.delay(1000);
+      animation.add(function() {
+        $output.insertAdjacentHTML('beforeend', '<p>Last step</p>');
+      });
+      $animate.addEventListener('click', function() {
+        animation.run();
+      });
     });
     </script>
   </body>
