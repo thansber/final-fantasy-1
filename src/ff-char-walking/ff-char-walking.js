@@ -21,9 +21,16 @@
         type: Number,
         value: 16
       },
-      sheetLoaded: Boolean,
-      walkCol: Number,
+      sheetLoaded: {
+        readonly: true,
+        type: Boolean
+      },
+      walkCol: {
+        readonly: true,
+        type: Number
+      },
       walkColsByDirection: {
+        readonly: true,
         type: Object,
         value: function() {
           return {
@@ -34,7 +41,10 @@
           }
         }
       },
-      walkRow: Number
+      walkRow: {
+        readonly: true,
+        type: Number
+      }
     },
 
     observers: [
@@ -51,7 +61,14 @@
     },
 
     walk: function() {
-
+      var queue = new scope.FF.Animation();
+      var isStepping = false;
+      for (var i = 0; i < 6; i++) {
+        queue.add(this._drawChar.bind(this, isStepping));
+        queue.delay(80);
+        isStepping = !isStepping;
+      }
+      queue.run();
     },
 
     _drawChar: function(isStepping) {
@@ -69,9 +86,7 @@
 
     _loadSheet: function() {
       this.sheet = new Image();
-      this.sheet.addEventListener('load', function() {
-        this.set('sheetLoaded', true);
-      }.bind(this), false);
+      this.sheet.addEventListener('load', this.set.bind(this, 'sheetLoaded', true, undefined), false);
       this.sheet.src = this.resolveUrl('char-walking.png');
     },
 

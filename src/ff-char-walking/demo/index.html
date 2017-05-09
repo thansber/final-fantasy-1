@@ -12,14 +12,13 @@
         height: 180px;
         width: 180px;
       }
-
-
     </style>
   </head>
   <body>
 
     <template is="dom-bind">
       <ff-char-walking
+        id="charWalking"
         char-class="whitemage"
         direction="right"></ff-char-walking>
       <button id="animate">Animate!</button>
@@ -29,22 +28,9 @@
     <script>
     window.addEventListener('WebComponentsReady', function(e) {
       var $animate = document.getElementById('animate');
-      var $output = document.getElementById('output');
-      var animation = new FF.Animation();
 
-      animation.add(function(i) {
-        $output.insertAdjacentHTML('beforeend', '<p>Received ' + i + '</p>');
-      }, [123]);
-      animation.delay(3000);
-      animation.add(function(i, j) {
-        $output.insertAdjacentHTML('beforeend', '<p>' + i + ',' + j + '</p>');
-      }, [456, 789]);
-      animation.delay(1000);
-      animation.add(function() {
-        $output.insertAdjacentHTML('beforeend', '<p>Last step</p>');
-      });
       $animate.addEventListener('click', function() {
-        animation.run();
+        document.getElementById('charWalking').walk();
       });
     });
     </script>
