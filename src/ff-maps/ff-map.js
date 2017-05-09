@@ -113,6 +113,12 @@
       return row[x] || this.map.filler;
     },
 
+    _isPassable: function(y, x) {
+      var tileDefinition = this.map.definition[this._getTile(y, x)];
+      // TODO: compare current transportation against passableBy
+      return !!tileDefinition.passableBy;
+    },
+
     _moveOnePixel: function(options) {
       var upperLeftX = this.positionX - (this.numTiles / 2 - 1) + options.xUpperLeftAdjustment;
       var upperLeftY = this.positionY - (this.numTiles / 2 - 1) + options.yUpperLeftAdjustment;
@@ -142,7 +148,12 @@
         this._adjustPosition(directionOptions.yChange, directionOptions.xChange);
 
         // TODO: check for map transition
-        // TODO: confirm new position is passable
+
+        if (!this._isPassable(this.positionY, this.positionX)) {
+          // not passable, so reset their position
+          this._adjustPosition(-1 * directionOptions.yChange, -1 * directionOptions.xChange);
+          return;
+        }
 
         var moveLoop = function() {
           switch (direction) {
