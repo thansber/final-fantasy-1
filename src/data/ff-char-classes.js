@@ -95,6 +95,7 @@
   ];
 
   scope.FF.CharClasses = {
+    all: Object.values(allClassesById),
     basicClasses: basicClasses,
     basicClassIndex: basicClassIndex,
     fromId: fromId

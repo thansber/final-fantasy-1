@@ -10,6 +10,10 @@
       }
     },
 
+    _clearCanvas: function(canvas, ctx) {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+    },
+
     _resizeCanvas: function(canvas, w, h) {
       var canvasWidth = w * this.scale;
       var canvasHeight = h * this.scale;

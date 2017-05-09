@@ -72,6 +72,7 @@
     },
 
     _drawChar: function(isStepping) {
+      this._clearCanvas(this.canvas, this.ctx);
       this.ctx.drawImage(
         this.sheet,
         this.sheetIconSize * (isStepping ? this.walkCol + 1 : this.walkCol), // y in source
