@@ -41,7 +41,10 @@
         return copied;
       };
 
-      Object.assign(map, Object.keys(mapData).filter(excludeFields).reduce(copyField, {}));
+      Object.assign(map, Object.keys(mapData)
+          .filter(excludeFields)
+          .reduce(copyField, {}));
+      map.transitions = this._transitionsAsMap(mapData.transitions);
       this.map = map;
     },
 
@@ -72,6 +75,27 @@
       return mapData.map(function(data) {
         return data.split(' ').filter(Boolean);
       });
+    },
+
+    _transitionsAsMap: function(transitions) {
+      if (!transitions) {
+        return {};
+      }
+      return transitions.reduce(function(map, transition) {
+        var entry = map[transition.y];
+        if (!entry) {
+          entry = {};
+          map[transition.y] = entry;
+        }
+        entry[transition.x] = {
+          to: {
+            map: transition.to,
+            x: transition.toX,
+            y: transition.toY
+          }
+        };
+        return map;
+      }, {});
     }
 
   });

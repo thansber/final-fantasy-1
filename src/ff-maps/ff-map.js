@@ -52,7 +52,8 @@
           xExtraTiles: 0,
           xUpperLeftAdjustment: 0,
           yExtraTiles: 1,
-          yUpperLeftAdjustment: 0
+          yUpperLeftAdjustment: 0,
+          xAdjustment: 0
         },
         down: {
           xChange: 0,
@@ -60,7 +61,8 @@
           xExtraTiles: 0,
           xUpperLeftAdjustment: 0,
           yExtraTiles: 1,
-          yUpperLeftAdjustment: -1
+          yUpperLeftAdjustment: -1,
+          xAdjustment: 0
         },
         right: {
           xChange: 1,
@@ -68,7 +70,8 @@
           xExtraTiles: 1,
           xUpperLeftAdjustment: -1,
           yExtraTiles: 0,
-          yUpperLeftAdjustment: 0
+          yUpperLeftAdjustment: 0,
+          yAdjustment: 0
         },
         left: {
           xChange: -1,
@@ -76,7 +79,8 @@
           xExtraTiles: 1,
           xUpperLeftAdjustment: 0,
           yExtraTiles: 0,
-          yUpperLeftAdjustment: 0
+          yUpperLeftAdjustment: 0,
+          yAdjustment: 0
         }
       };
 
@@ -119,6 +123,45 @@
       return !!tileDefinition.passableBy;
     },
 
+    _move: function(direction) {
+      var pixelsMoved = 1;
+      var moveId;
+      var directionOptions = Object.assign({}, this.moveOptions[direction]);
+
+      // already determined that we can move, scrolls map to new position
+      // and starts walk animation
+      var moveLoop = function() {
+        switch (direction) {
+          case 'up':
+            directionOptions.yAdjustment = parseFloat(1 - pixelsMoved / this.scale);
+            break;
+          case 'down':
+            directionOptions.yAdjustment = parseFloat(pixelsMoved / this.scale);
+            break;
+          case 'left':
+            directionOptions.xAdjustment = parseFloat(1 - pixelsMoved / this.scale);
+            break;
+          case 'right':
+            directionOptions.xAdjustment = parseFloat(pixelsMoved / this.scale);
+            break;
+          default:
+            throw 'Invalid direction: [' + direction + ']';
+        }
+
+        this._moveOnePixel(directionOptions);
+        pixelsMoved++;
+
+        if (pixelsMoved > this.scale) {
+          clearInterval(moveId);
+          this.moving = null;
+          this._onMovingDone(directionOptions);
+        }
+      };
+
+      moveId = setInterval(moveLoop.bind(this), 1000 / this.FPS);
+      this.$charWalking.walk();
+    },
+
     _moveOnePixel: function(options) {
       var upperLeftX = this.positionX - (this.numTiles / 2 - 1) + options.xUpperLeftAdjustment;
       var upperLeftY = this.positionY - (this.numTiles / 2 - 1) + options.yUpperLeftAdjustment;
@@ -140,14 +183,15 @@
 
     _onMove: function(direction) {
       if (direction) {
+        var directionOptions = this.moveOptions[direction];
         this.facing = direction;
-        var pixelsMoved = 1;
-        var moveId;
-        var directionOptions = Object.assign({}, this.moveOptions[direction]);
-
         this._adjustPosition(directionOptions.yChange, directionOptions.xChange);
 
         // TODO: check for map transition
+
+        if (this._isTransition(this.positionY, this.positionX)) {
+          console.log("")
+        }
 
         if (!this._isPassable(this.positionY, this.positionX)) {
           // not passable, so reset their position
@@ -155,40 +199,7 @@
           return;
         }
 
-        var moveLoop = function() {
-          switch (direction) {
-            case 'up':
-              directionOptions.xAdjustment = 0;
-              directionOptions.yAdjustment = parseFloat(1 - pixelsMoved / this.scale);
-              break;
-            case 'down':
-              directionOptions.xAdjustment = 0;
-              directionOptions.yAdjustment = parseFloat(pixelsMoved / this.scale);
-              break;
-            case 'left':
-              directionOptions.xAdjustment = parseFloat(1 - pixelsMoved / this.scale);
-              directionOptions.yAdjustment = 0;
-              break;
-            case 'right':
-              directionOptions.xAdjustment = parseFloat(pixelsMoved / this.scale);
-              directionOptions.yAdjustment = 0;
-              break;
-            default:
-              throw 'Invalid direction: [' + direction + ']';
-          }
-
-          this._moveOnePixel(directionOptions);
-          pixelsMoved++;
-
-          if (pixelsMoved > this.scale) {
-            clearInterval(moveId);
-            this.moving = null;
-            this._onMovingDone(directionOptions);
-          }
-        };
-
-        moveId = setInterval(moveLoop.bind(this), 1000 / this.FPS);
-        this.$charWalking.walk();
+        this._move(direction);
       }
     },
 
