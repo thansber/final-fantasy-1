@@ -29,7 +29,11 @@
       sheetIconSize: {
         readonly: true,
         type: Number,
-        value: 16
+        value: 32
+      },
+      transition: {
+        readonly: true,
+        type: Object
       }
     },
 
@@ -117,6 +121,12 @@
       return row[x] || this.map.filler;
     },
 
+    _getTransition: function(y, x) {
+      var transitionsForY = this.map.transitions[y] || {};
+      var transitions = transitionsForY[x] || {};
+      return transitions.to;
+    },
+
     _isPassable: function(y, x) {
       var tileDefinition = this.map.definition[this._getTile(y, x)];
       // TODO: compare current transportation against passableBy
@@ -183,15 +193,11 @@
 
     _onMove: function(direction) {
       if (direction) {
+
         var directionOptions = this.moveOptions[direction];
         this.facing = direction;
         this._adjustPosition(directionOptions.yChange, directionOptions.xChange);
-
-        // TODO: check for map transition
-
-        if (this._isTransition(this.positionY, this.positionX)) {
-          console.log("")
-        }
+        this.transition = this._getTransition(this.positionY, this.positionX);
 
         if (!this._isPassable(this.positionY, this.positionX)) {
           // not passable, so reset their position
@@ -204,7 +210,11 @@
     },
 
     _onMovingDone: function(directionOptions) {
-
+      if (this.transition) {
+        console.log('transitioning...');
+        // TODO: transition animation
+        // TODO: jump to new map
+      }
     },
 
     _onPosition: function(posY, posX) {

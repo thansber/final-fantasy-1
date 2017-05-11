@@ -263,11 +263,11 @@
   "wrapsX": true,
   "wrapsY": true,
   "transitions": [
-    { "y":160, "x":151, "to": "towns/coneria" },
-    { "y":161, "x":151, "to": "towns/coneria" },
-    { "y":162, "x":151, "to": "towns/coneria" },
-    { "y":160, "x":154, "to": "towns/coneria" },
-    { "y":161, "x":154, "to": "towns/coneria" },
-    { "y":162, "x":154, "to": "towns/coneria" }
+    { "y":160, "x":151, "to": "towns/coneria", "toY": 23, "toX": 16 },
+    { "y":161, "x":151, "to": "towns/coneria", "toY": 23, "toX": 16 },
+    { "y":162, "x":151, "to": "towns/coneria", "toY": 23, "toX": 16 },
+    { "y":160, "x":154, "to": "towns/coneria", "toY": 23, "toX": 16 },
+    { "y":161, "x":154, "to": "towns/coneria", "toY": 23, "toX": 16 },
+    { "y":162, "x":154, "to": "towns/coneria", "toY": 23, "toX": 16 }
   ]
 }

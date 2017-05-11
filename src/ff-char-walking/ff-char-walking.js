@@ -19,7 +19,7 @@
       sheetIconSize: {
         readonly: true,
         type: Number,
-        value: 16
+        value: 32
       },
       sheetLoaded: {
         readonly: true,
