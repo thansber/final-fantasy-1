@@ -205,6 +205,7 @@
         if (!this._isPassable(this.positionY, this.positionX)) {
           // not passable, so reset their position
           this._adjustPosition(-1 * directionOptions.yChange, -1 * directionOptions.xChange);
+          this.moving = null;
           return;
         }
 

@@ -51,20 +51,29 @@
       //this.playAnimation('entry');
     },
 
+    _moveChar: function(direction) {
+      // need this check so the map doesn't try to move in
+      // multiple directions at once if you press multiple arrow keys
+      // at the same time
+      if (!this.moving) {
+        this.set('moving', direction);
+      }
+    },
+
     _moveDown: function() {
-      this.set('moving', 'down');
+      this._moveChar('down');
     },
 
     _moveLeft: function() {
-      this.set('moving', 'left');
+      this._moveChar('left');
     },
 
     _moveRight: function() {
-      this.set('moving', 'right');
+      this._moveChar('right');
     },
 
     _moveUp: function() {
-      this.set('moving', 'up');
+      this._moveChar('up');
     }
   });
 
