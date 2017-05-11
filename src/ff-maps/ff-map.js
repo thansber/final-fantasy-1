@@ -13,7 +13,10 @@
       charClass: String,
       facing: String,
       map: Object,
-      moving: String, // one of up|down|left|right
+      moving: {
+        notify: true,
+        type: String // one of up|down|left|right
+      },
       numTiles: { // number of tiles shown across/down
         type: Number,
         value: 16
@@ -215,6 +218,7 @@
         // TODO: transition animation
         // TODO: jump to new map
       }
+      this.fire('ff-moving-done');
     },
 
     _onPosition: function(posY, posX) {

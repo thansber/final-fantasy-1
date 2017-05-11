@@ -7,29 +7,35 @@ Polymer({
         type: Number,
         value: 0
       },
+      firstCharClass: {
+        notify: true,
+        type: String
+      },
       party: {
         notify: true,
         type: Array,
         value: function() {
+          // TODO: remove this default party
           return [{
             charClass: 'fighter',
-            name: ''
+            name: 'AAAA'
           }, {
             charClass: 'thief',
-            name: ''
+            name: 'BBBB'
           }, {
             charClass: 'blackbelt',
-            name: ''
+            name: 'CCCC'
           }, {
             charClass: 'redmage',
-            name: ''
+            name: 'DDDD'
           }];
         }
       }
     },
 
     listeners: {
-      'ff-screen': '_onScreenChange'
+      'ff-screen': '_onScreenChange',
+      'ff-start-game': '_onStartGame'
     },
 
     ready: function() {
@@ -66,13 +72,22 @@ Polymer({
         this.charIndex++;
         this.screenChanged('charSelect');
       } else {
-        // TODO: check if 4th char, start game
-        console.log('START GAME');
+        this._startGame();
       }
     },
 
     _onScreenChange: function(e, detail) {
       this.screenChanged(detail.screen);
+    },
+
+    _onStartGame: function(e, detail) {
+      // TODO: set party from detail.party, for now use default
+      this._startGame();
+    },
+
+    _startGame: function() {
+      this.set('firstCharClass', this.party[0].charClass);
+      this.screenChanged('map');
     }
 
   });

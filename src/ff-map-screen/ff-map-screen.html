@@ -1,0 +1,26 @@
+<link rel="import" href="../ff-maps/ff-maps.html">
+<link rel="import" href="../ff-maps/ff-map.html">
+<link rel="import" href="ff-map-screen-css.html">
+
+<dom-module id="ff-map-screen">
+  <template>
+    <style include="ff-map-screen-css"></style>
+
+    <ff-maps map-id="[[ mapId ]]"
+      map="{{ map }}"></ff-maps>
+    <ff-map id="map"
+      map="{{ map }}"
+      moving="{{ moving }}"
+      position-x="{{ posX }}"
+      position-y="{{ posY }}"
+      char-class="[[ charClass ]]"></ff-map>
+
+    <ff-keyhandler
+      on-ff-up="_moveUp"
+      on-ff-down="_moveDown"
+      on-ff-left="_moveLeft"
+      on-ff-right="_moveRight"></ff-keyhandler>
+  </template>
+
+  <script src="ff-map-screen.js"></script>
+</dom-module>

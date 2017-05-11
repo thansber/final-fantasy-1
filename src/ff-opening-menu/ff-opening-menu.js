@@ -10,6 +10,9 @@
     ],
 
     properties: {
+      party: {
+        type: Object
+      },
       respondRate: {
         notify: true,
         type: Number,
@@ -17,10 +20,18 @@
       }
     },
 
+    _hasSavedGame: function() {
+      // TODO: check for existing saved game
+      // TODO: load party, set it
+      return true;
+    },
+
     _next: function(e, detail) {
       if (detail.value === 'continue') {
-        // TODO: check for existing saved game, load it
-        // TODO: if no saved game go to new game
+        if (this._hasSavedGame()) {
+          this.fire('ff-start-game', this.party);
+          return;
+        }
         this.fire('ff-screen', { screen: 'charSelect' });
       } else if (detail.value === 'new') {
         this.fire('ff-screen', { screen: 'charSelect' });

@@ -3,6 +3,7 @@
 <link rel="import" href="../ff-opening-menu/ff-opening-menu.html">
 <link rel="import" href="../ff-char-select/ff-char-select.html">
 <link rel="import" href="../ff-enter-name/ff-enter-name.html">
+<link rel="import" href="../ff-map-screen/ff-map-screen.html">
 <link rel="import" href="ff-app-css.html">
 
 <dom-module id="ff-app">
@@ -18,6 +19,9 @@
         on-ff-char-class-done="_onCharClassSelected"></ff-char-select>
       <ff-enter-name flex screen="enterName"
         on-ff-char-name-done="_onCharNameEntered"></ff-enter-name>
+      <ff-map-screen flex screen="map"
+        char-class="[[ firstCharClass ]]"
+        map-id="world"></ff-map-screen>
     </div>
   </template>
 
