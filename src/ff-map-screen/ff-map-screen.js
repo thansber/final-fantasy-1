@@ -48,6 +48,10 @@
       transition: {
         observer: '_startingGame',
         type: Object
+      },
+      worldMapPosition: {
+        readonly: true,
+        type: Object
       }
     },
 
@@ -104,6 +108,13 @@
     },
 
     _toMap: function(transition) {
+      if (transition.toWorldMap) {
+        transition = {
+          map: 'world',
+          y: this.worldMapPosition.y,
+          x: this.worldMapPosition.x
+        };
+      }
       this.mapId = transition.map;
       this.$.map.transitionTo(transition);
     }

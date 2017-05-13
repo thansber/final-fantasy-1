@@ -132,9 +132,19 @@
     },
 
     _getTransition: function(y, x) {
+      if (this.map.exitOnOutOfBounds && this._isOutOfBounds(y, x)) {
+        return { toWorldMap: true };
+      }
       var transitionsForY = this.map.transitions[y] || {};
       var transitions = transitionsForY[x] || {};
       return transitions.to;
+    },
+
+    _isOutOfBounds: function(y, x) {
+      if (y < 0 || x < 0) {
+        return true;
+      }
+      return y >= this.map.data.length || x >= this.map.data[0].length ;
     },
 
     _isPassable: function(y, x) {
@@ -226,9 +236,11 @@
         console.log(this.transition);
         console.log('TODO: show transition overlay');
         if (this._isWorldMap(this.mapId)) {
-          console.log('TODO: save world map position');
+          this.fire('ff-save-world-map-position', {
+            y: this.positionY,
+            x: this.positionX
+          });
         }
-        //this.transitionTo(this.transition);
         this.map = undefined;
       }
       this.fire('ff-moving-done');

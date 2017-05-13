@@ -16,7 +16,10 @@ Polymer({
         notify: true,
         type: Object,
         value: function() {
-          return {};
+          return {
+            mapPosition: undefined,
+            worldMapPosition: undefined
+          };
         }
       },
       party: {
@@ -91,6 +94,13 @@ Polymer({
       } else {
         this._startGame();
       }
+    },
+
+    _onSaveWorldMapPosition: function(e, detail) {
+      this.set('game.worldMapPosition', {
+        y: detail.y,
+        x: detail.x
+      });
     },
 
     _onScreenChange: function(e, detail) {
