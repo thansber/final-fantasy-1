@@ -21,8 +21,8 @@
     },
 
     _hasSavedGame: function() {
-      // TODO: check for existing saved game
-      // TODO: load party, set it
+      console.log('TODO: check for existing saved game');
+      console.log('TODO: load party, set it');
       return true;
     },
 

@@ -13,6 +13,10 @@
       charClass: String,
       facing: String,
       map: Object,
+      mapId: {
+        readonly: true,
+        type: String
+      },
       moving: {
         notify: true,
         type: String // one of up|down|left|right
@@ -35,15 +39,14 @@
         value: 32
       },
       transition: {
-        readonly: true,
+        notify: true,
         type: Object
       }
     },
 
     observers: [
-      '_onMap(map)',
       '_onMove(moving)',
-      '_onPosition(positionY, positionX)'
+      '_onPosition(map, positionY, positionX)'
     ],
 
     ready: function() {
@@ -94,14 +97,18 @@
       this._resizeCanvas(this.canvas, this.numTiles, this.numTiles);
     },
 
+    // Only sets position/map based on transition and fires transition done event
+    transitionTo: function(transition) {
+      this.positionX = undefined;
+      this.positionY = undefined;
+      this.positionX = transition.x;
+      this.positionY = transition.y;
+      this.fire('ff-map-transition-done');
+    },
+
     _adjustPosition: function(yChange, xChange) {
       this.positionX += xChange;
       this.positionY += yChange;
-    },
-
-    _drawMap: function() {
-      this.positionX = this.map.start.x;
-      this.positionY = this.map.start.y;
     },
 
     _drawTile: function(sheet, whereToPullFrom, whereToDraw) {
@@ -134,6 +141,10 @@
       var tileDefinition = this.map.definition[this._getTile(y, x)];
       // TODO: compare current transportation against passableBy
       return !!tileDefinition.passableBy;
+    },
+
+    _isWorldMap: function(mapId) {
+      return /world/.test(mapId);
     },
 
     _move: function(direction) {
@@ -190,17 +201,13 @@
       }
     },
 
-    _onMap: function(map) {
-      this._drawMap();
-    },
-
     _onMove: function(direction) {
       if (direction) {
 
         var directionOptions = this.moveOptions[direction];
         this.facing = direction;
         this._adjustPosition(directionOptions.yChange, directionOptions.xChange);
-        this.transition = this._getTransition(this.positionY, this.positionX);
+        this.set('transition', this._getTransition(this.positionY, this.positionX));
 
         if (!this._isPassable(this.positionY, this.positionX)) {
           // not passable, so reset their position
@@ -215,15 +222,20 @@
 
     _onMovingDone: function(directionOptions) {
       if (this.transition) {
-        console.log('transitioning...');
-        // TODO: transition animation
-        // TODO: jump to new map
+        console.log('transitioning to...');
+        console.log(this.transition);
+        console.log('TODO: show transition overlay');
+        if (this._isWorldMap(this.mapId)) {
+          console.log('TODO: save world map position');
+        }
+        //this.transitionTo(this.transition);
+        this.map = undefined;
       }
       this.fire('ff-moving-done');
     },
 
-    _onPosition: function(posY, posX) {
-      if (this.moving || isNaN(parseInt(posY, 10)) || isNaN(parseInt(posX, 10))) {
+    _onPosition: function(map, posY, posX) {
+      if (this.moving || !this.map || isNaN(parseInt(posY, 10)) || isNaN(parseInt(posX, 10))) {
         return;
       }
 

@@ -1,18 +1,18 @@
 <link rel="import" href="../ff-maps/ff-maps.html">
 <link rel="import" href="../ff-maps/ff-map.html">
-<link rel="import" href="ff-map-screen-css.html">
 
 <dom-module id="ff-map-screen">
   <template>
-    <style include="ff-map-screen-css"></style>
 
     <ff-maps map-id="[[ mapId ]]"
       map="{{ map }}"></ff-maps>
     <ff-map id="map"
       map="{{ map }}"
+      map-id="[[ mapId ]]"
       moving="{{ moving }}"
       position-x="{{ posX }}"
       position-y="{{ posY }}"
+      transition="{{ transition }}"
       char-class="[[ charClass ]]"></ff-map>
 
     <ff-keyhandler

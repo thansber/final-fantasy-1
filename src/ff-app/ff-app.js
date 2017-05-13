@@ -11,6 +11,14 @@ Polymer({
         notify: true,
         type: String
       },
+      // The state of the game
+      game: {
+        notify: true,
+        type: Object,
+        value: function() {
+          return {};
+        }
+      },
       party: {
         notify: true,
         type: Array,
@@ -29,6 +37,15 @@ Polymer({
             charClass: 'redmage',
             name: 'DDDD'
           }];
+        }
+      },
+      startGamePosition: {
+        readonly: true,
+        type: Object,
+        value: {
+          map: 'world',
+          y: 165,
+          x: 153
         }
       }
     },
@@ -81,7 +98,12 @@ Polymer({
     },
 
     _onStartGame: function(e, detail) {
-      // TODO: set party from detail.party, for now use default
+      console.log('TODO: set party from detail.party, for now use default');
+      console.log('TODO: set game from detail.game');
+      if (!this.game.mapPosition) {
+        this.starting = true;
+        this.set('game.mapPosition', this.startGamePosition);
+      }
       this._startGame();
     },
 

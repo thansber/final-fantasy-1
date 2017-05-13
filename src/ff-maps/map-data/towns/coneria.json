@@ -25,7 +25,6 @@
     ".  .  .  .  .  .  .  .  W6 .  .  .  .  .  .  t  r  t  .  .  t  t  t  W1 .1 .  .  .  .  .  .  .",
     ".  .  .  .  .  .  .  .  W  W  W  W  W  W  t  t  r  t  t  W  W  W  W  W  .2 .  .  .  .  .  .  ."
   ],
-  "start": { "y": 23, "x": 16 },
   "definition": "town",
   "sheet": "town",
   "filler": ".",

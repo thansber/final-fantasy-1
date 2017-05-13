@@ -36,11 +36,23 @@
       },
 
       mapId: {
-        readonly: true,
+        notify: true,
         type: String
       },
 
-      moving: String
+      moving: String,
+      starting: {
+        readonly: true,
+        type: Boolean
+      },
+      transition: {
+        observer: '_startingGame',
+        type: Object
+      }
+    },
+
+    listeners: {
+      'ff-moving-done': '_onMovingDone'
     },
 
     onScreenClosed: function() {
@@ -74,6 +86,26 @@
 
     _moveUp: function() {
       this._moveChar('up');
+    },
+
+    _onMovingDone: function(e, detail) {
+      if (!this.transition) {
+        return;
+      }
+
+      this._toMap(this.transition);
+    },
+
+    _startingGame: function(transition) {
+      if (this.starting) {
+        this._toMap(transition);
+        this.starting = false;
+      }
+    },
+
+    _toMap: function(transition) {
+      this.mapId = transition.map;
+      this.$.map.transitionTo(transition);
     }
   });
 

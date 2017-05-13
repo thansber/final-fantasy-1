@@ -20,8 +20,10 @@
       <ff-enter-name flex screen="enterName"
         on-ff-char-name-done="_onCharNameEntered"></ff-enter-name>
       <ff-map-screen flex screen="map"
+        id="mapScreen"
         char-class="[[ firstCharClass ]]"
-        map-id="world"></ff-map-screen>
+        transition="[[ game.mapPosition ]]"
+        starting="[[ starting ]]"></ff-map-screen>
     </div>
   </template>
 
