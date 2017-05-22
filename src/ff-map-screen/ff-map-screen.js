@@ -49,6 +49,10 @@
         observer: '_startingGame',
         type: Object
       },
+      transitioning: {
+        reflectToAttribute: true,
+        type: Boolean
+      },
       worldMapPosition: {
         readonly: true,
         type: Object
@@ -97,7 +101,7 @@
         return;
       }
 
-      this._toMap(this.transition);
+      this._transitionAnimation();
     },
 
     _startingGame: function(transition) {
@@ -117,6 +121,15 @@
       }
       this.mapId = transition.map;
       this.$.map.transitionTo(transition);
+    },
+
+    _transitionAnimation: function() {
+      var queue = new scope.FF.Animation();
+      queue.add(this.set.bind(this, 'transitioning', true, undefined));
+      queue.delay(1300);
+      queue.add(this._toMap.bind(this, this.transition));
+      queue.add(this.set.bind(this, 'transitioning', false, undefined));
+      queue.run();
     }
   });
 

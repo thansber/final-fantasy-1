@@ -4,6 +4,37 @@
 <dom-module id="ff-map-screen">
   <template>
 
+    <style is="custom-style">
+      :host {
+        position: relative;
+      }
+
+      [transition] {
+        background-color: black;
+        height: 224px;
+        position: absolute;
+        transition: top 1s linear, bottom 1s linear;
+        width: 512px;
+      }
+
+      [transition][top] {
+        top: -51%;
+      }
+
+      :host[transitioning] [transition][top] {
+        top: 0;
+      }
+
+      [transition][bottom] {
+        bottom: -51%;
+      }
+
+      :host[transitioning] [transition][bottom] {
+        bottom: 0;
+      }
+
+    </style>
+
     <ff-maps map-id="[[ mapId ]]"
       map="{{ map }}"></ff-maps>
     <ff-map id="map"
@@ -15,6 +46,9 @@
       transition="{{ transition }}"
       char-class="[[ charClass ]]"></ff-map>
 
+    <div transition top></div>
+    <div transition bottom></div>
+
     <ff-keyhandler
       on-ff-up="_moveUp"
       on-ff-down="_moveDown"
@@ -22,5 +56,6 @@
       on-ff-right="_moveRight"></ff-keyhandler>
   </template>
 
+  <script src="../data/ff-animation.js"></script>
   <script src="ff-map-screen.js"></script>
 </dom-module>
