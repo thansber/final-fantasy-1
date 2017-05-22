@@ -21,7 +21,7 @@
 
       #posX, #posY {
         font-size: 125%;
-        width: 2em;
+        width: 3em;
       }
 
       #directions {
@@ -47,21 +47,23 @@
   <body>
 
     <template is="dom-bind">
-      <ff-maps map-id="world"
+      <ff-maps id="maps"
+        map-id="{{ mapId }}"
         map="{{map}}"></ff-maps>
       <ff-map id="map"
         map="{{map}}"
+        map-id="{{ mapId }}"
         position-x="{{posX}}"
         position-y="{{posY}}"
         char-class="blackbelt"></ff-map>
 
       <div>
         <label for="posX">X position</label>
-        <input id="posX" value="{{posX::input}}" maxlength="3" />
+        <input id="posX" value="{{posX::input}}" type="number" maxlength="3" />
       </div>
       <div>
         <label for="posY">Y position</label>
-        <input id="posY" value="{{posY::input}}" maxlength="3" />
+        <input id="posY" value="{{posY::input}}" type="number" maxlength="3" />
       </div>
 
       <div id="directions">
@@ -77,8 +79,20 @@
 
     <script>
     window.addEventListener('WebComponentsReady', function(e) {
+      var $maps = document.getElementById('maps');
       var $map = document.getElementById('map');
       var buttons = document.getElementsByTagName('button');
+      var posY = document.getElementById('posY');
+      var posX = document.getElementById('posX');
+
+      $maps.setAttribute('map-id', 'world');
+      $map.transports = ['foot'];
+      $map.transitionTo({
+        map: 'world',
+        y: 165,
+        x: 153
+      });
+
       for (var i = 0; i < buttons.length; i++) {
         buttons.item(i).addEventListener('click', function(e) {
           $map.moving = e.target.id;

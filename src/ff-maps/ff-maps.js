@@ -32,6 +32,9 @@
         sheet: e.currentTarget
       };
 
+      map.rows = map.data.length;
+      map.cols = map.data[0].length;
+
       var doNotCopy = /sprites|definition|sheet/;
       var excludeFields = function(f) {
         return !doNotCopy.test(f);

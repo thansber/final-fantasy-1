@@ -53,6 +53,10 @@
         reflectToAttribute: true,
         type: Boolean
       },
+      transports: {
+        readonly: true,
+        value: Array
+      },
       worldMapPosition: {
         readonly: true,
         type: Object

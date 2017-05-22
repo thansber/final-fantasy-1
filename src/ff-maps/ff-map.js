@@ -41,6 +41,10 @@
       transition: {
         notify: true,
         type: Object
+      },
+      transports: {
+        readonly: true,
+        value: Array
       }
     },
 
@@ -107,6 +111,8 @@
     },
 
     _adjustPosition: function(yChange, xChange) {
+      this.positionX = +this.positionX;
+      this.positionY = +this.positionY;
       this.positionX += xChange;
       this.positionY += yChange;
     },
@@ -144,13 +150,12 @@
       if (y < 0 || x < 0) {
         return true;
       }
-      return y >= this.map.data.length || x >= this.map.data[0].length ;
+      return y >= this.map.rows || x >= this.map.cols;
     },
 
-    _isPassable: function(y, x) {
+    _isPassable: function(y, x, leavingTileDefinition) {
       var tileDefinition = this.map.definition[this._getTile(y, x)];
-      // TODO: compare current transportation against passableBy
-      return !!tileDefinition.passableBy;
+      return FF.Game.hasTransportation(this.transports, tileDefinition.passableBy, leavingTileDefinition);
     },
 
     _isWorldMap: function(mapId) {
@@ -215,11 +220,13 @@
       if (direction) {
 
         var directionOptions = this.moveOptions[direction];
+        // need this for dock->ship check
+        var leavingTileDefinition = this.map.definition[this._getTile(this.positionY, this.positionX)];
         this.facing = direction;
         this._adjustPosition(directionOptions.yChange, directionOptions.xChange);
         this.set('transition', this._getTransition(this.positionY, this.positionX));
 
-        if (!this._isPassable(this.positionY, this.positionX)) {
+        if (!this._isPassable(this.positionY, this.positionX, leavingTileDefinition)) {
           // not passable, so reset their position
           this._adjustPosition(-1 * directionOptions.yChange, -1 * directionOptions.xChange);
           this.moving = null;
@@ -232,9 +239,8 @@
 
     _onMovingDone: function(directionOptions) {
       if (this.transition) {
-        console.log('transitioning to...');
-        console.log(this.transition);
-        console.log('TODO: show transition overlay');
+        //console.log('transitioning to...');
+        //console.log(this.transition);
         if (this._isWorldMap(this.mapId)) {
           this.fire('ff-save-world-map-position', {
             y: this.positionY,
@@ -257,6 +263,13 @@
       var upperLeftY = this.positionY - 7;
       var sheet = this.map.sheet;
 
+      if (this.map.wrapsX && upperLeftX < 0) {
+        upperLeftX += this.map.cols;
+      }
+      if (this.map.wrapsY && upperLeftY < 0) {
+        upperLeftY += this.map.rows;
+      }
+
       for (var y = 0; y < this.numTiles; y++) { // for now, treat y like x, even though y uses halves
         for (var x = 0; x < this.numTiles; x++) {
           this._drawTile(sheet, this._tileCoords(upperLeftY + y, upperLeftX + x), { x: x, y: y });
@@ -265,7 +278,10 @@
     },
 
     _tileCoords: function(y, x) {
-      var tile = this._getTile(y, x);
+      // ensures wrapped maps behave properly
+      var tileY = this.map.wrapsY ? y % this.map.rows : y;
+      var tileX = this.map.wrapsX ? x % this.map.cols : x;
+      var tile = this._getTile(tileY, tileX);
       return {
         x: this.map.definition[tile].x,
         y: this.map.definition[tile].y
