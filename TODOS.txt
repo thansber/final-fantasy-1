@@ -1,4 +1,8 @@
+- add coneria castle sheet (enlarge it too)
+- add shop transition animation
+- shops
+  - equipment data (weapons/armor/items)
+  - equipment -> town
+  - town -> shop transition tiles
+
 - add screen selection menu (debug)
-- after selecting char, go to name enter screen
-- add name enter screen
-- add intro screen w/fade in effect
