@@ -1,0 +1,37 @@
+<script>
+(function(scope) {
+  scope.FF = scope.FF || {};
+
+  scope.FF.MonsterBehavior = {
+    properties: {
+      AllMonsterTypes: {
+        readonly: true,
+        type: Array,
+        value: {}
+      },
+
+      MonsterType: {
+        readonly: true,
+        type: Object,
+        value: function() {
+          return {
+            Magical : 'magical',
+            Dragon : 'dragon',
+            Giant : 'giant',
+            Undead : 'undead',
+            Were : 'were',
+            Aquatic : 'aquatic',
+            Mage : 'mage',
+            Regenerative : 'regen'
+          };
+        }
+      }
+    },
+
+    ready: function() {
+      this.AllMonsterTypes = Object.values(this.MonsterType);
+    }
+  };
+
+}(window));
+</script>

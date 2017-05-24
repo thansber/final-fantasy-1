@@ -1,0 +1,19 @@
+<script>
+(function(scope) {
+  scope.FF = scope.FF || {};
+
+  scope.FF.UtilBehavior = {
+    _objectify: function(array, property) {
+      return (array || []).reduce(function(obj, element) {
+        var key = element;
+        if (property) {
+          key = element[property];
+        }
+        obj[key] = element;
+        return obj;
+      }, {});
+    }
+  };
+
+}(window));
+</script>

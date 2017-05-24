@@ -1,0 +1,32 @@
+<script>
+(function(scope) {
+  scope.FF = scope.FF || {};
+
+  scope.FF.CharClassBehavior = {
+    properties: {
+      CharClass: {
+        readonly: true,
+        type: Object,
+        value: function() {
+          return {
+            Fighter: 'fighter',
+            Thief: 'thief',
+            Blackbelt: 'blackbelt',
+            RedMage: 'redmage',
+            WhiteMage: 'whitemage',
+            BlackMage: 'blackmage',
+
+            Knight: 'knight',
+            Ninja: 'ninja',
+            Master: 'master',
+            RedWizard: 'redwizard',
+            WhiteWizard: 'whitewizard',
+            BlackWizard: 'blackwizard'
+          };
+        }
+      }
+    }
+  };
+
+}(window));
+</script>

@@ -1,0 +1,453 @@
+<link rel="import" href="ff-util-behavior.html">
+<link rel="import" href="ff-char-class-behavior.html">
+<link rel="import" href="ff-element-behavior.html">
+<link rel="import" href="ff-monster-behavior.html">
+
+<script>
+(function(scope) {
+  scope.FF = scope.FF || {};
+
+  scope.FF.WeaponBehaviorImpl = {
+    properties: {
+      weapons: {
+        readonly: true,
+        type: Array,
+        value: function() {
+          return [];
+        }
+      },
+      weaponsByName: {
+        readonly: true,
+        type: Object,
+        value: function() {
+          return {};
+        }
+      }
+    },
+
+    ready: function() {
+      this._createAxes();
+      this._createHammers();
+      this._createKnives();
+      this._createNunchucks();
+      this._createStaves();
+      this._createSwords();
+
+      this.weaponsByName = this._objectify(this.weapons, 'name');
+    },
+
+    _createAxes: function() {
+      this._weapon({
+        name:"Hand[A]",desc:"Hand  %", price:550,
+        ui:{cssClasses:"hand axe", splash:"grey"},
+        stats:{attack:16,hit:5,crit:3,index:7},
+        allowedClasses:[
+          this.CharClass.Fighter, this.CharClass.Knight,
+          this.CharClass.Ninja]});
+
+      this._weapon({
+        name:"Great[A]",desc:"Great %", // TODO need price
+        ui:{cssClasses:"great axe", splash:"pink"},
+        stats:{attack:22,hit:5,crit:3,index:14},
+        allowedClasses:[
+          this.CharClass.Fighter, this.CharClass.Knight,
+          this.CharClass.Ninja]});
+
+      this._weapon({
+        name:"Silver[A]",desc:"Silver%",price:4500,
+        ui:{cssClasses:"silver axe", splash:"turquoise"},
+        stats:{attack:25,hit:10,crit:4,index:19},
+        allowedClasses:[
+          this.CharClass.Fighter, this.CharClass.Knight,
+          this.CharClass.Ninja]});
+
+      this._weapon({
+        name:"Light[A]",desc:"Light %",price:10000,
+        ui:{cssClasses:"light axe", splash:"purple"},
+        stats:{attack:28,hit:15,crit:3,index:29},
+        special:{spell:"HRM2"},
+        monsterTypes:[this.MonsterType.Undead],
+        allowedClasses:[
+          this.CharClass.Fighter, this.CharClass.Knight,
+          this.CharClass.Ninja]});
+
+
+    },
+
+    _createHammers: function() {
+      this._weapon({
+        name:"Iron[H]",desc:"Iron  $",price:10,
+        ui:{cssClasses:"iron hammer", splash:"orange"},
+        stats:{attack:9,hit:0,crit:1,index:5},
+        allowedClasses:[
+          this.CharClass.Fighter, this.CharClass.Knight,
+          this.CharClass.Ninja,
+          this.CharClass.WhiteMage, this.CharClass.WhiteWizard]});
+
+      this._weapon({
+        name:"Silver[H]",desc:"Silver$",price:2500,
+        ui:{cssClasses:"silver hammer", splash:"turquoise"},
+        stats:{attack:12,hit:5,crit:1,index:18},
+        allowedClasses:[
+          this.CharClass.Fighter, this.CharClass.Knight,
+          this.CharClass.Ninja,
+          this.CharClass.WhiteMage, this.CharClass.WhiteWizard]});
+
+      this._weapon({
+        name:"Thor[H]",desc:"Thor  $",price:40000,
+        ui:{cssClasses:"thor hammer", splash:"magenta"},
+        stats:{attack:18,hit:15,crit:1,index:36},
+        special:{spell:"LIT2"},
+        allowedClasses:[
+          this.CharClass.Knight,
+          this.CharClass.Ninja,
+          this.CharClass.WhiteWizard]});
+
+    },
+
+    _createKnives: function() {
+      this._weapon({
+        name:"Small[K]",desc:"Small ^",price:5,
+        ui:{cssClasses:"small dagger", splash:"grey"},
+        stats:{attack:5,hit:10,crit:5,index:2},
+        allowedClasses:[
+          this.CharClass.Fighter, this.CharClass.Knight,
+          this.CharClass.Thief, this.CharClass.Ninja,
+          this.CharClass.RedMage, this.CharClass.RedWizard,
+          this.CharClass.BlackMage, this.CharClass.BlackWizard]});
+
+      this._weapon({
+        name:"Large[K]",desc:"Large ^",price:175,
+        ui:{cssClasses:"large dagger", splash:"grey"},
+        stats:{attack:7,hit:10,crit:5,index:10},
+        allowedClasses:[
+          this.CharClass.Fighter, this.CharClass.Knight,
+          this.CharClass.Thief, this.CharClass.Ninja,
+          this.CharClass.RedMage, this.CharClass.RedWizard,
+          this.CharClass.BlackMage, this.CharClass.BlackWizard]});
+
+      this._weapon({
+        name:"Silver[K]",desc:"Silver^",price:800,
+        ui:{cssClasses:"silver dagger", splash:"turquoise"},
+        stats:{attack:10,hit:15,crit:5,index:16},
+        allowedClasses:[
+          this.CharClass.Fighter, this.CharClass.Knight,
+          this.CharClass.Thief, this.CharClass.Ninja,
+          this.CharClass.RedMage, this.CharClass.RedWizard,
+          this.CharClass.BlackMage, this.CharClass.BlackWizard]});
+
+      this._weapon({
+        name:"CatClaw",desc:"CatClaw",price:65000,
+        ui:{cssClasses:"catclaw", splash:"turquoise"},
+        stats:{attack:22,hit:35,crit:5,index:35},
+        allowedClasses:[
+          this.CharClass.Knight,
+          this.CharClass.Ninja,
+          this.CharClass.RedWizard,
+          this.CharClass.BlackWizard]});
+    },
+
+    _createNunchucks: function() {
+      this._weapon({
+        name:"Wooden[N]",desc:"Wooden~",price:10,
+        ui:{cssClasses:"wooden nunchucks",splash:"orange"},
+        stats:{attack:12,hit:0,crit:10,index:1},
+        allowedClasses:[
+          this.CharClass.Ninja,
+          this.CharClass.Blackbelt, this.CharClass.Master]});
+
+      this._weapon({
+        name:"Iron[N]",desc:"Iron  ~",price:200,
+        ui:{cssClasses:"iron nunchucks", splash:"grey"},
+        stats:{attack:16,hit:0,crit:10,index:9},
+        allowedClasses:[
+          this.CharClass.Ninja,
+          this.CharClass.Blackbelt, this.CharClass.Master]});
+
+    },
+
+    _createStaves: function() {
+      this._weapon({
+        name:"Wooden[R]",desc:"Wooden_",price:5,
+        ui:{cssClasses:"wooden staff", splash:"orange"},
+        stats:{attack:6,hit:0,crit:1,index:3},
+        allowedClasses:[
+          this.CharClass.Fighter, this.CharClass.Knight,
+          this.CharClass.Ninja,
+          this.CharClass.Blackbelt, this.CharClass.Master,
+          this.CharClass.RedMage, this.CharClass.RedWizard,
+          this.CharClass.WhiteMage, this.CharClass.WhiteWizard,
+          this.CharClass.BlackMage, this.CharClass.BlackWizard]});
+
+      this._weapon({
+        name:"Iron[S]",desc:"Iron  |",price:200,
+        ui:{cssClasses:"iron staff", splash:"grey"},
+        stats:{attack:14,hit:0,crit:1,index:11},
+        allowedClasses:[
+          this.CharClass.Fighter, this.CharClass.Knight,
+          this.CharClass.Ninja,
+          this.CharClass.Blackbelt, this.CharClass.Master]});
+
+      this._weapon({
+        name:"Power[R]",desc:"Power _",price:12345,
+        ui:{cssClasses:"power staff", splash:"light green"},
+        stats:{attack:12,hit:0,crit:1,index:28},
+        allowedClasses:[
+          this.CharClass.Fighter, this.CharClass.Knight,
+          this.CharClass.Ninja,
+          this.CharClass.Blackbelt, this.CharClass.Master,
+          this.CharClass.WhiteMage, this.CharClass.WhiteWizard,
+          this.CharClass.BlackMage, this.CharClass.BlackWizard]});
+
+      this._weapon({
+        name:"Heal[R]",desc:"Heal  _",price:12500,
+        ui:{cssClasses:"heal staff", splash:"blue"},
+        stats:{attack:6,hit:0,crit:1,index:30},
+        special:{spell:"HEAL"},
+        allowedClasses:[
+          this.CharClass.Ninja,
+          this.CharClass.WhiteMage,
+          this.CharClass.WhiteWizard]});
+
+      this._weapon({
+        name:"Mage[R]",desc:"Mage  _",price:25000,
+        ui:{cssClasses:"mage staff", splash:"pink"},
+        stats:{attack:12,hit:10,crit:1,index:31},
+        special:{spell:"FIR2"},
+        allowedClasses:[
+          this.CharClass.Ninja,
+          this.CharClass.BlackMage,
+          this.CharClass.BlackWizard]});
+
+      this._weapon({
+        name:"Wizard[R]",desc:"Wizard_",price:50000,
+        ui:{cssClasses:"wizard staff", splash:"turquoise"},
+        stats:{attack:15,hit:15,crit:1,index:33},
+        special:{spell:"CONF"},
+        allowedClasses:[
+          this.CharClass.BlackWizard]});
+    },
+
+    _createSwords: function() {
+      this._weapon({
+        name:"Rapier",desc:"Rapier",price:10,
+        ui:{cssClasses:"rapier", splash:"grey"},
+        stats:{attack:9,hit:5,crit:10,index:4},
+        allowedClasses:[
+          this.CharClass.Fighter, this.CharClass.Knight,
+          this.CharClass.Thief, this.CharClass.Ninja,
+          this.CharClass.RedMage, this.CharClass.RedWizard]});
+
+      this._weapon({
+        name:"Short[S]",desc:"Short |", price:550,
+        ui:{cssClasses:"short sword", splash:"grey"},
+        stats:{attack:15,hit:10,crit:5,index:6},
+        allowedClasses:[
+          this.CharClass.Fighter, this.CharClass.Knight,
+          this.CharClass.Ninja,
+          this.CharClass.RedMage, this.CharClass.RedWizard]});
+
+      this._weapon({
+        name:"Scimtar",desc:"Scimtar",price:200,
+        ui:{cssClasses:"scimitar", splash:"sea green"},
+        stats:{attack:10,hit:10,crit:5,index:8},
+        allowedClasses:[
+          this.CharClass.Fighter, this.CharClass.Knight,
+          this.CharClass.Thief, this.CharClass.Ninja,
+          this.CharClass.RedMage, this.CharClass.RedWizard]});
+
+      this._weapon({
+        name:"Sabre",desc:"Sabre",price:450,
+        ui:{cssClasses:"saber", splash:"grey"},
+        stats:{attack:13,hit:5,crit:10,index:12},
+        allowedClasses:[
+          this.CharClass.Fighter, this.CharClass.Knight,
+          this.CharClass.Thief, this.CharClass.Ninja,
+          this.CharClass.RedMage, this.CharClass.RedWizard]});
+
+      this._weapon({
+        name:"Long[S]",desc:"Long  |",price:3000,
+        ui:{cssClasses:"long sword", splash:"grey"},
+        stats:{attack:20,hit:10,crit:5,index:13},
+        allowedClasses:[
+          this.CharClass.Fighter, this.CharClass.Knight,
+          this.CharClass.Ninja,
+          this.CharClass.RedMage, this.CharClass.RedWizard]});
+
+      this._weapon({
+        name:"Falchon",desc:"Falchon",price:450,
+        ui:{cssClasses:"falchion", splash:"grey"},
+        stats:{attack:15,hit:10,crit:5,index:15},
+        allowedClasses:[
+          this.CharClass.Fighter, this.CharClass.Knight,
+          this.CharClass.Thief, this.CharClass.Ninja,
+          this.CharClass.RedMage, this.CharClass.RedWizard]});
+
+      this._weapon({
+        name:"Silver[S]",desc:"Silver|",price:4000,
+        ui:{cssClasses:"silver sword", splash:"turquoise"},
+        stats:{attack:23,hit:15,crit:5,index:17},
+        allowedClasses:[
+          this.CharClass.Fighter, this.CharClass.Knight,
+          this.CharClass.Ninja,
+          this.CharClass.RedMage, this.CharClass.RedWizard]});
+
+      this._weapon({
+        name:"Flame[S]",desc:"Flame |",price:10000,
+        ui:{cssClasses:"flame sword", splash:"red"},
+        stats:{attack:26,hit:20,crit:5,index:20},
+        elements:[this.Element.Fire],
+        monsterTypes:[this.MonsterType.Undead, this.MonsterType.Regenerative],
+        allowedClasses:[
+          this.CharClass.Fighter, this.CharClass.Knight,
+          this.CharClass.Ninja,
+          this.CharClass.RedMage, this.CharClass.RedWizard]});
+
+      this._weapon({
+        name:"Ice[S]",desc:"Ice   |",price:15000,
+        ui:{cssClasses:"ice sword", splash:"blue"},
+        stats:{attack:29,hit:25,crit:5,index:21},
+        elements:[this.Element.Ice],
+        allowedClasses:[
+          this.CharClass.Fighter, this.CharClass.Knight,
+          this.CharClass.Ninja,
+          this.CharClass.RedMage, this.CharClass.RedWizard]});
+
+      this._weapon({
+        name:"Dragon[S]",desc:"Dragon|",price:8000,
+        ui:{cssClasses:"dragon sword", splash:"sea green"},
+        stats:{attack:19,hit:15,crit:10,index:22},
+        monsterTypes:[this.MonsterType.Dragon],
+        allowedClasses:[
+          this.CharClass.Fighter, this.CharClass.Knight,
+          this.CharClass.Thief, this.CharClass.Ninja,
+          this.CharClass.RedMage, this.CharClass.RedWizard]});
+
+      this._weapon({
+        name:"Giant[S]",desc:"Giant |",price:8000,
+        ui:{cssClasses:"giant sword", splash:"royal blue"},
+        stats:{attack:21,hit:20,crit:5,index:23},
+        monsterTypes:[this.MonsterType.Giant],
+        allowedClasses:[
+          this.CharClass.Fighter, this.CharClass.Knight,
+          this.CharClass.Ninja,
+          this.CharClass.RedMage, this.CharClass.RedWizard]});
+
+      this._weapon({
+        name:"Sun[S]",desc:"Sun   |",price:20000,
+        ui:{cssClasses:"sun sword", splash:"orange"},
+        stats:{attack:32,hit:30,crit:5,index:24},
+        monsterTypes:[this.MonsterType.Undead],
+        allowedClasses:[
+          this.CharClass.Fighter, this.CharClass.Knight,
+          this.CharClass.Ninja,
+          this.CharClass.RedMage, this.CharClass.RedWizard]});
+
+      this._weapon({
+        name:"Coral[S]",desc:"Coral |",price:8000,
+        ui:{cssClasses:"coral sword", splash:"pink"},
+        stats:{attack:19,hit:15,crit:10,index:25},
+        monsterTypes:[this.MonsterType.Aquatic],
+        allowedClasses:[
+          this.CharClass.Fighter, this.CharClass.Knight,
+          this.CharClass.Thief, this.CharClass.Ninja,
+          this.CharClass.RedMage, this.CharClass.RedWizard]});
+
+      this._weapon({
+        name:"Were[S]",desc:"Were  |",price:6000,
+        ui:{cssClasses:"were sword", splash:"magenta"},
+        stats:{attack:18,hit:15,crit:5,index:26},
+        monsterTypes:[this.MonsterType.Were],
+        allowedClasses:[
+          this.CharClass.Fighter, this.CharClass.Knight,
+          this.CharClass.Ninja,
+          this.CharClass.RedMage, this.CharClass.RedWizard]});
+
+      this._weapon({
+        name:"Rune[S]",desc:"Rune  |",price:5000,
+        ui:{cssClasses:"rune sword", splash:"purple"},
+        stats:{attack:18,hit:15,crit:5,index:27},
+        monsterTypes:[this.MonsterType.Magical, this.MonsterType.Mage],
+        allowedClasses:[
+          this.CharClass.Fighter, this.CharClass.Knight,
+          this.CharClass.Thief, this.CharClass.Ninja,
+          this.CharClass.RedMage, this.CharClass.RedWizard]});
+
+      this._weapon({
+        name:"Defense",desc:"Defense",price:40000,
+        ui:{cssClasses:"defense", splash:"orange"},
+        stats:{attack:30,hit:35,crit:5,index:32},
+        special:{spell:"RUSE"},
+        allowedClasses:[
+          this.CharClass.Knight,
+          this.CharClass.Ninja,
+          this.CharClass.RedWizard]});
+
+      this._weapon({
+        name:"Vorpal",desc:"Vorpal",price:30000,
+        ui:{cssClasses:"vorpal", splash:"blue"},
+        stats:{attack:24,hit:25,crit:30,index:34},
+        allowedClasses:[
+          this.CharClass.Knight,
+          this.CharClass.Ninja,
+          this.CharClass.RedWizard]});
+
+      this._weapon({
+        name:"Bane[S]",desc:"Bane  |",price:60000,
+        ui:{cssClasses:"bane sword", splash:"royal blue"},
+        stats:{attack:22,hit:20,crit:10,index:37},
+        special:{spell:"BANE"},
+        allowedClasses:[
+          this.CharClass.Knight,
+          this.CharClass.Ninja,
+          this.CharClass.RedWizard]});
+
+      this._weapon({
+        name:"Katana",desc:"Katana",price:60000,
+        ui:{cssClasses:"katana", splash:"orange"},
+        stats:{attack:33,hit:35,crit:30,index:38},
+        allowedClasses:[
+          this.CharClass.Ninja]});
+
+      this._weapon({
+        name:"Xcalber",desc:"Xcalber",price:60000,
+        ui:{cssClasses:"excalibur", splash:"gold"},
+        stats:{attack:45,hit:35,crit:5,index:39},
+        elements: this.AllElements,
+        monsterTypes: this.AllMonsterTypes,
+        allowedClasses:[
+          this.CharClass.Knight]});
+
+      this._weapon({
+        name:"Masmune",desc:"Masmune",price:60000,
+        ui:{cssClasses:"masamune", splash:"grey"},
+        stats:{attack:56,hit:50,crit:10,index:40},
+        allowedClasses:[
+          this.CharClass.Fighter, this.CharClass.Knight,
+          this.CharClass.Thief, this.CharClass.Ninja,
+          this.CharClass.Blackbelt, this.CharClass.Master,
+          this.CharClass.RedMage, this.CharClass.RedWizard,
+          this.CharClass.WhiteMage, this.CharClass.WhiteWizard,
+          this.CharClass.BlackMage, this.CharClass.BlackWizard]});
+    },
+
+    _weapon: function(data) {
+      var weapon = Object.assign({}, data, {
+        hasElement: this._objectify(data.elements),
+        strongAgainst: this._objectify(data.monsterTypes),
+        usableBy: this._objectify(data.allowedClasses)
+      });
+      this.weapons.push(weapon);
+    }
+  };
+
+  scope.FF.WeaponBehavior = [
+    scope.FF.UtilBehavior,
+    scope.FF.CharClassBehavior,
+    scope.FF.ElementBehavior,
+    scope.FF.MonsterBehavior,
+    scope.FF.WeaponBehaviorImpl
+  ];
+
+}(window));
+</script>
