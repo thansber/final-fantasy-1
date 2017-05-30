@@ -24,7 +24,47 @@
             BlackWizard: 'blackwizard'
           };
         }
+      },
+
+      CharClasses: {
+        readonly: true,
+        type: Object,
+        value: {}
+      },
+
+      basicClasses: {
+        readonly: true,
+        type: Array,
+        value: []
       }
+    },
+
+    ready: function() {
+      this._charClass({ id: this.CharClass.Fighter, label: 'FIGHTER', index: 0, basic: true });
+      this._charClass({ id: this.CharClass.Thief, label: 'THIEF', index: 1, basic: true });
+      this._charClass({ id: this.CharClass.Blackbelt, label: 'Bl.BELT', index: 2, basic: true });
+      this._charClass({ id: this.CharClass.RedMage, label: 'RedMAGE', index: 3, basic: true });
+      this._charClass({ id: this.CharClass.WhiteMage, label: 'Wh.MAGE', index: 4, basic: true });
+      this._charClass({ id: this.CharClass.BlackMage, label: 'Bl.MAGE', index: 5, basic: true });
+
+      // advanced classes
+      this._charClass({ id: this.CharClass.Knight, index: 6 });
+      this._charClass({ id: this.CharClass.Ninja, index: 7 });
+      this._charClass({ id: this.CharClass.Master, index: 8 });
+      this._charClass({ id: this.CharClass.RedWizard, index: 9 });
+      this._charClass({ id: this.CharClass.WhiteWizard, index: 10 });
+      this._charClass({ id: this.CharClass.BlackWizard, index: 11});
+
+      this.basicClasses = Object.keys(this.CharClasses).map(function(charClassId) {
+        var charClass = this.CharClasses[charClassId];
+        if (charClass.basic) {
+          return charClass;
+        }
+      }, this).filter(Boolean);
+    },
+
+    _charClass: function(data) {
+      this.CharClasses[data.id] = data;
     }
   };
 

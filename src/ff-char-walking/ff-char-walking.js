@@ -5,7 +5,8 @@
     is: 'ff-char-walking',
 
     behaviors: [
-      scope.FF.CanvasBehavior
+      scope.FF.CanvasBehavior,
+      scope.FF.CharClassBehavior
     ],
 
     properties: {
@@ -58,6 +59,8 @@
 
       this._resizeCanvas(this.canvas, 1, 1);
       this._loadSheet();
+
+      this.isReady = true;
     },
 
     walk: function() {
@@ -92,7 +95,7 @@
     },
 
     _onCharacterSetup: function(charClass, direction) {
-      this.set('walkRow', scope.FF.CharClasses.fromId(charClass).walkRow);
+      this.set('walkRow', this.CharClasses[charClass].index);
       this.set('walkCol', this.walkColsByDirection[direction]);
       this._onSheetLoaded(this.sheetLoaded);
     },
