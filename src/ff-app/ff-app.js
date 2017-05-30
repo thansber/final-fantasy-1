@@ -27,20 +27,7 @@ Polymer({
         notify: true,
         type: Array,
         value: function() {
-          // TODO: remove this default party
-          return [{
-            charClass: 'fighter',
-            name: 'AAAA'
-          }, {
-            charClass: 'thief',
-            name: 'BBBB'
-          }, {
-            charClass: 'blackbelt',
-            name: 'CCCC'
-          }, {
-            charClass: 'redmage',
-            name: 'DDDD'
-          }];
+          return [];
         }
       },
       startGamePosition: {
@@ -56,7 +43,7 @@ Polymer({
 
     listeners: {
       'ff-screen': '_onScreenChange',
-      'ff-start-game': '_onStartGame'
+      'ff-load-game': '_onStartGame'
     },
 
     ready: function() {
@@ -109,7 +96,7 @@ Polymer({
     },
 
     _onStartGame: function(e, detail) {
-      console.log('TODO: set party from detail.party, for now use default');
+      this.set('party', detail.party);
       console.log('TODO: set game from detail.game');
       if (!this.game.mapPosition) {
         this.starting = true;

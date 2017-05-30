@@ -22,14 +22,32 @@
 
     _hasSavedGame: function() {
       console.log('TODO: check for existing saved game');
-      console.log('TODO: load party, set it');
       return true;
+    },
+
+    _loadSavedGame: function() {
+      console.log('TODO: load from actual saved game');
+      return [{
+        charClass: 'whitemage',
+        name: 'AAAA'
+      }, {
+        charClass: 'thief',
+        name: 'BBBB'
+      }, {
+        charClass: 'blackbelt',
+        name: 'CCCC'
+      }, {
+        charClass: 'redmage',
+        name: 'DDDD'
+      }];
     },
 
     _next: function(e, detail) {
       if (detail.value === 'continue') {
         if (this._hasSavedGame()) {
-          this.fire('ff-start-game', this.party);
+          this.fire('ff-load-game', {
+            party: this._loadSavedGame()
+          });
           return;
         }
         this.fire('ff-screen', { screen: 'charSelect' });
