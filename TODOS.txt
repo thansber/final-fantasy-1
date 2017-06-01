@@ -1,4 +1,3 @@
-- add coneria castle sheet (enlarge it too)
 - add shop transition animation
 - shops
   - equipment data (weapons/armor/items)
@@ -6,3 +5,8 @@
   - town -> shop transition tiles
 
 - add screen selection menu (debug)
+
+- movement
+-- check ship dock tile NE of pravoka with corner of land in regular game
+-- add ship/canoe/airship sprites
+-- handle new vehicle event, dock ship if leaving it
