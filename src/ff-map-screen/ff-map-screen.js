@@ -41,6 +41,10 @@
       },
 
       moving: String,
+      shipPosition: {
+        readonly: true,
+        type: Object
+      },
       starting: {
         readonly: true,
         type: Boolean
@@ -56,6 +60,10 @@
       transports: {
         readonly: true,
         value: Array
+      },
+      vehicle: {
+        readonly: true,
+        type: String
       },
       worldMapPosition: {
         readonly: true,

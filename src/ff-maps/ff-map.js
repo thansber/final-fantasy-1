@@ -5,7 +5,8 @@
     is: 'ff-map',
 
     behaviors: [
-      scope.FF.CanvasBehavior
+      scope.FF.CanvasBehavior,
+      scope.FF.VehicleBehavior
     ],
 
     properties: {
@@ -38,6 +39,10 @@
         type: Number,
         value: 32
       },
+      shipPosition: {
+        readonly: true,
+        type: Object
+      },
       transition: {
         notify: true,
         type: Object
@@ -45,6 +50,10 @@
       transports: {
         readonly: true,
         value: Array
+      },
+      vehicle: {
+        readonly: true,
+        type: String
       }
     },
 
@@ -153,11 +162,6 @@
       return y >= this.map.rows || x >= this.map.cols;
     },
 
-    _isPassable: function(y, x, leavingTileDefinition) {
-      var tileDefinition = this.map.definition[this._getTile(y, x)];
-      return FF.Game.hasTransportation(this.transports, tileDefinition.passableBy, leavingTileDefinition);
-    },
-
     _isWorldMap: function(mapId) {
       return /world/.test(mapId);
     },
@@ -218,22 +222,31 @@
 
     _onMove: function(direction) {
       if (direction) {
-
         var directionOptions = this.moveOptions[direction];
-        // need this for dock->ship check
+        // need this for passable check
         var leavingTileDefinition = this.map.definition[this._getTile(this.positionY, this.positionX)];
+
         this.facing = direction;
         this._adjustPosition(directionOptions.yChange, directionOptions.xChange);
-        this.set('transition', this._getTransition(this.positionY, this.positionX));
 
-        if (!this._isPassable(this.positionY, this.positionX, leavingTileDefinition)) {
+        var passableOptions = {
+          goingToPosition: { y: this.positionY, x: this.positionX },
+          goingToTile: this.map.definition[this._getTile(this.positionY, this.positionX)],
+          leavingTile: leavingTileDefinition,
+          shipPosition: this.shipPosition,
+          partyVehicles: this.transports,
+          vehicle: this.vehicle
+        };
+
+        if (this.isPassable(passableOptions)) {
+          this.set('transition', this._getTransition(this.positionY, this.positionX));
+          this._move(direction);
+        } else {
           // not passable, so reset their position
           this._adjustPosition(-1 * directionOptions.yChange, -1 * directionOptions.xChange);
           this.moving = null;
           return;
         }
-
-        this._move(direction);
       }
     },
 

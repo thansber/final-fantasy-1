@@ -18,7 +18,9 @@ Polymer({
         value: function() {
           return {
             mapPosition: undefined,
+            shipPosition: {},
             transports: ['foot'],
+            vehicle: 'foot',
             worldMapPosition: undefined
           };
         }
