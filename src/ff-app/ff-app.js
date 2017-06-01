@@ -1,5 +1,12 @@
-Polymer({
+(function(scope) {
+  scope.FF = scope.FF || {};
+
+  Polymer({
     is: 'ff-app',
+
+    behaviors: [
+      scope.FF.VehicleBehavior
+    ],
 
     properties: {
       charIndex: {
@@ -15,15 +22,7 @@ Polymer({
       game: {
         notify: true,
         type: Object,
-        value: function() {
-          return {
-            mapPosition: undefined,
-            shipPosition: {},
-            transports: ['foot'],
-            vehicle: 'foot',
-            worldMapPosition: undefined
-          };
-        }
+        value: {}
       },
       party: {
         notify: true,
@@ -49,6 +48,13 @@ Polymer({
     },
 
     ready: function() {
+      this.set('game', {
+        mapPosition: undefined,
+        shipPosition: {},
+        transports: [this.Vehicles.Foot],
+        vehicle: this.Vehicles.Foot,
+        worldMapPosition: undefined
+      });
       this.screenChanged('intro');
     },
 
@@ -107,9 +113,18 @@ Polymer({
       this._startGame();
     },
 
+    _onVehicleChange: function(e, detail) {
+      if (this.game.vehicle === this.Vehicles.Ship) {
+        // if leaving ship, record its last position
+        this.set('game.shipPosition', detail.leavingPosition);
+      }
+      this.set('game.vehicle', detail.vehicle);
+    },
+
     _startGame: function() {
       this.set('firstCharClass', this.party[0].charClass);
       this.screenChanged('map');
     }
 
   });
+}(window));

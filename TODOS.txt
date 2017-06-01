@@ -9,4 +9,3 @@
 - movement
 -- check ship dock tile NE of pravoka with corner of land in regular game
 -- add ship/canoe/airship sprites
--- handle new vehicle event, dock ship if leaving it

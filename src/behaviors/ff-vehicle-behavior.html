@@ -4,6 +4,14 @@
 
   scope.FF.VehicleBehavior = {
     properties: {
+      _currentVehicle: {
+        readonly: true,
+        type: String
+      },
+      _partyVehicles: {
+        readonly: true,
+        type: Array
+      },
       Vehicles: {
         readonly: true,
         type: Object,
@@ -20,8 +28,11 @@
 
     isPassable: function(options) {
       var passable;
+      this._currentVehicle = options.vehicle;
+      this._partyVehicles = options.partyVehicles;
+
       // If currently in airship can go anywhere
-      if (options.vehicle === this.Vehicles.Airship) {
+      if (this._isInVehicle(this.Vehicles.Airship)) {
         return true;
       }
 
@@ -32,47 +43,55 @@
 
       // If going to a river, party must own canoe
       if (options.goingToTile.passableBy === this.Vehicles.Canoe) {
-        passable = this._hasVehicle(options.partyVehicles, this.Vehicles.Canoe);
+        passable = this._hasVehicle(this.Vehicles.Canoe);
         if (passable) {
-          this._enteringVehicle(this.Vehicles.Canoe);
+          this._enteringVehicle(this.Vehicles.Canoe, options.leavingPosition);
         }
         return passable;
       }
 
-      // If going to ocean, party must own ship and ship must be on tile we are going to
+      // If going to ocean, ship must be on tile we are going to
       if (options.goingToTile.passableBy === this.Vehicles.Ship) {
-        var hasVehicle = this._hasVehicle(options.partyVehicles, this.Vehicles.Ship);
+        var isInShip = this._isInVehicle(this.Vehicles.Ship);
         var isShipThere = options.goingToPosition.y === options.shipPosition.y
           && options.goingToPosition.x === options.shipPosition.x;
-        passable = hasVehicle && isShipThere;
-        if (passable) {
+
+        passable = isInShip || isShipThere;
+        if (passable && !isInShip) {
           this._enteringVehicle(this.Vehicles.Ship);
         }
         return passable;
       }
 
       if (options.goingToTile.passableBy === this.Vehicles.Foot) {
-        if (this.vehicle === this.Vehicles.Ship) {
+        if (options.vehicle === this.Vehicles.Ship) {
         // going from ship -> foot, make sure going to dock
-          passable = !!this.goingToTile.dockable;
+          passable = !!options.goingToTile.dockable;
         } else {
         // going from canoe->foot or foot->foot is always good
           passable = true;
         }
-        this._enteringVehicle(this.Vehicles.Foot);
+
+        if (passable) {
+          this._enteringVehicle(this.Vehicles.Foot, options.leavingPosition);
+        }
         return passable;
       }
     },
 
-    _enteringVehicle: function(newVehicle) {
-      console.log('dock ship if leaving it, save its coords');
+    _enteringVehicle: function(newVehicle, leavingPosition) {
       this.fire('ff-vehicle-change', {
-        vehicle: newVehicle
+        vehicle: newVehicle,
+        leavingPosition: leavingPosition
       });
     },
 
-    _hasVehicle: function(partyVehicles, vehicle) {
-      return partyVehicles.indexOf(vehicle) > -1;
+    _hasVehicle: function(vehicle) {
+      return this._partyVehicles.indexOf(vehicle) > -1;
+    },
+
+    _isInVehicle: function(vehicle) {
+      return this._currentVehicle === vehicle;
     }
 
   };

@@ -224,6 +224,7 @@
       if (direction) {
         var directionOptions = this.moveOptions[direction];
         // need this for passable check
+        var leavingPosition = { y: this.positionY, x: this.positionX };
         var leavingTileDefinition = this.map.definition[this._getTile(this.positionY, this.positionX)];
 
         this.facing = direction;
@@ -233,6 +234,7 @@
           goingToPosition: { y: this.positionY, x: this.positionX },
           goingToTile: this.map.definition[this._getTile(this.positionY, this.positionX)],
           leavingTile: leavingTileDefinition,
+          leavingPosition: leavingPosition,
           shipPosition: this.shipPosition,
           partyVehicles: this.transports,
           vehicle: this.vehicle
