@@ -1,0 +1,43 @@
+{
+  "sprites": [
+    ".  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  tt tt tt tt tt tt tt tt tt tt tt tt tt tt tt tt tt tt tt tt tt tt tt .  .  .  .  .",
+    "W1 W  W  W  W  W  W  W  W  W  W  W  W  W  W  W  W  W  W  .  t  t  tt tt tt t  t  t  tt tt tt tt tt tt tt tt tt t  tt tt t  tt tt tt .  .  .  .",
+    "W1 .1 G  G  .  .  t  tt tt tt tt tt .  .  .  .  .  .  .  .  .  .  t  t  t  .  .  .  t  tt tt tt tt t  tt tt t  .  t  t  .  tt t  tt tt tt .  .",
+    "W1 .1 .  .  .  .  .  tt tt tt tt tt Rt Rt Rt .  Rt Rt Rt .  .  .  .  .  .  .  .  .  .  tt tt tt tt .  t  t  .  .  .  .  .  t  .  tt tt tt .  .",
+    "W1 .1 .  Rt Rt Rt .  w  w  w  t  tt Rb WM Rb .1 Rb BM Rb .1 W5 tt .  .  .  .  tt .  .  tt tt tt t  tt .  .  .  .  .  .  .  .  t  t  tt tt tt .",
+    "W1 .1 .  Rb WP Rb w1 w  w  w  w  t  H2 D  H2 .2 H2 D  H2 .2 W6 t  tt t  .  .  tt .  .  tt tt tt .  tt t  .  .  .  .  .  .  .  .  .  t  tt tt .",
+    "W1 .1 .  H2 D  H2 w2 w  w  w  w  .  FN r  .  .  .  r  FN FN W6 .  tt t  .  tt tt .  .  t  tt tt t  t  .  .  .  .  .  .  .  .  .  .  .  tt tt tt",
+    "W1 .1 FN FN r  FN FN w  w  w  w  w  w  Bv w  w  w  Bv w  w  W6 .  t  tt .  tt tt tt .  .  tt tt .  .  .  .  .  .  .  .  .  .  .  .  .  tt tt tt",
+    "W1 .1 .  .  r2 r  r  Bh Bh Bh Bh Bh r  r  r  r  r  r3 .  .  W6 .  tt tt .  tt tt tt .  .  tt tt .  .  .  .  .  .  .  .  .  .  .  .  .  t  tt tt",
+    "W1 .1 tt tt tt tt .  w  w  w  w  w  r  .  .  .  .  .  .  .  W6 .  tt tt tt tt tt tt .  .  tt tt .  .  .  .  .  .  .  .  .  .  .  .  .  t  tt tt",
+    "W1 .1 t  t  tt tt tt w  w  w  w  w  r  .  G  G  G  G  tt tt W6 .  tt tt tt tt tt tt .  .  tt t  .  .  .  .  .  .  .  .  .  .  .  .  .  .  t  tt",
+    "W1 .1 FL FL Rt Rt Rt w  w  w  w  w  r  tt tt tt tt .  tt tt W6 .  tt tt tt tt tt tt .  .  tt tt tt .  .  .  .  .  .  .  .  .  .  .  .  .  tt tt",
+    "W1 .1 FL FL Rb AR Rb w1 w  w  w  w  r  t  Rt Rt Rt .  tt tt W6 tt tt tt tt tt tt tt .  .  tt tt tt t  .  .  .  .  .  .  .  .  .  .  tt tt tt tt",
+    "W1 .1 FL FL H1 D  H1 w2 w  w  w  w  r  .  Rb CL Rb .1 tt tt W6 tt tt tt tt tt tt tt .  .  t  tt tt .  .  .  .  .  .  .  .  .  .  .  tt tt tt tt",
+    "W1 .1 FL FL FL r  .  t  t  t  t  t  r  .  H1 D  H1 .2 tt tt W6 tt tt tt tt tt tt tt .  .  .  tt tt tt tt .  tt tt .  .  t  tt .  .  t  tt tt tt",
+    "W1 .1 FL FL FL r2 r  r  r  r  r  r  r3 tt FL r  FL .  tt tt W6 tt tt tt tt tt tt tt tt .  .  tt tt tt tt tt tt t  .  .  tt tt tt tt .  tt tt tt",
+    "W1 .1 tt tt tt tt tt r  tt tt tt tt tt tt FL r  FL tt tt tt W6 tt tt tt tt tt tt tt tt t  .  tt tt tt t  t  t  .  .  .  tt tt tt tt tt tt tt tt",
+    "W1 .1 tt Rt Rt Rt tt r  tt Rt Rt Rt Rt tt .  r  .  tt tt tt W6 tt tt tt tt tt tt tt tt .  .  t  tt t  .  .  .  t  .  .  tt tt tt tt tt tt tt tt",
+    "W1 .1 tt Rb IT Rb tt r  tt Rb Rb Rb Rb tt .  r  .  tt tt tt W6 tt tt tt tt tt tt tt tt .  t  t  t  .  .  .  .  .  .  tt tt tt tt tt tt tt tt tt",
+    "W1 .1 tt H2 D  H2 tt r  tt H1 H1 IN H1 tt .  r  .  tt tt tt W6 tt tt tt tt tt tt tt tt .  .  .  .  .  .  .  tt tt tt tt tt tt tt tt tt tt tt tt",
+    "W1 .1 tt FL r  FL tt r  tt H1 H1 D  H1 tt .  r  .  t  tt tt W6 tt tt tt tt tt tt tt tt tt tt tt tt tt tt tt tt tt tt tt tt tt tt tt tt tt tt tt",
+    "W1 .1 t  FN r  FN t  r  t  .  .  r  .  t  .  r  t  .  t  tt W6 tt tt tt tt tt tt tt tt tt tt tt tt tt tt tt tt tt tt tt tt tt tt tt tt tt tt tt",
+    "W1 .1 .  .  r2 r  r  r  r  r  r  r  r  r  r  r3 .  .  .  t  W6 t  tt tt tt tt tt tt tt tt tt tt tt tt tt tt tt tt tt tt tt tt tt tt tt tt tt tt",
+    "W1 .1 .  .  .  .  .  .  t  t  t  r  t  t  t  t  t  t  t  t  W6 .  t  tt tt tt tt tt tt tt tt tt tt tt tt tt tt tt tt tt tt tt tt tt tt tt tt tt",
+    "W2 W3 W3 W3 W3 W3 W3 W3 W3 W3 W4 r  W2 W3 W3 W3 W3 W3 W3 W3 W4 .  .  tt tt tt tt tt tt tt tt tt tt tt tt tt tt tt tt tt tt tt tt tt tt tt tt tt",
+    ".  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  t  tt tt tt tt tt tt tt tt tt tt tt tt tt tt tt tt tt tt tt tt tt tt tt tt"
+  ],
+  "definition": "town",
+  "sheet": "town",
+  "filler": ".",
+  "exitOnOutOfBounds": true,
+  "transitions": [
+    { "y":20, "x":11, "to": "shop", "toShop": "inn" },
+    { "y":6, "x":4, "to": "shop", "toShop": "weapon" },
+    { "y":13, "x":5, "to": "shop", "toShop": "armor" },
+    { "y":19, "x":4, "to": "shop", "toShop": "item" },
+    { "y":5, "x":17, "to": "shop", "toShop": "blackmagic" },
+    { "y":5, "x":13, "to": "shop", "toShop": "whitemagic" },
+    { "y":14, "x":15, "to": "shop", "toShop": "clinic" }
+  ]
+}

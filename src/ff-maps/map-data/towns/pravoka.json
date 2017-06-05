@@ -34,9 +34,17 @@
     "W2 W3 W3 W3 W3 W3 W3 W3 W3 W3 W3 W3 W3 W3 W4 t  .  .  r  r  r  .  .  t  W2 W3 W3 W3 W3 W3 W3 W3 W3 W3 W3 W3 W3 W3 W4",
     ".  .  .  .  .  .  .  .  .  .  .  .  .  .  .  t  .  .  r  r  r  .  .  t  .  .  .  .  .  .  .  .  .  .  .  .  .  .  ."
   ],
-  "start": { "y": 31, "x": 19 },
   "definition": "town",
   "sheet": "town",
   "filler": ".",
-  "exitOnOutOfBounds": true
+  "exitOnOutOfBounds": true,
+  "transitions": [
+    { "y":4, "x":19, "to": "shop", "toShop": "inn" },
+    { "y":18, "x":31, "to": "shop", "toShop": "weapon" },
+    { "y":18, "x":15, "to": "shop", "toShop": "armor" },
+    { "y":22, "x":5, "to": "shop", "toShop": "item" },
+    { "y":16, "x":35, "to": "shop", "toShop": "blackmagic" },
+    { "y":5, "x":33, "to": "shop", "toShop": "whitemagic" },
+    { "y":10, "x":25, "to": "shop", "toShop": "clinic" }
+  ]
 }

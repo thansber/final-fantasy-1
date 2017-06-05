@@ -28,5 +28,14 @@
   "definition": "town",
   "sheet": "town",
   "filler": ".",
-  "exitOnOutOfBounds": true
+  "exitOnOutOfBounds": true,
+  "transitions": [
+    { "y":18, "x":11, "to": "shop", "toShop": "inn" },
+    { "y":10, "x":11, "to": "shop", "toShop": "weapon" },
+    { "y":10, "x":6, "to": "shop", "toShop": "armor" },
+    { "y":10, "x":27, "to": "shop", "toShop": "item" },
+    { "y":4, "x":3, "to": "shop", "toShop": "blackmagic" },
+    { "y":4, "x":7, "to": "shop", "toShop": "whitemagic" },
+    { "y":4, "x":24, "to": "shop", "toShop": "clinic" }
+  ]
 }
