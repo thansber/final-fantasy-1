@@ -1,0 +1,36 @@
+{
+  "sprites": [
+    ".  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  t  .  .  .  .  .  .  .",
+    ".  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  t  .  t  .  .  .  .  .  .  .  .  .  .  .  .  .  t  t  .  Rt Rt Rt Rt .  t  .",
+    "W1 W  W  W  W  W  W  W  W  W  W  W  W  W  W5 .  .  .  .  .  W1 W  W  W  W  W  W  W  W  W  t  t  t  t  t  .  .  .  .  .  .  .  .  .  .  .  t  t  t  .  R^ WM BM R^ .1 t  t",
+    "W1 r  r  r  r  r  r  r  r  r  r  r  r  r  W  W  W  W  W  W  W  r  r  r  r  r  r  r  r  r  r  r  t  t  .  .  .  .  .  .  .  .  .  .  .  t  .  t  .  .  H2 D  D  H2 .2 t  .",
+    "W1 r  Rt Rt Rt r  Rt Rt Rt Rt Rt Rt Rt r  Rt Rt Rt Rt Rt Rt Rt r  Rt Rt Rt Rt Rt Rt r  Rt Rt Rt r  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .",
+    "W1 r  R^ Rb R^ r4 R^ Rb R^ Rb R^ Rb R^ r4 R^ Rb R^ Rb R^ Rb R^ r4 R^ Rb R^ R^ Rb R^ r4 R^ Rb R^ r4 t  .  .  .  .  .  .  .  .  .  .  .  .  .  .  t  t  .  t  .  .  t  t  .",
+    "W1 r  H1 H2 H1 r5 H1 H2 H1 H2 H1 H2 H1 r5 H1 H2 H1 r5 H1 H2 H1 r5 H1 H2 H1 H1 H2 H1 r5 H1 H2 H1 r5 W5 .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  t  t  .  .  .  t  .  .",
+    "W1 r  t  .  t  r  t  .  t  .  t  .  t  r  t  .  t  r  t  .  t  r  t  .  t  t  .  t  r  t  .  t  r  t  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .",
+    "W1 r  r  r  r  r  r  r  r  r  r  r  r  r  r  r  r  r  r  r  r  r  r  r  r  r  r  r  r  r  r  r  r  t  t  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .",
+    "W1 r  r  r  r  t  t  t  t  t  t  t  t  t  t  t  r  r  r  t  t  t  t  t  t  t  t  t  t  t  r  r  r  W5 t  t  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .",
+    "W1 r  r  r  r  t  W  W  W  W  W  W  W  W  r  t  r  r  r  t  r  W  W  W  W  W  W  W  W  t  r  r  r  W6 t  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .",
+    "W1 r  w1 w  w  w  w  w  w  w  w  w  w  w  r  t  r  r  r  t  r  w1 w  w  w  w  w  w  w  w  w  w  r  W6 .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .",
+    "W1 r  w1 r  r  r  r  r  r  r  r  r  r  w1 r  t  r  r  r  t  r  w1 r  r  r  r  r  r  r  r  r  w1 r  W6 .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .",
+    "W1 r  w1 r  r  r  r  r  r  r  r  r  r  w1 r  r  r  r  r  r  r  w1 r  r  r  r  r  r  r  r  r  w1 r  W6 .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .",
+    "W1 r  Bh Bh Bh Bh Bh Bh Bh Bh r  r  r  w1 r  r  t  r  t  r  r  w1 r  r  r  Bh Bh Bh Bh Bh Bh Bh r  W6 .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .",
+    "W1 r  w1 w  w  r  r  r  r  r  r  r  r  w1 r  t  r  r  r  t  r  w1 r  r  r  r  r  r  r  w1 w  w  r  W6 .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .",
+    "W1 r  w1 w  w  r  r  r  r  r  r  r  r  w1 r  r  r  F  r  r  r  w1 r  r  r  r  r  r  r  w1 w  w  r  W6 .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .",
+    "W1 r  Bh Bh Bh Bh Bh Bh Bh Bh r  r  r  w1 r  t  r  r  r  t  r  w1 r  r  r  Bh Bh Bh Bh Bh Bh Bh r  W6 .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .",
+    "W1 r  w1 w  w  w  w  r  r  r  r  r  r  w1 r  r  t  r  t  r  r  w1 r  r  r  r  r  w1 w  w  w  w  r  W6 .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .",
+    "W1 r  w1 w  w  w  w  r  r  r  r  r  r  w1 r  r  r  r  r  r  r  w1 r  r  r  r  r  w1 w  w  w  w  r  W6 .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .",
+    "W1 r  Bh Bh Bh Bh Bh Bh Bh Bh r  r  r  w1 r  t  r  r  r  t  r  w1 r  r  r  Bh Bh Bh Bh Bh Bh Bh r  W6 .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .",
+    "W1 r  w1 w  w  w  w  w  w  w  r  r  r  w2 r  t  r  r  r  t  r  w1 r  r  r  w  w  w  w  w  w  w  r  W6 .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .",
+    "W1 r  w1 w  w  w  w  w  w  w  w  w  w  w  r  t  r  r  r  t  r  w1 w  w  w  w  w  w  w  w  w  w  r  W6 .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .",
+    "W2 W3 W3 W3 W3 W3 W3 W3 W3 W3 W3 W3 W3 W4 r  r  r  r  r  r  r  W2 W3 W3 W3 W3 W3 W3 W3 W3 W3 W3 W3 W4 .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  ."
+  ],
+  "definition": "town",
+  "sheet": "town",
+  "filler": ".",
+  "exitOnOutOfBounds": true,
+  "transitions": [
+    { "y":3, "x":52, "to": "shop", "toShop": "blackmagic" },
+    { "y":3, "x":51, "to": "shop", "toShop": "whitemagic" }
+  ]
+}

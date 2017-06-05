@@ -546,6 +546,171 @@
       }
     ]
   },
+  "towns/gaia": {
+    "sprites": [
+      ".  .  .  .  .  .  .  .  .  .  .  .  .  .  .  tt tt tt tt tt tt tt tt tt tt tt tt tt tt tt tt tt tt tt tt tt tt tt tt tt tt tt tt tt tt tt tt tt tt tt tt tt tt tt tt",
+      ".  .  .  .  .  .  .  .  .  tt tt tt tt tt tt tt tt tt tt tt tt tt tt tt tt tt tt tt tt tt tt tt tt tt tt tt tt tt tt tt tt tt tt tt tt tt tt tt tt tt tt tt tt tt tt",
+      ".  .  .  FN FN FN FN FN tt tt tt tt tt tt tt tt tt tt tt tt tt tt tt tt tt tt tt tt tt tt tt tt tt tt tt tt tt tt tt tt tt tt tt tt tt tt tt tt tt tt tt tt tt tt tt",
+      ".  .  .  .  .  tt tt tt tt tt tt tt tt tt tt tt tt tt tt tt tt tt tt tt tt tt tt tt tt tt tt tt tt tt tt tt tt tt tt tt tt tt tt tt tt tt tt tt tt tt tt tt tt tt tt",
+      ".  FN FN FN tt tt tt tt tt tt tt tt tt tt tt tt tt tt tt tt tt tt tt tt tt tt tt tt tt tt tt tt tt tt tt tt tt tt tt tt tt tt tt tt tt tt tt tt tt tt tt tt tt tt tt",
+      ".  .  .  tt tt tt tt tt t  t  t  t  t  t  t  t  t  t  t  t  tt tt tt tt tt tt tt tt tt tt tt tt tt tt tt tt tt tt tt tt tt tt tt tt tt tt tt tt tt tt tt tt tt tt tt",
+      ".  tt tt tt tt tt tt t  FN FN FN FN FN Rt Rt Rt Rt Rt FN FN t  tt tt tt tt tt tt tt tt tt tt tt tt tt tt tt tt tt tt t  t  t  t  t  t  tt tt tt tt tt tt tt tt tt tt",
+      "tt tt tt tt tt tt tt .  tt WL .  t  t  Rb Rb CL Rb Rb t  tt .  t  tt tt tt tt tt tt tt tt tt tt tt tt tt tt tt tt t  w  w  w  w  w  w  t  tt tt tt tt tt tt tt tt tt",
+      "tt tt tt tt tt tt t  .  tt .  .  .  .  R^ Rb H2 Rb R^ .1 tt .  .  t  tt tt tt tt tt tt tt tt tt tt tt tt tt tt tt w  w  w  w  w  w  w  w  tt tt tt tt tt tt tt tt tt",
+      "tt tt tt tt tt t  .  .  tt .  .  .  .  H1 H2 D  H2 H1 .2 tt .  t  .  t  tt tt tt tt tt tt tt tt tt tt tt tt tt tt w  w  w  w  w  w  w  w  tt tt tt tt tt tt tt tt tt",
+      "tt tt tt tt t  .  .  .  FN FN tt .  .  tt tt r  tt tt .  tt .  .  .  .  t  tt tt tt tt tt tt tt tt tt tt tt tt tt w  w  w  w  w  w  w  w  tt tt tt tt tt tt tt tt tt",
+      "t  tt tt tt .  .  .  .  .  .  tt .  .  .  .  r  .  .  .  tt .  .  .  .  .  t  t  tt tt tt tt tt tt tt tt tt tt tt t  w  w  w  w  w  w  tt tt tt tt tt tt tt tt tt tt",
+      ".  t  t  tt .  .  .  .  .  .  FN FN FN FN FN r  FN FN FN FN .  .  t  .  t  .  .  t  t  t  t  tt tt tt tt tt tt tt tt t  .  .  .  .  t  tt tt tt tt tt tt tt tt tt tt",
+      ".  .  .  t  .  .  .  .  .  .  .  .  .  .  .  r  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  t  tt tt tt tt tt tt tt tt t  .  t  .  tt t  tt tt tt tt tt tt tt tt tt",
+      ".  .  .  .  .  .  .  .  .  .  .  .  .  .  .  r  .  .  .  .  tt tt .  .  .  t  .  .  .  t  .  .  t  tt tt tt tt tt tt t  .  .  .  t  t  tt tt tt tt tt tt tt tt tt tt",
+      "tt .  .  .  .  .  .  .  .  .  .  .  .  .  .  r  .  .  .  tt tt tt tt tt .  .  .  tt tt .  .  .  .  tt tt tt tt tt tt .  t  .  t  .  tt tt tt tt tt tt tt tt tt tt t",
+      "tt tt .  .  .  .  .  .  r1 r  r  r  r  r  r  r3 .  tt tt tt tt tt tt tt tt tt tt tt tt .  .  .  .  tt tt tt tt tt t  .  .  .  .  .  t  tt tt tt tt t  t  tt t  t  .",
+      "tt tt tt .  .  .  .  .  r  .  .  tt tt tt tt tt tt tt tt tt tt tt tt tt tt tt tt tt tt t  .  .  tt tt tt tt tt tt .  .  .  t  .  .  .  t  t  t  t  .  .  t  .  .  .",
+      "tt tt tt tt tt tt .  .  r  .  tt tt tt tt tt tt tt tt tt tt tt tt tt tt tt tt tt tt tt .  .  t  tt tt tt tt tt tt .  .  t  .  .  .  .  .  .  .  .  .  .  .  .  t  .",
+      "tt tt tt tt tt tt tt .  r  tt tt tt tt tt tt tt tt tt tt tt tt tt tt tt tt tt tt tt t  .  .  .  tt tt tt tt tt tt tt .  .  .  .  .  t  .  tt tt tt tt tt tt tt tt .",
+      "tt tt tt tt tt tt tt .  r  tt tt tt tt tt tt tt tt tt tt tt tt tt tt tt tt tt tt t  .  .  .  tt tt tt tt tt tt tt tt tt .  .  t  .  .  tt tt tt tt tt tt tt tt tt tt",
+      "tt tt tt tt t  t  tt tt r  tt tt tt tt tt tt tt tt tt tt tt tt tt tt tt tt tt tt .  t  .  .  tt tt tt tt tt tt tt tt tt tt .  .  .  .  tt tt tt tt tt tt tt tt tt tt",
+      "tt tt tt t  .  .  t  tt r  tt tt tt tt tt tt tt tt tt tt tt tt tt tt tt tt tt tt .  .  .  .  tt tt tt tt tt tt tt tt tt t  .  .  .  tt tt tt tt tt tt tt tt tt tt tt",
+      "tt tt t  .  .  .  .  t  r  tt tt tt tt tt tt tt tt tt tt tt tt tt tt tt tt tt tt tt .  .  t  t  t  tt tt tt tt t  t  t  .  .  tt tt tt tt tt tt tt tt tt tt tt tt tt",
+      "tt t  r1 r  r  r  r  r  r  tt tt tt tt tt tt tt tt tt tt tt tt tt tt tt tt tt tt tt .  .  .  .  .  t  t  tt t  .  .  .  .  tt tt tt tt tt tt tt tt tt tt tt tt tt tt",
+      "tt .  r  tt Rt Rt Rt .  r  tt tt tt tt tt tt tt tt tt tt tt tt tt tt tt tt tt tt tt tt tt .  .  .  .  .  t  .  .  .  tt tt tt tt tt tt tt tt tt tt tt tt tt tt tt tt",
+      "tt t  r  tt IT Rb Rb .1 r  tt tt tt tt tt tt tt tt tt tt tt tt tt tt tt tt tt tt tt tt tt tt tt .  t  .  .  .  .  tt tt tt tt tt tt tt tt tt tt tt tt tt tt tt tt tt",
+      "tt .  r  tt D  H2 H2 .2 r  tt tt tt tt tt tt tt tt tt tt tt tt tt tt tt tt tt tt tt tt tt tt tt tt .  .  .  .  tt tt tt tt tt tt tt tt tt tt tt tt tt tt tt tt tt tt",
+      "tt t  r  t  r  FN FN FN r  tt tt tt tt tt tt tt tt tt tt tt tt tt tt tt tt tt tt tt t  tt tt t  t  tt tt tt tt tt tt tt tt tt tt tt tt tt tt tt tt tt tt tt tt tt t",
+      "tt t  r2 r  r  r  r  r  r3 tt tt tt tt tt tt tt tt tt tt tt tt tt tt tt tt tt tt tt .  t  t  .  .  t  t  tt tt tt tt tt tt tt tt tt tt tt tt tt tt tt tt t  t  t  .",
+      "tt tt .  .  r  .  .  tt tt tt tt tt tt tt tt tt tt tt tt tt tt tt tt tt tt tt tt t  .  Rt Rt Rt Rt Rt .  t  tt tt tt tt tt tt tt tt tt tt tt tt tt tt t  .  .  .  .",
+      "tt tt tt .  r  .  tt tt tt tt tt tt tt tt tt tt tt tt tt tt tt tt tt tt t  t  t  .  t  Rb WM Rb BM Rb .1 .  tt tt tt tt tt tt tt tt tt tt tt tt t  t  .  .  .  .  .",
+      "tt tt tt tt r  .  tt tt tt tt tt t  t  t  t  t  t  tt tt tt tt tt tt t  .  .  .  .  .  H2 D  H2 D  H2 .2 t  tt tt tt tt tt tt tt tt tt tt tt t  .  .  .  .  .  .  .",
+      "tt tt tt t  r  .  tt tt tt tt t  .  .  .  .  .  .  t  t  t  t  t  t  .  .  t  t  t  .  .  .  .  .  .  .  .  tt tt tt tt tt tt tt tt tt tt t  .  .  .  .  t  t  t  t",
+      "tt tt tt .  r  tt tt tt t  t  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  t  t  t  .  .  tt tt tt tt tt tt tt t  t  t  .  .  .  .  t  .  .  .  .",
+      "tt tt tt .  r  tt tt t  .  .  .  .  tt tt tt tt tt .  .  .  .  .  .  .  .  .  .  t  t  t  t  .  .  .  .  tt tt tt tt tt tt tt t  .  .  .  .  .  .  .  .  .  .  .  .",
+      "tt tt tt .  r  t  t  .  .  tt tt tt tt tt tt tt tt tt tt tt tt tt tt .  .  .  .  .  .  t  .  .  .  tt tt tt tt tt tt tt tt t  .  .  .  .  .  .  .  .  .  .  .  .  .",
+      "t  tt tt tt r  .  .  .  tt tt tt tt tt t  t  t  t  t  tt tt tt tt tt tt .  .  .  .  .  .  .  tt tt tt tt tt tt tt tt tt t  .  .  .  .  .  t  t  t  t  t  t  t  .  .",
+      ".  tt tt tt r  .  .  .  tt tt tt tt t  .  .  .  .  .  t  t  t  tt tt tt tt tt tt tt tt tt tt tt tt tt tt tt tt t  t  t  .  .  .  .  .  .  .  .  .  .  .  .  .  t  .",
+      ".  t  tt tt r  .  .  tt tt t  t  t  .  .  .  .  .  .  .  .  .  t  t  t  t  t  t  t  t  t  t  t  t  t  t  t  t  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  t",
+      ".  .  tt t  r  .  .  tt tt r  r  r  r  r  r  r  r  r  r  r  r  r  r  r  r  r  r  r  r  r  r  r  r  r  r  r  r  r  r  r  r  r  r  r  r  r  r  r  r  r  r  r  r  r  r",
+      ".  .  tt .  r  .  .  tt tt r  r  r  r  r  r  r  r  r  r  r  r  r  r  Rt Rt Rt Rt Rt Rt Rt r  r  r  r  r  r  r  r  r  r  r  r  r  r  r  r  r  r  r  r  r  r  r  r  r",
+      ".  .  t  .  r  .  tt t  t  r  r  Rt Rt Rt Rt Rt Rt Rt Rt Rt .  W1 W  Rb Rb Rb R^ Rb Rb Rb W  W5 .  r  r  r  tt t  t  Rt Rt Rt Rt t  tt tt FN Rt Rt Rt Rt FN FN tt r",
+      ".  .  .  .  r  .  t  .  .  r  r  Rb WP Rb Rb Rb Rb Rb AR Rb .1 W1 t  H1 H1 H1 IN H1 H1 H1 .1 W6 .  r  r  r  tt .  .  Rb WM Rb Rb .1 tt tt r  Rb Rb BM Rb r4 r  tt r",
+      "FN FN .  .  r  FN FN FN FN r  r  H2 D  H2 H1 H2 H1 H2 D  H2 .2 W1 t  H2 H2 H2 D  H2 H2 H2 .2 W6 .  r  r  r  tt .  .  H2 D  H2 H2 .2 tt tt r  H1 H1 D  H1 r5 r  tt r",
+      ".  .  .  .  r  .  .  .  .  r  r  tt r  tt tt tt tt tt r  .  .  W2 W3 W3 W3 W4 r  W2 W3 W3 W3 W4 .  r  r  r  t  t  t  t  r  t  t  t  t  t  FN FN FN r  FN FN FN t  r",
+      "r  r  r  r  r  r  r  r  r  r  r  r  r  r  r  r  r  r  r  r  r  r  r  r  r  r  r  r  r  r  r  r  r  r  r  r  r  r  r  r  r  r  r  r  r  r  r  r  r  r  r  r  r  r  r",
+      "r  r  r  r  r  r  r  r  r  r  r  r  r  r  r  r  r  r  r  r  r  r  r  r  r  r  r  r  r  r  r  r  r  r  r  r  r  r  r  r  r  r  r  r  r  r  r  r  r  r  r  r  r  r  r3",
+      ".  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  r  r  .  .  .  .  .  .  .  .  .",
+      "FN FN FN FN FN FN FN FN FN FN FN FN .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  FN FN FN FN FN FN FN FN FN FN FN FN FN FN FN FN .  r  r  .  FN FN FN FN FN FN FN .",
+      ".  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  r  r  .  .  .  .  .  .  .  .  .",
+      ".  .  .  .  .  .  .  .  .  .  t  t  t  t  t  t  t  t  .  .  .  .  .  .  .  .  .  .  .  .  .  .  t  t  t  t  t  t  .  .  .  .  .  .  r  r  r  r  r  r  r  r  r  r  r",
+      ".  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  r2 r  r  r  r  r  r  r  r  r  r",
+      ".  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  r  r",
+      ".  .  .  .  .  FN FN FN FN FN FN FN .  .  .  FN FN FN FN FN FN FN FN FN .  .  .  .  FN FN FN FN FN .  .  .  .  FN FN FN FN FN FN FN FN FN FN FN FN FN FN FN .  r2 r3"
+    ],
+    "definition": "town",
+    "sheet": "town",
+    "filler": ".",
+    "exitOnOutOfBounds": true,
+    "transitions": [
+      {
+        "y": 44,
+        "x": 26,
+        "to": "shop",
+        "toShop": "inn"
+      },
+      {
+        "y": 44,
+        "x": 12,
+        "to": "shop",
+        "toShop": "weapon"
+      },
+      {
+        "y": 44,
+        "x": 18,
+        "to": "shop",
+        "toShop": "armor"
+      },
+      {
+        "y": 27,
+        "x": 4,
+        "to": "shop",
+        "toShop": "item"
+      },
+      {
+        "y": 44,
+        "x": 49,
+        "to": "shop",
+        "toShop": "blackmagic"
+      },
+      {
+        "y": 44,
+        "x": 40,
+        "to": "shop",
+        "toShop": "whitemagic"
+      },
+      {
+        "y": 9,
+        "x": 15,
+        "to": "shop",
+        "toShop": "clinic"
+      },
+      {
+        "y": 32,
+        "x": 32,
+        "to": "shop",
+        "toShop": "blackmagic2"
+      },
+      {
+        "y": 32,
+        "x": 30,
+        "to": "shop",
+        "toShop": "whitemagic2"
+      }
+    ]
+  },
+  "towns/lefein": {
+    "sprites": [
+      ".  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  t  .  .  .  .  .  .  .",
+      ".  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  t  .  t  .  .  .  .  .  .  .  .  .  .  .  .  .  t  t  .  Rt Rt Rt Rt .  t  .",
+      "W1 W  W  W  W  W  W  W  W  W  W  W  W  W  W5 .  .  .  .  .  W1 W  W  W  W  W  W  W  W  W  t  t  t  t  t  .  .  .  .  .  .  .  .  .  .  .  t  t  t  .  R^ WM BM R^ .1 t  t",
+      "W1 r  r  r  r  r  r  r  r  r  r  r  r  r  W  W  W  W  W  W  W  r  r  r  r  r  r  r  r  r  r  r  t  t  .  .  .  .  .  .  .  .  .  .  .  t  .  t  .  .  H2 D  D  H2 .2 t  .",
+      "W1 r  Rt Rt Rt r  Rt Rt Rt Rt Rt Rt Rt r  Rt Rt Rt Rt Rt Rt Rt r  Rt Rt Rt Rt Rt Rt r  Rt Rt Rt r  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .",
+      "W1 r  R^ Rb R^ r4 R^ Rb R^ Rb R^ Rb R^ r4 R^ Rb R^ Rb R^ Rb R^ r4 R^ Rb R^ R^ Rb R^ r4 R^ Rb R^ r4 t  .  .  .  .  .  .  .  .  .  .  .  .  .  .  t  t  .  t  .  .  t  t  .",
+      "W1 r  H1 H2 H1 r5 H1 H2 H1 H2 H1 H2 H1 r5 H1 H2 H1 r5 H1 H2 H1 r5 H1 H2 H1 H1 H2 H1 r5 H1 H2 H1 r5 W5 .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  t  t  .  .  .  t  .  .",
+      "W1 r  t  .  t  r  t  .  t  .  t  .  t  r  t  .  t  r  t  .  t  r  t  .  t  t  .  t  r  t  .  t  r  t  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .",
+      "W1 r  r  r  r  r  r  r  r  r  r  r  r  r  r  r  r  r  r  r  r  r  r  r  r  r  r  r  r  r  r  r  r  t  t  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .",
+      "W1 r  r  r  r  t  t  t  t  t  t  t  t  t  t  t  r  r  r  t  t  t  t  t  t  t  t  t  t  t  r  r  r  W5 t  t  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .",
+      "W1 r  r  r  r  t  W  W  W  W  W  W  W  W  r  t  r  r  r  t  r  W  W  W  W  W  W  W  W  t  r  r  r  W6 t  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .",
+      "W1 r  w1 w  w  w  w  w  w  w  w  w  w  w  r  t  r  r  r  t  r  w1 w  w  w  w  w  w  w  w  w  w  r  W6 .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .",
+      "W1 r  w1 r  r  r  r  r  r  r  r  r  r  w1 r  t  r  r  r  t  r  w1 r  r  r  r  r  r  r  r  r  w1 r  W6 .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .",
+      "W1 r  w1 r  r  r  r  r  r  r  r  r  r  w1 r  r  r  r  r  r  r  w1 r  r  r  r  r  r  r  r  r  w1 r  W6 .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .",
+      "W1 r  Bh Bh Bh Bh Bh Bh Bh Bh r  r  r  w1 r  r  t  r  t  r  r  w1 r  r  r  Bh Bh Bh Bh Bh Bh Bh r  W6 .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .",
+      "W1 r  w1 w  w  r  r  r  r  r  r  r  r  w1 r  t  r  r  r  t  r  w1 r  r  r  r  r  r  r  w1 w  w  r  W6 .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .",
+      "W1 r  w1 w  w  r  r  r  r  r  r  r  r  w1 r  r  r  F  r  r  r  w1 r  r  r  r  r  r  r  w1 w  w  r  W6 .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .",
+      "W1 r  Bh Bh Bh Bh Bh Bh Bh Bh r  r  r  w1 r  t  r  r  r  t  r  w1 r  r  r  Bh Bh Bh Bh Bh Bh Bh r  W6 .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .",
+      "W1 r  w1 w  w  w  w  r  r  r  r  r  r  w1 r  r  t  r  t  r  r  w1 r  r  r  r  r  w1 w  w  w  w  r  W6 .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .",
+      "W1 r  w1 w  w  w  w  r  r  r  r  r  r  w1 r  r  r  r  r  r  r  w1 r  r  r  r  r  w1 w  w  w  w  r  W6 .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .",
+      "W1 r  Bh Bh Bh Bh Bh Bh Bh Bh r  r  r  w1 r  t  r  r  r  t  r  w1 r  r  r  Bh Bh Bh Bh Bh Bh Bh r  W6 .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .",
+      "W1 r  w1 w  w  w  w  w  w  w  r  r  r  w2 r  t  r  r  r  t  r  w1 r  r  r  w  w  w  w  w  w  w  r  W6 .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .",
+      "W1 r  w1 w  w  w  w  w  w  w  w  w  w  w  r  t  r  r  r  t  r  w1 w  w  w  w  w  w  w  w  w  w  r  W6 .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .",
+      "W2 W3 W3 W3 W3 W3 W3 W3 W3 W3 W3 W3 W3 W4 r  r  r  r  r  r  r  W2 W3 W3 W3 W3 W3 W3 W3 W3 W3 W3 W3 W4 .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  ."
+    ],
+    "definition": "town",
+    "sheet": "town",
+    "filler": ".",
+    "exitOnOutOfBounds": true,
+    "transitions": [
+      {
+        "y": 3,
+        "x": 52,
+        "to": "shop",
+        "toShop": "blackmagic"
+      },
+      {
+        "y": 3,
+        "x": 51,
+        "to": "shop",
+        "toShop": "whitemagic"
+      }
+    ]
+  },
   "towns/melmond": {
     "sprites": [
       ".  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  w  .  .  .",
@@ -614,6 +779,87 @@
         "x": 14,
         "to": "shop",
         "toShop": "whitemagic"
+      }
+    ]
+  },
+  "towns/onrac": {
+    "sprites": [
+      "tt tt tt tt tt tt tt tt tt tt tt tt tt tt tt tt tt tt tt tt tt tt tt tt tt tt tt tt tt tt tt tt tt tt tt tt tt tt tt tt tt tt tt tt tt tt tt tt w  w  w",
+      "tt tt tt tt tt tt tt tt tt tt tt tt tt tt tt tt tt tt tt tt tt tt tt t  t  t  t  t  t  t  t  t  tt tt tt tt tt tt tt tt tt tt tt tt tt tt tt tt w  w  w",
+      "tt tt tt tt t  t  t  t  tt tt tt tt tt tt t  t  t  t  t  t  t  tt tt W1 W  W  W  W  W  W  W  W5 tt tt tt tt tt tt tt tt tt tt tt tt tt tt tt tt w  w  w",
+      "tt tt tt t  .  .  .  .  t  tt tt tt tt tt WL .  .  .  .  .  .  t  tt W1 t  .  G  .  G  .  t  W6 tt tt tt tt tt tt tt tt tt tt tt tt tt tt tt tt w  w  w",
+      "tt tt t  WL .  Rt Rt Rt .  tt tt tt tt t  .  .  Rt Rt Rt .  .  .  tt W1 .  .  .  .  .  .  .  W6 tt tt tt tt tt tt tt tt tt tt tt tt tt tt tt tt w  w  w",
+      "tt tt .  .  .  Rb IT Rb .2 t  tt tt tt .  .  .  Rb CL Rb .  .  .  tt W1 .  G  .  G  .  G  .  W6 tt tt tt tt tt tt tt tt tt tt tt tt tt tt tt tt w  w  w",
+      "tt tt .  .  .  H1 D  H1 .2 .  tt tt t  .  .  .  R^ H2 R^ .2 .  .  tt W1 .  .  .  .  .  .  .  W6 tt tt tt tt tt tt tt tt tt tt tt tt tt tt tt tt w  w  w",
+      "tt tt .  .  .  .  r  .  .  .  tt tt .  .  .  .  H1 D  H1 .2 .  .  tt W1 .  G  .  G  .  G  .  W6 tt tt tt tt tt tt tt tt tt tt tt tt tt tt tt tt w  w  w",
+      "t  tt .  .  .  .  r  .  .  .  tt tt .  .  .  .  .  r  .  .  .  .  tt W1 .  .  .  .  .  .  .  W6 tt tt tt tt tt tt tt tt tt tt tt tt tt tt tt tt w  w  w",
+      ".  t  .  .  .  .  r  .  .  t  t  t  t  .  .  t  .  r  .  t  .  t  tt W1 t  .  .  .  .  .  t  W6 tt tt tt tt tt tt tt tt tt tt tt tt tt tt tt tt w  w  w",
+      ".  .  FN FN FN .  r  .  FN FN .  .  FN FN FN FN .  r  .  FN FN FN t  W2 W3 W3 W4 .  W2 W3 W3 W4 tt tt tt tt tt tt tt tt tt tt tt tt tt tt tt tt w  w  w",
+      ".  .  .  .  .  .  r  .  .  .  .  .  .  .  .  .  .  r  .  .  .  .  .  .  .  t  .  r  .  t  .  .  tt tt tt tt tt tt tt tt tt tt tt tt tt tt tt tt w  w  w",
+      ".  .  .  .  .  .  r2 r  r  r  r  r  r  r  r  r  r  r  r  r  r  r  r  r  r  r  r  r3 .  .  .  .  tt tt tt tt tt tt tt tt tt tt tt tt tt tt tt tt w  w  w",
+      ".  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  r  .  .  .  .  .  r  .  .  .  .  .  .  .  .  tt tt tt tt tt tt tt tt tt tt tt tt tt tt tt tt w  w  w",
+      ".  .  tt tt tt tt tt tt tt tt tt tt .  .  .  .  .  r  .  .  .  .  .  r  .  .  .  .  .  .  .  .  tt tt tt tt tt tt tt tt tt tt tt tt tt tt tt tt w  w  w",
+      ".  tt tt t  t  t  t  t  t  t  tt tt tt .  .  .  .  r  .  .  .  .  .  r  .  .  .  .  .  .  .  tt tt tt tt tt tt tt tt tt tt tt tt tt tt tt tt tt w  w  w",
+      "tt t  w  w  w  w  w  w  w  w  w  t  tt r  r  r  r  r3 .  .  .  .  .  r  .  .  .  .  .  .  tt tt tt tt tt tt tt tt tt tt tt tt tt tt tt tt tt tt w  w  w",
+      "tt w  Rt Rt Rt Rt Rt Rt Rt Rt Rt w  t  r  .  .  t  t  t  t  t  t  t  r  t  t  t  t  t  t  t  tt tt tt tt tt tt tt tt tt tt tt tt tt tt tt tt tt w  w  w",
+      "tt w  Rb Rb Rb R^ Rb R^ Rb Rb Rb w  t  r  .  .  t  r  Rt Rt Rt Rt Rt r  Rt Rt Rt Rt Rt r  .  tt tt tt tt tt tt tt tt tt tt tt tt tt tt tt tt tt w  w  w",
+      "tt w  Rb Rb Rb H2 IN H2 Rb Rb Rb w1 t  r  .  .  t  r  R^ Rb WM Rb R^ r4 R^ Rb BM Rb R^ r4 .  tt tt tt tt tt tt tt tt tt tt tt tt tt tt tt tt tt w  w  w",
+      "tt w  R^ Rb R^ H2 D  H2 R^ Rb R^ w1 t  r  .  .  t  r  H1 H1 D  H1 H1 r5 H1 H1 D  H1 H1 r5 .  tt tt tt tt tt tt tt tt tt tt tt tt tt tt tt tt tt w  w  w",
+      "tt w  H2 H2 H2 .2 r  .  H2 H2 H2 w1 t  r  .  .  t  r2 r  r  r  r  r  r  r  r  r  r  r  r3 .  tt tt tt tt tt tt tt tt tt tt tt tt tt t  t  t  t  w  w  w",
+      "tt w  H2 H2 H2 .2 r  .  H2 H2 H2 w2 t  r  .  .  t  t  t  t  t  t  t  t  t  r  t  t  t  t  tt tt tt tt tt tt tt tt tt tt tt tt tt t  w  w  w  w  w  w  w",
+      "tt w  t  .  .  .  r  .  .  .  t  w  t  r  r  r  r  r  r  r  r  r  r  r  r  r  .  .  .  .  tt tt tt tt tt tt tt tt tt tt tt tt tt w  w  t  .  t  w  w  w",
+      "tt w  t  .  .  r1 r  r  .  .  t  w  t  r  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  tt tt tt tt tt tt tt tt tt tt tt tt tt w  t  .  .  t  w  w  w",
+      "tt w  t  .  .  r  F  r  .  .  t  w  t  r  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  tt tt tt tt tt tt tt tt t  t  t  t  t  w  .  .  t  t  w  w  w",
+      "tt w  t  .  .  r2 r  r3 .  .  t  w  w  Bh w  w  w  w  w  w  w  w  w  w  w  w  .  .  .  .  tt tt tt tt tt tt tt tt w1 w  w  w  w  w  .  t  t  .  w  w  w",
+      "tt w  t  .  .  .  r  .  .  .  t  w  t  r  .  .  .  .  .  .  .  .  .  .  .  w  .  .  .  .  tt tt tt tt t  t  t  t  w2 t  t  .  .  .  .  .  .  t  w  w  w",
+      "tt w  t  t  t  t  r  t  t  t  t  w  t  r  .  .  .  .  .  .  .  .  .  .  .  w  w  w  w  w  tt tt tt tt w1 w  w  w  w  .  .  .  .  t  t  t  t  w  w  w  w",
+      "tt w  w  w  w  w  Bv w  w  w  w  w  t  r  .  .  .  .  .  .  .  .  .  .  .  w  .  .  .  .  t  t  t  t  t  .  .  t  t  .  t  t  t  t  t  r  r  r  w  w  w",
+      "tt tt tt tt tt tt r  t  t  t  t  t  r  r  r  r  r  r  r  r  r  r  r  r  r  Bh r  r  r  r  r  r  r  r  r  r  r  r  r  r  r  r  r  r  r  r  SU w  w  w  w",
+      "tt tt tt tt tt tt r2 r  r  r  r  r  r3 .  .  .  .  .  .  .  .  .  .  .  .  w  t  t  t  t  .  .  .  .  .  t  t  t  t  t  .  .  t  t  t  r  r  r  w  w  w",
+      "tt tt tt tt tt tt tt tt tt tt tt tt tt tt .  .  .  .  .  .  tt tt tt tt tt tt tt tt tt tt tt tt tt tt tt tt tt tt tt tt tt tt tt .  t  t  t  w  w  w  w",
+      "tt tt tt tt tt tt tt tt tt tt tt tt tt tt tt .  .  .  .  tt tt tt tt tt tt tt tt tt tt tt tt tt tt tt tt tt tt tt tt tt tt tt tt t  .  t  t  t  w  w  w",
+      "tt tt tt tt tt tt tt tt tt tt tt tt tt tt tt tt .  .  tt tt tt tt tt tt tt tt tt tt tt tt tt tt tt tt tt tt tt tt tt tt tt tt tt tt tt tt tt tt tt tt w",
+      "tt tt tt tt tt tt tt tt tt tt tt tt tt tt tt tt .  .  tt tt tt tt tt tt tt tt tt tt tt tt tt tt tt tt tt tt tt tt tt tt tt tt tt tt tt tt tt tt tt tt w",
+      "tt tt tt tt tt tt tt tt tt tt tt tt tt tt tt tt .  .  tt tt tt tt tt tt tt tt tt tt tt tt tt tt tt tt tt tt tt tt tt tt tt tt tt tt tt tt tt tt tt tt w",
+      "tt tt tt tt tt tt tt tt tt tt tt tt tt tt tt tt .  .  tt tt tt tt tt tt tt tt tt tt tt tt tt tt tt tt tt tt tt tt tt tt tt tt tt tt tt tt tt tt tt tt w",
+      "tt tt tt tt tt tt tt tt tt tt tt tt tt tt tt tt .  .  tt tt tt tt tt tt tt tt tt tt tt tt tt tt tt tt tt tt tt tt tt tt tt tt tt tt tt tt tt tt tt tt w",
+      "t  t  t  t  t  t  t  t  t  t  t  t  t  t  t  t  .  .  t  t  t  t  t  t  t  t  t  t  t  t  t  t  t  t  t  t  t  t  t  t  t  t  t  t  t  t  t  t  t  t  w",
+      ".  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  w"
+    ],
+    "definition": "town",
+    "sheet": "town",
+    "filler": ".",
+    "exitOnOutOfBounds": true,
+    "transitions": [
+      {
+        "y": 20,
+        "x": 6,
+        "to": "shop",
+        "toShop": "inn"
+      },
+      {
+        "y": 6,
+        "x": 6,
+        "to": "shop",
+        "toShop": "item"
+      },
+      {
+        "y": 20,
+        "x": 26,
+        "to": "shop",
+        "toShop": "blackmagic"
+      },
+      {
+        "y": 20,
+        "x": 20,
+        "to": "shop",
+        "toShop": "whitemagic"
+      },
+      {
+        "y": 7,
+        "x": 17,
+        "to": "shop",
+        "toShop": "clinic"
       }
     ]
   },
