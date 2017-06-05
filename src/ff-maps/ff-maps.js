@@ -93,6 +93,7 @@
         entry[transition.x] = {
           to: {
             map: transition.to,
+            shop: transition.toShop,
             x: transition.toX,
             y: transition.toY
           }

@@ -10,26 +10,6 @@
     ],
 
     properties: {
-      animationConfig: {
-        value: function() {
-          var text = Polymer.dom(this.root).querySelectorAll('p');
-          var textArray = Array.prototype.slice.call(text);
-
-          return {
-            entry: [{
-              name: 'cascaded-animation',
-              animation: 'fade-in-animation',
-              nodes: textArray,
-              nodeDelay: 1250,
-              timing: {
-                duration: 1000,
-                easing: 'steps(4, start)'
-              }
-            }]
-          };
-        }
-      },
-
       charClass: {
         readonly: true,
         type: String
@@ -113,6 +93,12 @@
         return;
       }
 
+      if (this.transition.shop) {
+        this.fire('ff-enter-shop', {
+          shop: this.transition.shop
+        });
+        return;
+      }
       this._transitionAnimation();
     },
 
@@ -133,6 +119,10 @@
       }
       this.mapId = transition.map;
       this.$.map.transitionTo(transition);
+    },
+
+    _shopAnimation: function() {
+
     },
 
     _transitionAnimation: function() {

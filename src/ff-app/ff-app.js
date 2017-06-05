@@ -31,6 +31,10 @@
           return [];
         }
       },
+      shop: {
+        notify: true,
+        type: String
+      },
       startGamePosition: {
         readonly: true,
         type: Object,
@@ -49,6 +53,7 @@
 
     ready: function() {
       this.set('game', {
+        airshipPosition: {},
         mapPosition: undefined,
         shipPosition: {},
         transports: [this.Vehicles.Foot],
@@ -90,6 +95,12 @@
       } else {
         this._startGame();
       }
+    },
+
+    _onEnterShop: function(e, detail) {
+      this.set('shop', detail.shop);
+      console.log('TODO: add fading animation on screen change');
+      this.screenChanged('shop');
     },
 
     _onSaveWorldMapPosition: function(e, detail) {

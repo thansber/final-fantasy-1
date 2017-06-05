@@ -5,6 +5,7 @@
 <link rel="import" href="../ff-char-select/ff-char-select.html">
 <link rel="import" href="../ff-enter-name/ff-enter-name.html">
 <link rel="import" href="../ff-map-screen/ff-map-screen.html">
+<link rel="import" href="../ff-shop-screen/ff-shop-screen.html">
 <link rel="import" href="ff-app-css.html">
 
 <dom-module id="ff-app">
@@ -29,8 +30,11 @@
         transports="[[ game.transports ]]"
         vehicle="[[ game.vehicle ]]"
         world-map-position="[[ game.worldMapPosition ]]"
-        on-ff-vehicle-change="_onVehicleChange"
-        on-ff-save-world-map-position="_onSaveWorldMapPosition"></ff-map-screen>
+        on-ff-enter-shop="_onEnterShop"
+        on-ff-save-world-map-position="_onSaveWorldMapPosition"
+        on-ff-vehicle-change="_onVehicleChange"></ff-map-screen>
+      <ff-shop-screen flex screen="shop"
+        shop="[[ shop ]]"></ff-shop-screen>
     </div>
   </template>
 
