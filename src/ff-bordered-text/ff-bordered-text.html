@@ -1,0 +1,35 @@
+<link rel="import" href="/bower_components/polymer/polymer.html">
+<link rel="import" href="../ff-bordered/ff-bordered.html">
+<link rel="import" href="../ff-styles/ff-styles.html">
+
+<dom-module id="ff-bordered-text">
+  <template>
+    <style include="ff-styles" is="custom-style">
+      :host {
+      }
+
+      pre {
+        margin: 0.25em 0;
+        @apply(--ff-font);
+      }
+    </style>
+    <ff-bordered>
+      <div>
+        <template is="dom-repeat" items="[[ text ]]">
+          <pre>[[ item ]]</pre>
+        </template>
+      </div>
+    </ff-bordered>
+  </template>
+
+  <script>Polymer({
+    is: 'ff-bordered-text',
+
+    properties: {
+      text: {
+        readonly: true,
+        type: Array
+      }
+    }
+  });</script>
+</dom-module>

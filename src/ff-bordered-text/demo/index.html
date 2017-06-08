@@ -1,0 +1,30 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=yes">
+    <title>ff-shop-screen Demo</title>
+    <script src="/bower_components/webcomponentsjs/webcomponents-lite.js"></script>
+    <link rel="import" href="/bower_components/iron-selector/iron-selector.html">
+    <link rel="import" href="../ff-bordered-text.html">
+
+    <style>
+      ff-bordered-text {
+        background-color: black;
+        display: block;
+        height: 200px;
+        width: 168px;
+      }
+    </style>
+  </head>
+  <body>
+    <ff-bordered-text id="inn"></ff-bordered-text>
+
+    <script>
+    window.addEventListener('WebComponentsReady', function(e) {
+      var inn = document.getElementById('inn');
+      inn.text = ['Welcome', '  ::', 'Stay,', 'to save', 'your', 'data'];
+    });
+    </script>
+  </body>
+</html>

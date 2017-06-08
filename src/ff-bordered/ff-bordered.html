@@ -4,24 +4,24 @@
 <dom-module id="ff-bordered">
 	<template>
 		<style include="ff-styles" is="custom-style">
-          :host {
-            background-color: var(--ff-blue);
-            border-color: transparent;
-            border-radius: 14px;
-            border-style: solid;
-            border-width: 10px;
-            border-image: url('/images/border.png') 10 repeat;
-            box-sizing: border-box;
-            display: block;
-            padding: 20px 8px 8px;
-            height: 100%;
-            @apply(--ff-font);
-          }
+      :host {
+        background-color: var(--ff-blue);
+        border-color: transparent;
+        border-radius: 14px;
+        border-style: solid;
+        border-width: 10px;
+        border-image: url('/images/border.png') 10 repeat;
+        box-sizing: border-box;
+        display: block;
+        padding: 20px 8px 8px;
+        height: 100%;
+        @apply(--ff-font);
+      }
 
-          :host(.red) {
-            background-color: var(--ff-red);
-          }
-        </style>
+      :host(.red) {
+        background-color: var(--ff-red);
+      }
+    </style>
 		<slot></slot>
 	</template>
 
