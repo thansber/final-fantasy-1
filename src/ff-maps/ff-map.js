@@ -66,7 +66,7 @@
       this.canvas = this.$.canvas;
       this.ctx = this.canvas.getContext("2d");
       this.FPS = this.scale / 16 * 40;
-      this.$charWalking = this.$.charWalking;
+      this.$moving = this.$.moving;
 
       this.moveOptions = {
         up: {
@@ -202,7 +202,7 @@
       };
 
       moveId = setInterval(moveLoop.bind(this), 1000 / this.FPS);
-      this.$charWalking.walk();
+      this.$moving.walk();
     },
 
     _moveOnePixel: function(options) {

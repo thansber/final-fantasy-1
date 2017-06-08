@@ -56,8 +56,8 @@
         airshipPosition: {},
         mapPosition: undefined,
         shipPosition: {},
-        transports: [this.Vehicles.Foot],
-        vehicle: this.Vehicles.Foot,
+        transports: [this.Vehicles.Foot.id],
+        vehicle: this.Vehicles.Foot.id,
         worldMapPosition: undefined
       });
       this.screenChanged('intro');
@@ -125,7 +125,7 @@
     },
 
     _onVehicleChange: function(e, detail) {
-      if (this.game.vehicle === this.Vehicles.Ship) {
+      if (this.game.vehicle === this.Vehicles.Ship.id) {
         // if leaving ship, record its last position
         this.set('game.shipPosition', detail.leavingPosition);
       }

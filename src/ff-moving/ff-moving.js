@@ -2,20 +2,21 @@
   scope.FF = scope.FF || {};
 
   Polymer({
-    is: 'ff-char-walking',
+    is: 'ff-moving',
 
     behaviors: [
       scope.FF.CanvasBehavior,
-      scope.FF.CharClassBehavior
+      scope.FF.CharClassBehavior,
+      scope.FF.VehicleBehavior
     ],
 
     properties: {
-      charClass: {
-        type: String
-      },
       direction: {
         type: String,
         value: 'down'
+      },
+      movableId: {
+        type: String
       },
       sheetIconSize: {
         readonly: true,
@@ -49,7 +50,7 @@
     },
 
     observers: [
-      '_onCharacterSetup(charClass, direction)',
+      '_onCharacterSetup(movableId, direction, isReady)',
       '_onSheetLoaded(sheetLoaded)'
     ],
 
@@ -60,25 +61,27 @@
       this._resizeCanvas(this.canvas, 1, 1);
       this._loadSheet();
 
+      this._movables = Object.assign({}, this.CharClasses, this.Vehicles);
+
       this.isReady = true;
     },
 
     walk: function() {
       var queue = new scope.FF.Animation();
-      var isStepping = false;
+      var isMoving = false;
       for (var i = 0; i < 6; i++) {
-        queue.add(this._drawChar.bind(this, isStepping));
+        queue.add(this._drawChar.bind(this, isMoving));
         queue.delay(80);
-        isStepping = !isStepping;
+        isMoving = !isMoving;
       }
       queue.run();
     },
 
-    _drawChar: function(isStepping) {
+    _drawChar: function(isMoving) {
       this._clearCanvas(this.canvas, this.ctx);
       this.ctx.drawImage(
         this.sheet,
-        this.sheetIconSize * (isStepping ? this.walkCol + 1 : this.walkCol), // y in source
+        this.sheetIconSize * (isMoving ? this.walkCol + 1 : this.walkCol), // y in source
         this.sheetIconSize * this.walkRow, // x in source
         this.sheetIconSize, // x-scale on source
         this.sheetIconSize, // y-scale on source
@@ -91,11 +94,14 @@
     _loadSheet: function() {
       this.sheet = new Image();
       this.sheet.addEventListener('load', this.set.bind(this, 'sheetLoaded', true, undefined), false);
-      this.sheet.src = this.resolveUrl('char-walking.png');
+      this.sheet.src = this.resolveUrl('moving.png');
     },
 
-    _onCharacterSetup: function(charClass, direction) {
-      this.set('walkRow', this.CharClasses[charClass].index);
+    _onCharacterSetup: function(movableId, direction, isReady) {
+      if (!this.isReady) {
+        return;
+      }
+      this.set('walkRow', this._movables[movableId].index);
       this.set('walkCol', this.walkColsByDirection[direction]);
       this._onSheetLoaded(this.sheetLoaded);
     },

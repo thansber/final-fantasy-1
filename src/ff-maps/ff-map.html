@@ -1,6 +1,6 @@
 <link rel="import" href="../behaviors/ff-canvas-behavior.html">
 <link rel="import" href="../behaviors/ff-vehicle-behavior.html">
-<link rel="import" href="../ff-char-walking/ff-char-walking.html">
+<link rel="import" href="../ff-moving/ff-moving.html">
 
 <dom-module id="ff-map">
   <template>
@@ -12,7 +12,7 @@
         width: 512px;
       };
 
-      ff-char-walking {
+      ff-moving {
         position: absolute;
         margin-left: -32px;
         left: 50%;
@@ -21,10 +21,10 @@
     </style>
 
     <canvas id="canvas"></canvas>
-    <ff-char-walking
-      id="charWalking"
-      char-class="[[ charClass ]]"
-      direction="[[ facing ]]"></ff-char-walking>
+    <ff-moving
+      id="moving"
+      movable-id="[[ charClass ]]"
+      direction="[[ facing ]]"></ff-moving>
 
   </template>
 

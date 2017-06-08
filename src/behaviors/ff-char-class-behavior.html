@@ -48,12 +48,12 @@
       this._charClass({ id: this.CharClass.BlackMage, label: 'Bl.MAGE', index: 5, basic: true });
 
       // advanced classes
-      this._charClass({ id: this.CharClass.Knight, index: 6 });
-      this._charClass({ id: this.CharClass.Ninja, index: 7 });
-      this._charClass({ id: this.CharClass.Master, index: 8 });
-      this._charClass({ id: this.CharClass.RedWizard, index: 9 });
-      this._charClass({ id: this.CharClass.WhiteWizard, index: 10 });
-      this._charClass({ id: this.CharClass.BlackWizard, index: 11});
+      this._charClass({ id: this.CharClass.Knight, label: 'KNIGHT', index: 6 });
+      this._charClass({ id: this.CharClass.Ninja, label: 'NINJA', index: 7 });
+      this._charClass({ id: this.CharClass.Master, label: 'MASTER', index: 8 });
+      this._charClass({ id: this.CharClass.RedWizard, label: 'RedWIZ', index: 9 });
+      this._charClass({ id: this.CharClass.WhiteWizard, label: 'Wh.WIZ', index: 10 });
+      this._charClass({ id: this.CharClass.BlackWizard, label: 'Bl.WIZ', index: 11});
 
       this.basicClasses = Object.keys(this.CharClasses).map(function(charClassId) {
         var charClass = this.CharClasses[charClassId];
