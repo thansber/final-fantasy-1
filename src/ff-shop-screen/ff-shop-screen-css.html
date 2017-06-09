@@ -1,8 +1,24 @@
+<link rel="import" href="../ff-styles/ff-styles.html">
+
 <dom-module id="ff-shop-screen-css">
   <template>
-    <style>
+    <style include="ff-styles" is="custom-style">
     :host {
-      color: white;
+      display: block;
+    }
+
+    #conversation {
+      padding-bottom: 3em;
+      width: 168px;
+    }
+
+    #conversation p {
+      margin: 0.25em 0;
+    }
+
+    #conversation pre {
+      margin: 0.25em 0;
+      @apply(--ff-font);
     }
     </style>
   </template>

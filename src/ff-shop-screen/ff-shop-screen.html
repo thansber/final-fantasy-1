@@ -1,5 +1,6 @@
 <link rel="import" href="../behaviors/ff-screen-behavior.html">
 <link rel="import" href="../ff-bordered/ff-bordered.html">
+<link rel="import" href="../ff-bordered-text/ff-bordered-text.html">
 <link rel="import" href="../ff-selector/ff-selector.html">
 <link rel="import" href="ff-shop-screen-css.html">
 
@@ -7,6 +8,11 @@
   <template>
     <style include="ff-shop-screen-css"></style>
 
+    <div id="top">
+      <ff-bordered-text id="conversation"></ff-bordered-text>
+    </div>
+    <div id="bottom">
+    </div>
     Shop: {{shop}}
   </template>
 
