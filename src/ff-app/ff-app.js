@@ -28,7 +28,7 @@
         notify: true,
         type: Array,
         value: function() {
-          return [];
+          return [{}, {}, {}, {}];
         }
       },
       shop: {

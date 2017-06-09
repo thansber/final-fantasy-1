@@ -17,7 +17,7 @@
       selected: {
         notify: true,
         type: String,
-        value: 'fighter'
+        value: ''
       }
     },
 
@@ -38,7 +38,7 @@
     },
 
     _indexOf: function(charClass) {
-      return this.CharClasses[charClass].index;
+      return this.CharClasses[charClass || this._defaultCharClass].index;
     },
 
     _labelFor: function(selectedCharClass) {
@@ -49,6 +49,8 @@
     },
 
     ready: function() {
+      this._defaultCharClass = this.CharClass.Fighter;
+      this.selected = this._defaultCharClass;
       this.isReady = true;
     }
   });
