@@ -12,18 +12,36 @@
         border-width: 10px;
         border-image: url('/images/border.png') 10 repeat;
         box-sizing: border-box;
-        display: block;
+        display: flex;
+        flex-direction: column;
         padding: 20px 8px 8px;
         height: 100%;
         @apply(--ff-font);
       }
 
-      :host(.red) {
+      :host([color="red"]) {
         background-color: var(--ff-red);
+      }
+
+      :host([color="green"]) {
+        background-color: var(--ff-green);
+      }
+
+      :host([color="purple"]) {
+        background-color: var(--ff-purple);
       }
     </style>
 		<slot></slot>
 	</template>
 
-  <script>Polymer({ is: 'ff-bordered' });</script>
+  <script>
+  Polymer({
+    is: 'ff-bordered',
+    properties: {
+      color: {
+        reflectToAttribute: true,
+        type: String
+      }
+    }
+  });</script>
 </dom-module>

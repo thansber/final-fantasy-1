@@ -9,21 +9,43 @@
     <link rel="import" href="../ff-bordered-text.html">
 
     <style>
-      ff-bordered-text {
+      section {
         background-color: black;
+        height: 100vh;
+        width: 100%;
+      }
+      ff-bordered-text {
         display: block;
         height: 200px;
-        width: 168px;
+        width: 160px;
+      }
+
+      #purple,
+      #gold {
+        height: 68px;
+      }
+
+      #gold {
+        width: 200px;
       }
     </style>
   </head>
   <body>
-    <ff-bordered-text id="inn"></ff-bordered-text>
+    <section>
+      <ff-bordered-text id="inn"></ff-bordered-text>
+      <ff-bordered-text id="purple" color="purple" centered></ff-bordered-text>
+      <ff-bordered-text id="gold" color="green" right></ff-bordered-text>
+    </section>
 
     <script>
     window.addEventListener('WebComponentsReady', function(e) {
       var inn = document.getElementById('inn');
+      var purple = document.getElementById('purple');
+      var gold = document.getElementById('gold');
+
       inn.text = ['Welcome', '  ::', 'Stay,', 'to save', 'your', 'data'];
+      purple.text = ['INN'];
+      gold.text = ['12345 G'];
     });
     </script>
   </body>

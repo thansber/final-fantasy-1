@@ -8,17 +8,23 @@
       :host {
       }
 
+      :host([centered]) ff-bordered {
+        align-items: center;
+      }
+
+      :host([right]) ff-bordered {
+        align-items: flex-end;
+      }
+
       pre {
         margin: 0.25em 0;
         @apply(--ff-font);
       }
     </style>
-    <ff-bordered>
-      <div>
-        <template is="dom-repeat" items="[[ text ]]">
-          <pre>[[ item ]]</pre>
-        </template>
-      </div>
+    <ff-bordered color="[[color]]">
+      <template is="dom-repeat" items="[[ text ]]">
+        <pre>[[ item ]]</pre>
+      </template>
     </ff-bordered>
   </template>
 
@@ -26,6 +32,7 @@
     is: 'ff-bordered-text',
 
     properties: {
+      color: String,
       text: {
         readonly: true,
         type: Array
