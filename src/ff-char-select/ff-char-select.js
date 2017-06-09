@@ -5,7 +5,8 @@
   Polymer({
     is: 'ff-char-select',
     behaviors: [
-      FF.ScreenBehavior
+      scope.FF.CharClassBehavior,
+      scope.FF.ScreenBehavior
     ],
 
     properties: {
@@ -17,6 +18,10 @@
         notify: true,
         type: Array
       }
+    },
+
+    _charClassFor: function(change, index) {
+      return this._charProperty(change, index, 'charClass') || this.CharClass.Fighter;
     },
 
     _charProperty: function(change, index, property) {

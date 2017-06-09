@@ -13,16 +13,16 @@
       on-ff-right="_nextCharClass"
       on-ff-selected="_next">
       <ff-char-selector name="char1"
-        selected="[[ _charProperty(party.*, 0, 'charClass') ]]"
+        selected="[[ _charClassFor(party.*, 0) ]]"
         char-name="[[ _charProperty(party.*, 0, 'name') ]]"></ff-char-selector>
       <ff-char-selector name="char2"
-        selected="[[ _charProperty(party.*, 1, 'charClass') ]]"
+        selected="[[ _charClassFor(party.*, 1) ]]"
         char-name="[[ _charProperty(party.*, 1, 'name') ]]"></ff-char-selector>
       <ff-char-selector name="char3"
-        selected="[[ _charProperty(party.*, 2, 'charClass') ]]"
+        selected="[[ _charClassFor(party.*, 2) ]]"
         char-name="[[ _charProperty(party.*, 2, 'name') ]]"></ff-char-selector>
       <ff-char-selector name="char4"
-        selected="[[ _charProperty(party.*, 3, 'charClass') ]]"
+        selected="[[ _charClassFor(party.*, 3) ]]"
         char-name="[[ _charProperty(party.*, 3, 'name') ]]"></ff-char-selector>
     </ff-selector>
   </template>

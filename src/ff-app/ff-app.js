@@ -117,10 +117,6 @@
     _onStartGame: function(e, detail) {
       this.set('party', detail.party);
       console.log('TODO: set game from detail.game');
-      if (!this.game.mapPosition) {
-        this.starting = true;
-        this.set('game.mapPosition', this.startGamePosition);
-      }
       this._startGame();
     },
 
@@ -133,6 +129,11 @@
     },
 
     _startGame: function() {
+      if (!this.game.mapPosition) {
+        this.starting = true;
+        this.set('game.mapPosition', this.startGamePosition);
+      }
+
       this.set('firstCharClass', this.party[0].charClass);
       this.screenChanged('map');
     }
