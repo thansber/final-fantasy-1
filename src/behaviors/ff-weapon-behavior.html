@@ -9,14 +9,14 @@
 
   scope.FF.WeaponBehaviorImpl = {
     properties: {
-      weapons: {
+      Weapons: {
         readonly: true,
         type: Array,
         value: function() {
           return [];
         }
       },
-      weaponsByName: {
+      WeaponsByName: {
         readonly: true,
         type: Object,
         value: function() {
@@ -33,7 +33,7 @@
       this._createStaves();
       this._createSwords();
 
-      this.weaponsByName = this._objectify(this.weapons, 'name');
+      this.WeaponsByName = this._objectify(this.weapons, 'name');
     },
 
     _createAxes: function() {
@@ -70,8 +70,6 @@
         allowedClasses:[
           this.CharClass.Fighter, this.CharClass.Knight,
           this.CharClass.Ninja]});
-
-
     },
 
     _createHammers: function() {
@@ -102,7 +100,6 @@
           this.CharClass.Knight,
           this.CharClass.Ninja,
           this.CharClass.WhiteWizard]});
-
     },
 
     _createKnives: function() {
@@ -163,7 +160,6 @@
         allowedClasses:[
           this.CharClass.Ninja,
           this.CharClass.Blackbelt, this.CharClass.Master]});
-
     },
 
     _createStaves: function() {
@@ -437,7 +433,7 @@
         strongAgainst: this._objectify(data.monsterTypes),
         usableBy: this._objectify(data.allowedClasses)
       });
-      this.weapons.push(weapon);
+      this.Weapons.push(weapon);
     }
   };
 
