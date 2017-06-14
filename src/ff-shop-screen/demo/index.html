@@ -6,14 +6,15 @@
     <title>ff-shop-screen Demo</title>
     <script src="/bower_components/webcomponentsjs/webcomponents-lite.js"></script>
     <link rel="import" href="/bower_components/iron-selector/iron-selector.html">
+    <link rel="import" href="../../behaviors/ff-char-class-behavior.html">
     <link rel="import" href="../ff-shop-screen.html">
 
     <style>
       ff-shop-screen-demo {
         background-color: black;
         display: block;
-        height: 366px;
-        width: 416px;
+        height: 448px;
+        width: 512px;
       }
     </style>
   </head>
@@ -22,6 +23,7 @@
     <dom-module id="ff-shop-screen-demo">
       <template>
         <ff-shop-screen
+          current-screen
           id="shopScreen"
           shop="inn"></ff-shop-screen>
       </template>
@@ -34,9 +36,18 @@
           is: 'ff-shop-screen-demo',
 
           behaviors: [
+            scope.FF.CharClassBehavior
           ],
 
           ready: function() {
+            var party = [
+              { charClass: this.CharClass.Fighter, name: 'aaaa' },
+              { charClass: this.CharClass.Thief, name: 'aaaa' },
+              { charClass: this.CharClass.Blackbelt, name: 'aaaa' },
+              { charClass: this.CharClass.BlackMage, name: 'aaaa' }
+            ];
+            this.$.shopScreen.party = party;
+            this.$.shopScreen.gold = 12345;
           }
         });
       }(window));

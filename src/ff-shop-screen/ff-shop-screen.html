@@ -1,6 +1,8 @@
 <link rel="import" href="../behaviors/ff-screen-behavior.html">
+<link rel="import" href="../behaviors/ff-shop-behavior.html">
 <link rel="import" href="../ff-bordered/ff-bordered.html">
 <link rel="import" href="../ff-bordered-text/ff-bordered-text.html">
+<link rel="import" href="../ff-char-image/ff-char-image.html">
 <link rel="import" href="../ff-selector/ff-selector.html">
 <link rel="import" href="ff-shop-screen-css.html">
 
@@ -9,9 +11,33 @@
     <style include="ff-shop-screen-css"></style>
 
     <div id="top">
-      <ff-bordered-text id="conversation"></ff-bordered-text>
+      <ff-bordered-text id="conversation" text="[[ _conversation ]]"></ff-bordered-text>
+      <div id="counter">
+        <ff-bordered id="shop-type" color="purple">[[ _sign ]]</ff-bordered>
+        <div id="transaction">
+          <div id="shopkeeper" style="background-image:url([[ shopkeepers ]])"></div>
+          <div id="party">
+            <ff-char-image id="leader" char-class="[[ party.0.charClass ]]"></ff-char-image>
+            <div id="remaining">
+              <ff-char-image class="second char" char-class="[[ party.1.charClass ]]"></ff-char-image>
+              <ff-char-image class="third char" char-class="[[ party.2.charClass ]]"></ff-char-image>
+              <ff-char-image class="fourth char" char-class="[[ party.3.charClass ]]"></ff-char-image>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
     <div id="bottom">
+      <ff-bordered not-shown$="[[ _noChoices ]]">
+        <ff-selector id="decision"
+          selectable=".choice"
+          up-down-selects>
+          <template is="dom-repeat" items="[[ _choices ]]">
+            <div class="choice" choice="[[ item.type ]]">[[ item.label ]]</div>
+          </template>
+        </ff-selector>
+      </ff-bordered>
+      <ff-bordered id="gold" color="green">[[ gold ]] G</ff-bordered>
     </div>
     Shop: {{shop}}
   </template>

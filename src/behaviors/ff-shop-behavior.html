@@ -1,0 +1,63 @@
+<script>
+(function(scope) {
+  scope.FF = scope.FF || {};
+
+  scope.FF.ShopBehavior = {
+    properties: {
+      Shop: {
+        readonly: true,
+        type: Object,
+        value: function() {
+          return {
+            Armor: 'armor',
+            BlackMagic: 'blackmagic',
+            Clinic: 'clinic',
+            Inn: 'inn',
+            Item: 'item',
+            Weapon: 'weapon',
+            WhiteMagic: 'whitemagic'
+          };
+        }
+      },
+
+      Shops: {
+        readonly: true,
+        type: Object,
+        value: {}
+      }
+    },
+
+    ready: function() {
+      this._shop({
+        id: this.Shop.Inn,
+        sign: 'INN',
+        states: {
+          start: {
+            conversation: ['Welcome', '  ::', 'Stay,', 'to save', 'your', 'data.'],
+            choices: [
+              { label: 'Yes', to: 'buying' },
+              { label: 'No', to: 'leaving' }
+            ]
+          },
+          buying: {
+            conversation: ['   30', '', 'Gold', '', 'OK?'],
+            choices: [
+              { label: 'Yes', to: 'resting' },
+              { label: 'No', to: 'leaving' }
+            ]
+          },
+          leaving: {
+            conversation: ['Hold', 'RESET', 'while', 'you', 'turn', 'POWER', 'off!!'],
+            to: 'exit'
+          }
+        }
+      });
+    },
+
+    _shop: function(data) {
+      this.Shops[data.id] = data;
+    }
+  };
+
+}(window));
+</script>

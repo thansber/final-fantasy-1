@@ -7,19 +7,130 @@
       display: block;
     }
 
+    #top {
+      display: flex;
+      flex-direction: row;
+    }
+
     #conversation {
+      display: block;
+      height: 190px;
+      margin-top: 36px;
       padding-bottom: 3em;
-      width: 168px;
+      width: 160px;
     }
 
-    #conversation p {
-      margin: 0.25em 0;
+    #counter {
+      display: flex;
+      flex-direction: column;
+      margin-left: 20px;
     }
 
-    #conversation pre {
-      margin: 0.25em 0;
-      @apply(--ff-font);
+    #shop-type {
+      align-items: center;
+      height: 60px;
+      margin-bottom: 16px;
+      margin-left: 16px;
+      width: 140px;
     }
+
+    #transaction {
+      align-items: flex-end;
+      display: flex;
+    }
+
+    #shopkeeper {
+      background-repeat: no-repeat;
+      height: 128px;
+      width: 94px;
+    }
+
+    :host([shop="armor"]) #shopkeeper {
+      background-position-x: 0px;
+    }
+
+    :host([shop="clinic"]) #shopkeeper {
+      background-position-x: -94px;
+    }
+
+    :host([shop="inn"]) #shopkeeper {
+      background-position-x: -188px;
+    }
+
+    :host([shop="weapon"]) #shopkeeper {
+      background-position-x: -282px;
+    }
+
+    :host([shop="item"]) #shopkeeper {
+      background-position-x: -378px;
+    }
+
+    :host([shop="white-magic"]) #shopkeeper {
+      background-position-x: -472px;
+    }
+
+    :host([shop="black-magic"]) #shopkeeper {
+      background-position-x: -566px;
+    }
+
+    #party {
+      align-items: center;
+      display: flex;
+    }
+
+    ff-char-image {
+      position: relative;
+    }
+
+    #leader,
+    .third.char {
+      top: 4px;
+    }
+
+    .second.char {
+      top: 8px;
+    }
+
+    #remaining {
+      left: -4px;
+      position: relative;
+    }
+
+    #bottom {
+      align-items: flex-end;
+      display: flex;
+      height: 155px;
+    }
+
+    #bottom ff-bordered {
+      height: 100%;
+      margin-left: 90px;
+      width: 155px;
+    }
+
+    [not-shown] {
+      opacity: 0;
+    }
+
+    #decision {
+      --ff-selector-cursor: {
+        left: -34px;
+        top: 2px;
+      }
+    }
+
+    .choice {
+      margin-bottom: 1.25em;
+    }
+
+    #bottom #gold {
+      height: initial;
+      margin-left: 60px;
+      text-align: right;
+      width: 170px;
+    }
+
+
     </style>
   </template>
 </dom-module>
