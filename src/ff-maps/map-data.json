@@ -381,7 +381,44 @@
         "to": "shop",
         "toShop": "clinic"
       }
-    ]
+    ],
+    "shopInventory": {
+      "inn": {
+        "price": 30
+      },
+      "clinic": {
+        "price": 40
+      },
+      "weapon": [
+        "Wooden[R]",
+        "Small[K]",
+        "Wooden[N]",
+        "Rapier",
+        "Iron[H]"
+      ],
+      "armor": [
+        "Cloth",
+        "Wooden[A]",
+        "Chain[A]"
+      ],
+      "item": [
+        "HealPotion",
+        "PurePotion",
+        "Tent"
+      ],
+      "blackmagic": [
+        "FIRE",
+        "SLEP",
+        "LOCK",
+        "LIT"
+      ],
+      "whitemagic": [
+        "CURE",
+        "FOG",
+        "HARM",
+        "RUSE"
+      ]
+    }
   },
   "towns/crescent-lake": {
     "sprites": [

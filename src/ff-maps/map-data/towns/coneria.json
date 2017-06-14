@@ -37,5 +37,14 @@
     { "y":4, "x":3, "to": "shop", "toShop": "blackmagic" },
     { "y":4, "x":7, "to": "shop", "toShop": "whitemagic" },
     { "y":4, "x":24, "to": "shop", "toShop": "clinic" }
-  ]
+  ],
+  "shopInventory": {
+    "inn": { "price": 30 },
+    "clinic": { "price": 40 },
+    "weapon": ["Wooden[R]", "Small[K]", "Wooden[N]", "Rapier", "Iron[H]"],
+    "armor": ["Cloth", "Wooden[A]", "Chain[A]"],
+    "item": ["HealPotion", "PurePotion", "Tent"],
+    "blackmagic": ["FIRE", "SLEP", "LOCK", "LIT"],
+    "whitemagic": ["CURE", "FOG", "HARM", "RUSE"]
+  }
 }
