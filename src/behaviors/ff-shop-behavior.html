@@ -40,14 +40,19 @@
             ]
           },
           buying: {
-            conversation: ['   30', '', 'Gold', '', 'OK?'],
             choices: [
               { label: 'Yes', to: 'resting' },
               { label: 'No', to: 'leaving' }
             ]
           },
+          resting: {
+            conversation: ['Don\'t', 'forget,', 'if you', 'leave', 'your', 'game,'],
+            fire: { event: 'ff-resting', detail: { resting: true } },
+            to: 'leaving'
+          },
           leaving: {
             conversation: ['Hold', 'RESET', 'while', 'you', 'turn', 'POWER', 'off!!'],
+            fire: { event: 'ff-resting', detail: { resting: false } },
             to: 'exit'
           }
         }

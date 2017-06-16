@@ -95,7 +95,8 @@
 
       if (this.transition.shop) {
         this.fire('ff-enter-shop', {
-          shop: this.transition.shop
+          shop: this.transition.shop,
+          inventory: this.map.shopInventory
         });
         return;
       }

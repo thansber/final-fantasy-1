@@ -24,6 +24,11 @@
         type: Object,
         value: {}
       },
+      inventory: {
+        notify: true,
+        type: Array,
+        value: function() { return []; }
+      },
       party: {
         notify: true,
         type: Array,
@@ -99,8 +104,13 @@
 
     _onEnterShop: function(e, detail) {
       this.set('shop', detail.shop);
+      this.set('inventory', detail.inventory[detail.shop]);
       console.log('TODO: add fading animation on screen change');
       this.screenChanged('shop');
+    },
+
+    _onExitShop: function(e) {
+      this.screenChanged('map');
     },
 
     _onSaveWorldMapPosition: function(e, detail) {

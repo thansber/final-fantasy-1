@@ -262,7 +262,10 @@
             x: this.positionX
           });
         }
-        this.map = undefined;
+        if (!this.transition.shop) {
+          // If going to a shop, want to keep map set for when they exit
+          this.map = undefined;
+        }
       }
       this.fire('ff-moving-done');
     },

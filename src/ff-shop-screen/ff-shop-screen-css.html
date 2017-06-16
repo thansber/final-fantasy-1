@@ -5,6 +5,7 @@
     <style include="ff-styles" is="custom-style">
     :host {
       display: block;
+      flex-wrap: wrap;
     }
 
     #top {
@@ -76,6 +77,12 @@
     #party {
       align-items: center;
       display: flex;
+      opacity: 1;
+      transition: opacity 0.6s linear;
+    }
+
+    #party.resting {
+      opacity: 0;
     }
 
     ff-char-image {

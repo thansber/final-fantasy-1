@@ -383,12 +383,12 @@
       }
     ],
     "shopInventory": {
-      "inn": {
-        "price": 30
-      },
-      "clinic": {
-        "price": 40
-      },
+      "inn": [
+        30
+      ],
+      "clinic": [
+        40
+      ],
       "weapon": [
         "Wooden[R]",
         "Small[K]",

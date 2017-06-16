@@ -17,11 +17,19 @@
         <div id="transaction">
           <div id="shopkeeper" style="background-image:url([[ shopkeepers ]])"></div>
           <div id="party">
-            <ff-char-image id="leader" char-class="[[ party.0.charClass ]]"></ff-char-image>
+            <ff-char-image
+              id="leader"
+              char-class="[[ _charClassFor(party.*, 0) ]]"></ff-char-image>
             <div id="remaining">
-              <ff-char-image class="second char" char-class="[[ party.1.charClass ]]"></ff-char-image>
-              <ff-char-image class="third char" char-class="[[ party.2.charClass ]]"></ff-char-image>
-              <ff-char-image class="fourth char" char-class="[[ party.3.charClass ]]"></ff-char-image>
+              <ff-char-image
+                class="second char"
+                char-class="[[ _charClassFor(party.*, 1) ]]"></ff-char-image>
+              <ff-char-image
+                class="third char"
+                char-class="[[ _charClassFor(party.*, 2) ]]"></ff-char-image>
+              <ff-char-image
+                class="fourth char"
+                char-class="[[ _charClassFor(party.*, 3) ]]"></ff-char-image>
             </div>
           </div>
         </div>
