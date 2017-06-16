@@ -1,5 +1,6 @@
 <link rel="import" href="../ff-maps/ff-maps.html">
 <link rel="import" href="../ff-maps/ff-map.html">
+<link rel="import" href="../behaviors/ff-animation-behavior.html">
 
 <dom-module id="ff-map-screen">
   <template>
@@ -33,6 +34,10 @@
         bottom: 0;
       }
 
+      #map {
+        opacity: 1;
+      }
+
     </style>
 
     <ff-maps map-id="[[ mapId ]]"
@@ -59,6 +64,5 @@
       on-ff-right="_moveRight"></ff-keyhandler>
   </template>
 
-  <script src="../data/ff-animation.js"></script>
   <script src="ff-map-screen.js"></script>
 </dom-module>

@@ -7,7 +7,8 @@
     behaviors: [
       scope.FF.CanvasBehavior,
       scope.FF.CharClassBehavior,
-      scope.FF.VehicleBehavior
+      scope.FF.VehicleBehavior,
+      scope.FF.AnimationBehavior
     ],
 
     properties: {
@@ -67,14 +68,15 @@
     },
 
     walk: function() {
-      var queue = new scope.FF.Animation();
+      var animation = this.createAnimation();
       var isMoving = false;
       for (var i = 0; i < 6; i++) {
-        queue.add(this._drawChar.bind(this, isMoving));
-        queue.delay(80);
+        animation
+          .add(this._drawChar.bind(this, isMoving))
+          .delay(80);
         isMoving = !isMoving;
       }
-      queue.run();
+      animation.run();
     },
 
     _drawChar: function(isMoving) {

@@ -5,8 +5,8 @@
     is: 'ff-map-screen',
 
     behaviors: [
-      Polymer.NeonAnimationRunnerBehavior,
-      scope.FF.ScreenBehavior
+      scope.FF.ScreenBehavior,
+      scope.FF.AnimationBehavior
     ],
 
     properties: {
@@ -94,10 +94,7 @@
       }
 
       if (this.transition.shop) {
-        this.fire('ff-enter-shop', {
-          shop: this.transition.shop,
-          inventory: this.map.shopInventory
-        });
+        this._shopAnimation();
         return;
       }
       this._transitionAnimation();
@@ -123,16 +120,19 @@
     },
 
     _shopAnimation: function() {
-
+      this.fire('ff-enter-shop', {
+        shop: this.transition.shop,
+        inventory: this.map.shopInventory
+      });
     },
 
     _transitionAnimation: function() {
-      var queue = new scope.FF.Animation();
-      queue.add(this.set.bind(this, 'transitioning', true, undefined));
-      queue.delay(1300);
-      queue.add(this._toMap.bind(this, this.transition));
-      queue.add(this.set.bind(this, 'transitioning', false, undefined));
-      queue.run();
+      this.createAnimation()
+        .add(this.set.bind(this, 'transitioning', true, undefined))
+        .delay(1300)
+        .add(this._toMap.bind(this, this.transition))
+        .add(this.set.bind(this, 'transitioning', false, undefined))
+        .run();
     }
   });
 

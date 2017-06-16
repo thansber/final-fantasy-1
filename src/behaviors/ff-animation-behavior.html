@@ -1,9 +1,6 @@
+<script>
 (function(scope) {
   scope.FF = scope.FF || {};
-
-  if (scope.FF.Animation) {
-    return;
-  }
 
   function Animation() {
     this.queue = [];
@@ -16,6 +13,7 @@
           resolve(callback.apply(undefined, args));
         });
       });
+      return this;
     },
 
     delay: function(milliseconds) {
@@ -24,6 +22,7 @@
           setTimeout(resolve, milliseconds);
         });
       });
+      return this;
     },
 
     run: function() {
@@ -33,7 +32,12 @@
     }
   });
 
-  scope.FF.Animation = Animation;
+  scope.FF.AnimationBehavior = {
+    createAnimation: function() {
+      return new Animation();
+    }
+  };
 
-  return scope.FF.Animation;
+
 }(window));
+</script>
