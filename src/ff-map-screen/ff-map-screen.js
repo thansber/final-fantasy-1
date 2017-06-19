@@ -14,12 +14,10 @@
         readonly: true,
         type: String
       },
-
       mapId: {
         notify: true,
         type: String
       },
-
       moving: String,
       shipPosition: {
         readonly: true,
@@ -94,7 +92,10 @@
       }
 
       if (this.transition.shop) {
-        this._shopAnimation();
+        this.fire('ff-enter-shop', {
+          shop: this.transition.shop,
+          inventory: this.map.shopInventory
+        });
         return;
       }
       this._transitionAnimation();
@@ -117,13 +118,6 @@
       }
       this.mapId = transition.map;
       this.$.map.transitionTo(transition);
-    },
-
-    _shopAnimation: function() {
-      this.fire('ff-enter-shop', {
-        shop: this.transition.shop,
-        inventory: this.map.shopInventory
-      });
     },
 
     _transitionAnimation: function() {

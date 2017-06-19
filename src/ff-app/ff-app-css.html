@@ -28,6 +28,15 @@
       #screens [screen][current-screen][flex] {
         display: flex;
       }
+
+      #mapScreen {
+        opacity: 1;
+        transition: opacity 1s;
+      }
+
+      #mapScreen[entering-shop] {
+        opacity: 0;
+      }
     </style>
   </template>
 </dom-module>

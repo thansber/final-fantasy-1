@@ -115,6 +115,7 @@
 
       if (this._exitRegex.test(this._state)) {
         this.fire('ff-exit-shop');
+        this.set('shop', undefined);
         return;
       }
 

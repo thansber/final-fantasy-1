@@ -5,6 +5,7 @@
     is: 'ff-app',
 
     behaviors: [
+      scope.FF.AnimationBehavior,
       scope.FF.VehicleBehavior
     ],
 
@@ -105,12 +106,20 @@
     _onEnterShop: function(e, detail) {
       this.set('shop', detail.shop);
       this.set('inventory', detail.inventory[detail.shop]);
-      console.log('TODO: add fading animation on screen change');
-      this.screenChanged('shop');
+      this.createAnimation()
+        .add(this.$.mapScreen.setAttribute.bind(this.$.mapScreen, 'entering-shop', true))
+        .delay(1000)
+        .add(this.screenChanged.bind(this, 'shop'))
+        .run();
     },
 
     _onExitShop: function(e) {
-      this.screenChanged('map');
+      this.createAnimation()
+        .add(this.set.bind(this, 'shop', undefined, undefined))
+        .add(this.screenChanged.bind(this, 'map'))
+        .delay(0)
+        .add(this.$.mapScreen.removeAttribute.bind(this.$.mapScreen, 'entering-shop'))
+        .run();
     },
 
     _onSaveWorldMapPosition: function(e, detail) {
