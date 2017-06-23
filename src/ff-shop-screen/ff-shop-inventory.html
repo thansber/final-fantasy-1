@@ -1,0 +1,55 @@
+<link rel="import" href="../behaviors/ff-weapon-behavior.html">
+
+<dom-module id="ff-shop-inventory">
+
+  <script>
+  (function(scope) {
+    scope.FF = scope.FF || {};
+
+    Polymer({
+      is: 'ff-shop-inventory',
+      behaviors: [
+        scope.FF.WeaponBehavior
+      ],
+      properties: {
+        items: {
+          readonly: true,
+          type: Array
+        },
+        shop: {
+          readonly: true,
+          type: String
+        },
+        shopInventory: {
+          notify: true,
+          type: Array
+        }
+      },
+
+      observers: [
+        '_buildShopInventory(items)'
+      ],
+
+      ready: function() {
+        this.inventoryByShop = {
+          weapon: this.WeaponsByName
+        };
+      },
+
+      _buildShopInventory: function(items) {
+        if (!this.shop) {
+          return;
+        }
+        if (!this.inventoryByShop[this.shop]) {
+          return;
+        }
+        this.shopInventory = items.map(function(item) {
+          return Object.assign({
+            name: item
+          }, this.inventoryByShop[this.shop][item]);
+        }, this);
+      }
+    });
+  }(window));
+  </script>
+</dom-module>

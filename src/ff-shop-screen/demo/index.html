@@ -83,15 +83,16 @@
 
           properties: {
             inventory: Array,
-            map: {
-              observer: '_mapChanged',
-              type: Object
-            },
+            map: Object,
             shop: String
           },
 
           behaviors: [
             scope.FF.CharClassBehavior
+          ],
+
+          observers: [
+            '_reloadInventory(map, shop)'
           ],
 
           ready: function() {
@@ -107,8 +108,8 @@
             this.$.shopScreen.gold = 12345;
           },
 
-          _mapChanged: function(map) {
-            this.set('inventory', map.shopInventory[this.shop]);
+          _reloadInventory: function(map, shop) {
+            this.set('inventory', map.shopInventory[shop]);
           }
         });
       }(window));

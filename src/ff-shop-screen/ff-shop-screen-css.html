@@ -8,9 +8,14 @@
       flex-wrap: wrap;
     }
 
+    [hidden] {
+      display: none !important;
+    }
+
     #top {
       display: flex;
       flex-direction: row;
+      position: relative;
     }
 
     #conversation {
@@ -101,6 +106,13 @@
     #remaining {
       left: -4px;
       position: relative;
+    }
+
+    #inventory {
+      height: 360px;
+      position: absolute;
+      right: 0;
+      width: 160px;
     }
 
     #bottom {

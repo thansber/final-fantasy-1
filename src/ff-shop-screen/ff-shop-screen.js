@@ -52,7 +52,13 @@
       this.shopkeepers = this.resolveUrl('shopkeepers.png');
       this._buyingRegex = /buying/i;
       this._exitRegex = /exit/i;
+      this._inventoryRegex = /inventory/i;
+      this._showingInventory = false;
       this._isReady = true;
+    },
+
+    primaryKeyHandler: function() {
+      return this.$.decision.$.keyHandler;
     },
 
     _charClassFor: function(change, index) {
@@ -102,6 +108,7 @@
         return;
       }
 
+      this.set('_state', undefined);
       this.shopData = this.Shops[shop];
 
       this.set('_sign', this.shopData.sign);
@@ -112,6 +119,8 @@
       if (!this._state) {
         return;
       }
+
+      this._showingInventory = false;
 
       if (this._exitRegex.test(this._state)) {
         this.fire('ff-exit-shop');
@@ -129,6 +138,9 @@
         this.set('_conversation', [this._padPrice(this._getPrice(shopState.item)), '', 'Gold', '', 'OK?']);
       } else {
         this.set('_conversation', shopState.conversation);
+        if (shopState.showInventory) {
+          this._showingInventory = true;
+        }
       }
       this.set('_choices', shopState.choices || []);
       this.set('_noChoices', !this._choices.length);

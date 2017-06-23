@@ -4,11 +4,17 @@
 <link rel="import" href="../ff-bordered-text/ff-bordered-text.html">
 <link rel="import" href="../ff-char-image/ff-char-image.html">
 <link rel="import" href="../ff-selector/ff-selector.html">
+<link rel="import" href="ff-shop-inventory.html">
 <link rel="import" href="ff-shop-screen-css.html">
 
 <dom-module id="ff-shop-screen">
   <template>
     <style include="ff-shop-screen-css"></style>
+
+    <ff-shop-inventory
+      shop="[[ shop ]]"
+      items="[[ inventory ]]"
+      shop-inventory="{{ _shopInventory }}"></ff-shop-inventory>
 
     <div id="top">
       <ff-bordered-text id="conversation" text="[[ _conversation ]]"></ff-bordered-text>
@@ -34,6 +40,15 @@
           </div>
         </div>
       </div>
+      <ff-bordered id="inventory" hidden="[[ !_showingInventory ]]">
+        <ff-selector id="inventorySelector"
+          selectable=".item"
+          up-down-selects>
+          <template is="dom-repeat" items="[[ _shopInventory ]]">
+            <div class="item">[[ item.name ]]</div>
+          </template>
+        </ff-selector>
+      </ff-bordered>
     </div>
     <div id="bottom">
       <ff-bordered not-shown$="[[ _noChoices ]]">
@@ -41,13 +56,12 @@
           selectable=".choice"
           up-down-selects>
           <template is="dom-repeat" items="[[ _choices ]]">
-            <div class="choice" choice="[[ item.type ]]">[[ item.label ]]</div>
+            <div class="choice">[[ item.label ]]</div>
           </template>
         </ff-selector>
       </ff-bordered>
       <ff-bordered id="gold" color="green">[[ gold ]] G</ff-bordered>
     </div>
-    Shop: {{shop}}
   </template>
 
   <script src="ff-shop-screen.js"></script>
