@@ -4,10 +4,10 @@
 <dom-module id="ff-selector">
   <template>
     <style>
-      :host ::content .iron-selected {
+      :host ::slotted(.iron-selected) {
         position: relative;
       }
-      :host ::content .iron-selected:before {
+      :host ::slotted(.iron-selected:before) {
         background-image: url('cursor.png');
         content: ' ';
         height: 32px;
@@ -20,7 +20,7 @@
       }
     </style>
 
-    <content></content>
+    <slot></slot>
 
     <ff-keyhandler
       id="keyHandler"
