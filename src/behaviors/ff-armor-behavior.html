@@ -1,0 +1,314 @@
+<link rel="import" href="ff-util-behavior.html">
+<link rel="import" href="ff-char-class-behavior.html">
+<link rel="import" href="ff-element-behavior.html">
+\
+<script>
+(function(scope) {
+  scope.FF = scope.FF || {};
+
+  scope.FF.ArmorBehaviorImpl = {
+    properties: {
+      Armor: {
+        readonly: true,
+        type: Array,
+        value: function() {
+          return [];
+        }
+      },
+      ArmorByName: {
+        readonly: true,
+        type: Object,
+        value: function() {
+          return {};
+        }
+      }
+    },
+
+    ready: function() {
+      this._bracelets();
+      this._gloves();
+      this._headgear();
+      this._mail();
+      this._robes();
+      this._shields();
+
+      this.ArmorByName = this._objectify(this.Armor, 'name');
+    },
+
+    _armor: function(type, equippableOn, data) {
+      this.Armor.push(Object.assign({
+        type: type,
+        equippableOn: equippableOn
+      }, data));
+    },
+
+    _bracelets: function() {
+      var type = 'bracelet';
+      var equippableOn = 'body';
+
+      this._armor(type, equippableOn, {
+        name:"Copper[B]",desc:"Copper",price:1000,stats:{def:4,weight:1},
+        allowedClasses:this.AllCharClasses});
+
+      this._armor(type, equippableOn, {
+        name:"Silver[B]",desc:"Silver",price:5000,stats:{def:15,weight:1},
+        allowedClasses:this.AllCharClasses});
+
+      this._armor(type, equippableOn, {
+        name:"Gold[B]",desc:"Gold",price:50000,stats:{def:24,weight:1},
+        allowedClasses:this.AllCharClasses});
+
+      this._armor(type, equippableOn, {
+        name:"Opal[B]",desc:"Opal",price:50000,stats:{def:34,weight:1},
+        allowedClasses:this.AllCharClasses});
+    },
+
+    _gloves: function() {
+      var type = 'gloves';
+      var equippableOn = 'hands';
+
+      this._armor(type, equippableOn, {
+        name:"Gloves",desc:"Gloves",price:60,stats:{def:1,weight:1},textOnly:true,
+        allowedClasses:this.AllCharClasses});
+
+      this._armor(type, equippableOn, {
+        name:"Copper[G]",desc:"Copper",price:200,stats:{def:2,weight:3},
+        allowedClasses:[
+          this.CharClass.FIGHTER, this.CharClass.KNIGHT,
+          this.CharClass.NINJA]});
+
+      this._armor(type, equippableOn, {
+        name:"Iron[G]",desc:"Iron",price:750,stats:{def:4,weight:5},
+        allowedClasses:[
+          this.CharClass.FIGHTER, this.CharClass.KNIGHT,
+          this.CharClass.NINJA]});
+
+      this._armor(type, equippableOn, {
+        name:"Silver[G]",desc:"Silver",price:2500,stats:{def:6,weight:3},
+        allowedClasses:[
+          this.CharClass.FIGHTER, this.CharClass.KNIGHT,
+          this.CharClass.NINJA,
+          this.CharClass.RED_WIZARD]});
+
+      this._armor(type, equippableOn, {
+        name:"Zeus[G]",desc:"Zeus",price:15000,stats:{def:6,weight:3},
+        special:{spell:"LIT2"},
+        allowedClasses:[
+          this.CharClass.KNIGHT,
+          this.CharClass.NINJA,
+          this.CharClass.RED_WIZARD]});
+
+      this._armor(type, equippableOn, {
+        name:"Power[G]",desc:"Power",price:10000,stats:{def:6,weight:3},
+        special:{spell:"SABR"},
+        allowedClasses:[
+          this.CharClass.FIGHTER, this.CharClass.KNIGHT,
+          this.CharClass.NINJA,
+          this.CharClass.RED_WIZARD]});
+
+      this._armor(type, equippableOn, {
+        name:"Opal[G]",desc:"Opal",price:20000,stats:{def:8,weight:3},
+        allowedClasses:[this.CharClass.KNIGHT]});
+
+      this._armor(type, equippableOn, {
+        name:"ProRing",desc:"ProRing",price:20000,stats:{def:8,weight:1},textOnly:true,
+        special:{element:Element.Death},
+        allowedClasses:this.AllCharClasses});
+    },
+
+    _headgear: function() {
+      var type = 'headgear';
+      var equippableOn = 'head';
+
+      this._armor(type, equippableOn, {
+        name:"Cap",desc:"Cap",price:80,stats:{def:1,weight:1},textOnly:true,
+        allowedClasses:this.AllCharClasses});
+
+      this._armor(type, equippableOn, {
+        name:"Wooden[H]",desc:"Wooden",price:100,stats:{def:3,weight:3},
+        allowedClasses:[
+          this.CharClass.FIGHTER, this.CharClass.KNIGHT,
+          this.CharClass.NINJA]});
+
+      this._armor(type, equippableOn, {
+        name:"Iron[H]",desc:"Iron",price:450,stats:{def:5,weight:5},
+        allowedClasses:[
+          this.CharClass.FIGHTER, this.CharClass.KNIGHT,
+          this.CharClass.NINJA]});
+
+      this._armor(type, equippableOn, {
+        name:"Silver[H]",desc:"Silver",price:250,stats:{def:6,weight:3},
+        allowedClasses:[
+          this.CharClass.FIGHTER, this.CharClass.KNIGHT,
+          this.CharClass.NINJA]});
+
+      this._armor(type, equippableOn, {
+        name:"Opal[H]",desc:"Opal",price:50000,stats:{def:8,weight:3},
+        allowedClasses:[this.CharClass.KNIGHT]});
+
+      this._armor(type, equippableOn, {
+        name:"Heal[H]",desc:"Heal",price:20000,stats:{def:6,weight:3},
+        special:{spell:"HEAL"},
+        allowedClasses:[
+          this.CharClass.KNIGHT,
+          this.CharClass.NINJA]});
+
+      this._armor(type, equippableOn, {
+        name:"Ribbon",desc:"Ribbon",price:2,stats:{def:1,weight:1},textOnly:true,
+        special:{element:Element.All},
+        allowedClasses:this.AllCharClasses});
+    },
+
+    _mail: function() {
+      var type = 'mail';
+      var equippableOn = 'body';
+
+      this._armor(type, equippableOn, {
+        name:"Cloth",desc:"Cloth",price:10,textOnly:true,stats:{def:1,weight:3},
+        allowedClasses:this.AllCharClasses});
+
+      this._armor(type, equippableOn, {
+        name:"Wooden[A]",desc:"Wooden",price:50,stats:{def:4,weight:8},
+        allowedClasses:[
+          this.CharClass.FIGHTER, this.CharClass.KNIGHT,
+          this.CharClass.THIEF, this.CharClass.NINJA,
+          this.CharClass.BLACKBELT, this.CharClass.MASTER,
+          this.CharClass.RED_MAGE, this.CharClass.RED_WIZARD]});
+
+      this._armor(type, equippableOn, {
+        name:"Chain[A]",desc:"Chain",price:80,stats:{def:15,weight:15},
+        allowedClasses:[
+          this.CharClass.FIGHTER, this.CharClass.KNIGHT,
+          this.CharClass.NINJA,
+          this.CharClass.RED_MAGE, this.CharClass.RED_WIZARD]});
+
+      this._armor(type, equippableOn, {
+        name:"Iron[A]",desc:"Iron",price:800,stats:{def:24,weight:23},
+        allowedClasses:[
+          this.CharClass.FIGHTER, this.CharClass.KNIGHT,
+          this.CharClass.NINJA]});
+
+      this._armor(type, equippableOn, {
+        name:"Steel[A]",desc:"Steel",price:45000,stats:{def:34,weight:33},
+        allowedClasses:[this.CharClass.FIGHTER, this.CharClass.KNIGHT]});
+
+      this._armor(type, equippableOn, {
+        name:"Silver[A]",desc:"Silver",price:7500,stats:{def:18,weight:8},
+        allowedClasses:[
+          this.CharClass.FIGHTER, this.CharClass.KNIGHT,
+          this.CharClass.NINJA,
+          this.CharClass.RED_MAGE, this.CharClass.RED_WIZARD]});
+
+      this._armor(type, equippableOn, {
+        name:"Flame[A]",desc:"Flame",price:30000,stats:{def:34,weight:10},
+        special:{element:Element.Ice},
+        allowedClasses:[
+          this.CharClass.FIGHTER, this.CharClass.KNIGHT,
+          this.CharClass.NINJA]});
+
+      this._armor(type, equippableOn, {
+        name:"Ice[A]",desc:"Ice",price:30000,stats:{def:34,weight:10},
+        special:{element:Element.Fire},
+        allowedClasses:[
+          this.CharClass.FIGHTER, this.CharClass.KNIGHT,
+          this.CharClass.NINJA]});
+
+      this._armor(type, equippableOn, {
+        name:"Opal[A]",desc:"Opal",price:60000,stats:{def:42,weight:10},
+        special:{element:Element.Lightning},
+        allowedClasses:[this.CharClass.KNIGHT]});
+
+      this._armor(type, equippableOn, {
+        name:"Dragon[A]",desc:"Dragon",price:60000,stats:{def:42,weight:10},
+        special:{element:[Element.Fire,Element.Ice,Element.Lightning]},
+        allowedClasses:[this.CharClass.KNIGHT]});
+    },
+
+    _robes: function() {
+      var type = 'robe';
+      var equippableOn = 'body';
+
+      this._armor(type, equippableOn, {
+        name:"White[R]",desc:"White",price:2,stats:{def:24,weight:2},
+        special:{element:[Element.Fire,Element.Death],spell:"INV2"},
+        allowedClasses:[this.CharClass.WHITE_WIZARD]});
+
+      this._armor(type, equippableOn, {
+        name:"Black[R]",desc:"Black",price:2,stats:{def:24,weight:2},
+        special:{element:[Element.Ice,Element.Time],spell:"ICE2"},
+        allowedClasses:[this.CharClass.BLACK_WIZARD]});
+    },
+
+    _shields: function() {
+      var type = 'shield';
+      var equippableOn = 'shield';
+
+      this._armor(type, equippableOn, {
+        name:"Wooden[S]",desc:"Wooden",price:15,stats:{def:2,weight:0},
+        allowedClasses:[
+          this.CharClass.FIGHTER, this.CharClass.KNIGHT,
+          this.CharClass.NINJA]});
+
+      this._armor(type, equippableOn, {
+        name:"Buckler",desc:"Buckler",price:2500,stats:{def:2,weight:0},textOnly:true,
+        allowedClasses:[
+          this.CharClass.FIGHTER, this.CharClass.KNIGHT,
+          this.CharClass.THIEF, this.CharClass.NINJA,
+          this.CharClass.RED_MAGE, this.CharClass.RED_WIZARD]});
+
+      this._armor(type, equippableOn, {
+        name:"Iron[S]",desc:"Iron",price:100,stats:{def:4,weight:0},
+        allowedClasses:[
+          this.CharClass.FIGHTER, this.CharClass.KNIGHT,
+          this.CharClass.NINJA]});
+
+      this._armor(type, equippableOn, {
+        name:"Silver[S]",desc:"Silver",price:2500,stats:{def:8,weight:0},
+        allowedClasses:[
+          this.CharClass.FIGHTER, this.CharClass.KNIGHT,
+          this.CharClass.NINJA]});
+
+      this._armor(type, equippableOn, {
+        name:"Flame[S]",desc:"Flame",price:10000,stats:{def:12,weight:0},
+        special:{element:Element.Ice},
+        allowedClasses:[
+          this.CharClass.FIGHTER, this.CharClass.KNIGHT,
+          this.CharClass.NINJA]});
+
+      this._armor(type, equippableOn, {
+        name:"Ice[S]",desc:"Ice",price:10000,stats:{def:12,weight:0},
+        special:{element:Element.Fire},
+        allowedClasses:[
+          this.CharClass.FIGHTER, this.CharClass.KNIGHT,
+          this.CharClass.NINJA]});
+
+      this._armor(type, equippableOn, {
+        name:"Opal[S]",desc:"Opal",price:15000,stats:{def:16,weight:0},
+        special:{element:Element.Lightning},
+        allowedClasses:[this.CharClass.KNIGHT]});
+
+      this._armor(type, equippableOn, {
+        name:"Aegis[S]",desc:"Aegis",price:40000,stats:{def:16,weight:0},
+        special:{element:Element.PoisonStone},
+        allowedClasses:[this.CharClass.KNIGHT]});
+
+      this._armor(type, equippableOn, {
+        name:"ProCape",desc:"ProCape",price:20000,textOnly:true,stats:{def:8,weight:2},
+        allowedClasses:[
+          this.CharClass.FIGHTER, this.CharClass.KNIGHT,
+          this.CharClass.THIEF, this.CharClass.NINJA,
+          this.CharClass.RED_MAGE, this.CharClass.RED_WIZARD,
+          this.CharClass.WHITE_MAGE, this.CharClass.WHITE_WIZARD,
+          this.CharClass.BLACK_MAGE, this.CharClass.BLACK_WIZARD]});
+    }
+  };
+
+  scope.FF.ArmorBehavior = [
+    scope.FF.UtilBehavior,
+    scope.FF.CharClassBehavior,
+    scope.FF.ElementBehavior,
+    scope.FF.ArmorBehaviorImpl
+  ];
+
+}(window));
+</script>
