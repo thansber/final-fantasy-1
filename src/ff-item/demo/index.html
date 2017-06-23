@@ -1,0 +1,96 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=yes">
+    <title>ff-item Demo</title>
+    <script src="/bower_components/webcomponentsjs/webcomponents-lite.js"></script>
+    <link rel="import" href="/bower_components/iron-selector/iron-selector.html">
+    <link rel="import" href="../../behaviors/ff-armor-behavior.html">
+    <link rel="import" href="../../behaviors/ff-weapon-behavior.html">
+    <link rel="import" href="../../ff-styles/ff-styles.html">
+    <link rel="import" href="../ff-item.html">
+
+    <style>
+    </style>
+  </head>
+  <body>
+
+    <dom-module id="ff-item-demo">
+      <style include="ff-styles" is="custom-style">
+        :host {
+          align-items: center;
+          background-color: black;
+          display: flex;
+        }
+
+        header {
+          color: blue;
+          font-size: 2em;
+          padding: 0.5em;
+        }
+
+        section {
+          padding: 0 0.5em;
+          width: 10em;
+        }
+
+        ff-item {
+          height: 2em;
+          @apply(--ff-font);
+        }
+
+      </style>
+      <template>
+        <section id="weapons">
+          <header>Weapons</header>
+          <template is="dom-repeat" items="[[ weapons ]]">
+            <ff-item
+              label="[[ item.desc ]]"
+              icon="[[ item.type ]]"
+              no-icon="[[ item.textOnly ]]"></ff-item>
+          </template>
+        </section>
+
+        <section id="armor">
+          <header>Armor</header>
+          <template is="dom-repeat" items="[[ armor ]]">
+            <ff-item
+              label="[[ item.desc ]]"
+              icon="[[ item.type ]]"
+              no-icon="[[ item.textOnly ]]"></ff-item>
+          </template>
+        </section>
+      </template>
+
+      <script>
+      (function(scope) {
+        scope.FF = scope.FF || {};
+
+        Polymer({
+          is: 'ff-item-demo',
+
+          behaviors: [
+            scope.FF.ArmorBehavior,
+            scope.FF.WeaponBehavior
+          ],
+
+          properties: {
+            armor: Array,
+            weapons: Array
+          },
+
+
+          ready: function() {
+            this.armor = this.Armor;
+            this.weapons = this.Weapons;
+          }
+        });
+      }(window));
+      </script>
+    </dom-module>
+
+    <ff-item-demo></ff-item-demo>
+
+  </body>
+</html>
