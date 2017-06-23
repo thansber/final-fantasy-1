@@ -24,16 +24,24 @@
     onScreenClosed: function() {},
     onScreenOpened: function() {},
 
+    // Override if a screen contains multiple key handlers
+    primaryKeyHandler: function() {},
+
     _activateKeyHandler: function() {
       this._findKeyHandler().activate();
     },
 
     _deactivateKeyHandler: function() {
-      this._findKeyHandler().deactivate();
+      Polymer.dom(this.root).querySelectorAll('ff-keyhandler').forEach(function(keyHandler) {
+        keyHandler.deactivate();
+      });
     },
 
     _findKeyHandler: function() {
-      return this._keyHandler() || this._keyHandlerInSelector() || this._noopKeyHandler();
+      return this.primaryKeyHandler()
+        || this._keyHandler()
+        || this._keyHandlerInSelector()
+        || this._noopKeyHandler();
     },
 
     _keyHandler: function() {

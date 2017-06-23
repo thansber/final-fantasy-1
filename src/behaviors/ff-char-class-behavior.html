@@ -4,6 +4,7 @@
 
   scope.FF.CharClassBehavior = {
     properties: {
+      AllCharClasses: Array,
       CharClass: {
         readonly: true,
         type: Object,
@@ -61,6 +62,8 @@
           return charClass;
         }
       }, this).filter(Boolean);
+
+      this.AllCharClasses = Object.values(this.CharClass);
     },
 
     _charClass: function(data) {

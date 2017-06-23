@@ -28,6 +28,11 @@
     },
 
     ready: function() {
+      this._inn();
+      this._weapon();
+    },
+
+    _inn: function() {
       this._shop({
         id: this.Shop.Inn,
         sign: 'INN',
@@ -61,6 +66,27 @@
 
     _shop: function(data) {
       this.Shops[data.id] = data;
+    },
+
+    _weapon: function() {
+      this._shop({
+        id: this.Shop.Weapon,
+        sign: 'WEAPON',
+        states: {
+          start: {
+            conversation: ['Welcome'],
+            choices: [
+              { label: 'Buy', to: 'inventory' },
+              { label: 'Sell', to: 'selling' },
+              { label: 'Exit', to: 'exit' }
+            ]
+          },
+          inventory: {
+            conversation: ['What do', 'you', 'want?'],
+            showInventory: true
+          }
+        }
+      })
     }
   };
 
