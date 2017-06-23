@@ -1,8 +1,9 @@
-- add shop transition animation
 - shops
-  - equipment data (weapons/armor/items)
+  - equipment data (armor/consumables)
   - equipment -> town
   - town -> shop transition tiles
+
+- rod weapon sprite
 
 - add screen selection menu (debug)
 
