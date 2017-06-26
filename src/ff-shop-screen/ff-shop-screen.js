@@ -39,6 +39,7 @@
     },
 
     listeners: {
+      'ff-back': '_onBack',
       'ff-selected': '_onSelect',
       'ff-resting': '_onResting'
     },
@@ -58,6 +59,7 @@
     },
 
     primaryKeyHandler: function() {
+      this._currentSelector = this.$.decision;
       return this.$.decision.$.keyHandler;
     },
 
@@ -70,7 +72,7 @@
         return this.inventory[0];
       }
 
-
+      return this.$.inventorySelector.selectedItem.getAttribute('price')
     },
 
     _isClinic: function() {
@@ -79,6 +81,13 @@
 
     _isInn: function() {
       return /inn/i.test(this.shop);
+    },
+
+    _onBack: function(e, detail) {
+      var state = this.shopData.states[this._state];
+      if (state.back) {
+        this.set('_state', state.back);
+      }
     },
 
     _onResting: function(e, detail) {
@@ -134,17 +143,38 @@
         this.fire(shopState.fire.event, shopState.fire.detail);
       }
 
+      if (shopState.showInventory) {
+        this._showingInventory = true;
+      }
+
       if (this._buyingRegex.test(this._state)) {
-        this.set('_conversation', [this._padPrice(this._getPrice(shopState.item)), '', 'Gold', '', 'OK?']);
+        this.set('_conversation', [
+          this._padPrice(this._getPrice()),
+          '',
+          'Gold',
+          '',
+          'OK?']);
+        this._switchKeyHandler(this.$.decision);
       } else {
         this.set('_conversation', shopState.conversation);
-        if (shopState.showInventory) {
-          this._showingInventory = true;
-        }
       }
+
+      this._switchKeyHandler(shopState.inventoryActive
+        ? this.$.inventorySelector
+        : this.$.decision);
+
       this.set('_choices', shopState.choices || []);
       this.set('_noChoices', !this._choices.length);
-      this.$.decision.selectIndex(0);
+    },
+
+    _switchKeyHandler: function(newSelector) {
+      if (this._currentSelector) {
+        this._currentSelector.selected = null;
+        this._currentSelector.$.keyHandler.deactivate();
+      }
+      newSelector.$.keyHandler.activate();
+      newSelector.selectIndex(0);
+      this._currentSelector = newSelector;
     }
 
   });

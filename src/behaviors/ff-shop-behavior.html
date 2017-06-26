@@ -38,6 +38,7 @@
         sign: 'INN',
         states: {
           start: {
+            back: 'leaving',
             conversation: ['Welcome', '  ::', 'Stay,', 'to save', 'your', 'data.'],
             choices: [
               { label: 'Yes', to: 'buying' },
@@ -45,17 +46,20 @@
             ]
           },
           buying: {
+            back: 'leaving',
             choices: [
               { label: 'Yes', to: 'resting' },
               { label: 'No', to: 'leaving' }
             ]
           },
           resting: {
+            back: 'leaving',
             conversation: ['Don\'t', 'forget,', 'if you', 'leave', 'your', 'game,'],
             fire: { event: 'ff-resting', detail: { resting: true } },
             to: 'leaving'
           },
           leaving: {
+            back: 'exit',
             conversation: ['Hold', 'RESET', 'while', 'you', 'turn', 'POWER', 'off!!'],
             fire: { event: 'ff-resting', detail: { resting: false } },
             to: 'exit'
@@ -82,7 +86,32 @@
             ]
           },
           inventory: {
+            back: 'start',
             conversation: ['What do', 'you', 'want?'],
+            inventoryActive: true,
+            showInventory: true,
+            to: 'buying'
+          },
+          buying: {
+            back: 'inventory',
+            choices: [
+              { label: 'Yes', to: 'forWhom' },
+              { label: 'No', to: 'inventory' }
+            ],
+            showInventory: true
+          },
+          forWhom: {
+            back: 'regretStart',
+            conversation: ['Who', 'will', 'take', 'it?'],
+            showInventory: true
+          },
+          regretStart: {
+            conversation: ['Too bad', '::', 'Some-', 'thing', 'else?'],
+            choices: [
+              { label: 'Buy', to: 'inventory' },
+              { label: 'Sell', to: 'selling' },
+              { label: 'Exit', to: 'exit' }
+            ],
             showInventory: true
           }
         }

@@ -3,6 +3,7 @@
 <link rel="import" href="../ff-bordered/ff-bordered.html">
 <link rel="import" href="../ff-bordered-text/ff-bordered-text.html">
 <link rel="import" href="../ff-char-image/ff-char-image.html">
+<link rel="import" href="../ff-item/ff-item.html">
 <link rel="import" href="../ff-selector/ff-selector.html">
 <link rel="import" href="ff-shop-inventory.html">
 <link rel="import" href="ff-shop-screen-css.html">
@@ -45,7 +46,12 @@
           selectable=".item"
           up-down-selects>
           <template is="dom-repeat" items="[[ _shopInventory ]]">
-            <div class="item">[[ item.name ]]</div>
+            <ff-item class="item"
+              label="[[ item.desc ]]"
+              icon="[[ item.type ]]"
+              no-icon="[[ item.textOnly ]]"
+              price$="[[ item.price ]]"></ff-item>
+            <div class="price">[[ item.price ]]</div>
           </template>
         </ff-selector>
       </ff-bordered>
