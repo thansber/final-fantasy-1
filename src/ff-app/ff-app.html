@@ -36,8 +36,10 @@
         on-ff-vehicle-change="_onVehicleChange"></ff-map-screen>
       <ff-shop-screen flex screen="shop"
         shop="[[ shop ]]"
-        inventory="[[ inventory ]]"
+        shop-items="[[ inventory ]]"
         party="[[ party ]]"
+        gold="[[ game.gold ]]"
+        on-ff-purchase="_onPurchase"
         on-ff-exit-shop="_onExitShop"></ff-shop-screen>
     </div>
   </template>

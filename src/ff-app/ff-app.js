@@ -32,10 +32,7 @@
       },
       party: {
         notify: true,
-        type: Array,
-        value: function() {
-          return [{}, {}, {}, {}];
-        }
+        type: Array
       },
       shop: {
         notify: true,
@@ -60,12 +57,21 @@
     ready: function() {
       this.set('game', {
         airshipPosition: {},
+        gold: 0,
         mapPosition: undefined,
         shipPosition: {},
         transports: [this.Vehicles.Foot.id],
         vehicle: this.Vehicles.Foot.id,
         worldMapPosition: undefined
       });
+
+      this.set('party', [
+        this._emptyChar(),
+        this._emptyChar(),
+        this._emptyChar(),
+        this._emptyChar()
+      ]);
+
       this.screenChanged('intro');
     },
 
@@ -81,8 +87,22 @@
       newScreen.set('currentScreen', true);
     },
 
+    _addGold: function(amount) {
+      this.set('game.gold', this.game.gold += +amount);
+    },
+
     _currentChar: function() {
       return this.party[this.charIndex];
+    },
+
+    _emptyChar: function() {
+      return {
+        weapons: [],
+        armor: [],
+        equippedWeapons: [],
+        equippedArmor: [],
+        spells: []
+      };
     },
 
     _onCharClassSelected: function(e, detail) {
@@ -120,6 +140,30 @@
         .delay(0)
         .add(this.$.mapScreen.removeAttribute.bind(this.$.mapScreen, 'entering-shop'))
         .run();
+    },
+
+    // It is assumed the party can afford the item
+    // and the character has room for it
+    _onPurchase: function(e, detail) {
+      this._addGold(-1 * +detail.item.price);
+      var addingTo;
+      switch (detail.shop) {
+        case 'weapon':
+          addingTo = 'party.' + detail.forChar + '.weapons';
+          break;
+        case 'armor':
+          addingTo = 'party.' + detail.forChar + '.armor';
+          break;
+        case' item':
+          addingTo = 'game.inventory';
+          break;
+      }
+
+      if (!this.get(addingTo)) {
+        this.set(addingTo, []);
+      }
+
+      this.push(addingTo, detail.item.name);
     },
 
     _onSaveWorldMapPosition: function(e, detail) {
