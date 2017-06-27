@@ -35,6 +35,8 @@
       Polymer.dom(this.root).querySelectorAll('ff-keyhandler').forEach(function(keyHandler) {
         keyHandler.deactivate();
       });
+
+      (this._keyHandlerInSelector() || this._noopKeyHandler()).deactivate();
     },
 
     _findKeyHandler: function() {
