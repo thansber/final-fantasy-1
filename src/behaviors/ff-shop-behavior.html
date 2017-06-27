@@ -83,7 +83,8 @@
               { label: 'Buy', to: 'inventory' },
               { label: 'Sell', to: 'selling' },
               { label: 'Exit', to: 'exit' }
-            ]
+            ],
+            reset: true
           },
           inventory: {
             back: 'start',
@@ -103,15 +104,23 @@
           forWhom: {
             back: 'regretStart',
             conversation: ['Who', 'will', 'take', 'it?'],
+            confirmPurchase: true,
+            showInventory: true,
+            to: 'thanks'
+          },
+          notEnoughMoney: {
+            conversation: ['You', 'can\'t', 'afford', 'that.'],
+            copyFrom: 'start',
             showInventory: true
           },
           regretStart: {
             conversation: ['Too bad', '::', 'Some-', 'thing', 'else?'],
-            choices: [
-              { label: 'Buy', to: 'inventory' },
-              { label: 'Sell', to: 'selling' },
-              { label: 'Exit', to: 'exit' }
-            ],
+            copyFrom: 'start',
+            showInventory: true
+          },
+          thanks: {
+            conversation: ['Thank', 'you!', 'What', 'else?'],
+            copyFrom: 'start',
             showInventory: true
           }
         }
