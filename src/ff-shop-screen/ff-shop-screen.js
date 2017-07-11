@@ -19,7 +19,11 @@
         readonly: true,
         type: Array
       },
-      purchase: {
+      partyInventoryKey: {
+        readonly: true,
+        type: String
+      },
+      transaction: {
         readonly: true,
         type: Object,
         value: function() {
@@ -58,10 +62,6 @@
 
     ready: function() {
       this.shopkeepers = this.resolveUrl('shopkeepers.png');
-      this._buyingRegex = /buying/i;
-      this._exitRegex = /exit/i;
-      this._forWhomRegex = /forWhom/i;
-      this._inventoryRegex = /inventory/i;
       this._showingInventory = false;
       this._isReady = true;
     },
@@ -80,14 +80,22 @@
     },
 
     _canAfford: function() {
-      return this.gold > +this.purchase.item.price;
+      return this.gold > +this.transaction.item.price;
     },
 
     _charClassFor: function(change, index) {
       return this.get('charClass', change.base[index]);
     },
 
-    _getPrice: function(thingToBuy) {
+    _charHasInventory: function() {
+      return !!this._getCharInventory().length;
+    },
+
+    _getCharInventory: function() {
+      return this.party[this.transaction.forChar][this.partyInventoryKey];
+    },
+
+    _getPrice: function() {
       if (this._isInn() || this._isClinic()) {
         return this.shopItems[0];
       }
@@ -95,12 +103,47 @@
       return this.$.inventorySelector.selectedItem.getAttribute('price')
     },
 
+    _hasRoom: function() {
+      var numItemsOwned = this._getCharInventory().length;
+      var maxOwnedAllowed = this.shopData.maxOwned || 99;
+      return numItemsOwned < maxOwnedAllowed;
+    },
+
     _isClinic: function() {
       return /clinic/i.test(this.shop);
     },
 
+    _isExiting: function() {
+      return /exit/i.test(this._state);
+    },
+
     _isInn: function() {
       return /inn/i.test(this.shop);
+    },
+
+    _isPurchaseOk: function() {
+      if (this.transaction.selling) {
+        return true;
+      }
+      if (!this._canAfford()) {
+        this.set('_state', 'notEnoughMoney');
+        return false;
+      }
+      if (!this._hasRoom()) {
+        this.set('_state', 'notEnoughRoom');
+        return false;
+      }
+
+      return true;
+    },
+
+    _loadCharInventory: function() {
+      var selling = this._getCharInventory().map(function(item) {
+        return Object.assign({}, item, {
+          price: Math.floor(item.price / 2)
+        });
+      });
+      this.set('_shopInventory', selling);
     },
 
     _onBack: function(e, detail) {
@@ -117,19 +160,23 @@
     _onSelect: function(e, detail) {
       var state = this._buildState(this._state);
 
-      if (state.confirmPurchase) {
-        this.purchase.forChar = detail.value;
-        if (!this._canAfford()) {
-          this.set('_state', 'notEnoughMoney');
-          return;
+      if (state.confirmForChar) {
+        this.transaction.forChar = detail.value;
+      }
+
+      if (state.finishTransaction) {
+        if (this._isPurchaseOk()) {
+          this.fire('ff-purchase', this.transaction);
+          this._updateState(state, detail.value);
         }
-        // TODO: check if has room
-        this.fire('ff-purchase', this.purchase);
-        this.set('_state', state.to);
-      } else if (state.to) {
-        this.set('_state', state.to);
+      } else if (state.checkCharInventory) {
+        if (!this._charHasInventory()) {
+          this.set('_state', 'nothingToSell');
+        } else {
+          this.set('_state', state.to);
+        }
       } else {
-        this.set('_state', this._choices[detail.value].to);
+        this._updateState(state, detail.value);
       }
     },
 
@@ -145,6 +192,22 @@
       return this.party.map(function(c) {
         return { label: c.name };
       });
+    },
+
+    _setupChoices: function(shopState) {
+      if (shopState.charNameChoices) {
+        this.set('_choices', this._partyNames());
+      } else {
+        this.set('_choices', shopState.choices || []);
+      }
+
+      this.set('_noChoices', !this._choices.length);
+    },
+
+    _setupPriceConfirmation: function(inventory, price) {
+      this.transaction.item = inventory[this.$.inventorySelector.selected];
+      this.set('_conversation', [this._padPrice(price), '', 'Gold', '', 'OK?']);
+      this._switchKeyHandler(this.$.decision);
     },
 
     _shopChanged: function(shop) {
@@ -166,7 +229,7 @@
 
       this._showingInventory = false;
 
-      if (this._exitRegex.test(this._state)) {
+      if (this._isExiting()) {
         this.fire('ff-exit-shop');
         this.set('shop', undefined);
         return;
@@ -178,25 +241,26 @@
         this.fire(shopState.fire.event, shopState.fire.detail);
       }
 
+      if (shopState.loadCharInventory) {
+        this._loadCharInventory();
+      }
+
       if (shopState.showInventory) {
         this._showingInventory = true;
       }
 
       if (shopState.reset) {
-        this.purchase = {
+        this.transaction = {
           shop: this.shop
         };
       }
 
-      if (this._buyingRegex.test(this._state)) {
-        this.purchase.item = this._shopInventory[this.$.inventorySelector.selected];
-        this.set('_conversation', [
-          this._padPrice(this._getPrice()),
-          '',
-          'Gold',
-          '',
-          'OK?']);
-        this._switchKeyHandler(this.$.decision);
+      if (shopState.transactionSelling) {
+        this.transaction.selling = true;
+      }
+
+      if (shopState.askForPrice) {
+        this._setupPriceConfirmation(this._shopInventory, this._getPrice());
       } else {
         this.set('_conversation', shopState.conversation);
       }
@@ -205,13 +269,7 @@
         ? this.$.inventorySelector
         : this.$.decision);
 
-      this.set('_choices', shopState.choices || []);
-
-      if (this._forWhomRegex.test(this._state)) {
-        this.set('_choices', this._partyNames());
-      }
-
-      this.set('_noChoices', !this._choices.length);
+      this._setupChoices(shopState);
     },
 
     _switchKeyHandler: function(newSelector) {
@@ -222,6 +280,10 @@
       newSelector.$.keyHandler.activate();
       newSelector.selectIndex(0);
       this._currentSelector = newSelector;
+    },
+
+    _updateState: function(shopState, selectedChoice) {
+      this.set('_state', shopState.to ? shopState.to : this._choices[selectedChoice].to);
     }
 
   });

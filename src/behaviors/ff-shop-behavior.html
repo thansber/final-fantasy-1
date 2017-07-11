@@ -76,42 +76,84 @@
       this._shop({
         id: this.Shop.Weapon,
         sign: 'WEAPON',
+        maxOwned: 4,
         states: {
           start: {
+            back: 'exit',
             conversation: ['Welcome'],
             choices: [
-              { label: 'Buy', to: 'inventory' },
-              { label: 'Sell', to: 'selling' },
+              { label: 'Buy', to: 'buyingStart' },
+              { label: 'Sell', to: 'sellingStart' },
               { label: 'Exit', to: 'exit' }
             ],
             reset: true
           },
-          inventory: {
+          buyingStart: {
             back: 'start',
             conversation: ['What do', 'you', 'want?'],
             inventoryActive: true,
             showInventory: true,
-            to: 'buying'
+            to: 'buyingConfirmPrice'
           },
-          buying: {
-            back: 'inventory',
+          buyingConfirmPrice: {
+            askForPrice: true,
+            back: 'regretStart',
             choices: [
-              { label: 'Yes', to: 'forWhom' },
-              { label: 'No', to: 'inventory' }
+              { label: 'Yes', to: 'buyingForWhom' },
+              { label: 'No', to: 'regretStart' }
             ],
             showInventory: true
           },
-          forWhom: {
+          buyingForWhom: {
             back: 'regretStart',
+            charNameChoices: true,
             conversation: ['Who', 'will', 'take', 'it?'],
-            confirmPurchase: true,
+            confirmForChar: true,
+            finishTransaction: true,
             showInventory: true,
             to: 'thanks'
+          },
+          sellingStart: {
+            back: 'regretStart',
+            charNameChoices: true,
+            checkCharInventory: true,
+            confirmForChar: true,
+            conversation: ['Whose', 'item', 'do you', 'want to', 'sell?'],
+            to: 'sellingFromWhom',
+            transactionSelling: true
+          },
+          sellingFromWhom: {
+            back: 'regretStart',
+            conversation: ['Whose', 'item', 'do you', 'want to', 'sell?'],
+            inventoryActive: true,
+            loadCharInventory: true,
+            showInventory: true,
+            to: 'sellingConfirmPrice'
+          },
+          sellingConfirmPrice: {
+            askForPrice: true,
+            back: 'regretStart',
+            choices: [
+              { label: 'Yes', to: 'thanks' },
+              { label: 'No', to: 'regretStart' }
+            ],
+            confirmPurchase: true,
+            finishTransaction: true,
+            showInventory: true,
           },
           notEnoughMoney: {
             conversation: ['You', 'can\'t', 'afford', 'that.'],
             copyFrom: 'start',
             showInventory: true
+          },
+          notEnoughRoom: {
+            conversation: ['You', 'can\'t', 'carry', 'anymore'],
+            copyFrom: 'start',
+            showInventory: true
+          },
+          nothingToSell: {
+            conversation: ['You', 'have', 'nothing', 'to sell', '  ::', 'Any-', 'thing', 'else?'],
+            copyFrom: 'start'
           },
           regretStart: {
             conversation: ['Too bad', '::', 'Some-', 'thing', 'else?'],
@@ -120,8 +162,7 @@
           },
           thanks: {
             conversation: ['Thank', 'you!', 'What', 'else?'],
-            copyFrom: 'start',
-            showInventory: true
+            copyFrom: 'start'
           }
         }
       })

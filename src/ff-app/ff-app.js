@@ -6,6 +6,7 @@
 
     behaviors: [
       scope.FF.AnimationBehavior,
+      scope.FF.ShopBehavior,
       scope.FF.VehicleBehavior
     ],
 
@@ -57,7 +58,7 @@
     ready: function() {
       this.set('game', {
         airshipPosition: {},
-        gold: 0,
+        gold: 100,
         mapPosition: undefined,
         shipPosition: {},
         transports: [this.Vehicles.Foot.id],
@@ -71,6 +72,12 @@
         this._emptyChar(),
         this._emptyChar()
       ]);
+
+      this._partyInventoryMapping = {};
+      this._partyInventoryMapping[this.Shop.Weapon] = 'weapons';
+      this._partyInventoryMapping[this.Shop.Armor] = 'armor';
+      this._partyInventoryMapping[this.Shop.BlackMagic] = 'spells';
+      this._partyInventoryMapping[this.Shop.WhiteMagic] = 'spells';
 
       this.screenChanged('intro');
     },
@@ -126,6 +133,7 @@
     _onEnterShop: function(e, detail) {
       this.set('shop', detail.shop);
       this.set('inventory', detail.inventory[detail.shop]);
+      this.set('_partyInventoryKey', this._partyInventoryMapping[detail.shop]);
       this.createAnimation()
         .add(this.$.mapScreen.setAttribute.bind(this.$.mapScreen, 'entering-shop', true))
         .delay(1000)

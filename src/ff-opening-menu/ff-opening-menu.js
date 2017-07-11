@@ -29,16 +29,20 @@
       console.log('TODO: load from actual saved game');
       return [{
         charClass: 'whitemage',
-        name: 'AAAA'
+        name: 'AAAA',
+        weapons: [], armor: [], spells: []
       }, {
         charClass: 'thief',
-        name: 'BBBB'
+        name: 'BBBB',
+        weapons: [], armor: [], spells: []
       }, {
         charClass: 'blackbelt',
-        name: 'CCCC'
+        name: 'CCCC',
+        weapons: [], armor: [], spells: []
       }, {
         charClass: 'redmage',
-        name: 'DDDD'
+        name: 'DDDD',
+        weapons: [], armor: [], spells: []
       }];
     },
 

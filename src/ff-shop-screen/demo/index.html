@@ -7,6 +7,7 @@
     <script src="/bower_components/webcomponentsjs/webcomponents-lite.js"></script>
     <link rel="import" href="/bower_components/iron-selector/iron-selector.html">
     <link rel="import" href="../../behaviors/ff-char-class-behavior.html">
+    <link rel="import" href="../../behaviors/ff-weapon-behavior.html">
     <link rel="import" href="../../ff-maps/ff-maps.html">
     <link rel="import" href="../ff-shop-screen.html">
 
@@ -60,17 +61,22 @@
           <ff-shop-screen
             current-screen
             id="shopScreen"
+            party="[[ party ]]"
+            party-inventory-key="[[ _partyInventoryKey ]]"
             shop="{{ shop }}"
             shop-items="[[ inventory ]]"
             on-ff-purchase="_onPurchase"></ff-shop-screen>
-          <iron-selector id="shopSelector" selected="{{ shop }}" attr-for-selected="shop">
+          <iron-selector id="shopSelector"
+            selected="{{ shop }}"
+            attr-for-selected="shop"
+            on-iron-select="_onShopSelect">
             <div shop="inn">Inn</div>
             <div shop="clinic">Clinic</div>
-            <div shop="weapon">Weapon</div>
-            <div shop="armor">Armor</div>
+            <div shop="weapon" inventory-key="weapons">Weapon</div>
+            <div shop="armor" inventory-key="armor">Armor</div>
             <div shop="item">Item</div>
-            <div shop="blackmagic">Black Magic</div>
-            <div shop="whitemagic">White Magic</div>
+            <div shop="blackmagic" inventory-key="spells">Black Magic</div>
+            <div shop="whitemagic" inventory-key="spells">White Magic</div>
           </iron-selector>
         </div>
       </template>
@@ -89,7 +95,8 @@
           },
 
           behaviors: [
-            scope.FF.CharClassBehavior
+            scope.FF.CharClassBehavior,
+            scope.FF.WeaponBehavior
           ],
 
           observers: [
@@ -97,20 +104,39 @@
           ],
 
           ready: function() {
-            var party = [
-              { charClass: this.CharClass.Fighter, name: 'AAAA' },
-              { charClass: this.CharClass.Thief, name: 'MMMM' },
-              { charClass: this.CharClass.Blackbelt, name: 'JJJJ' },
-              { charClass: this.CharClass.BlackMage, name: 'QQQQ' }
-            ];
+            this.set('party', [{
+              charClass: this.CharClass.Fighter,
+              name: 'AAAA',
+              weapons: [
+                this.WeaponsByName['Hand[A]'],
+                this.WeaponsByName['Thor[H]'],
+                this.WeaponsByName['Large[K]'],
+                this.WeaponsByName['Power[R]']
+              ]
+            }, {
+              charClass: this.CharClass.Thief,
+              name: 'MMMM',
+              weapons: []
+            }, {
+              charClass: this.CharClass.Blackbelt,
+              name: 'JJJJ',
+              weapons: []
+            }, {
+              charClass: this.CharClass.BlackMage,
+              name: 'QQQQ',
+              weapons: []
+            }]);
             this.$.maps.mapId = 'towns/coneria';
             this.$.shopSelector.selected = 'weapon';
-            this.$.shopScreen.party = party;
             this.$.shopScreen.gold = 1234;
           },
 
           _onPurchase: function(e, detail) {
             console.log(detail);
+          },
+
+          _onShopSelect: function(e, detail) {
+            this.set('_partyInventoryKey', detail.item.getAttribute('inventory-key'));
           },
 
           _reloadInventory: function(map, shop) {
