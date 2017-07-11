@@ -1,3 +1,4 @@
+<link rel="import" href="../behaviors/ff-armor-behavior.html">
 <link rel="import" href="../behaviors/ff-weapon-behavior.html">
 
 <dom-module id="ff-shop-inventory">
@@ -9,6 +10,7 @@
     Polymer({
       is: 'ff-shop-inventory',
       behaviors: [
+        scope.FF.ArmorBehavior,
         scope.FF.WeaponBehavior
       ],
       properties: {
@@ -32,6 +34,7 @@
 
       ready: function() {
         this.inventoryByShop = {
+          armor: this.ArmorByName,
           weapon: this.WeaponsByName
         };
       },

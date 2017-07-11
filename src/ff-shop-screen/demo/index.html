@@ -7,6 +7,7 @@
     <script src="/bower_components/webcomponentsjs/webcomponents-lite.js"></script>
     <link rel="import" href="/bower_components/iron-selector/iron-selector.html">
     <link rel="import" href="../../behaviors/ff-char-class-behavior.html">
+    <link rel="import" href="../../behaviors/ff-armor-behavior.html">
     <link rel="import" href="../../behaviors/ff-weapon-behavior.html">
     <link rel="import" href="../../ff-maps/ff-maps.html">
     <link rel="import" href="../ff-shop-screen.html">
@@ -96,6 +97,7 @@
 
           behaviors: [
             scope.FF.CharClassBehavior,
+            scope.FF.ArmorBehavior,
             scope.FF.WeaponBehavior
           ],
 
@@ -112,19 +114,26 @@
                 this.WeaponsByName['Thor[H]'],
                 this.WeaponsByName['Large[K]'],
                 this.WeaponsByName['Power[R]']
+              ],
+              armor: [
+                this.ArmorByName['Iron[G]'],
+                this.ArmorByName['Silver[H]']
               ]
             }, {
               charClass: this.CharClass.Thief,
               name: 'MMMM',
-              weapons: []
+              weapons: [],
+              armor: []
             }, {
               charClass: this.CharClass.Blackbelt,
               name: 'JJJJ',
-              weapons: []
+              weapons: [],
+              armor: []
             }, {
               charClass: this.CharClass.BlackMage,
               name: 'QQQQ',
-              weapons: []
+              weapons: [],
+              armor: []
             }]);
             this.$.maps.mapId = 'towns/coneria';
             this.$.shopSelector.selected = 'weapon';

@@ -30,6 +30,14 @@
     ready: function() {
       this._inn();
       this._weapon();
+      this._armor();
+    },
+
+    _armor: function() {
+      this._shop(Object.assign({}, this.Shops[this.Shop.Weapon], {
+        id: this.Shop.Armor,
+        sign: 'ARMOR',
+      }));
     },
 
     _inn: function() {
