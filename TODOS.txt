@@ -9,6 +9,7 @@ WORK
   - checks for full inventory
   - equipment data (consumables)
   - shop equipment for each town
+  - handle town with multiple magic shops
 
 
 - rod weapon sprite
