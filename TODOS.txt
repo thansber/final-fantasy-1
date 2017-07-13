@@ -11,10 +11,21 @@ WORK
   - shop equipment for each town
   - handle town with multiple magic shops
 
+- fonts
+-- create battle menu font
+-- create battle status font
 
 - rod weapon sprite
 
 - add screen selection menu (debug)
+
+- allowedClasses => Fi Ni RW WW, create function to map these to actual char classes
+
+- spells
+-- fix hit multipler spells, make same type with attribute, check for both when spell applied
+-- handle status > 300 HP better
+-- create SVGs for effects that allows for dual colors
+-- create SVGs for splashes that allows for dual? colorss
 
 - movement
 -- check ship dock tile NE of pravoka with corner of land in regular game
