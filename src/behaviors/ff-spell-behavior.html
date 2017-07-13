@@ -1,0 +1,777 @@
+<link rel="import" href="ff-util-behavior.html">
+<link rel="import" href="ff-char-class-behavior.html">
+<link rel="import" href="ff-element-behavior.html">
+<link rel="import" href="ff-status-behavior.html">
+
+<script>
+(function(scope) {
+  scope.FF = scope.FF || {};
+
+  var Effects = {
+    Beam : "beam",
+    Death : "death",
+    Flame : "flame",
+    Heal : "healing",
+    Poof : "poof",
+    Protect : "protect",
+    Star : "star",
+    Status : "status"
+  };
+
+  var Targets = {
+    All: 'all',
+    Self: 'self',
+    Single: 'single'
+  };
+
+  var SpellTypes = {
+    Damage: 'damage',
+    ElementResist: 'element-resist',
+    ElementWeakness: 'element-weakness',
+    Healing: 'healing',
+    HealingFull: 'healing-full',
+    HitMultiplierDown: 'hit-multiplier-down',
+    HitMultiplierUp: 'hit-multiplier-up',
+    MoraleDown: 'morale-down',
+    Resurrect: 'resurrect',
+    StatDown: 'stat-down',
+    StatUp: 'stat-up',
+    StatUpMulti: 'stat-up-multi',
+    StatusAdd: 'status-add',
+    StatusAdd300Hp: 'status-add-300-hp',
+    StatusRemove: 'status-remove',
+    Teleport: 'teleport'
+  };
+
+  var Prices = [ 100, 400, 1500, 4000, 8000, 20000, 45000, 60000 ];
+
+  scope.FF.SpellBehaviorImpl = {
+    properties: {
+      Spells: {
+        readonly: true,
+        type: Array,
+        value: function() {
+          return [];
+        }
+      },
+      SpellsByLevel: {
+        readonly: true,
+        type: Array,
+        value: function() {
+          return [];
+        }
+      },
+      SpellsByName: {
+        readonly: true,
+        type: Object,
+        value: function() {
+          return {};
+        }
+      },
+      SpellClass: {
+        readonly: true,
+        type: Object,
+        value: function() {
+          return {
+            BlackMagic: 'blackmagic',
+            WhiteMagic: 'whitemagic'
+          }
+        }
+      }
+    },
+
+    ready: function() {
+      this._whiteMagicLevel1();
+      this._whiteMagicLevel2();
+      this._whiteMagicLevel3();
+      this._whiteMagicLevel4();
+      this._whiteMagicLevel5();
+      this._whiteMagicLevel6();
+      this._whiteMagicLevel7();
+      this._whiteMagicLevel8();
+
+      this._blackMagicLevel1();
+      this._blackMagicLevel2();
+      this._blackMagicLevel3();
+      this._blackMagicLevel4();
+      this._blackMagicLevel5();
+      this._blackMagicLevel6();
+      this._blackMagicLevel7();
+      this._blackMagicLevel8();
+
+      this.SpellsByName = this._objectify(this.Spells, 'name');
+      this._spellUi();
+    },
+
+    _spell: function(name, spellClass, level, data) {
+      this.Spells.push(Object.assign({}, {
+        name: name,
+        spellClass: spellClass,
+        level: level,
+        price: Prices[level - 1]
+      }, data));
+    },
+
+    _spellUi: function() {
+      // Black Magic - Level 1
+      this.SpellsByName.FIRE.ui = {effect:Effects.Flame, bgColor:"#FC7460", splash:"red",overlay:true};
+      this.SpellsByName.LIT.ui = {effect:Effects.Beam, bgColor:"#F0BC3C", splash:"gold", overlay:true};
+      this.SpellsByName.LOCK.ui = {effect:Effects.Star, bgColor:"#F0BC3C", splash:"gold",overlay:true, message:"Easy to hit"};
+      this.SpellsByName.SLEP.ui = {effect:Effects.Status, bgColor:"#58F898", splash:"sea green", overlay:true, message:"Asleep"};
+      // Black Magic - Level 2
+      this.SpellsByName.DARK.ui = {effect:Effects.Status, message:"Darkness", bgColor:"#4088FC", splash:"purple", overlay:true};
+      this.SpellsByName.ICE.ui = {effect:Effects.Flame, bgColor:"#3CBCFC", splash:"blue", overlay:true};
+      this.SpellsByName.SLOW.ui = {effect:Effects.Status, message:"Lost intelligence", bgColor:"#4CDC48", splash:"light green", overlay:true};
+      this.SpellsByName.TMPR.ui = {effect:Effects.Star, message:"Weapons stronger", bgColor:"#58F898"};
+      // Black Magic - Level 3
+      this.SpellsByName.FIR2.ui = {effect:Effects.Flame, bgColor:"#FC9838", splash:"orange", overlay:true};
+      this.SpellsByName.HOLD.ui = {effect:Effects.Status, message:"Attack halted", bgColor:"#FC9838", splash:"orange", overlay:true};
+      this.SpellsByName.LIT2.ui = {effect:Effects.Beam, bgColor:"#FC9838", splash:"orange", overlay:true};
+      this.SpellsByName.LOK2.ui = {effect:Effects.Star, message:"Easy to hit", bgColor:"#FC9838", splash:"orange", overlay:true};
+      // Black Magic - Level 4
+      this.SpellsByName.CONF.ui = {effect:Effects.Status, bgColor:"#FC7460", splash:"red", overlay:true, message:"Confused"};
+      this.SpellsByName.FAST.ui = {effect:Effects.Star, bgColor:"#4CDC48", message:"Quick shot"};
+      this.SpellsByName.ICE2.ui = {effect:Effects.Flame, bgColor:"#5C94FC", splash:"blue", overlay:true};
+      this.SpellsByName.SLP2.ui = {effect:Effects.Status, bgColor:"#3CBCFC", splash:"blue", overlay:true, message:"Asleep"};
+      // Black Magic - Level 5
+      this.SpellsByName.BANE.ui = {effect:Effects.Status, bgColor:"#FC94FC", splash:"blue", overlay:true, message:"Poison smoke"};
+      this.SpellsByName.FIR3.ui = {effect:Effects.Flame, bgColor:"#FC74B4", splash:"pink", overlay:true};
+      this.SpellsByName.SLO2.ui = {effect:Effects.Status, bgColor:"#80D010", splash:"green", overlay:true, message:"Lost intelligence"};
+      // Black Magic - Level 6
+      this.SpellsByName.LIT3.ui = {effect:Effects.Beam, bgColor:"#5C94FC", splash:"blue", overlay:true};
+      this.SpellsByName.QAKE.ui = {effect:Effects.Star, bgColor:"#FC7460", splash:"red", overlay:true, message:"Fell into crack"};
+      this.SpellsByName.RUB.ui = {effect:Effects.Death, bgColor:"#BCBCBC", splash:"grey", overlay:true, message:"Erased"};
+      this.SpellsByName.STUN.ui = {effect:Effects.Status, bgColor:"#F0BC3C", splash:"gold", overlay:true, message:"Paralyzed"};
+      // Black Magic - Level 7
+      this.SpellsByName.BLND.ui = {effect:Effects.Status, bgColor:"#F478FC", splash:"magenta", overlay:true, message:"Darkness"};
+      this.SpellsByName.BRAK.ui = {effect:Effects.Beam, bgColor:"#BCBCBC", splash:"grey", overlay:true, message:"Broken into pieces"};
+      this.SpellsByName.ICE3.ui = {effect:Effects.Flame, bgColor:"#58F898", splash:"sea green", overlay:true};
+      this.SpellsByName.SABR.ui = {effect:Effects.Protect, bgColor:"#BCBCBC", message:"Weapon became enchanted"};
+      // Black Magic - Level 8
+      this.SpellsByName.NUKE.ui = {effect:Effects.Flame, bgColor:"#F0BC3C", splash:"gold", overlay:true};
+      this.SpellsByName.STOP.ui = {effect:Effects.Status, bgColor:"#BCBCBC", splash:"grey", overlay:true, message:["Time stopped","Paralyzed"]};
+      this.SpellsByName.XXXX.ui = {effect:Effects.Death, bgColor:"#F0BC3C", splash:"gold", overlay:true, message:"Erased"};
+      this.SpellsByName.['ZAP!'].ui = {effect:Effects.Death, bgColor:"#58F898", splash:"sea green", overlay:true, message:"Exile to 4th dimension"};
+
+      // White Magic - Level 1
+      this.SpellsByName.CURE.ui = {effect: Effects.Heal, bgColor:"#80D010", message:"HP up!"};
+      this.SpellsByName.FOG.ui = {effect: Effects.Protect, bgColor:"#80D010", message:"Armor up"};
+      this.SpellsByName.HARM.ui = {effect: Effects.Beam, bgColor:"#0070EC", splash:"blue", overlay:true};
+      this.SpellsByName.RUSE.ui = {effect: Effects.Protect, bgColor:"#5C94FC", message:"Easy to dodge"};
+      // White Magic - Level 2
+      this.SpellsByName.ALIT.ui = {effect:Effects.Protect, bgColor:"#F0BC3C", message:"Defend Lightning"};
+      this.SpellsByName.INVS.ui = {effect:Effects.Protect, bgColor:"#4088FC", message:"Easy to dodge"};
+      this.SpellsByName.LAMP.ui = {effect:Effects.Poof, bgColor:"#FC9838", message:"Sight recovered"};
+      this.SpellsByName.MUTE.ui = {effect:Effects.Status, bgColor:"#00E8D8", message:"Silenced"};
+      // White Magic - Level 3
+      this.SpellsByName.AFIR.ui = {effect:Effects.Protect, bgColor:"#FC7460", message:"Defend Fire"};
+      this.SpellsByName.CUR2.ui = {effect:Effects.Heal, bgColor:"#58F898", message:"HP up!"};
+      this.SpellsByName.HEAL.ui = {effect:Effects.Heal, bgColor:"#F0BC3C", message:"HP up!"};
+      this.SpellsByName.HRM2.ui = {effect:Effects.Beam, bgColor:"#4088FC", splash:"purple", overlay:true};
+      // White Magic - Level 4
+      this.SpellsByName.AICE.ui = {effect:Effects.Protect, bgColor:"#3CBCFC", message:"Defend Cold"};
+      this.SpellsByName.AMUT.ui = {effect:Effects.Poof, bgColor:"#00E8D8", message:"Defend Mute"};
+      this.SpellsByName.FEAR.ui = {effect:Effects.Status, bgColor:"#FC74B4", splash:"pink", overlay:true, message:"Became terrified"};
+      this.SpellsByName.PURE.ui = {effect:Effects.Poof, bgColor:"#4CDC48", message:"Cured!"};
+      // White Magic - Level 5
+      this.SpellsByName.CUR3.ui = {effect:Effects.Heal, bgColor:"#00E8D8", message:"HP up!"};
+      this.SpellsByName.HEL2.ui = {effect:Effects.Heal, bgColor:"#FC9838", message:"HP up!"};
+      this.SpellsByName.HRM3.ui = {effect:Effects.Beam, bgColor:"#FC74B4", splash:"pink", overlay:true};
+      // White Magic - Level 6
+      this.SpellsByName.FOG2.ui = {effect:Effects.Protect, bgColor:"#4CDC48", message:"Armor up"};
+      this.SpellsByName.INV2.ui = {effect:Effects.Protect, bgColor:"#F478FC", message:"Easy to dodge"};
+      // White Magic - Level 7
+      this.SpellsByName.ARUB.ui = {effect:Effects.Protect, bgColor:"#FC74B4", message:"Defend Magic"};
+      this.SpellsByName.CUR4.ui = {effect:Effects.Heal, bgColor:"#3CBCFC", message:"HP max!"};
+      this.SpellsByName.HEL3.ui = {effect:Effects.Heal, bgColor:"#FC74B4", message:"HP up!"};
+      this.SpellsByName.HRM4.ui = {effect:Effects.Beam, bgColor:"#00E8D8", splash:"turquoise", overlay:true};
+      // White Magic - Level 8
+      this.SpellsByName.FADE.ui = {effect:Effects.Beam, bgColor:"#F478FC", splash:"magenta", overlay:true};
+      this.SpellsByName.WALL.ui = {effect:Effects.Protect, bgColor:"#BCBCBC", message:"Defend All"};
+      this.SpellsByName.XFER.ui = {effect:Effects.Star, bgColor:"#BCBCBC", splash:"grey", overlay:true, message:"Defenseless"};
+    },
+
+    _blackMagicLevel1: function() {
+      var spellClass = this.SpellClass.BlackMagic;
+      var level = 1;
+
+      this._spell('FIRE', spellClass, level, {
+        target: Targets.Single,
+        type: SpellTypes.Damage,
+        stats:{eff:10, acc:24, element: this.Element.Fire},
+        allowedClasses:[
+          CharacterClass.NINJA,
+          CharacterClass.RED_MAGE, CharacterClass.RED_WIZARD,
+          CharacterClass.BLACK_MAGE, CharacterClass.BLACK_WIZARD]});
+
+      this._spell('LIT', spellClass, level, {
+        target: Targets.Single,
+        type: SpellTypes.Damage,
+        stats:{eff:10, acc:24, element: this.Element.Lightning},
+        allowedClasses:[
+          CharacterClass.NINJA,
+          CharacterClass.RED_MAGE, CharacterClass.RED_WIZARD,
+          CharacterClass.BLACK_MAGE, CharacterClass.BLACK_WIZARD]});
+
+      this._spell('LOCK', spellClass, level, {
+        target: Targets.Single,
+        type: SpellTypes.StatDown,
+        stats:{eff:20, acc:64, statChanged:"spellEvasion"},
+        allowedClasses:[
+          CharacterClass.NINJA,
+          CharacterClass.RED_MAGE, CharacterClass.RED_WIZARD,
+          CharacterClass.BLACK_MAGE, CharacterClass.BLACK_WIZARD]});
+
+      this._spell('SLEP', spellClass, level, {
+        target: Targets.All,
+        type: SpellTypes.StatusAdd,
+        stats:{eff:0, acc:24, element: this.Element.Status, status: this.Status.Sleep},
+        allowedClasses:[
+          CharacterClass.NINJA,
+          CharacterClass.RED_MAGE, CharacterClass.RED_WIZARD,
+          CharacterClass.BLACK_MAGE, CharacterClass.BLACK_WIZARD]});
+    },
+
+    _blackMagicLevel2: function() {
+      var spellClass = this.SpellClass.BlackMagic;
+      var level = 2;
+
+      this._spell('DARK', spellClass, level, {
+        target: Target.All,
+        type: SpellTypes.StatusAdd,
+        stats:{eff:0, acc:24, element: this.Element.Status, status: this.Status.Blind},
+        allowedClasses:[
+          CharacterClass.NINJA,
+          CharacterClass.RED_MAGE, CharacterClass.RED_WIZARD,
+          CharacterClass.BLACK_MAGE, CharacterClass.BLACK_WIZARD]});
+
+      this._spell('ICE', spellClass, level, {
+        target: Target.Single,
+        type: SpellTypes.Damage,
+        stats:{eff:20, acc:24, element: this.Element.Ice},
+        allowedClasses:[
+          CharacterClass.NINJA,
+          CharacterClass.RED_MAGE, CharacterClass.RED_WIZARD,
+          CharacterClass.BLACK_MAGE, CharacterClass.BLACK_WIZARD]});
+
+      this._spell('SLOW', spellClass, level, {
+        target: Target.All,
+        type: SpellTypes.HitMultiplierDown,
+        stats:{eff:0, acc:64, element: this.Element.Status, hitMultiplierChange:-1},
+        allowedClasses:[
+          CharacterClass.NINJA,
+          CharacterClass.RED_MAGE, CharacterClass.RED_WIZARD,
+          CharacterClass.BLACK_MAGE, CharacterClass.BLACK_WIZARD]});
+
+      this._spell('TMPR', spellClass, level, {
+        target: Target.Single,
+        type: SpellTypes.StatUp,
+        stats:{eff:14, acc:0, statChanged:"spellAttack"},
+        allowedClasses:[
+          CharacterClass.NINJA,
+          CharacterClass.RED_MAGE, CharacterClass.RED_WIZARD,
+          CharacterClass.BLACK_MAGE, CharacterClass.BLACK_WIZARD]});
+    },
+
+    _blackMagicLevel3: function() {
+      var spellClass = this.SpellClass.BlackMagic;
+      var level = 3;
+
+      this._spell('FIR2', spellClass, level, {
+        target: Target.All,
+        type: SpellTypes.Damage,
+        stats:{eff:30, acc:24, element: this.Element.Fire},
+        allowedClasses:[
+          CharacterClass.NINJA,
+          CharacterClass.RED_MAGE, CharacterClass.RED_WIZARD,
+          CharacterClass.BLACK_MAGE, CharacterClass.BLACK_WIZARD]});
+
+      this._spell('HOLD', spellClass, level, {
+        target: Target.Single,
+        type: SpellTypes.StatusAdd,
+        stats:{eff:0, acc:64, element: this.Element.Status, status: this.Status.Paralysis},
+        allowedClasses:[
+          CharacterClass.NINJA,
+          CharacterClass.RED_MAGE, CharacterClass.RED_WIZARD,
+          CharacterClass.BLACK_MAGE, CharacterClass.BLACK_WIZARD]});
+
+      this._spell('LIT2', spellClass, level, {
+        target: Target.All,
+        type: SpellTypes.Damage,
+        stats:{eff:30, acc:24, element: this.Element.Lightning},
+        allowedClasses:[
+          CharacterClass.NINJA,
+          CharacterClass.RED_MAGE, CharacterClass.RED_WIZARD,
+          CharacterClass.BLACK_MAGE, CharacterClass.BLACK_WIZARD]});
+
+      this._spell('LOK2', spellClass, level, {
+        target: Target.All,
+        type: SpellTypes.StatDown,
+        stats:{eff:20, acc:40, statChanged:"spellEvasion"},
+        allowedClasses:[
+          CharacterClass.NINJA,
+          CharacterClass.RED_MAGE, CharacterClass.RED_WIZARD,
+          CharacterClass.BLACK_MAGE, CharacterClass.BLACK_WIZARD]});
+    },
+
+    _blackMagicLevel4: function() {
+      var spellClass = this.SpellClass.BlackMagic;
+      var level = 4;
+
+      this._spell('CONF', spellClass, level, {
+        target: Target.All,
+        type: SpellTypes.StatusAdd,
+        stats:{eff:0, acc:64, status: this.Status.Confuse},
+        allowedClasses:[
+          CharacterClass.NINJA,
+          CharacterClass.RED_MAGE, CharacterClass.RED_WIZARD,
+          CharacterClass.BLACK_MAGE, CharacterClass.BLACK_WIZARD]});
+
+      this._spell('FAST', spellClass, level, {
+        target: Target.Single,
+        type: SpellTypes.HitMultiplierUp,
+        stats:{eff:0, acc:0, hitMultiplierChange:1},
+        allowedClasses:[
+          CharacterClass.NINJA,
+          CharacterClass.RED_MAGE, CharacterClass.RED_WIZARD,
+          CharacterClass.BLACK_MAGE, CharacterClass.BLACK_WIZARD]});
+
+      this._spell('ICE2', spellClass, level, {
+        target: Target.All,
+        type: SpellTypes.Damage,
+        stats:{eff:40, acc:24, element: this.Element.Ice},
+        allowedClasses:[
+          CharacterClass.NINJA,
+          CharacterClass.RED_MAGE, CharacterClass.RED_WIZARD,
+          CharacterClass.BLACK_MAGE, CharacterClass.BLACK_WIZARD]});
+
+      this._spell('SLP2', spellClass, level, {
+        target: Target.Single,
+        type: SpellTypes.StatusAdd,
+        stats:{eff:0, acc:64, status: this.Status.Sleep},
+        allowedClasses:[
+          CharacterClass.NINJA,
+          CharacterClass.RED_MAGE, CharacterClass.RED_WIZARD,
+          CharacterClass.BLACK_MAGE, CharacterClass.BLACK_WIZARD]});
+    },
+
+    _blackMagicLevel5: function() {
+      var spellClass = this.SpellClass.BlackMagic;
+      var level = 5;
+
+      this._spell('BANE', spellClass, level, {
+        target: Target.All,
+        type: SpellTypes.StatusAdd,
+        stats:{eff:0, acc:40, element: this.Element.PoisonStone, status:Status.Dead},
+        allowedClasses:[
+          CharacterClass.RED_WIZARD,
+          CharacterClass.BLACK_MAGE, CharacterClass.BLACK_WIZARD]});
+
+      this._spell('FIR3', spellClass, level, {
+        target: Target.All,
+        type: SpellTypes.Damage,
+        stats:{eff:50, acc:24, element: this.Element.Fire},
+        allowedClasses:[
+          CharacterClass.RED_MAGE, CharacterClass.RED_WIZARD,
+          CharacterClass.BLACK_MAGE, CharacterClass.BLACK_WIZARD]});
+
+      this._spell('SLO2', spellClass, level, {
+        target: Target.Single,
+        type: SpellTypes.HitMultiplierDown,
+        stats:{eff:0, acc:64, hitMultiplierChange:-1},
+        allowedClasses:[
+          CharacterClass.RED_MAGE, CharacterClass.RED_WIZARD,
+          CharacterClass.BLACK_MAGE, CharacterClass.BLACK_WIZARD]});
+
+      this._spell('WARP', spellClass, level, {
+        target: Target.Single,
+        type: SpellTypes.Teleport,
+        stats:{eff:0, acc:0, inBattle:false},
+        allowedClasses:[
+          CharacterClass.RED_WIZARD, CharacterClass.BLACK_WIZARD]});
+    },
+
+    _blackMagicLevel6: function() {
+      var spellClass = this.SpellClass.BlackMagic;
+      var level = 6;
+
+      this._spell('LIT3', spellClass, level, {
+        target: Target.All,
+        type: SpellTypes.Damage,
+        stats:{eff:60, acc:24, element: this.Element.Lightning},
+        allowedClasses:[
+          CharacterClass.RED_WIZARD,
+          CharacterClass.BLACK_MAGE, CharacterClass.BLACK_WIZARD]});
+
+      this._spell('QAKE', spellClass, level, {
+        target: Target.All,
+        type: SpellTypes.StatusAdd,
+        stats:{eff:0, acc:24, element: this.Element.Earth, status:Status.Dead},
+        allowedClasses:[CharacterClass.BLACK_MAGE, CharacterClass.BLACK_WIZARD]});
+
+      this._spell('RUB', spellClass, level, {
+        target: Target.Single,
+        type: SpellTypes.StatusAdd,
+        stats:{eff:0, acc:24, element: this.Element.Death, status:Status.Dead},
+        allowedClasses:[CharacterClass.BLACK_MAGE, CharacterClass.BLACK_WIZARD]});
+
+      this._spell('STUN', spellClass, level, {
+        target: Target.Single,
+        type: SpellTypes.StatusAdd300Hp,
+        stats:{eff:0, acc:0, element: this.Element.Status, status:Status.Paralysis},
+        allowedClasses:[CharacterClass.BLACK_MAGE, CharacterClass.BLACK_WIZARD]});
+    },
+
+    _blackMagicLevel7: function() {
+      var spellClass = this.SpellClass.BlackMagic;
+      var level = 7;
+
+      this._spell('BLND', spellClass, level, {
+        target: Target.Single,
+        type: SpellTypes.StatusAdd300Hp,
+        stats:{eff:0, acc:0, element: this.Element.Status, status:Status.Blind},
+        allowedClasses:[CharacterClass.BLACK_MAGE, CharacterClass.BLACK_WIZARD]});
+
+      this._spell('BRAK', spellClass, level, {
+        target: Target.Single,
+        type: SpellTypes.StatusAdd,
+        stats:{eff:0, acc:64, element: this.Element.PoisonStone, status:Status.Stone},
+        allowedClasses:[CharacterClass.BLACK_WIZARD]});
+
+      this._spell('ICE3', spellClass, level, {
+        target: Target.All,
+        type: SpellTypes.Damage,
+        stats:{eff:70, acc:24, element: this.Element.Ice},
+        allowedClasses:[
+          CharacterClass.RED_WIZARD,
+          CharacterClass.BLACK_MAGE, CharacterClass.BLACK_WIZARD]});
+
+      this._spell('SABR', spellClass, level, {
+        target: Target.Self,
+        type: SpellTypes.StatUpMulti,
+        stats:{eff:16, acc:40, statChanged:{eff:"spellAttack", acc:"spellHit"}},
+        allowedClasses:[CharacterClass.BLACK_WIZARD]});
+    },
+
+    _blackMagicLevel8: function() {
+      var spellClass = this.SpellClass.BlackMagic;
+      var level = 8;
+
+      this._spell('NUKE', spellClass, level, {
+        target: Target.All,
+        type: SpellTypes.Damage,
+        stats:{eff:100, acc:107},
+        allowedClasses:[CharacterClass.BLACK_WIZARD]});
+
+      this._spell('STOP', spellClass, level, {
+        target: Target.All,
+        type: SpellTypes.StatusAdd,
+        stats:{eff:0, acc:48, element: this.Element.Time, status:Status.Paralysis},
+        allowedClasses:[CharacterClass.BLACK_WIZARD]});
+
+      this._spell('XXXX', spellClass, level, {
+        target: Target.Single,
+        type: SpellTypes.StatusAdd,
+        stats:{eff:0, acc:0, element: this.Element.Death, status:Status.Dead},
+        allowedClasses:[CharacterClass.BLACK_WIZARD]});
+
+      this._spell('ZAP!', spellClass, level, {
+        target: Target.All,
+        type: SpellTypes.StatusAdd,
+        stats:{eff:0, acc:32, element: this.Element.Time, status:Status.Dead},
+        allowedClasses:[CharacterClass.BLACK_WIZARD]});
+    },
+
+    _whiteMagicLevel1: function() {
+      var spellClass = this.SpellClass.WhiteMagic;
+      var level = 1;
+
+      this._spell('CURE', spellClass, level, {
+        target: Targets.Single,
+        type: SpellTypes.Healing,
+        stats: { eff: 16, acc: 0 },
+        allowedClasses: [
+          CharacterClass.KNIGHT,
+          CharacterClass.RED_MAGE, CharacterClass.RED_WIZARD,
+          CharacterClass.WHITE_MAGE, CharacterClass.WHITE_WIZARD]});
+
+      this._spell('FOG', spellClass, level, {
+        target: Targets.Single,
+        type: SpellTypes.StatUp,
+        stats: { eff: 8, acc: 0, statChanged: "spellDef" },
+        allowedClasses: [
+          CharacterClass.KNIGHT,
+          CharacterClass.RED_MAGE, CharacterClass.RED_WIZARD,
+          CharacterClass.WHITE_MAGE, CharacterClass.WHITE_WIZARD]});
+
+      this._spell('HARM', spellClass, level, {
+        target: Targets.All,
+        type: SpellTypes.Damage,
+        stats:{eff:20, acc:24},
+        affects:[MonsterConstants.Types.Undead]
+        allowedClasses:[
+          CharacterClass.WHITE_MAGE, CharacterClass.WHITE_WIZARD]});
+
+      this._spell('RUSE', spellClass, level, {
+        target: Targets.Self,
+        type: SpellTypes.StatUp,
+        stats:{eff:80, acc:0, statChanged:"spellEvasion"},
+        allowedClasses:[
+          CharacterClass.KNIGHT,
+          CharacterClass.RED_WIZARD,
+          CharacterClass.WHITE_MAGE, CharacterClass.WHITE_WIZARD]});
+    },
+
+    _whiteMagicLevel2: function() {
+      var spellClass = this.SpellClass.WhiteMagic;
+      var level = 2;
+
+      this._spell('ALIT', spellClass, level, {
+        target: Targets.All,
+        type: SpellTypes.ElementResist,
+        stats:{eff:0,acc:0, element: this.Element.Lightning},
+        allowedClasses:[
+          CharacterClass.KNIGHT,
+          CharacterClass.RED_MAGE, CharacterClass.RED_WIZARD,
+          CharacterClass.WHITE_MAGE, CharacterClass.WHITE_WIZARD]});
+
+      this._spell('INVS', spellClass, level, {
+        target: Targets.Single,
+        type: SpellTypes.StatUp,
+        stats:{eff:40, acc:0, statChanged:"spellEvasion"},
+        allowedClasses:[
+          CharacterClass.KNIGHT,
+          CharacterClass.RED_MAGE, CharacterClass.RED_WIZARD,
+          CharacterClass.WHITE_MAGE, CharacterClass.WHITE_WIZARD]});
+
+      this._spell('LAMP', spellClass, level, {
+        target: Targets.Single,
+        type: SpellTypes.StatusRemove,
+        stats:{eff:0, acc:0, element: this.Element.Status, status:Status.Blind},
+        allowedClasses:[
+          CharacterClass.KNIGHT,
+          CharacterClass.RED_MAGE, CharacterClass.RED_WIZARD,
+          CharacterClass.WHITE_MAGE, CharacterClass.WHITE_WIZARD]});
+
+      this._spell('MUTE', spellClass, level, {
+        target: Targets.All,
+        type: SpellTypes.StatusAdd,
+        stats:{eff:0, acc:64, status:Status.Mute},
+        allowedClasses:[
+          CharacterClass.KNIGHT,
+          CharacterClass.RED_MAGE, CharacterClass.RED_WIZARD,
+          CharacterClass.WHITE_MAGE, CharacterClass.WHITE_WIZARD]});
+    },
+
+    _whiteMagicLevel3: function() {
+      var spellClass = this.SpellClass.WhiteMagic;
+      var level = 3;
+
+      this._spell('AFIR', spellClass, level, {
+        target: Targets.All,
+        type: SpellTypes.ElementResist,
+        stats:{eff:0,acc:0, element: this.Element.Fire},
+        allowedClasses:[
+          CharacterClass.KNIGHT,
+          CharacterClass.RED_MAGE, CharacterClass.RED_WIZARD,
+          CharacterClass.WHITE_MAGE, CharacterClass.WHITE_WIZARD]});
+
+      this._spell('CUR2', spellClass, level, {
+        target: Targets.Single,
+        type: SpellTypes.Healing,
+        stats:{eff:33, acc:0},
+        allowedClasses:[
+          CharacterClass.KNIGHT,
+          CharacterClass.RED_MAGE, CharacterClass.RED_WIZARD,
+          CharacterClass.WHITE_MAGE, CharacterClass.WHITE_WIZARD]});
+
+      this._spell('HEAL', spellClass, level, {
+        target: Targets.All,
+        type: SpellTypes.Healing,
+        stats:{eff:12, acc:0},
+        allowedClasses:[CharacterClass.WHITE_MAGE, CharacterClass.WHITE_WIZARD]});
+
+      this._spell('HRM2', spellClass, level, {
+        target: Targets.All,
+        type: SpellTypes.Damage,
+        stats:{eff:40, acc:24},
+        affects:[MonsterConstants.Types.Undead],
+        allowedClasses:[CharacterClass.WHITE_MAGE, CharacterClass.WHITE_WIZARD]});
+    },
+
+    _whiteMagicLevel4: function() {
+      var spellClass = this.SpellClass.WhiteMagic;
+      var level = 4;
+
+      this._spell('AICE', spellClass, level, {
+        target: Targets.All,
+        type: SpellTypes.ElementResist,
+        stats:{eff:0,acc:0, element: this.Element.Ice}
+        allowedClasses:[
+          CharacterClass.RED_MAGE, CharacterClass.RED_WIZARD,
+          CharacterClass.WHITE_MAGE, CharacterClass.WHITE_WIZARD]});
+
+      this._spell('AMUT', spellClass, level, {
+        target: Targets.Single,
+        type: SpellTypes.StatusRemove,
+        stats:{eff:0, acc:0, status:Status.Mute},
+        allowedClasses:[
+          CharacterClass.RED_WIZARD,
+          CharacterClass.WHITE_MAGE, CharacterClass.WHITE_WIZARD]});
+
+      this._spell('FEAR', spellClass, level, {
+        target: Targets.All,
+        type: SpellTypes.MoraleDown,
+        stats:{eff:40, acc:24, element: this.Element.Status},
+        allowedClasses:[CharacterClass.WHITE_MAGE, CharacterClass.WHITE_WIZARD]});
+
+      this._spell('PURE', spellClass, level, {
+        target: Targets.Single,
+        type: SpellTypes.StatusRemove,
+        stats:{eff:0, acc:0, status:Status.Poison},
+        allowedClasses:[
+          CharacterClass.RED_MAGE, CharacterClass.RED_WIZARD,
+          CharacterClass.WHITE_MAGE, CharacterClass.WHITE_WIZARD]});
+    },
+
+    _whiteMagicLevel5: function() {
+      var spellClass = this.SpellClass.WhiteMagic;
+      var level = 5;
+
+      this._spell('CUR3', spellClass, level, {
+        target: Targets.Single,
+        type: SpellTypes.Healing,
+        stats:{eff:66, acc:0},
+        allowedClasses:[
+          CharacterClass.RED_MAGE, CharacterClass.RED_WIZARD,
+          CharacterClass.WHITE_MAGE, CharacterClass.WHITE_WIZARD]});
+
+      this._spell('HEL2', spellClass, level, {
+        target: Targets.All,
+        type: SpellTypes.Healing,
+        stats:{eff:24, acc:0},
+        allowedClasses:[CharacterClass.WHITE_MAGE, CharacterClass.WHITE_WIZARD]});
+
+      this._spell('HRM3', spellClass, level, {
+        target: Targets.All,
+        type: SpellTypes.Damage,
+        stats:{eff:60, acc:24},
+        affects:[MonsterConstants.Types.Undead],
+        allowedClasses:[CharacterClass.WHITE_MAGE, CharacterClass.WHITE_WIZARD]});
+
+      this._spell('LIFE', spellClass, level, {
+        target: Targets.Single,
+        type: SpellTypes.Resurrect,
+        stats:{eff:1, acc:0, inBattle:false}
+        allowedClasses:[
+          CharacterClass.RED_WIZARD,
+          CharacterClass.WHITE_MAGE, CharacterClass.WHITE_WIZARD]});
+    },
+
+    _whiteMagicLevel6: function() {
+      var spellClass = this.SpellClass.WhiteMagic;
+      var level = 6;
+
+      this._spell('EXIT', spellClass, level, {
+        target: Targets.Single,
+        type: SpellTypes.Teleport,
+        stats:{eff:0, acc:0, inBattle:false},
+        allowedClasses:[
+          CharacterClass.RED_WIZARD,
+          CharacterClass.WHITE_WIZARD]});
+
+      this._spell('FOG2', spellClass, level, {
+        target: Targets.All,
+        type: SpellTypes.StatUp,
+        stats:{eff:12, acc:0, statChanged:"spellDef"},
+        allowedClasses:[
+          CharacterClass.RED_WIZARD,
+          CharacterClass.WHITE_MAGE, CharacterClass.WHITE_WIZARD]});
+
+      this._spell('INV2', spellClass, level, {
+        target: Targets.All,
+        type: SpellTypes.StatUp,
+        stats:{eff:40, acc:0, statChanged:"spellEvasion"},
+        allowedClasses:[
+          CharacterClass.RED_WIZARD,
+          CharacterClass.WHITE_MAGE, CharacterClass.WHITE_WIZARD]});
+
+      this._spell('SOFT', spellClass, level, {
+        target: Targets.Single,
+        type: SpellTypes.StatusRemove,
+        stats:{eff:0, acc:0, element: this.Element.Status, status: this.Status.Stone, inBattle:false},
+        allowedClasses:[CharacterClass.WHITE_MAGE, CharacterClass.WHITE_WIZARD]});
+    },
+
+    _whiteMagicLevel7: function() {
+      var spellClass = this.SpellClass.WhiteMagic;
+      var level = 7;
+
+      this._spell('ARUB', spellClass, level, {
+        target: Targets.All,
+        type: SpellTypes.ElementResist,
+        stats:{eff:0, acc:0, element:[ this.Element.Earth,  this.Element.Status,  this.Element.Death]},
+        allowedClasses:[
+          CharacterClass.RED_WIZARD,
+          CharacterClass.WHITE_MAGE, CharacterClass.WHITE_WIZARD]});
+
+      this._spell('CUR4', spellClass, level, {
+        target: Targets.Single,
+        type: SpellTypes.HealingFull,
+        stats:{eff:0, acc:0},
+        allowedClasses:[CharacterClass.WHITE_WIZARD]});
+
+      this._spell('HEL3', spellClass, level, {
+        target: Targets.All,
+        type: SpellTypes.Healing,
+        stats:{eff:48, acc:0},
+        allowedClasses:[CharacterClass.WHITE_MAGE, CharacterClass.WHITE_WIZARD]});
+
+      this._spell('HRM4', spellClass, level, {
+        target: Targets.All,
+        type: SpellTypes.Damage,
+        stats:{eff:80, acc:48},
+        affects:[MonsterConstants.Types.Undead],
+        allowedClasses:[CharacterClass.WHITE_MAGE, CharacterClass.WHITE_WIZARD]});
+    },
+
+    _whiteMagicLevel8: function() {
+      var spellClass = this.SpellClass.WhiteMagic;
+      var level = 8;
+
+      this._spell('FADE', spellClass, level, {
+        target: Targets.All,
+        type: SpellTypes.Damage,
+        stats:{eff:80, acc:107}
+        allowedClasses:[CharacterClass.WHITE_WIZARD]});
+
+      this._spell('LIF2', spellClass, level, {
+        target: Targets.Single,
+        type: SpellTypes.Resurrect,
+        stats:{eff:999, acc:0, inBattle:false},
+        allowedClasses:[CharacterClass.WHITE_WIZARD]});
+
+      this._spell('WALL', spellClass, level, {
+        target: Targets.Single,
+        type: SpellTypes.ElementResist,
+        stats:{eff:0, acc:0, element: this.AllElements},
+        allowedClasses:[CharacterClass.WHITE_WIZARD]});
+
+      this._spell('XFER', spellClass, level, {
+        target: Targets.Single,
+        type: SpellTypes.ElementWeakness,
+        stats:{eff:0, acc:107, element: this.AllElements},
+        allowedClasses:[CharacterClass.WHITE_WIZARD]});
+    }
+  }
+
+  scope.FF.SpellBehavior = [
+    scope.FF.UtilBehavior,
+    scope.FF.CharClassBehavior,
+    scope.FF.ElementBehavior,
+    scope.FF.StatusBehavior,
+    scope.FF.SpellBehaviorImpl
+  ];
+
+});
+</script>
