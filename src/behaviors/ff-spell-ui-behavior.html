@@ -1,0 +1,367 @@
+<link rel='import' href='ff-spell-behavior.html'>
+
+<script>
+(function(scope) {
+  scope.FF = scope.FF || {};
+
+  var Effects = {
+    Beam : 'beam',
+    Death : 'death',
+    Flame : 'flame',
+    Heal : 'healing',
+    Poof : 'poof',
+    Protect : 'protect',
+    Star : 'star',
+    Status : 'status'
+  };
+
+  scope.FF.SpellUiBehavior = {
+
+    properties: {
+      BySpell: {
+        type: Object,
+        function() {
+          return {};
+        }
+      }
+    },
+
+    ready: function() {
+      this._blackMagicUi();
+      this._whiteMagicUi();
+    },
+
+    _ui: function(spellId, effect, data) {
+      this.BySpell[spellId] = Object.assign({}, {  effect }, data);
+    },
+
+    _blackMagicUi: function() {
+      // Black Magic - Level 1
+      this._ui('FIRE', Effects.Flame, {
+        bgColor: '#FC7460',
+        splash: 'red',
+        overlay: true
+      });
+      this._ui('LIT', Effects.Beam, {
+        bgColor: '#F0BC3C',
+        splash: 'gold',
+        overlay: true
+      });
+      this._ui('LOCK', Effects.Star, {
+        bgColor: '#F0BC3C',
+        splash: 'gold',
+        overlay: true,
+        message: 'Easy to hit'
+      });
+      this._ui('SLEP', Effects.Status, {
+        bgColor: '#58F898',
+        splash: 'sea green',
+        overlay: true,
+        message: 'Asleep'
+      });
+
+      // Black Magic - Level 2
+      this._ui('DARK', Effects.Status, {
+        bgColor: '#4088FC',
+        splash: 'purple',
+        overlay: true,
+        message: 'Darkness'
+      });
+      this._ui('ICE', Effects.Flame, {
+        bgColor: '#3CBCFC',
+        splash: 'blue',
+        overlay: true
+      });
+      this._ui('SLOW', Effects.Status, {
+        bgColor: '#4CDC48',
+        splash: 'light green',
+        overlay: true,
+        message: 'Lost intelligence'
+      });
+      this._ui('TMPR', Effects.Star, {
+        bgColor: '#58F898',
+        message: 'Weapons stronger'
+      });
+
+      // Black Magic - Level 3
+      this._ui('FIR2', Effects.Flame, {
+        bgColor: '#FC9838',
+        splash: 'orange',
+        overlay: true
+      });
+      this._ui('HOLD', Effects.Status, {
+        bgColor: '#FC9838',
+        splash: 'orange',
+        overlay: true,
+        message: 'Attack halted'
+      });
+      this._ui('LIT2', Effects.Beam, {
+        bgColor: '#FC9838',
+        splash: 'orange',
+        overlay: true
+      });
+      this._ui('LOK2', Effects.Star, {
+        bgColor: '#FC9838',
+        splash: 'orange',
+        overlay: true,
+        message: 'Easy to hit'
+      });
+
+      // Black Magic - Level 4
+      this._ui('CONF', Effects.Status, {
+        bgColor: '#FC7460',
+        splash: 'red',
+        overlay: true,
+        message: 'Confused'
+      });
+      this._ui('FAST', Effects.Star, {
+        bgColor: '#4CDC48',
+        message: 'Quick shot'
+      });
+      this._ui('ICE2', Effects.Flame, {
+        bgColor: '#5C94FC',
+        splash: 'blue',
+        overlay: true
+      });
+      this._ui('SLP2', Effects.Status, {
+        bgColor: '#3CBCFC',
+        splash: 'blue',
+        overlay: true,
+        message: 'Asleep'
+      });
+
+      // Black Magic - Level 5
+      this._ui('BANE', Effects.Status, {
+        bgColor: '#FC94FC',
+        splash: 'blue',
+        overlay: true,
+        message: 'Poison smoke'
+      });
+      this._ui('FIR3', Effects.Flame, {
+        bgColor: '#FC74B4',
+        splash: 'pink',
+        overlay: true
+      });
+      this._ui('SLO2', Effects.Status, {
+        bgColor: '#80D010',
+        splash: 'green',
+        overlay: true,
+        message: 'Lost intelligence'
+      });
+
+      // Black Magic - Level 6
+      this._ui('LIT3', Effects.Beam, {
+        bgColor: '#5C94FC',
+        splash: 'blue',
+        overlay: true
+      });
+      this._ui('QAKE', Effects.Star, {
+        bgColor: '#FC7460',
+        splash: 'red',
+        overlay: true,
+        message: 'Fell into crack'
+      });
+      this._ui('RUB', Effects.Death, {
+        bgColor: '#BCBCBC',
+        splash: 'grey',
+        overlay: true,
+        message: 'Erased'
+      });
+      this._ui('STUN', Effects.Status, {
+        bgColor: '#F0BC3C',
+        splash: 'gold',
+        overlay: true,
+        message: 'Paralyzed'
+      });
+
+      // Black Magic - Level 7
+      this._ui('BLND', Effects.Status, {
+        bgColor: '#F478FC',
+        splash: 'magenta',
+        overlay: true,
+        message: 'Darkness'
+      });
+      this._ui('BRAK', Effects.Beam, {
+        bgColor: '#BCBCBC',
+        splash: 'grey',
+        overlay: true,
+        message: 'Broken into pieces'
+      });
+      this._ui('ICE3', Effects.Flame, {
+        bgColor: '#58F898',
+        splash: 'sea green',
+        overlay: true
+      });
+      this._ui('SABR', Effects.Protect, {
+        bgColor: '#BCBCBC',
+        message: 'Weapon became enchanted'
+      });
+
+      // Black Magic - Level 8
+      this._ui('NUKE', Effects.Flame, {
+        bgColor: '#F0BC3C',
+        splash: 'gold',
+        overlay: true
+      });
+      this._ui('STOP', Effects.Status, {
+        bgColor: '#BCBCBC',
+        splash: 'grey',
+        overlay: true,
+        message:['Time stopped','Paralyzed']
+      });
+      this._ui('XXXX', Effects.Death, {
+        bgColor: '#F0BC3C',
+        splash: 'gold',
+        overlay: true,
+        message: 'Erased'
+      });
+      this._ui('ZAP!', Effects.Death, {
+        bgColor: '#58F898',
+        splash: 'sea green',
+        overlay: true,
+        message: 'Exile to 4th dimension'
+      });
+    },
+
+    _whiteMagicUi: function() {
+      // White Magic - Level 1
+      this._ui('CURE',  Effects.Heal, {
+        bgColor: '#80D010',
+        message: 'HP up!'
+      });
+      this._ui('FOG', Effects.Protect, {
+        bgColor: '#80D010',
+        message: 'Armor up'
+      });
+      this._ui('HARM', Effects.Beam, {
+        bgColor: '#0070EC',
+        splash: 'blue',
+        overlay: true
+      });
+      this._ui('RUSE', Effects.Protect, {
+        bgColor: '#5C94FC',
+        message: 'Easy to dodge'
+      });
+
+      // White Magic - Level 2
+      this._ui('ALIT', Effects.Protect, {
+        bgColor: '#F0BC3C',
+        message: 'Defend Lightning'
+      });
+      this._ui('INVS', Effects.Protect, {
+        bgColor: '#4088FC',
+        message: 'Easy to dodge'
+      });
+      this._ui('LAMP', Effects.Poof, {
+        bgColor: '#FC9838',
+        message: 'Sight recovered'
+      });
+      this._ui('MUTE', Effects.Status, {
+        bgColor: '#00E8D8',
+        message: 'Silenced'
+      });
+
+      // White Magic - Level 3
+      this._ui('AFIR', Effects.Protect, {
+        bgColor: '#FC7460',
+        message: 'Defend Fire'
+      });
+      this._ui('CUR2', Effects.Heal, {
+        bgColor: '#58F898',
+        message: 'HP up!'
+      });
+      this._ui('HEAL', Effects.Heal, {
+        bgColor: '#F0BC3C',
+        message: 'HP up!'
+      });
+      this._ui('HRM2', Effects.Beam, {
+        bgColor: '#4088FC',
+        splash: 'purple',
+        overlay: true
+      });
+
+      // White Magic - Level 4
+      this._ui('AICE', Effects.Protect, {
+        bgColor: '#3CBCFC',
+        message: 'Defend Cold'
+      });
+      this._ui('AMUT', Effects.Poof, {
+        bgColor: '#00E8D8',
+        message: 'Defend Mute'
+      });
+      this._ui('FEAR', Effects.Status, {
+        bgColor: '#FC74B4',
+        splash: 'pink',
+        overlay: true,
+        message: 'Became terrified'
+      });
+      this._ui('PURE', Effects.Poof, {
+        bgColor: '#4CDC48',
+        message: 'Cured!'
+      });
+
+      // White Magic - Level 5
+      this._ui('CUR3', Effects.Heal, {
+        bgColor: '#00E8D8',
+        message: 'HP up!'
+      });
+      this._ui('HEL2', Effects.Heal, {
+        bgColor: '#FC9838',
+        message: 'HP up!'
+      });
+      this._ui('HRM3', Effects.Beam, {
+        bgColor: '#FC74B4',
+        splash: 'pink',
+        overlay: true
+      });
+
+      // White Magic - Level 6
+      this._ui('FOG2', Effects.Protect, {
+        bgColor: '#4CDC48',
+        message: 'Armor up'
+      });
+      this._ui('INV2', Effects.Protect, {
+        bgColor: '#F478FC',
+        message: 'Easy to dodge'
+      });
+
+      // White Magic - Level 7
+      this._ui('ARUB', Effects.Protect, {
+        bgColor: '#FC74B4',
+        message: 'Defend Magic'
+      });
+      this._ui('CUR4', Effects.Heal, {
+        bgColor: '#3CBCFC',
+        message: 'HP max!'
+      });
+      this._ui('HEL3', Effects.Heal, {
+        bgColor: '#FC74B4',
+        message: 'HP up!'
+      });
+      this._ui('HRM4', Effects.Beam, {
+        bgColor: '#00E8D8',
+        splash: 'turquoise',
+        overlay: true
+      });
+
+      // White Magic - Level 8
+      this._ui('FADE', Effects.Beam, {
+        bgColor: '#F478FC',
+        splash: 'magenta',
+        overlay: true
+      });
+      this._ui('WALL', Effects.Protect, {
+        bgColor: '#BCBCBC',
+        message: 'Defend All'
+      });
+      this._ui('XFER', Effects.Star, {
+        bgColor: '#BCBCBC',
+        splash: 'grey',
+        overlay: true,
+        message: 'Defenseless'
+      });
+    }
+  };
+
+});
+</script>
