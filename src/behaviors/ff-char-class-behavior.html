@@ -10,19 +10,19 @@
         type: Object,
         value: function() {
           return {
-            Fighter: 'fighter',
-            Thief: 'thief',
-            Blackbelt: 'blackbelt',
-            RedMage: 'redmage',
-            WhiteMage: 'whitemage',
-            BlackMage: 'blackmage',
+            Fighter: 'Fi',
+            Thief: 'Th',
+            Blackbelt: 'BB',
+            RedMage: 'RM',
+            WhiteMage: 'WM',
+            BlackMage: 'BM',
 
-            Knight: 'knight',
-            Ninja: 'ninja',
-            Master: 'master',
-            RedWizard: 'redwizard',
-            WhiteWizard: 'whitewizard',
-            BlackWizard: 'blackwizard'
+            Knight: 'Kn',
+            Ninja: 'Ni',
+            Master: 'Ma',
+            RedWizard: 'RW',
+            WhiteWizard: 'WW',
+            BlackWizard: 'BW'
           };
         }
       },
@@ -38,6 +38,10 @@
         type: Array,
         value: []
       }
+    },
+
+    containsCharClass: function(charClasses, charClass) {
+      return charClasses.indexOf(charClass) > -1;
     },
 
     ready: function() {
