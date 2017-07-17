@@ -118,25 +118,29 @@
               armor: [
                 this.ArmorByName['Iron[G]'],
                 this.ArmorByName['Silver[H]']
-              ]
+              ],
+              spells: []
             }, {
-              charClass: this.CharClass.Thief,
+              charClass: this.CharClass.RedMage,
               name: 'MMMM',
               weapons: [],
-              armor: []
+              armor: [],
+              spells: []
             }, {
-              charClass: this.CharClass.Blackbelt,
+              charClass: this.CharClass.WhiteMage,
               name: 'JJJJ',
               weapons: [],
-              armor: []
+              armor: [],
+              spells: []
             }, {
               charClass: this.CharClass.BlackMage,
               name: 'QQQQ',
               weapons: [],
-              armor: []
+              armor: [],
+              spells: ['FIRE', 'LIT']
             }]);
             this.$.maps.mapId = 'towns/coneria';
-            this.$.shopSelector.selected = 'weapon';
+            this.$.shopSelector.selected = 'blackmagic';
             this.$.shopScreen.gold = 1234;
           },
 

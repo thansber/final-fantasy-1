@@ -7,6 +7,7 @@
 
     behaviors: [
       scope.FF.ScreenBehavior,
+      scope.FF.CharClassBehavior,
       scope.FF.ShopBehavior
     ],
 
@@ -71,8 +72,15 @@
       return this.$.decision.$.keyHandler;
     },
 
+    _alreadyKnowsSpell: function() {
+      return this.party[this.transaction.forChar].spells.indexOf(this.transaction.item.name) > -1;
+    },
+
     _buildState: function(stateId) {
       var shopState = this.shopData.states[stateId];
+      if (!shopState) {
+        throw 'No state found for shop [' + this.shop + '], state [' + stateId + ']';
+      }
       if (shopState.copyFrom) {
         shopState = Object.assign({}, this.shopData.states[shopState.copyFrom], shopState);
       }
@@ -81,6 +89,12 @@
 
     _canAfford: function() {
       return this.gold > +this.transaction.item.price;
+    },
+
+    _canLearnSpell: function() {
+      var allowedClasses = this.transaction.item.allowedClasses;
+      var charClass = this.party[this.transaction.forChar].charClass;
+      return this.containsCharClass(allowedClasses, charClass);
     },
 
     _charClassFor: function(change, index) {
@@ -125,6 +139,7 @@
       if (this.transaction.selling) {
         return true;
       }
+
       if (!this._canAfford()) {
         this.set('_state', 'notEnoughMoney');
         return false;
@@ -135,6 +150,13 @@
       }
 
       return true;
+    },
+
+    _itemLevel: function(item) {
+      if (!item.level) {
+        return '';
+      }
+      return 'L' + item.level;
     },
 
     _loadCharInventory: function() {
@@ -175,6 +197,15 @@
         } else {
           this.set('_state', state.to);
         }
+      } else if (state.spellCheck) {
+        this._setTransactionItem(this._shopInventory);
+        if (!this._canLearnSpell()) {
+          this.set('_state', 'cannotLearnSpell');
+        } else if (this._alreadyKnowsSpell()) {
+          this.set('_state', 'alreadyKnowsSpell');
+        } else {
+          this.set('_state', state.to);
+        }
       } else {
         this._updateState(state, detail.value);
       }
@@ -194,6 +225,10 @@
       });
     },
 
+    _setTransactionItem: function(inventory) {
+      this.transaction.item = inventory[this.$.inventorySelector.selected];
+    },
+
     _setupChoices: function(shopState) {
       if (shopState.charNameChoices) {
         this.set('_choices', this._partyNames());
@@ -204,8 +239,7 @@
       this.set('_noChoices', !this._choices.length);
     },
 
-    _setupPriceConfirmation: function(inventory, price) {
-      this.transaction.item = inventory[this.$.inventorySelector.selected];
+    _setupPriceConfirmation: function(price) {
       this.set('_conversation', [this._padPrice(price), '', 'Gold', '', 'OK?']);
       this._switchKeyHandler(this.$.decision);
     },
@@ -260,7 +294,8 @@
       }
 
       if (shopState.askForPrice) {
-        this._setupPriceConfirmation(this._shopInventory, this._getPrice());
+        this._setTransactionItem(this._shopInventory);
+        this._setupPriceConfirmation(this._getPrice());
       } else {
         this.set('_conversation', shopState.conversation);
       }

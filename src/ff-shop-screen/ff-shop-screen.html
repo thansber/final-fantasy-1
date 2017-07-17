@@ -1,4 +1,5 @@
 <link rel="import" href="../behaviors/ff-screen-behavior.html">
+<link rel="import" href="../behaviors/ff-char-class-behavior.html">
 <link rel="import" href="../behaviors/ff-shop-behavior.html">
 <link rel="import" href="../ff-bordered/ff-bordered.html">
 <link rel="import" href="../ff-bordered-text/ff-bordered-text.html">
@@ -51,7 +52,10 @@
               icon="[[ item.type ]]"
               no-icon="[[ item.textOnly ]]"
               price$="[[ item.price ]]"></ff-item>
-            <div class="price">[[ item.price ]]</div>
+            <div class="priceRow">
+              <div class="level">[[ _itemLevel(item) ]]</div>
+              <div class="price">[[ item.price ]]</div>
+            </div>
           </template>
         </ff-selector>
       </ff-bordered>
