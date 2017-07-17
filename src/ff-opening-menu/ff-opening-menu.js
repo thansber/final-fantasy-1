@@ -6,7 +6,7 @@
     is: 'ff-opening-menu',
 
     behaviors: [
-      FF.ScreenBehavior
+      scope.FF.ScreenBehavior
     ],
 
     properties: {
@@ -28,19 +28,19 @@
     _loadSavedGame: function() {
       console.log('TODO: load from actual saved game');
       return [{
-        charClass: 'whitemage',
+        charClass: 'WM',
         name: 'AAAA',
         weapons: [], armor: [], spells: []
       }, {
-        charClass: 'thief',
+        charClass: 'Th',
         name: 'BBBB',
         weapons: [], armor: [], spells: []
       }, {
-        charClass: 'blackbelt',
+        charClass: 'BB',
         name: 'CCCC',
         weapons: [], armor: [], spells: []
       }, {
-        charClass: 'redmage',
+        charClass: 'RM',
         name: 'DDDD',
         weapons: [], armor: [], spells: []
       }];
