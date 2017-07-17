@@ -1,0 +1,70 @@
+<link rel="import" href="ff-util-behavior.html">
+<link rel="import" href="ff-spell-behavior.html">
+
+<script>
+(function(scope) {
+  scope.FF = scope.FF || {};
+
+  scope.FF.ItemBehaviorImpl = {
+    properties: {
+      ItemsByName: {
+        readonly: true,
+        type: Object,
+        value: function() {
+          return {};
+        }
+      }
+    }
+  };
+
+  ready: function() {
+    this._itemCreate('HealPotion', {
+      type: 'potion',
+      desc: 'HEAL',
+      price: 60,
+      spellId: this.SpellsByName.CURE,
+      spellIdOutsideBattle: this.SpellsByName.HEAL_POTION
+    });
+    this._itemCreate('PurePotion', {
+      type: 'potion',
+      desc: 'PURE',
+      price: 75,
+      spellId: this.SpellsByName.PURE
+    });
+    this._itemCreate('SoftPotion', {
+      type: 'potion',
+      desc: 'SOFT',
+      price: 300,
+      spellId: this.SpellsByName.SOFT
+    });
+
+    this._itemCreate('Tent', {
+      desc: 'TENT ',
+      price: 75,
+      spellId: this.SpellsByName.TENT
+    });
+    this._itemCreate('Cabin', {
+      desc: 'CABIN',
+      price: 300,
+      spellId: this.SpellsByName.CABIN
+    });
+    this._itemCreate('House', {
+      desc: 'HOUSE',
+      price: 3000,
+      spellId: this.SpellsByName.HOUSE
+    });
+  },
+
+  _itemCreate: function(name, data) {
+    this.ItemsByName[name] = Object.assign({}, {
+      name: name,
+      type: type
+    }, data);
+  }
+
+  scope.FF.ItemBehavior = [
+    scope.FF.UtilBehavior,
+    scope.FF.SpellBehavior,
+    scope.FF.ItemBehaviorImpl
+  ];
+}(window));

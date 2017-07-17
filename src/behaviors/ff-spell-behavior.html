@@ -89,7 +89,15 @@
       this._blackMagicLevel7();
       this._blackMagicLevel8();
 
+      this._itemMagic();
+
       this.SpellsByName = this._objectify(this.Spells, 'name');
+    },
+
+    spellsForLevel: function(spells, level) {
+      return spells.filter(function(spellId) {
+        return this.SpellsByName(spellId).level === level;
+      }, this);
     },
 
     _spell: function(name, spellClass, level, data) {
@@ -98,7 +106,7 @@
         desc: name,
         spellClass: spellClass,
         level: level,
-        price: Prices[level - 1],
+        price: level < 0 ? -1 : Prices[level - 1],
         textOnly: true
       }, data));
     },
@@ -392,6 +400,39 @@
         type: SpellTypes.StatusAdd,
         stats:{eff:0, acc:32, element: this.Element.Time, status: this.Status.Dead},
         allowedClasses:[this.CharClass.BlackWizard]});
+    },
+
+    _itemMagic: function() {
+      var level = -1;
+
+      this._spell('HEAL_POTION', null, level, {
+        target: Targets.Single,
+        type: SpellTypes.HealingSetAmount,
+        stats: { eff: 30 },
+        allowedClasses: this.AllCharClasses
+      });
+
+      this._spell('TENT', null, level, {
+        target: Targets.All,
+        type: SpellTypes.HealingSetAmount,
+        stats: { eff: 30 },
+        allowedClasses: this.AllCharClasses
+      });
+
+      this._spell('CABIN', null, level, {
+        target: Targets.All,
+        type: SpellTypes.HealingSetAmount,
+        stats: { eff: 60 },
+        allowedClasses: this.AllCharClasses
+      });
+
+      this._spell('HOUSE', null, level, {
+        target: Targets.All,
+        type: SpellTypes.HealingSetAmountRefillSpells,
+        stats: { eff: 120 },
+        allowedClasses: this.AllCharClasses
+      });
+
     },
 
     _whiteMagicLevel1: function() {
