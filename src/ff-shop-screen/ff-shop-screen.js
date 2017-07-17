@@ -88,7 +88,7 @@
     },
 
     _canAfford: function() {
-      return this.gold > +this.transaction.item.price;
+      return this.gold >= +this.transaction.item.price;
     },
 
     _canLearnSpell: function() {
