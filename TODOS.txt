@@ -4,9 +4,6 @@ BUGS
 WORK
 ====
 - shops
-  - selling flow
-  - magic shop flow
-  - checks for full inventory
   - equipment data (consumables)
   - shop equipment for each town
   - handle town with multiple magic shops
