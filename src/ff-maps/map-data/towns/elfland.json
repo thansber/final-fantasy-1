@@ -51,7 +51,7 @@
     "inn": [ 100 ],
     "clinic": [ 200 ],
     "weapon": ["Iron[N]", "Large[K]", "Iron[S]", "Sabre", "Silver[S]"],
-    "armor": ["Iron[A]", "Copper[B]", "Iron[S]", "Gloves", "Cap", "Wooden[H]"],
+    "armor": ["Iron[A]", "Copper[B]", "Iron[S]", "Cap", "Wooden[H]"],
     "item": ["HealPotion", "PurePotion", "Cabin", "House", "SoftPotion"],
     "blackmagic": ["FIR2", "HOLD", "LIT2", "LOK2"],
     "whitemagic": ["CUR2", "HRM2", "AFIR", "HEAL"],
