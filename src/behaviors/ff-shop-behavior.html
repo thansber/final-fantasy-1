@@ -33,6 +33,7 @@
       this._armorShopSetup();
       this._blackMagicShopSetup();
       this._whiteMagicShopSetup();
+      this._itemShopSetup();
     },
 
     _armorShopSetup: function() {
@@ -84,6 +85,57 @@
             conversation: ['Hold', 'RESET', 'while', 'you', 'turn', 'POWER', 'off!!'],
             fire: { event: 'ff-resting', detail: { resting: false } },
             to: 'exit'
+          }
+        }
+      });
+    },
+
+    _itemShopSetup: function() {
+      this._shopSetup({
+        id: this.Shop.Item,
+        sign: 'ITEM',
+        states: {
+          start: {
+            back: 'exit',
+            conversation: ['Welcome'],
+            choices: [
+              { label: 'Buy', to: 'buyingStart' },
+              { label: 'Exit', to: 'exit' }
+            ],
+            partyInventory: true,
+            reset: true
+          },
+          buyingStart: {
+            back: 'start',
+            conversation: ['What do', 'you', 'want?'],
+            inventoryActive: true,
+            showInventory: true,
+            to: 'buyingConfirmPrice'
+          },
+          buyingConfirmPrice: {
+            askForPrice: true,
+            back: 'regretStart',
+            choices: [
+              { label: 'Yes', to: 'thanks' },
+              { label: 'No', to: 'regretStart' }
+            ],
+            finishTransaction: true,
+            showInventory: true
+          },
+          notEnoughMoney: {
+            conversation: ['You', 'can\'t', 'afford', 'that.'],
+            copyFrom: 'start',
+            showInventory: true
+          },
+          regretStart: {
+            conversation: ['Too bad', '::', 'Some-', 'thing', 'else?'],
+            copyFrom: 'start',
+            showInventory: true
+          },
+          thanks: {
+            conversation: ['Thank', 'you!', 'What', 'else?'],
+            copyFrom: 'start',
+            showInventory: true
           }
         }
       });

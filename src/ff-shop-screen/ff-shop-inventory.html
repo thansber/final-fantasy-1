@@ -1,4 +1,5 @@
 <link rel="import" href="../behaviors/ff-armor-behavior.html">
+<link rel="import" href="../behaviors/ff-item-behavior.html">
 <link rel="import" href="../behaviors/ff-spell-behavior.html">
 <link rel="import" href="../behaviors/ff-weapon-behavior.html">
 
@@ -12,6 +13,7 @@
       is: 'ff-shop-inventory',
       behaviors: [
         scope.FF.ArmorBehavior,
+        scope.FF.ItemBehavior,
         scope.FF.SpellBehavior,
         scope.FF.WeaponBehavior
       ],
@@ -38,6 +40,7 @@
         this.inventoryByShop = {
           armor: this.ArmorByName,
           blackmagic: this.SpellsByName,
+          item: this.ItemsByName,
           weapon: this.WeaponsByName,
           whitemagic: this.SpellsByName
         };

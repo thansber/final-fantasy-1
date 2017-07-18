@@ -26,11 +26,6 @@
         type: Object,
         value: {}
       },
-      inventory: {
-        notify: true,
-        type: Array,
-        value: function() { return []; }
-      },
       party: {
         notify: true,
         type: Array
@@ -38,6 +33,11 @@
       shop: {
         notify: true,
         type: String
+      },
+      shopInventory: {
+        notify: true,
+        type: Array,
+        value: function() { return []; }
       },
       startGamePosition: {
         readonly: true,
@@ -60,6 +60,7 @@
         airshipPosition: {},
         gold: 100,
         mapPosition: undefined,
+        partyInventory: [],
         shipPosition: {},
         transports: [this.Vehicles.Foot.id],
         vehicle: this.Vehicles.Foot.id,
@@ -73,11 +74,11 @@
         this._emptyChar()
       ]);
 
-      this._partyInventoryMapping = {};
-      this._partyInventoryMapping[this.Shop.Weapon] = 'weapons';
-      this._partyInventoryMapping[this.Shop.Armor] = 'armor';
-      this._partyInventoryMapping[this.Shop.BlackMagic] = 'spells';
-      this._partyInventoryMapping[this.Shop.WhiteMagic] = 'spells';
+      this._charInventoryMapping = {};
+      this._charInventoryMapping[this.Shop.Weapon] = 'weapons';
+      this._charInventoryMapping[this.Shop.Armor] = 'armor';
+      this._charInventoryMapping[this.Shop.BlackMagic] = 'spells';
+      this._charInventoryMapping[this.Shop.WhiteMagic] = 'spells';
 
       this.screenChanged('intro');
     },
@@ -132,8 +133,8 @@
 
     _onEnterShop: function(e, detail) {
       this.set('shop', detail.shop);
-      this.set('inventory', detail.inventory[detail.shop]);
-      this.set('_partyInventoryKey', this._partyInventoryMapping[detail.shop]);
+      this.set('shopInventory', detail.inventory[detail.shop]);
+      this.set('_charInventoryKey', this._charInventoryMapping[detail.shop]);
       this.createAnimation()
         .add(this.$.mapScreen.setAttribute.bind(this.$.mapScreen, 'entering-shop', true))
         .delay(1000)
@@ -163,7 +164,7 @@
           addingTo = 'party.' + detail.forChar + '.armor';
           break;
         case' item':
-          addingTo = 'game.inventory';
+          addingTo = 'game.partyInventory';
           break;
       }
 

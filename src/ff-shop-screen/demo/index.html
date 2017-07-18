@@ -63,7 +63,7 @@
             current-screen
             id="shopScreen"
             party="[[ party ]]"
-            party-inventory-key="[[ _partyInventoryKey ]]"
+            char-inventory-key="[[ _inventoryKey ]]"
             shop="{{ shop }}"
             shop-items="[[ inventory ]]"
             on-ff-purchase="_onPurchase"></ff-shop-screen>
@@ -149,7 +149,7 @@
           },
 
           _onShopSelect: function(e, detail) {
-            this.set('_partyInventoryKey', detail.item.getAttribute('inventory-key'));
+            this.set('_inventoryKey', detail.item.getAttribute('inventory-key'));
           },
 
           _reloadInventory: function(map, shop) {

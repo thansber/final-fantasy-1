@@ -12,6 +12,10 @@
     ],
 
     properties: {
+      charInventoryKey: {
+        readonly: true,
+        type: String
+      },
       gold: {
         readonly: true,
         type: Number
@@ -19,10 +23,6 @@
       party: {
         readonly: true,
         type: Array
-      },
-      partyInventoryKey: {
-        readonly: true,
-        type: String
       },
       transaction: {
         readonly: true,
@@ -106,7 +106,10 @@
     },
 
     _getCharInventory: function() {
-      return this.party[this.transaction.forChar][this.partyInventoryKey];
+      if (this.transaction.partyInventory) {
+        return this.partyInventory;
+      }
+      return this.party[this.transaction.forChar][this.charInventoryKey];
     },
 
     _getPrice: function() {
@@ -285,6 +288,7 @@
 
       if (shopState.reset) {
         this.transaction = {
+          partyInventory: shopState.partyInventory,
           shop: this.shop
         };
       }
