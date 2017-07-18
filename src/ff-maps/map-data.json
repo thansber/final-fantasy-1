@@ -581,7 +581,61 @@
         "to": "shop",
         "toShop": "clinic"
       }
-    ]
+    ],
+    "shopInventory": {
+      "inn": [
+        100
+      ],
+      "clinic": [
+        200
+      ],
+      "weapon": [
+        "Iron[N]",
+        "Large[K]",
+        "Iron[S]",
+        "Sabre",
+        "Silver[S]"
+      ],
+      "armor": [
+        "Iron[A]",
+        "Copper[B]",
+        "Iron[S]",
+        "Gloves",
+        "Cap",
+        "Wooden[H]"
+      ],
+      "item": [
+        "HealPotion",
+        "PurePotion",
+        "Cabin",
+        "House",
+        "SoftPotion"
+      ],
+      "blackmagic": [
+        "FIR2",
+        "HOLD",
+        "LIT2",
+        "LOK2"
+      ],
+      "whitemagic": [
+        "CUR2",
+        "HRM2",
+        "AFIR",
+        "HEAL"
+      ],
+      "blackmagic2": [
+        "SLP2",
+        "ICE2",
+        "CONF",
+        "FAST"
+      ],
+      "whitemagic2": [
+        "PURE",
+        "AICE",
+        "FEAR",
+        "AMUT"
+      ]
+    }
   },
   "towns/gaia": {
     "sprites": [
@@ -983,6 +1037,45 @@
         "to": "shop",
         "toShop": "clinic"
       }
-    ]
+    ],
+    "shopInventory": {
+      "inn": [
+        50
+      ],
+      "clinic": [
+        80
+      ],
+      "weapon": [
+        "Iron[H]",
+        "Short[S]",
+        "Hand[A]",
+        "Scimtar"
+      ],
+      "armor": [
+        "Wooden[A]",
+        "Chain[A]",
+        "Iron[A]",
+        "Wooden[S]",
+        "Gloves"
+      ],
+      "item": [
+        "HealPotion",
+        "PurePotion",
+        "Tent",
+        "Cabin"
+      ],
+      "blackmagic": [
+        "DARK",
+        "ICE",
+        "SLOW",
+        "TMPR"
+      ],
+      "whitemagic": [
+        "LAMP",
+        "MUTE",
+        "ALIT",
+        "INVS"
+      ]
+    }
   }
 }
