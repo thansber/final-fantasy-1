@@ -36,7 +36,7 @@
           border-width: 1px;
           border-bottom-width: 0;
           margin-left: 2em;
-          height: 357px;
+          height: 459px;
         }
 
         iron-selector div {
@@ -56,7 +56,9 @@
         }
       </style>
       <template>
-        <ff-maps id="maps" map="{{ map }}"></ff-maps>
+        <ff-maps id="maps"
+          map="{{ map }}"
+          map-id="{{ town }}"></ff-maps>
 
         <div id="main">
           <ff-shop-screen
@@ -78,6 +80,16 @@
             <div shop="item">Item</div>
             <div shop="blackmagic" inventory-key="spells">Black Magic</div>
             <div shop="whitemagic" inventory-key="spells">White Magic</div>
+            <div shop="blackmagic2" inventory-key="spells">Black Magic 2</div>
+            <div shop="whitemagic2" inventory-key="spells">White Magic 2</div>
+          </iron-selector>
+
+          <iron-selector id="townSelector"
+            selected="{{ town }}"
+            attr-for-selected="town">
+            <div town="towns/coneria">Coneria</div>
+            <div town="towns/pravoka">Pravoka</div>
+            <div town="towns/elfland">Elfland</div>
           </iron-selector>
         </div>
       </template>
@@ -92,7 +104,8 @@
           properties: {
             inventory: Array,
             map: Object,
-            shop: String
+            shop: String,
+            town: String
           },
 
           behaviors: [
@@ -139,7 +152,7 @@
               armor: [],
               spells: ['FIRE', 'LIT']
             }]);
-            this.$.maps.mapId = 'towns/coneria';
+            this.$.townSelector.selected = 'towns/coneria';
             this.$.shopSelector.selected = 'blackmagic';
             this.$.shopScreen.gold = 1234;
           },

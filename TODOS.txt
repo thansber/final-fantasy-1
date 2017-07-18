@@ -1,18 +1,23 @@
 BUGS
 ====
+- Elfland has too much armor
 
 WORK
 ====
 - shops
-  - equipment data (consumables)
-  - item shop flow
   - clinic shop flow
   - shop equipment for each town
-  - handle town with multiple magic shops
 
 - fonts
 -- create battle menu font
 -- create battle status font
+
+- party inventory
+-- key item config
+-- pass in to shop screen
+-- adding consumables
+-- adding key items
+-- looking up consumables (for shop room check)
 
 - rod weapon sprite
 

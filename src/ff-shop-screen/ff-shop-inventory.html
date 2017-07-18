@@ -1,5 +1,6 @@
 <link rel="import" href="../behaviors/ff-armor-behavior.html">
 <link rel="import" href="../behaviors/ff-item-behavior.html">
+<link rel="import" href="../behaviors/ff-shop-behavior.html">
 <link rel="import" href="../behaviors/ff-spell-behavior.html">
 <link rel="import" href="../behaviors/ff-weapon-behavior.html">
 
@@ -14,6 +15,7 @@
       behaviors: [
         scope.FF.ArmorBehavior,
         scope.FF.ItemBehavior,
+        scope.FF.ShopBehavior,
         scope.FF.SpellBehavior,
         scope.FF.WeaponBehavior
       ],
@@ -37,13 +39,14 @@
       ],
 
       ready: function() {
-        this.inventoryByShop = {
-          armor: this.ArmorByName,
-          blackmagic: this.SpellsByName,
-          item: this.ItemsByName,
-          weapon: this.WeaponsByName,
-          whitemagic: this.SpellsByName
-        };
+        this.inventoryByShop = {};
+        this.inventoryByShop[this.Shop.Armor] = this.ArmorByName,
+        this.inventoryByShop[this.Shop.BlackMagic] = this.SpellsByName,
+        this.inventoryByShop[this.Shop.BlackMagic2] = this.SpellsByName,
+        this.inventoryByShop[this.Shop.Item] = this.ItemsByName,
+        this.inventoryByShop[this.Shop.Weapon] = this.WeaponsByName,
+        this.inventoryByShop[this.Shop.WhiteMagic] = this.SpellsByName
+        this.inventoryByShop[this.Shop.WhiteMagic2] = this.SpellsByName
       },
 
       _buildShopInventory: function(items) {

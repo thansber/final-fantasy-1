@@ -11,11 +11,13 @@
           return {
             Armor: 'armor',
             BlackMagic: 'blackmagic',
+            BlackMagic2: 'blackmagic2',
             Clinic: 'clinic',
             Inn: 'inn',
             Item: 'item',
             Weapon: 'weapon',
-            WhiteMagic: 'whitemagic'
+            WhiteMagic: 'whitemagic',
+            WhiteMagic2: 'whitemagic2'
           };
         }
       },
@@ -52,6 +54,10 @@
         maxOwned: 3,
         states: this._statesForMagic()
       });
+
+      this._shopSetup(Object.assign({}, this.Shops[this.Shop.BlackMagic], {
+        id: this.Shop.BlackMagic2
+      }));
     },
 
     _innShopSetup: function() {
@@ -315,6 +321,10 @@
         maxOwned: 3,
         states: this._statesForMagic()
       });
+
+      this._shopSetup(Object.assign({}, this.Shops[this.Shop.WhiteMagic], {
+        id: this.Shop.WhiteMagic2
+      }));
     }
   };
 
