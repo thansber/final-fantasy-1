@@ -5,7 +5,6 @@ WORK
 ====
 - shops
   - clinic shop flow
-  - shop equipment for each town
 
 - fonts
 -- create battle menu font

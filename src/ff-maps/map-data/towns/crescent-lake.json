@@ -39,5 +39,15 @@
     { "y":5, "x":17, "to": "shop", "toShop": "blackmagic" },
     { "y":5, "x":13, "to": "shop", "toShop": "whitemagic" },
     { "y":14, "x":15, "to": "shop", "toShop": "clinic" }
-  ]
+  ],
+  "shopInventory": {
+    "inn": [ 200 ],
+    "clinic": [ 400 ],
+    "weapon": ["Silver[K]", "Silver[S]", "Silver[H]", "Silver[A]"],
+    "armor": ["Silver[A]", "Silver[S]", "Buckler", "Silver[H]", "Silver[G]"],
+    "item": ["HealPotion", "PurePotion", "Cabin", "House"],
+    "blackmagic": ["QAKE", "RUB", "LIT3", "STUN"],
+    "whitemagic": ["SOFT", "EXIT", "FOG2", "INV2"]
+  }
+
 }

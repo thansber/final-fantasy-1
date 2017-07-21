@@ -32,5 +32,9 @@
   "transitions": [
     { "y":3, "x":52, "to": "shop", "toShop": "blackmagic" },
     { "y":3, "x":51, "to": "shop", "toShop": "whitemagic" }
-  ]
+  ],
+  "shopInventory": {
+    "blackmagic": ["NUKE"],
+    "whitemagic": ["LIF2"]
+  }
 }

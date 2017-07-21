@@ -53,5 +53,13 @@
     { "y":20, "x":26, "to": "shop", "toShop": "blackmagic" },
     { "y":20, "x":20, "to": "shop", "toShop": "whitemagic" },
     { "y":7, "x":17, "to": "shop", "toShop": "clinic" }
-  ]
+  ],
+  "shopInventory": {
+    "inn": [ 300 ],
+    "clinic": [ 750 ],
+    "item": ["Cabin", "House", "HealPotion", "PurePotion", "SoftPotion"],
+    "blackmagic": ["SABR", "BLND"],
+    "whitemagic": ["ARUB", "HEL3"]
+  }
+
 }

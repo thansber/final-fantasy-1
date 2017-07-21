@@ -70,5 +70,17 @@
     { "y":9, "x":15, "to": "shop", "toShop": "clinic" },
     { "y":32, "x":32, "to": "shop", "toShop": "blackmagic2" },
     { "y":32, "x":30, "to": "shop", "toShop": "whitemagic2" }
-  ]
+  ],
+  "shopInventory": {
+    "inn": [ 500 ],
+    "clinic": [ 750 ],
+    "weapon": ["CatClaw"],
+    "armor": ["Gold[B]", "ProRing"],
+    "item": ["Cabin", "House", "HealPotion", "PurePotion"],
+    "blackmagic": ["BRAK", "ICE3"],
+    "whitemagic": ["CUR4", "HRM4"],
+    "blackmagic2": ["STOP", "ZAP!", "XXXX"],
+    "whitemagic2": ["FADE", "WALL", "XFER"]
+  }
+
 }

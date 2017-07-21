@@ -42,5 +42,13 @@
     { "y":4, "x":14, "to": "shop", "toShop": "armor" },
     { "y":25, "x":19, "to": "shop", "toShop": "blackmagic" },
     { "y":20, "x":14, "to": "shop", "toShop": "whitemagic" }
-  ]
+  ],
+  "shopInventory": {
+    "inn": [ 100 ],
+    "weapon": ["Iron[S]", "Sabre", "Long[S]", "Falchon"],
+    "armor": ["Steel[A]", "Silver[B]", "Iron[H]", "Copper[G]", "Iron[G]"],
+    "blackmagic": ["FIR3", "BANE", "SLO2", "WARP"],
+    "whitemagic": ["CUR3", "LIFE", "HRM3", "HEL2"]
+  }
+
 }

@@ -496,7 +496,46 @@
         "to": "shop",
         "toShop": "clinic"
       }
-    ]
+    ],
+    "shopInventory": {
+      "inn": [
+        200
+      ],
+      "clinic": [
+        400
+      ],
+      "weapon": [
+        "Silver[K]",
+        "Silver[S]",
+        "Silver[H]",
+        "Silver[A]"
+      ],
+      "armor": [
+        "Silver[A]",
+        "Silver[S]",
+        "Buckler",
+        "Silver[H]",
+        "Silver[G]"
+      ],
+      "item": [
+        "HealPotion",
+        "PurePotion",
+        "Cabin",
+        "House"
+      ],
+      "blackmagic": [
+        "QAKE",
+        "RUB",
+        "LIT3",
+        "STUN"
+      ],
+      "whitemagic": [
+        "SOFT",
+        "EXIT",
+        "FOG2",
+        "INV2"
+      ]
+    }
   },
   "towns/elfland": {
     "sprites": [
@@ -753,7 +792,46 @@
         "to": "shop",
         "toShop": "whitemagic2"
       }
-    ]
+    ],
+    "shopInventory": {
+      "inn": [
+        500
+      ],
+      "clinic": [
+        750
+      ],
+      "weapon": [
+        "CatClaw"
+      ],
+      "armor": [
+        "Gold[B]",
+        "ProRing"
+      ],
+      "item": [
+        "Cabin",
+        "House",
+        "HealPotion",
+        "PurePotion"
+      ],
+      "blackmagic": [
+        "BRAK",
+        "ICE3"
+      ],
+      "whitemagic": [
+        "CUR4",
+        "HRM4"
+      ],
+      "blackmagic2": [
+        "STOP",
+        "ZAP!",
+        "XXXX"
+      ],
+      "whitemagic2": [
+        "FADE",
+        "WALL",
+        "XFER"
+      ]
+    }
   },
   "towns/lefein": {
     "sprites": [
@@ -799,7 +877,15 @@
         "to": "shop",
         "toShop": "whitemagic"
       }
-    ]
+    ],
+    "shopInventory": {
+      "blackmagic": [
+        "NUKE"
+      ],
+      "whitemagic": [
+        "LIF2"
+      ]
+    }
   },
   "towns/melmond": {
     "sprites": [
@@ -870,7 +956,37 @@
         "to": "shop",
         "toShop": "whitemagic"
       }
-    ]
+    ],
+    "shopInventory": {
+      "inn": [
+        100
+      ],
+      "weapon": [
+        "Iron[S]",
+        "Sabre",
+        "Long[S]",
+        "Falchon"
+      ],
+      "armor": [
+        "Steel[A]",
+        "Silver[B]",
+        "Iron[H]",
+        "Copper[G]",
+        "Iron[G]"
+      ],
+      "blackmagic": [
+        "FIR3",
+        "BANE",
+        "SLO2",
+        "WARP"
+      ],
+      "whitemagic": [
+        "CUR3",
+        "LIFE",
+        "HRM3",
+        "HEL2"
+      ]
+    }
   },
   "towns/onrac": {
     "sprites": [
@@ -951,7 +1067,30 @@
         "to": "shop",
         "toShop": "clinic"
       }
-    ]
+    ],
+    "shopInventory": {
+      "inn": [
+        300
+      ],
+      "clinic": [
+        750
+      ],
+      "item": [
+        "Cabin",
+        "House",
+        "HealPotion",
+        "PurePotion",
+        "SoftPotion"
+      ],
+      "blackmagic": [
+        "SABR",
+        "BLND"
+      ],
+      "whitemagic": [
+        "ARUB",
+        "HEL3"
+      ]
+    }
   },
   "towns/pravoka": {
     "sprites": [
