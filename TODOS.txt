@@ -1,6 +1,5 @@
 BUGS
 ====
-- Elfland has too much armor
 
 WORK
 ====
