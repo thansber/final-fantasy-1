@@ -2,15 +2,16 @@
   "name": "final-fantasy-1",
   "main": "index.html",
   "dependencies": {
-    "polymer": "Polymer/polymer#^1.8.0",
-    "iron-selector": "^1.5.2",
-    "iron-a11y-keys": "^1.0.7",
-    "neon-animation": "^1.2.4"
+    "polymer": "Polymer/polymer#^2.0.0",
+    "iron-selector": "^2.0.0",
+    "iron-a11y-keys": "^2.0.0",
+    "neon-animation": "^2.0.0",
+    "polymer-redux": "^1.0.1",
+    "iron-ajax": "^2.0.2",
+    "iron-flex-layout": "^2.0.0"
   },
   "devDependencies": {
-    "iron-component-page": "PolymerElements/iron-component-page#^1.0.0",
-    "iron-demo-helpers": "PolymerElements/iron-demo-helpers#^1.0.0",
-    "web-component-tester": "^4.0.0",
-    "webcomponentsjs": "webcomponents/webcomponentsjs#^0.7.0"
+    "web-component-tester": "^6.0.0",
+    "webcomponentsjs": "^1.0.0"
   }
 }
