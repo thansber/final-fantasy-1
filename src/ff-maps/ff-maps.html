@@ -5,15 +5,15 @@
 
     <iron-ajax
       auto
-      url="map-data.json"
+      url="[[importPath]]map-data.json"
       last-response="{{ mapData }}"></iron-ajax>
     <iron-ajax
       auto
-      url="map-definitions.json"
+      url="[[importPath]]map-definitions.json"
       last-response="{{ mapDefinitions }}"></iron-ajax>
     <iron-ajax
       auto
-      url="map-sheets.json"
+      url="[[importPath]]map-sheets.json"
       last-response="{{ mapSheets }}"></iron-ajax>
 
   </template>

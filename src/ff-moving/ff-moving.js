@@ -100,7 +100,7 @@
     },
 
     _onCharacterSetup: function(movableId, direction, isReady) {
-      if (!this.isReady) {
+      if (!this.isReady || !movableId) {
         return;
       }
       this.set('walkRow', this._movables[movableId].index);
