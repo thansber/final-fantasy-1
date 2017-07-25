@@ -1,31 +1,37 @@
-<link rel="import" href="/bower_components/polymer/polymer.html">
+<link rel="import" href="/bower_components/polymer/polymer-element.html">
+<link rel="import" href="/bower_components/shadycss/apply-shim.html">
+<link rel="import" href="/bower_components/polymer/lib/elements/custom-style.html">
+
 <link rel="import" href="../ff-bordered/ff-bordered.html">
 <link rel="import" href="../ff-styles/ff-styles.html">
 
 <dom-module id="ff-bordered-text">
   <template>
-    <style include="ff-styles" is="custom-style">
-      :host {
-      }
+    <custom-style>
+      <style include="ff-styles">
+        :host {
+        }
 
-      :host([centered]) ff-bordered {
-        align-items: center;
-      }
+        :host([centered]) ff-bordered {
+          align-items: center;
+        }
 
-      :host([right]) ff-bordered {
-        align-items: flex-end;
-      }
+        :host([right]) ff-bordered {
+          align-items: flex-end;
+        }
 
-      ff-bordered {
-        height: 100%;
-      }
+        ff-bordered {
+          height: 100%;
+        }
 
-      pre {
-        height: 16px;
-        margin: 1px 0;
-        @apply(--ff-font);
-      }
-    </style>
+        pre {
+          height: 16px;
+          margin: 1px 0;
+          @apply(--ff-font);
+        }
+      </style>
+    </custom-style>
+
     <ff-bordered color="[[color]]">
       <template is="dom-repeat" items="[[ text ]]">
         <pre>[[ item ]]</pre>
@@ -33,15 +39,21 @@
     </ff-bordered>
   </template>
 
-  <script>Polymer({
-    is: 'ff-bordered-text',
+  <script>
+class BorderedTextElement extends Polymer.Element {
+  static get is() { return 'ff-bordered-text'; }
 
-    properties: {
+  static get properties() {
+    return {
       color: String,
       text: {
         readonly: true,
         type: Array
       }
-    }
-  });</script>
+    };
+  }
+}
+
+customElements.define(BorderedTextElement.is, BorderedTextElement);
+  </script>
 </dom-module>
