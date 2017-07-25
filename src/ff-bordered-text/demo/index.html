@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=yes">
     <title>ff-shop-screen Demo</title>
     <script src="/bower_components/webcomponentsjs/webcomponents-lite.js"></script>
-    <link rel="import" href="/bower_components/iron-selector/iron-selector.html">
+    <link rel="import" href="/bower_components/polymer/polymer.html">
     <link rel="import" href="../ff-bordered-text.html">
 
     <style>
@@ -38,14 +38,10 @@
     </section>
 
     <script>
-    window.addEventListener('WebComponentsReady', function(e) {
-      var inn = document.getElementById('inn');
-      var purple = document.getElementById('purple');
-      var gold = document.getElementById('gold');
-
-      inn.text = ['Welcome', '  ::', 'Stay,', 'to save', 'your', 'data'];
-      purple.text = ['INN'];
-      gold.text = ['12345 G'];
+    window.addEventListener('WebComponentsReady', (e) => {
+      document.getElementById('inn').text = ['Welcome', '  ::', 'Stay,', 'to save', 'your', 'data'];
+      document.getElementById('purple').text = ['INN'];
+      document.getElementById('gold').text = ['12345 G'];
     });
     </script>
   </body>
