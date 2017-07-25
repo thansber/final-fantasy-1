@@ -1,4 +1,5 @@
-<link rel="import" href="/bower_components/polymer/polymer.html">
+<link rel="import" href="/bower_components/polymer/polymer-element.html">
+<link rel="import" href="/bower_components/polymer/lib/elements/dom-repeat.html">
 <link rel="import" href="../ff-char-image.html">
 
 <dom-module id="ff-char-image-all">
@@ -52,19 +53,23 @@
 
   </template>
   <script>
-    Polymer({
-      is: 'ff-char-image-all',
-      properties: {
-        actions: {
-          type: Array,
-          value: ['swing-back', 'swing-forward', 'arms-up', 'normal', 'critical', 'stone', 'dead', 'run-critical', 'run']
-        },
-        charClasses: {
-          type: Array,
-          value: ['fighter', 'thief', 'blackbelt', 'redmage', 'whitemage', 'blackmage']
-        },
+    class CharImageAllDemoElement extends Polymer.Element {
+      static get is() { return 'ff-char-image-all'; }
 
+      static get properties() {
+        return {
+          actions: {
+            type: Array,
+            value: ['swing-back', 'swing-forward', 'arms-up', 'normal', 'critical', 'stone', 'dead', 'run-critical', 'run']
+          },
+          charClasses: {
+            type: Array,
+            value: ['Fi', 'Th', 'BB', 'RM', 'WM', 'BM']
+          }
+        };
       }
-    });
+    }
+
+    customElements.define(CharImageAllDemoElement.is, CharImageAllDemoElement);
   </script>
 </dom-module>

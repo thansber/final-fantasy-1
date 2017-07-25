@@ -1,26 +1,30 @@
-<link rel="import" href="/bower_components/polymer/polymer.html">
+<link rel="import" href="/bower_components/polymer/polymer-element.html">
 <link rel="import" href="ff-char-image-css.html">
 
 <dom-module id="ff-char-image">
   <template>
     <style include="ff-char-image-css"></style>
-    <div id="charImage"></div>
+    <div id="charImage" action$="[[action]]"></div>
   </template>
   <script>
-    Polymer({
-      is: 'ff-char-image',
+    class CharImageElement extends Polymer.Element {
+      static get is() { return 'ff-char-image'; }
 
-      properties: {
-        action: {
-          reflectToAttribute: true,
-          type: String,
-          value: 'normal'
-        },
-        charClass: {
-          reflectToAttribute: true,
-          type: String
-        }
+      static get properties() {
+        return {
+          action: {
+            reflectToAttribute: true,
+            type: String,
+            value: 'normal'
+          },
+          charClass: {
+            reflectToAttribute: true,
+            type: String
+          }
+        };
       }
-    });
+    }
+
+    customElements.define(CharImageElement.is, CharImageElement);
   </script>
 </dom-module>
