@@ -1,47 +1,59 @@
-<link rel="import" href="/bower_components/polymer/polymer.html">
+<link rel="import" href="/bower_components/polymer/polymer-element.html">
+<link rel="import" href="/bower_components/shadycss/apply-shim.html">
+<link rel="import" href="/bower_components/polymer/lib/elements/custom-style.html">
+
 <link rel="import" href="../ff-styles/ff-styles.html">
 
 <dom-module id="ff-bordered">
 	<template>
-		<style include="ff-styles" is="custom-style">
-      :host {
-        background-color: var(--ff-blue);
-        border-color: transparent;
-        border-radius: 14px;
-        border-style: solid;
-        border-width: 10px;
-        border-image: url('/images/border.png') 10 repeat;
-        box-sizing: border-box;
-        display: flex;
-        flex-direction: column;
-        padding: 20px 8px 8px;
-        height: 100%;
-        @apply(--ff-font);
-      }
+    <custom-style>
+  		<style include="ff-styles">
+        :host {
+          background-color: var(--ff-blue);
+          border-color: transparent;
+          border-radius: 14px;
+          border-style: solid;
+          border-width: 10px;
+          border-image: url('/images/border.png') 10 repeat;
+          box-sizing: border-box;
+          display: flex;
+          flex-direction: column;
+          padding: 20px 8px 8px;
+          height: 100%;
+          @apply --ff-font;
+        }
 
-      :host([color="red"]) {
-        background-color: var(--ff-red);
-      }
+        :host([color="red"]) {
+          background-color: var(--ff-red);
+        }
 
-      :host([color="green"]) {
-        background-color: var(--ff-green);
-      }
+        :host([color="green"]) {
+          background-color: var(--ff-green);
+        }
 
-      :host([color="purple"]) {
-        background-color: var(--ff-purple);
-      }
-    </style>
+        :host([color="purple"]) {
+          background-color: var(--ff-purple);
+        }
+      </style>
+    </custom-style>
+
 		<slot></slot>
 	</template>
 
   <script>
-  Polymer({
-    is: 'ff-bordered',
-    properties: {
-      color: {
-        reflectToAttribute: true,
-        type: String
+    class BorderedElement extends Polymer.Element {
+      static get is() { return 'ff-bordered'; }
+
+      static get properties() {
+        return {
+          color: {
+            reflectToAttribute: true,
+            type: String
+          }
+        };
       }
     }
-  });</script>
+
+    customElements.define(BorderedElement.is, BorderedElement);
+  </script>
 </dom-module>

@@ -1,25 +1,32 @@
+<link rel="import" href="/bower_components/shadycss/apply-shim.html">
+<link rel="import" href="/bower_components/polymer/lib/elements/custom-style.html">
+
+<style>
+  @font-face {
+    font-family: FinalFantasy;
+    font-style: normal;
+    font-weight: normal;
+    src: url('/fonts/Final Fantasy 1.woff') format('woff');
+  }
+</style>
+
 <dom-module id="ff-styles">
   <template>
-    <style is="custom-style">
-      @font-face {
-        font-family: FinalFantasy;
-        font-style: normal;
-        font-weight: normal;
-        src: url('/fonts/Final Fantasy 1.woff') format('woff');
-      }
+    <custom-style>
+      <style>
+        :host {
+          --ff-green: rgb(31, 78, 17);
+          --ff-blue: rgb(36, 24, 140);
+          --ff-purple: rgb(129, 27, 112);
+          --ff-red: rgb(216, 40, 0);
+          --ff-white: rgb(255, 255, 255);
 
-      :root {
-        --ff-green: rgb(31, 78, 17);
-        --ff-blue: rgb(36, 24, 140);
-        --ff-purple: rgb(129, 27, 112);
-        --ff-red: rgb(216, 40, 0);
-        --ff-white: rgb(255, 255, 255);
-
-        --ff-font: {
-          color: var(--ff-white);
-          font-family: FinalFantasy;
-        };
-      }
-    </style>
+          --ff-font: {
+            color: var(--ff-white);
+            font-family: FinalFantasy;
+          };
+        }
+      </style>
+    </custom-style>
   </template>
 </dom-module>
