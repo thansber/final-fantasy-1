@@ -1,0 +1,80 @@
+<script>
+CharClassMixin = (superClass) => class extends superClass {
+  constructor() {
+    super();
+  }
+
+  static get properties() {
+    return {
+      AllCharClasses: Array,
+      CharClass: {
+        readonly: true,
+        type: Object,
+        value: function() {
+          return {
+            Fighter: 'Fi',
+            Thief: 'Th',
+            Blackbelt: 'BB',
+            RedMage: 'RM',
+            WhiteMage: 'WM',
+            BlackMage: 'BM',
+
+            Knight: 'Kn',
+            Ninja: 'Ni',
+            Master: 'Ma',
+            RedWizard: 'RW',
+            WhiteWizard: 'WW',
+            BlackWizard: 'BW'
+          };
+        }
+      },
+
+      CharClasses: {
+        readonly: true,
+        type: Object,
+        value: {}
+      },
+
+      basicClasses: {
+        readonly: true,
+        type: Array,
+        value: []
+      }
+    };
+  }
+
+  containsCharClass(charClasses, charClass) {
+    return charClasses.indexOf(charClass) > -1;
+  }
+
+  ready() {
+    super.ready();
+    this._charClass({ id: this.CharClass.Fighter, label: 'FIGHTER', index: 0, basic: true });
+    this._charClass({ id: this.CharClass.Thief, label: 'THIEF', index: 1, basic: true });
+    this._charClass({ id: this.CharClass.Blackbelt, label: 'Bl.BELT', index: 2, basic: true });
+    this._charClass({ id: this.CharClass.RedMage, label: 'RedMAGE', index: 3, basic: true });
+    this._charClass({ id: this.CharClass.WhiteMage, label: 'Wh.MAGE', index: 4, basic: true });
+    this._charClass({ id: this.CharClass.BlackMage, label: 'Bl.MAGE', index: 5, basic: true });
+    // advanced classes
+    this._charClass({ id: this.CharClass.Knight, label: 'KNIGHT', index: 6 });
+    this._charClass({ id: this.CharClass.Ninja, label: 'NINJA', index: 7 });
+    this._charClass({ id: this.CharClass.Master, label: 'MASTER', index: 8 });
+    this._charClass({ id: this.CharClass.RedWizard, label: 'RedWIZ', index: 9 });
+    this._charClass({ id: this.CharClass.WhiteWizard, label: 'Wh.WIZ', index: 10 });
+    this._charClass({ id: this.CharClass.BlackWizard, label: 'Bl.WIZ', index: 11});
+
+    this.basicClasses = Object.keys(this.CharClasses).map((charClassId) => {
+      var charClass = this.CharClasses[charClassId];
+      if (charClass.basic) {
+        return charClass;
+      }
+    }).filter(Boolean);
+
+    this.AllCharClasses = Object.values(this.CharClass);
+  }
+
+  _charClass(data) {
+    this.CharClasses[data.id] = data;
+  }
+}
+</script>

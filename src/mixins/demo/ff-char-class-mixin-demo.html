@@ -1,0 +1,35 @@
+<!doctype html>
+<html>
+  <head>
+    <title>ff-bordered Demo</title>
+    <script src="/bower_components/webcomponentsjs/webcomponents-lite.js"></script>
+    <link rel="import" href="/bower_components/polymer/polymer-element.html">
+    <link rel="import" href="../ff-char-class-mixin.html">
+  </head>
+  <body>
+
+    <dom-module id="ff-char-class-mixin-demo">
+      <template>
+        <p>[[ basic ]]</p>
+      </template>
+
+      <script>
+      HTMLImports.whenReady(() => {
+        class CharClassMixinDemo extends CharClassMixin(Polymer.Element) {
+          static get is() { return 'ff-char-class-mixin-demo'; }
+
+          ready() {
+            super.ready();
+            this.basic = this.basicClasses.map((c) => c.id);
+          }
+        }
+
+        window.customElements.define(CharClassMixinDemo.is, CharClassMixinDemo);
+      });
+      </script>
+    </dom-module>
+
+    <ff-char-class-mixin-demo></ff-char-class-mixin-demo>
+
+  </body>
+</html>
