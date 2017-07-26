@@ -1,0 +1,36 @@
+<link rel="import" href="/bower_components/polymer/polymer-element.html">
+<link rel="import" href="/bower_components/iron-flex-layout/iron-flex-layout-classes.html">
+<link rel="import" href="../mixins/ff-char-class-mixin.html">
+<link rel="import" href="../ff-bordered/ff-bordered.html">
+<link rel="import" href="../ff-char-image/ff-char-image.html">
+
+
+<dom-module id="ff-char-selector">
+  <template>
+    <custom-style>
+      <style include="iron-flex">
+        :host {
+          display: inline-block;
+        }
+
+        #label {
+          margin-bottom: 1.5em;
+        }
+
+        #name {
+          padding-top: 2em;
+        }
+      </style>
+    </custom-style>
+
+    <ff-bordered class="layout vertical center">
+      <div id="label">[[ label ]]</div>
+      <ff-char-image
+        char-class="[[selected]]"
+        class="layout horizontal center-justified"></ff-char-image>
+      <div id="name">[[ charName ]]</div>
+    </ff-bordered>
+  </template>
+
+  <script src="ff-char-selector.js"></script>
+</dom-module>
