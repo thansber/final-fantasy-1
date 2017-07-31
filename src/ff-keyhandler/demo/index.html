@@ -1,0 +1,54 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=yes">
+    <title>ff-char-selector Demo</title>
+    <script src="/bower_components/webcomponentsjs/webcomponents-lite.js"></script>
+    <link rel="import" href="/bower_components/polymer/polymer-element.html">
+    <link rel="import" href="/bower_components/polymer/lib/elements/dom-repeat.html">
+    <link rel="import" href="../ff-keyhandler.html">
+  </head>
+  <body>
+    <dom-module id="ff-keyhandler-demo">
+      <template>
+        <ff-keyhandler id="keyhandler"></ff-keyhandler>
+
+        <h3>Keys Pressed:</h3>
+        <template is="dom-repeat" items="[[ keys ]]">
+          <p>[[ item.type ]]</p>
+        </template>
+      </template>
+
+      <script>
+      class KeyHandlerDemoElement extends Polymer.Element {
+        static get is() { return 'ff-keyhandler-demo'; }
+
+        static get properties() {
+          return {
+            keys: {
+              type: Array,
+              value: []
+            }
+          };
+        }
+
+        ready() {
+          super.ready();
+          this.$.keyhandler.addEventListener('ff-go', (e) => this.push('keys', e));
+          this.$.keyhandler.addEventListener('ff-back', (e) => this.push('keys', e));
+          this.$.keyhandler.addEventListener('ff-down', (e) => this.push('keys', e));
+          this.$.keyhandler.addEventListener('ff-left', (e) => this.push('keys', e));
+          this.$.keyhandler.addEventListener('ff-right', (e) => this.push('keys', e));
+          this.$.keyhandler.addEventListener('ff-up', (e) => this.push('keys', e));
+          this.$.keyhandler.activate();
+        }
+      }
+
+      customElements.define(KeyHandlerDemoElement.is, KeyHandlerDemoElement);
+      </script>
+    </dom-module>
+
+    <ff-keyhandler-demo></ff-keyhandler-demo>
+  </body>
+</html>

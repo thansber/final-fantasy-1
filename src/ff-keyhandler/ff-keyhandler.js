@@ -1,43 +1,45 @@
-Polymer({
-  is: 'ff-keyhandler',
+class KeyHandler extends Polymer.Element {
+  static get is() { return 'ff-keyhandler'; }
 
-  activate: function() {
-    this._keyHandlers().forEach(function(keyHandler) {
-      keyHandler.target = document.body;
-    });
-  },
-
-  deactivate: function() {
-    this._keyHandlers().forEach(function(keyHandler) {
-      keyHandler.target = null;
-    });
-  },
-
-  _back: function() {
-    this.fire('ff-back');
-  },
-
-  _go: function() {
-    this.fire('ff-go');
-  },
-
-  _keyHandlers: function() {
-    return Polymer.dom(this.root).querySelectorAll("[keys]");
-  },
-
-  _pressedDown: function() {
-    this.fire('ff-down');
-  },
-
-  _pressedLeft: function() {
-    this.fire('ff-left');
-  },
-
-  _pressedRight: function() {
-    this.fire('ff-right');
-  },
-
-  _pressedUp: function() {
-    this.fire('ff-up');
+  activate() {
+    this._keyHandlers().forEach((keyHandler) => keyHandler.target = document.body);
   }
-});
+
+  deactivate() {
+    this._keyHandlers().forEach((keyHandler) => keyHandler.target = null);
+  }
+
+  _back() {
+    this._fire('ff-back');
+  }
+
+  _fire(eventType) {
+    this.dispatchEvent(new CustomEvent(eventType, {bubbles: true, composed: true}));
+  }
+
+  _go() {
+    this._fire('ff-go');
+  }
+
+  _keyHandlers() {
+    return this.shadowRoot.querySelectorAll("[keys]");
+  }
+
+  _pressedDown() {
+    this._fire('ff-down');
+  }
+
+  _pressedLeft() {
+    this._fire('ff-left');
+  }
+
+  _pressedRight() {
+    this._fire('ff-right');
+  }
+
+  _pressedUp() {
+    this._fire('ff-up');
+  }
+}
+
+customElements.define(KeyHandler.is, KeyHandler);
