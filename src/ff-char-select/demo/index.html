@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=yes">
     <title>ff-char-selector Demo</title>
     <script src="/bower_components/webcomponentsjs/webcomponents-lite.js"></script>
+    <link rel="import" href="/bower_components/polymer/lib/elements/dom-bind.html">
     <link rel="import" href="../ff-char-selector.html">
 
     <style>
@@ -15,28 +16,21 @@
     </style>
   </head>
   <body>
-
-    <template is="dom-bind">
-      <ff-char-selector selected="thief"></ff-char-selector>
-      <div>
-        <button id="prev">Previous</button>
-        <button id="next">Next</button>
-      </div>
-    </template>
+    <dom-bind>
+      <template>
+        <ff-char-selector selected="thief"></ff-char-selector>
+        <div>
+          <button id="prev">Previous</button>
+          <button id="next">Next</button>
+        </div>
+      </template>
+    </dom-bind>
 
     <script>
-    window.addEventListener('WebComponentsReady', function(e) {
-      var charSelector = document.querySelector('ff-char-selector');
-      var next = document.querySelector('#next');
-      var prev = document.querySelector('#prev');
-
-      next.addEventListener('click', function(e) {
-        charSelector.next();
-      });
-
-      prev.addEventListener('click', function(e) {
-        charSelector.prev();
-      });
+    window.addEventListener('WebComponentsReady', (e) => {
+      let charSelector = document.querySelector('ff-char-selector');
+      document.querySelector('#next').addEventListener('click', (e) => charSelector.next());
+      document.querySelector('#prev').addEventListener('click', (e) => charSelector.prev());
     });
     </script>
   </body>

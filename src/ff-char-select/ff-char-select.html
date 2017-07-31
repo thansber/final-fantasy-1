@@ -1,12 +1,16 @@
+<link rel="import" href="/bower_components/polymer/polymer-element.html">
+<link rel="import" href="/bower_components/iron-flex-layout/iron-flex-layout-classes.html">
 
+<link rel="import" href="../mixins/ff-char-class-mixin.html">
 <link rel="import" href="../ff-selector/ff-selector.html">
-<link rel="import" href="ff-char-selector.html">
+<link rel="import" href="../ff-char-selector/ff-char-selector.html">
 <link rel="import" href="ff-char-select-css.html">
 
 <dom-module id="ff-char-select">
   <template>
     <style include="ff-char-select-css"></style>
     <ff-selector id="selector"
+      class="layout horizontal wrap center-justified"
       selected="[[ charIndex ]]"
       up-down-selects
       on-ff-left="_prevCharClass"

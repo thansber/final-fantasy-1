@@ -1,26 +1,25 @@
+<link rel="import" href="/bower_components/shadycss/apply-shim.html">
+<link rel="import" href="/bower_components/polymer/lib/elements/custom-style.html">
+
 <dom-module id="ff-char-select-css">
   <template>
-    <style>
-    :host {
-      --ff-selector-cursor: {
-        left: 40px;
-        top: 70px;
-      };
-      margin-top: 40px;
-    }
+    <custom-style>
+      <style>
+      :host {
+        --ff-selector-cursor: {
+          left: 40px;
+          top: 70px;
+        };
+        margin-top: 40px;
+      }
 
-    #selector {
-      @apply(--layout-horizontal);
-      @apply(--layout-wrap);
-      @apply(--layout-center-justified);
-    }
+      ff-char-selector {
+        height: 180px;
+        margin: 25px 40px;
+        width: 180px;
 
-    ff-char-selector {
-      height: 180px;
-      margin: 25px 40px;
-      width: 180px;
-
-    }
-    </style>
+      }
+      </style>
+    </custom-style>
   </template>
 </dom-module>

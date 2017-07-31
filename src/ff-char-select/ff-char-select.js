@@ -1,50 +1,52 @@
-(function(scope) {
+((scope) => {
 
   scope.FF = scope.FF || {};
 
-  Polymer({
-    is: 'ff-char-select',
-    behaviors: [
-      scope.FF.CharClassBehavior,
-      scope.FF.ScreenBehavior
-    ],
+  const CharClassMixin = scope.FF.CharClassMixin;
+  // TODO: screen mixin
 
-    properties: {
-      charIndex: {
-        readonly: true,
-        type: Number
-      },
-      party: {
-        notify: true,
-        type: Array
-      }
-    },
+  class CharSelectElement extends CharClassMixin(Polymer.Element) {
+    static get is() { return 'ff-char-select'; }
 
-    _charClassFor: function(change, index) {
+    static get properties() {
+      return {
+        charIndex: {
+          readonly: true,
+          type: Number
+        },
+        party: {
+          notify: true,
+          type: Array
+        }
+      };
+    }
+
+    _charClassFor(change, index) {
       return this._charProperty(change, index, 'charClass') || this.CharClass.Fighter;
     },
 
-    _charProperty: function(change, index, property) {
+    _charProperty(change, index, property) {
       return this.get(property, change.base[index]);
     },
 
-    _next: function() {
+    _next() {
       this.fire('ff-char-class-done', {
         charClass: this._selectedCharSelector().selected
       });
     },
 
-    _nextCharClass: function() {
+    _nextCharClass() {
       this._selectedCharSelector().next();
     },
 
-    _prevCharClass: function() {
+    _prevCharClass() {
       this._selectedCharSelector().prev();
     },
 
-    _selectedCharSelector: function() {
+    _selectedCharSelector() {
       return this.$.selector.selectedItem;
     }
+  }
 
-  });
+  customElements.define(CharSelectElement.is, CharSelectElement);
 }(window));
