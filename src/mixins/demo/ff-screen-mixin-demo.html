@@ -1,0 +1,50 @@
+<!doctype html>
+<html>
+  <head>
+    <title>ff-screen-mixin Demo</title>
+    <script src="/bower_components/webcomponentsjs/webcomponents-lite.js"></script>
+    <link rel="import" href="/bower_components/polymer/polymer-element.html">
+    <link rel="import" href="/bower_components/polymer/lib/elements/dom-if.html">
+    <link rel="import" href="../../ff-keyhandler/ff-keyhandler.html">
+    <link rel="import" href="../ff-screen-mixin.html">
+  </head>
+  <body>
+
+    <dom-module id="ff-screen-mixin-demo">
+      <template>
+        <ff-keyhandler></ff-keyhandler>
+      </template>
+
+      <script>
+      HTMLImports.whenReady(() => {
+        class ScreenMixinDemo extends ScreenMixin(Polymer.Element) {
+          static get is() { return 'ff-screen-mixin-demo'; }
+
+          static get properties() {
+            return {
+              type: String
+            }
+          }
+
+          ready() {
+            super.ready();
+          }
+
+          _isNormal() {
+            return this.type === 'normal';
+          }
+        }
+
+        window.customElements.define(ScreenMixinDemo.is, ScreenMixinDemo);
+
+        let keyhandlerNormal = document.getElementById('keyhandlerNormal');
+        keyhandlerNormal.currentScreen = true;
+        keyhandlerNormal.addEventListener('ff-go', (e) => console.log(e));
+      });
+      </script>
+    </dom-module>
+
+    <ff-screen-mixin-demo id="keyhandlerNormal" type="normal"></ff-screen-mixin-demo>
+
+  </body>
+</html>

@@ -1,0 +1,81 @@
+<script>
+ScreenMixin = (superClass) => class extends superClass {
+
+  constructor() {
+    super();
+  }
+
+  static get properties() {
+    return {
+      currentScreen: {
+        observer: 'onScreenChange',
+        reflectToAttribute: true,
+        type: Boolean,
+        value: false
+      }
+    }
+  }
+
+  onScreenChange(value) {
+    if (value === false) {
+      this._onScreenClosed();
+    } else {
+      this._onScreenOpened();
+    }
+    this.hidden = !this.currentScreen;
+  }
+
+  // Override if you need custom logic when a screen is closing
+  onScreenClosed() {}
+  // Override if you need custom logic when a screen is opening
+  onScreenOpened() {}
+
+  // Override if a screen contains multiple key handlers
+  primaryKeyHandler() {}
+
+  _activateKeyHandler() {
+    this._findKeyHandler().activate();
+  }
+
+  _deactivateKeyHandler() {
+    this.shadowRoot.querySelectorAll('ff-keyhandler')
+      .forEach((keyHandler) => keyHandler.deactivate());
+    (this._keyHandlerInSelector() || this._noopKeyHandler()).deactivate();
+  }
+
+  _findKeyHandler() {
+    return this.primaryKeyHandler()
+      || this._keyHandler()
+      || this._keyHandlerInSelector()
+      || this._noopKeyHandler();
+  }
+
+  _keyHandler() {
+    return this.shadowRoot.querySelector('ff-keyhandler');
+  }
+
+  _keyHandlerInSelector() {
+    let selector = this.shadowRoot.querySelector('ff-selector');
+    if (selector) {
+      return selector.$.keyHandler;
+    }
+  }
+
+  _noopKeyHandler() {
+    return {
+      activate: () => {},
+      deactivate: () => {}
+    };
+  }
+
+  _onScreenClosed() {
+    this._deactivateKeyHandler();
+    this.onScreenClosed.call(this);
+  }
+
+  _onScreenOpened() {
+    this._activateKeyHandler();
+    this.onScreenOpened.call(this);
+  }
+}
+</script>
