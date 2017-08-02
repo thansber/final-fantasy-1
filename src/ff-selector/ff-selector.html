@@ -1,26 +1,34 @@
+<link rel="import" href="/bower_components/polymer/polymer-element.html">
+<link rel="import" href="/bower_components/polymer/lib/legacy/class.html">
+<link rel="import" href="/bower_components/shadycss/apply-shim.html">
 <link rel="import" href="/bower_components/iron-selector/iron-multi-selectable.html">
 <link rel="import" href="../ff-keyhandler/ff-keyhandler.html">
 
 <dom-module id="ff-selector">
   <template>
-    <style>
-      :host ::slotted(.iron-selected) {
-        position: relative;
-      }
-      :host ::slotted(.iron-selected:before) {
-        background-image: url('cursor.png');
-        content: ' ';
-        height: 32px;
-        left: -44px;
-        position: absolute;
-        top: 4px;
-        width: 32px;
+    <custom-style>
+      <style>
+        #container ::slotted(.iron-selected) {
+          position: relative;
+        }
 
-        @apply --ff-selector-cursor;
-      }
-    </style>
+        #container ::slotted(.iron-selected::before) {
+          background-image: url('cursor.png');
+          content: ' ';
+          height: 32px;
+          left: -44px;
+          position: absolute;
+          top: 4px;
+          width: 32px;
 
-    <slot></slot>
+          @apply --ff-selector-cursor;
+        }
+      </style>
+    </custom-style>
+
+    <div id="container">
+      <slot></slot>
+    </div>
 
     <ff-keyhandler
       id="keyHandler"
@@ -28,32 +36,47 @@
 
   </template>
   <script>
-    Polymer({
-      is: 'ff-selector',
-      behaviors: [
-        Polymer.IronMultiSelectableBehavior
-      ],
+    class SelectorElement extends Polymer.mixinBehaviors([Polymer.IronMultiSelectableBehavior], Polymer.Element) {
+      static get is() { return 'ff-selector'; }
 
-      observers: [
-        '_upDownSelectsChanged(upDownSelects)'
-      ],
-
-      properties: {
-        upDownSelects: Boolean
-      },
-
-      _go: function() {
-        this.fire('ff-selected', {
-          value: this.selected
-        });
-      },
-
-      _upDownSelectsChanged: function(upDownSelects) {
-        var listenFunction = upDownSelects ? this.listen : this.unlisten;
-        listenFunction.call(this, this.$.keyHandler, 'ff-up', 'selectPrevious');
-        listenFunction.call(this, this.$.keyHandler, 'ff-down', 'selectNext');
+      static get properties() {
+        return {
+          upDownSelects: {
+            observer: '_upDownSelectsChanged',
+            type: Boolean,
+            value: false
+          }
+        }
       }
 
-    });
+      ready() {
+        super.ready();
+        this.$.keyHandler.activate();
+      }
+
+      _go() {
+        this.dispatchEvent(new CustomEvent('ff-selected', {
+          bubbles: true,
+          composed: true,
+          detail: {
+            value: this.selected
+          }
+        }));
+      }
+
+      _upDownSelectsChanged(upDownSelects) {
+        let upHandler = () => this.selectPrevious();
+        let downHandler = () => this.selectNext();
+        if (upDownSelects) {
+          this.$.keyHandler.addEventListener('ff-up', upHandler);
+          this.$.keyHandler.addEventListener('ff-down', downHandler);
+        } else {
+          this.$.keyHandler.removeEventListener('ff-up', upHandler);
+          this.$.keyHandler.removeEventListener('ff-down', downHandler);
+        }
+      }
+    }
+
+    customElements.define(SelectorElement.is, SelectorElement);
   </script>
 </dom-module>

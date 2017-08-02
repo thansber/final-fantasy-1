@@ -1,5 +1,7 @@
 BUGS
 ====
+- ff-selector
+-- :before CSS no longer working
 
 WORK
 ====
