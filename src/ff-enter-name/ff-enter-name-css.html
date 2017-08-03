@@ -1,48 +1,53 @@
+<link rel="import" href="/bower_components/shadycss/apply-shim.html">
+<link rel="import" href="/bower_components/polymer/lib/elements/custom-style.html">
+
 <dom-module id="ff-enter-name-css">
   <template>
-    <style is="custom-style">
-    :host {
-      width: 460px;
-      @apply(--layout-vertical);
-      @apply(--layout-center);
+    <custom-style>
+      <style>
+        :host {
+          align-items: center;
+          display: flex;
+          flex-direction: column;
+          width: 460px;
+        }
 
-      --ff-selector-cursor: {
-        left: -40px;
-        top: 0px;
-      };
-    }
+        ff-bordered {
+          padding-top: 20px;
+        }
 
-    ff-bordered {
-      padding-top: 20px;
-    }
+        ff-selector {
+          --ff-selector-container: {
+            display: flex;
+            flex-direction: row;
+            flex-wrap: wrap;
+          }
+        }
 
-    #name {
-      height: 60px;
-      margin-bottom: 40px;
-      width: 110px;
-    }
+        #name {
+          height: 60px;
+          margin-bottom: 40px;
+          width: 110px;
+        }
 
-    [letters] {
-      padding-left: 20px;
-    }
+        [letters] {
+          padding-left: 20px;
+        }
 
-    #selector {
-      @apply(--layout);
-      @apply(--layout-horizontal);
-      @apply(--layout-wrap);
-    }
+        [letter] {
+          height: 40px;
+          width: 40px;
+        }
 
-    [letter] {
-      height: 40px;
-      width: 40px;
-    }
+        #selectName {
+          margin-top: 32px;
+        }
 
-    #selectName {
-      @apply(--layout);
-      @apply(--layout-horizontal);
-      @apply(--layout-center-justified);
-      margin-top: 32px;
-    }
-    </style>
+        [letter].iron-selected::before {
+          left: -40px;
+          top: 0px;
+        }
+      </style>
+    </custom-style>
   </template>
 </dom-module>

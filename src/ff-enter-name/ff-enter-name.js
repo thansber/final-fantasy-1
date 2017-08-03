@@ -1,14 +1,8 @@
-(function(scope) {
+class EnterNameElement extends ScreenMixin(Polymer.Element) {
+  static get is() { return 'ff-enter-name'; }
 
-  scope.FF = scope.FF || {};
-
-  Polymer({
-    is: 'ff-enter-name',
-    behaviors: [
-      FF.ScreenBehavior
-    ],
-
-    properties: {
+  static get properties() {
+    return {
       itemsPerRow: {
         type: Number,
         value: 10
@@ -21,49 +15,54 @@
         type: String,
         value: ''
       }
-    },
+    };
+  }
 
-    cancel: function(e, detail) {
-      if (!this.name.length) {
-        return;
-      }
-      this.name = this.name.substring(0, this.name.length - 1);
-    },
-
-    letterSelected: function(e, detail) {
-      if (this.name.length >= this.maxChars) {
-        this.fire('ff-char-name-done', {
-          name: this.name
-        });
-        this.name = '';
-        return;
-      }
-      this.name += detail.value;
-    },
-
-    nextLetter: function() {
-      this.$.selector.selectNext();
-    },
-
-    nextRow: function() {
-      for (let i = 0; i < this.itemsPerRow; i++) {
-        this.nextLetter();
-      }
-    },
-
-    onScreenClosed: function() {
-      this.$.selector.selected = 'A';
-    },
-
-    prevLetter: function() {
-      this.$.selector.selectPrevious();
-    },
-
-    prevRow: function() {
-      for (let i = 0; i < this.itemsPerRow; i++) {
-        this.prevLetter();
-      }
+  cancel(e, detail) {
+    if (!this.name.length) {
+      return;
     }
+    this.name = this.name.substring(0, this.name.length - 1);
+  }
 
-  });
-}(window));
+  letterSelected(e, detail) {
+    if (this.name.length >= this.maxChars) {
+      this.dispatchEvent(new CustomEvent('ff-char-name-done', {
+        bubbles: true,
+        composed: true,
+        detail: {
+          name: this.name
+        }
+      }));
+      this.name = '';
+      return;
+    }
+    this.name += detail.value;
+  }
+
+  nextLetter() {
+    this.$.selector.selectNext();
+  }
+
+  nextRow() {
+    for (let i = 0; i < this.itemsPerRow; i++) {
+      this.nextLetter();
+    }
+  }
+
+  onScreenClosed() {
+    this.$.selector.selected = 'A';
+  }
+
+  prevLetter() {
+    this.$.selector.selectPrevious();
+  }
+
+  prevRow() {
+    for (let i = 0; i < this.itemsPerRow; i++) {
+      this.prevLetter();
+    }
+  }
+}
+
+customElements.define(EnterNameElement.is, EnterNameElement);
