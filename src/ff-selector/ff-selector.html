@@ -10,6 +10,10 @@
   <template>
     <custom-style>
       <style>
+        #container {
+          @apply --ff-selector-container;
+        }
+
         #container ::slotted(.iron-selected) {
           position: relative;
         }
