@@ -1,7 +1,9 @@
 <link rel="import" href="/bower_components/polymer/polymer-element.html">
 <link rel="import" href="/bower_components/polymer/lib/legacy/class.html">
+<link rel="import" href="/bower_components/polymer/lib/elements/custom-style.html">
 <link rel="import" href="/bower_components/shadycss/apply-shim.html">
-<link rel="import" href="/bower_components/iron-selector/iron-multi-selectable.html">
+<link rel="import" href="/bower_components/iron-selector/iron-selectable.html">
+<link rel="import" href="../ff-cursor/ff-cursor.html">
 <link rel="import" href="../ff-keyhandler/ff-keyhandler.html">
 
 <dom-module id="ff-selector">
@@ -12,9 +14,11 @@
           position: relative;
         }
 
-        #container ::slotted(.iron-selected::before) {
+      /*
+        #container ::slotted(.iron-selected)::before {
           background-image: url('cursor.png');
           content: ' ';
+          display: inline-block;
           height: 32px;
           left: -44px;
           position: absolute;
@@ -23,6 +27,7 @@
 
           @apply --ff-selector-cursor;
         }
+        */
       </style>
     </custom-style>
 
@@ -36,7 +41,7 @@
 
   </template>
   <script>
-    class SelectorElement extends Polymer.mixinBehaviors([Polymer.IronMultiSelectableBehavior], Polymer.Element) {
+    class SelectorElement extends Polymer.mixinBehaviors([Polymer.IronSelectableBehavior], Polymer.Element) {
       static get is() { return 'ff-selector'; }
 
       static get properties() {

@@ -1,0 +1,21 @@
+<link rel="import" href="/bower_components/shadycss/apply-shim.html">
+<link rel="import" href="/bower_components/polymer/lib/elements/custom-style.html">
+
+<dom-module id="ff-cursor">
+  <template>
+    <custom-style>
+      <style>
+        .iron-selected::before {
+          background-image: url('/images/cursor.png');
+          content: ' ';
+          display: inline-block;
+          height: 32px;
+          left: -44px;
+          position: absolute;
+          top: 4px;
+          width: 32px;
+        }
+      </style>
+    </custom-style>
+  </template>
+</dom-module>

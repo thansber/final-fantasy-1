@@ -1,0 +1,56 @@
+<!doctype html>
+<html>
+  <head>
+    <script src="/bower_components/webcomponentsjs/webcomponents-lite.js"></script>
+    <link rel="import" href="/bower_components/polymer/polymer-element.html">
+    <link rel="import" href="/bower_components/shadycss/apply-shim.html">
+
+    <style>
+      .light::before {
+        content: 'NOO';
+      }
+    </style>
+  </head>
+  <body>
+
+    <dom-module id="my-slotted-pseudo-bug">
+      <template>
+        <custom-style>
+          <style>
+          :host {
+            display: flex;
+          }
+
+          #container ::slotted(.light) {
+            border: 1px solid blue;
+          }
+
+          #container ::slotted(.light)::before,
+          #container ::slotted(.light):before,
+          #container ::slotted(.light::before),
+          #container ::slotted(.light:before) {
+            content: 'MOO';
+          }
+
+          </style>
+        </custom-style>
+
+        <div id="container">
+          <slot></slot>
+        </div>
+      </template>
+
+      <script>
+      class SlottedPseudoBugElement extends Polymer.Element {
+        static get is() { return 'my-slotted-pseudo-bug'; }
+      }
+
+      customElements.define(SlottedPseudoBugElement.is, SlottedPseudoBugElement);
+      </script>
+    </dom-module>
+
+    <my-slotted-pseudo-bug>
+      <div class="light">LIGHT DOM</div>
+    </my-slotted-pseudo-bug>
+  </body>
+</html>

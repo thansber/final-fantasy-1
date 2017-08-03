@@ -20,35 +20,65 @@
     <dom-module id="ff-selector-demo">
       <template>
         <custom-style>
-          <style>
-            :host {
-              --ff-selector-cursor: {
-                left: 0;
-                top:0 ;
-              };
+          <style include="ff-cursor">
+            section {
+              color: white;
+              display: flex;
+              flex-direction: row;
             }
 
-            div {
-              border: 1px solid white;
-              color: white;
-              height: 2em;
-              margin-bottom: 1em;
+            ff-selector {
+              display: flex;
+            }
+
+            .column {
               margin-left: 3em;
             }
 
-            div.iron-selected {
+            div[selectable] {
+              align-items: center;
+              border: 1px solid white;
+              display: flex;
+              font-size: 150%;
+              height: 5em;
+              justify-content: center;
+              margin-bottom: 1em;
+              width: 5em;
+            }
+
+            .iron-selected {
               background-color: red;
             }
 
+            .iron-selected::before {
+              left: 6px;
+              top: 1em;
+            }
           </style>
         </custom-style>
 
-        <ff-selector id="selector" up-down-selects>
-          <div>A</div>
-          <div>A</div>
-          <div>A</div>
-          <div>A</div>
-        </ff-selector>
+        <section>
+          <div class="column">
+            <ff-selector id="selector" up-down-selects>
+              <div selectable>A</div>
+              <div selectable>B</div>
+              <div selectable>C</div>
+              <div selectable>D</div>
+            </ff-selector>
+            Selected: [[ selectorSelected ]]
+          </div>
+
+          <div class="column">
+            <ff-selector id="selectorNoKeys">
+              <div selectable>E</div>
+              <div selectable>F</div>
+              <div selectable>G</div>
+              <div selectable>H</div>
+            </ff-selector>
+            Selected: [[ selectorNoKeysSelected ]]
+          </div>
+        </section>
+
       </template>
 
       <script>
@@ -57,13 +87,22 @@
 
         static get properties() {
           return {
-
-          };
+            selectorSelected: String,
+            selectorNoKeysSelected: String
+          }
         }
 
         ready() {
           super.ready();
           this.$.selector.selected = 0;
+          this.$.selectorNoKeys.selected = 2;
+
+          const addSelected = (path, e) => this.set(path, e.detail.value);
+
+          this.$.selector
+            .addEventListener('ff-selected', addSelected.bind(this, 'selectorSelected'));
+          this.$.selectorNoKeys
+            .addEventListener('ff-selected', addSelected.bind(this, 'selectorNoKeysSelected'));
         }
       }
 
