@@ -1,23 +1,32 @@
 <link rel="import" href="../ff-styles/ff-styles.html">
+<link rel="import" href="/bower_components/shadycss/apply-shim.html">
+<link rel="import" href="/bower_components/polymer/lib/elements/custom-style.html">
 
 <dom-module id="ff-intro-css">
   <template>
-    <style include="ff-styles" is="custom-style">
-      :host {
-        background-color: var(--ff-blue);
-        display: block;
-        padding: 2em;
-        @apply(--ff-font);
-      }
+    <custom-style>
+      <style include="ff-styles">
+        :host {
+          background-color: var(--ff-blue);
+          display: block;
+          padding: 2em;
+          @apply --ff-font;
+        }
 
-      section {
-        margin-bottom: 2em;
-      }
+        section {
+          margin-bottom: 2em;
+        }
 
-      p {
-        line-height: 1.25em;
-        text-align: center;
-      }
-    </style>
+        p {
+          line-height: 1.25em;
+          opacity: 0;
+          text-align: center;
+        }
+
+        p.done {
+          opacity: 1;
+        }
+      </style>
+    </custom-style>
   </template>
 </dom-module>

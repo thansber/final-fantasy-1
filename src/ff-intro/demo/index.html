@@ -1,0 +1,45 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=yes">
+    <title>ff-intro Demo</title>
+    <script src="/bower_components/webcomponentsjs/webcomponents-lite.js"></script>
+    <link rel="import" href="/bower_components/polymer/lib/elements/dom-bind.html">
+    <link rel="import" href="../ff-intro.html">
+
+    <style>
+      body {
+        background-color: black;
+      }
+
+      section {
+        width: 100vw;
+      }
+
+      ff-intro {
+        margin: 0 auto;
+        width: 612px;
+      }
+
+      button {
+        display: block;
+        margin: 0 auto;
+      }
+    </style>
+  </head>
+  <body>
+    <section>
+      <ff-intro id="intro" current-screen></ff-intro>
+      <button id="cancel">Cancel Animation</button>
+    </section>
+
+    <script>
+    HTMLImports.whenReady(() => {
+      document.getElementById('cancel').addEventListener('click', () => {
+        document.getElementById('intro').removeAttribute('current-screen');
+      })
+    });
+    </script>
+  </body>
+</html>

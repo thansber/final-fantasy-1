@@ -1,49 +1,43 @@
-(function(scope) {
-  scope.FF = scope.FF || {};
+class IntroElement extends ScreenMixin(Polymer.Element) {
+  static get is() { return 'ff-intro'; }
 
-  Polymer({
-    is: 'ff-intro',
+  onScreenClosed() {
+    this.animations.forEach(a => a.cancel());
+  }
 
-    behaviors: [
-      Polymer.NeonAnimationRunnerBehavior,
-      scope.FF.ScreenBehavior
-    ],
+  onScreenOpened() {
+    //this.playAnimation('entry');
+    let nodes = this.shadowRoot.querySelectorAll('p');
+    let fadeIn = [
+      {'opacity': '0'},
+      {'opacity': '1'}
+    ];
+    let timing = {
+      delay: 0,
+      duration: 1000,
+      easing: 'steps(4, start)'
+    };
+    const delayBetweenNodes = 1250;
 
-    properties: {
-      animationConfig: {
-        value: function() {
-          var text = Polymer.dom(this.root).querySelectorAll('p');
-          var textArray = Array.prototype.slice.call(text);
-
-          return {
-            entry: [{
-              name: 'cascaded-animation',
-              animation: 'fade-in-animation',
-              nodes: textArray,
-              nodeDelay: 1250,
-              timing: {
-                duration: 1000,
-                easing: 'steps(4, start)'
-              }
-            }]
-          };
-        }
-      }
-    },
-
-    onScreenClosed: function() {
-      this.cancelAnimation();
-    },
-
-    onScreenOpened: function() {
-      this.playAnimation('entry');
-    },
-
-    _toMenu: function() {
-      this.fire('ff-screen', {
-        screen: 'openingMenu'
+    this.animations = Array.from(nodes).map((n, i) => {
+      let nodeTiming = Object.assign({}, timing, {
+        delay: timing.delay + (i * delayBetweenNodes)
       });
-    }
-  });
+      let animation = n.animate(fadeIn, nodeTiming);
+      animation.onfinish = () => n.classList.toggle('done');
+      return animation;
+    });
+  }
 
-}(window));
+  _toMenu() {
+    this.dispatchEvent(new CustomEvent('ff-screen', {
+      bubbles: true,
+      composed: true,
+      detail: {
+        screen: 'openingMenu'
+      }
+    }));
+  }
+}
+
+customElements.define(IntroElement.is, IntroElement);
