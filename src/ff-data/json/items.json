@@ -1,0 +1,37 @@
+{
+  "HealPotion": {
+    "type":"potion",
+    "desc":"HEAL",
+    "price":60,
+    "spell":"CURE",
+    "spellOutsideBattle":"HEAL_POTION"
+  },
+  "PurePotion": {
+    "type":"potion",
+    "desc":"PURE",
+    "price":75,
+    "spell":"PURE"
+  },
+  "SoftPotion": {
+    "type":"potion",
+    "desc":"SOFT",
+    "price":300,
+    "spell":"SOFT"
+  },
+
+  "Tent": {
+    "desc":"TENT",
+    "price":75,
+    "spell":"TENT"
+  },
+  "Cabin": {
+    "desc":"CABIN",
+    "price":300,
+    "spell":"CABIN"
+  },
+  "House": {
+    "desc":"HOUSE",
+    "price":3000,
+    "spell":"HOUSE"
+  }
+}

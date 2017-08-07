@@ -8,6 +8,14 @@
       url="../json/armor.json"
       last-response="{{ armorById }}"></iron-ajax>
     <iron-ajax
+      id="items"
+      url="../json/items.json"
+      last-response="{{ itemsById }}"></iron-ajax>
+    <iron-ajax
+      id="statuses"
+      url="../json/statuses.json"
+      last-response="{{ statusesById }}"></iron-ajax>
+    <iron-ajax
       id="weapons"
       url="../json/weapons.json"
       last-response="{{ weaponsById }}"></iron-ajax>
@@ -33,30 +41,29 @@
 
       static get observers() {
         return [
-          '_dataChanged(armorById, weaponsById)'
+          '_dataChanged(armorById, itemsById, statusesById, weaponsById)'
         ];
+      }
+
+      _addToData(data, byId, key) {
+        if (byId) {
+          data[key] = {
+            all: this._all(byId),
+            byId: byId
+          }
+        }
       }
 
       _all(byId) {
         return Object.keys(byId).map(id => Object.assign({ id }, byId[id]));
       }
 
-      _dataChanged(armorById, weaponsById) {
+      _dataChanged(armorById, itemsById, statusesById, weaponsById) {
         let updated = Object.assign({}, this.data);
-        if (armorById) {
-          updated.armor = {
-            all: this._all(armorById),
-            byId: armorById
-          };
-        }
-
-        if (weaponsById) {
-          updated.weapons = {
-            all: this._all(weaponsById),
-            byId: weaponsById
-          };
-        }
-
+        this._addToData(updated, armorById, 'armor');
+        this._addToData(updated, itemsById, 'items');
+        this._addToData(updated, statusesById, 'statuses');
+        this._addToData(updated, weaponsById, 'weapons');
         this.set('data', updated);
       }
 

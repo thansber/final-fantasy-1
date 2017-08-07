@@ -1,0 +1,41 @@
+{
+  "BLIND":{
+    "label":"Darkness",
+    "actionable":true,
+    "battleText":"Dark"
+  },
+  "CONFUSE": {
+    "label":"confused"
+  },
+  "DEAD": {
+    "label":"dead"
+  },
+  "MUTE":{
+    "label":"Silenced",
+    "actionable":true,
+    "battleText":"Mute"
+  },
+  "PARALYSIS":{
+    "label":"Paralyzed",
+    "battleText":"Stun",
+    "critical":true
+  },
+  "POISON":{
+    "label":"Poisoned",
+    "actionable":true,
+    "battleText":"Poison",
+    "shrunkText":true,
+    "critical":true
+  },
+  "SLEEP":{
+    "label":"Asleep",
+    "battleText":"Asleep",
+    "shrunkText":true,
+    "critical":true
+  },
+  "STONE":{
+    "label":"Petrified",
+    "battleText":"Stone",
+    "shrunkText":true
+  }
+}

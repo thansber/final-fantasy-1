@@ -34,7 +34,7 @@
   <body>
     <dom-bind>
       <template id="template">
-        <ff-data fetch="armor weapons" data="{{ data }}"></ff-data>
+        <ff-data fetch="armor items statuses weapons" data="{{ data }}"></ff-data>
 
         <div id="container">
           <section>
@@ -45,11 +45,26 @@
           </section>
 
           <section>
+            <h2>Items</h2>
+            <template is="dom-repeat" items="[[ data.items.all ]]">
+              <p>[[ item.id ]]</p>
+            </template>
+          </section>
+
+          <section>
+            <h2>Statuses</h2>
+            <template is="dom-repeat" items="[[ data.statuses.all ]]">
+              <p>[[ item.id ]]</p>
+            </template>
+          </section>
+
+          <section>
             <h2>Weapons</h2>
             <template is="dom-repeat" items="[[ data.weapons.all ]]">
               <p>[[ item.id ]]</p>
             </template>
           </section>
+
         </div>
 
       </template>
