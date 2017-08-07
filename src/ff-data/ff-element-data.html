@@ -1,0 +1,42 @@
+<link rel="import" href="/bower_components/polymer/polymer-element.html">
+
+<dom-module id="ff-element-data">
+  <script>
+    class ElementData extends Polymer.Element {
+      static get is() { return 'ff-element-data'; }
+
+      static get properties() {
+        return {
+          AllElements: {
+            readonly: true,
+            type: Array,
+            value: {}
+          },
+          Element: {
+            readonly: true,
+            type: Object,
+            value: function() {
+              return {
+                Fire : 'fire',
+                Ice : 'ice',
+                Lightning : 'lit',
+                Earth : 'earth',
+                Death : 'death',
+                Time : 'time',
+                PoisonStone : 'poison/stone',
+                Status : 'status'
+              };
+            }
+          }
+        };
+      }
+    }
+
+    ready() {
+      super.ready();
+      this.AllElements = Object.values(this.Element);
+    }
+
+    customElements.define(ElementData.is, ElementData);
+  </script>
+</dom-module>

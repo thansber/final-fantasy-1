@@ -1,0 +1,58 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=yes">
+    <title>ff-data Demo</title>
+    <script src="/bower_components/webcomponentsjs/webcomponents-lite.js"></script>
+    <link rel="import" href="/bower_components/polymer/lib/elements/dom-bind.html">
+    <link rel="import" href="../ff-data.html">
+
+    <style>
+      body {
+        background-color: black;
+        color: white;
+      }
+      #container {
+        display: flex;
+        flex-direction: row;
+      }
+      section {
+        align-items: flex-start;
+        display: flex;
+        flex-direction: column;
+        margin-right: 1em;
+      }
+
+      p {
+        margin: 0;
+        padding: 0;
+      }
+
+    </style>
+  </head>
+  <body>
+    <dom-bind>
+      <template id="template">
+        <ff-data fetch="armor weapons" data="{{ data }}"></ff-data>
+
+        <div id="container">
+          <section>
+            <h2>Armor</h2>
+            <template is="dom-repeat" items="[[ data.armor.all ]]">
+              <p>[[ item.id ]]</p>
+            </template>
+          </section>
+
+          <section>
+            <h2>Weapons</h2>
+            <template is="dom-repeat" items="[[ data.weapons.all ]]">
+              <p>[[ item.id ]]</p>
+            </template>
+          </section>
+        </div>
+
+      </template>
+    </dom-bind>
+  </body>
+</html>

@@ -1,0 +1,74 @@
+<link rel="import" href="/bower_components/polymer/polymer-element.html">
+<link rel="import" href="/bower_components/iron-ajax/iron-ajax.html">
+
+<dom-module id="ff-data">
+  <template>
+    <iron-ajax
+      id="armor"
+      url="../json/armor.json"
+      last-response="{{ armorById }}"></iron-ajax>
+    <iron-ajax
+      id="weapons"
+      url="../json/weapons.json"
+      last-response="{{ weaponsById }}"></iron-ajax>
+  </template>
+
+  <script>
+    class DataElement extends Polymer.Element {
+      static get is() { return 'ff-data'; }
+
+      static get properties() {
+        return {
+          data: {
+            notify: true,
+            type: Object,
+            value: {}
+          },
+          fetch: {
+            observer: '_fetchChanged',
+            type: String
+          }
+        };
+      }
+
+      static get observers() {
+        return [
+          '_dataChanged(armorById, weaponsById)'
+        ];
+      }
+
+      _all(byId) {
+        return Object.keys(byId).map(id => Object.assign({ id }, byId[id]));
+      }
+
+      _dataChanged(armorById, weaponsById) {
+        let updated = Object.assign({}, this.data);
+        if (armorById) {
+          updated.armor = {
+            all: this._all(armorById),
+            byId: armorById
+          };
+        }
+
+        if (weaponsById) {
+          updated.weapons = {
+            all: this._all(weaponsById),
+            byId: weaponsById
+          };
+        }
+
+        this.set('data', updated);
+      }
+
+      _fetchChanged(newValue, oldValue) {
+        if (!newValue) {
+          return;
+        }
+
+        newValue.split(' ').forEach(d => this.$[d].generateRequest());
+      }
+    }
+
+    customElements.define(DataElement.is, DataElement);
+  </script>
+</dom-module>
