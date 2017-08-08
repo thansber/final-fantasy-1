@@ -1,13 +1,15 @@
 <link rel="import" href="/bower_components/polymer/polymer-element.html">
+<link rel="import" href="/bower_components/iron-flex-layout/iron-flex-layout-classes.html">
 <link rel="import" href="/bower_components/iron-selector/iron-selector.html">
 <link rel="import" href="/redux-mixin.html">
 
 <link rel="import" href="../ff-intro/ff-intro.html">
+<link rel="import" href="../ff-opening-menu/ff-opening-menu.html">
 <link rel="import" href="ff-app-css.html">
 
 <dom-module id="ff-app">
   <template>
-    <style include="ff-app-css"></style>
+    <style include="iron-flex ff-app-css"></style>
 
     <iron-selector
       id="screens"
@@ -17,8 +19,9 @@
 
       <ff-intro
         screen="intro"></ff-intro>
-      <div
-        screen="openingMenu">OPENING MENU</div>
+      <ff-opening-menu
+        screen="openingMenu"
+        class="layout vertical center-center"></ff-opening-menu>
     </iron-selector>
 <!--
     <div id="screens">

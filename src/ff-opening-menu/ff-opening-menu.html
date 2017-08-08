@@ -1,4 +1,6 @@
-<link rel="import" href="../behaviors/ff-screen-behavior.html">
+<link rel="import" href="/bower_components/polymer/polymer-element.html">
+<link rel="import" href="/redux-mixin.html">
+<link rel="import" href="../mixins/ff-screen-mixin.html">
 <link rel="import" href="../ff-bordered/ff-bordered.html">
 <link rel="import" href="../ff-selector/ff-selector.html">
 <link rel="import" href="ff-opening-menu-css.html">
@@ -18,7 +20,9 @@
       <ff-bordered name="new">NEW GAME</ff-bordered>
     </ff-selector>
 
-    <ff-bordered name="respondRate">RESPOND RATE {{respondRate}}</ff-bordered>
+    <ff-bordered
+      id="respondRate"
+      name="respondRate">RESPOND RATE {{respondRate}}</ff-bordered>
 
     <div class="copyright square">C 1987 SQUARE</div>
     <div class="copyright">C 1990 NINTENDO</div>
