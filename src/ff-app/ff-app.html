@@ -1,19 +1,26 @@
-<link rel="import" href="/bower_components/polymer/polymer.html">
-<link rel="import" href="../behaviors/ff-animation-behavior.html">
-<link rel="import" href="../behaviors/ff-shop-behavior.html">
-<link rel="import" href="../behaviors/ff-vehicle-behavior.html">
+<link rel="import" href="/bower_components/polymer/polymer-element.html">
+<link rel="import" href="/bower_components/iron-selector/iron-selector.html">
+<link rel="import" href="/redux-mixin.html">
+
 <link rel="import" href="../ff-intro/ff-intro.html">
-<link rel="import" href="../ff-opening-menu/ff-opening-menu.html">
-<link rel="import" href="../ff-char-select/ff-char-select.html">
-<link rel="import" href="../ff-enter-name/ff-enter-name.html">
-<link rel="import" href="../ff-map-screen/ff-map-screen.html">
-<link rel="import" href="../ff-shop-screen/ff-shop-screen.html">
 <link rel="import" href="ff-app-css.html">
 
 <dom-module id="ff-app">
   <template>
     <style include="ff-app-css"></style>
 
+    <iron-selector
+      id="screens"
+      selected="[[ screen ]]"
+      attr-for-selected="screen"
+      selected-attribute="current-screen">
+
+      <ff-intro
+        screen="intro"></ff-intro>
+      <div
+        screen="openingMenu">OPENING MENU</div>
+    </iron-selector>
+<!--
     <div id="screens">
       <ff-intro screen="intro"></ff-intro>
       <ff-opening-menu flex screen="openingMenu"></ff-opening-menu>
@@ -45,7 +52,23 @@
         on-ff-purchase="_onPurchase"
         on-ff-exit-shop="_onExitShop"></ff-shop-screen>
     </div>
+    -->
   </template>
 
-  <script src="ff-app.js"></script>
+  <script>
+    class AppElement extends ReduxMixin(Polymer.Element) {
+      static get is() { return 'ff-app'; }
+
+      static get properties() {
+        return {
+          screen: {
+            statePath: 'screen',
+            type: String
+          }
+        };
+      }
+    }
+
+    customElements.define(AppElement.is, AppElement);
+  </script>
 </dom-module>

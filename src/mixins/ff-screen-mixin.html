@@ -16,13 +16,23 @@ ScreenMixin = (superClass) => class extends superClass {
     }
   }
 
+  static get actions() {
+    return {
+      screenChanged(screen) {
+        return {
+          type: 'SCREEN_CHANGED',
+          payload: screen
+        };
+      }
+    };
+  }
+
   onScreenChange(value) {
     if (value === false) {
       this._onScreenClosed();
     } else {
       this._onScreenOpened();
     }
-    this.hidden = !this.currentScreen;
   }
 
   // Override if you need custom logic when a screen is closing

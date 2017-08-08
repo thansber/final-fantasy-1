@@ -1,0 +1,23 @@
+<link rel="import" href="/bower_components/polymer-redux/polymer-redux.html">
+<script src="/node_modules/redux/dist/redux.js"></script>
+
+<script>
+const initialState = {
+  screen: 'intro'
+};
+
+const reducer = (state, action) => {
+  if (!state) return initialState;
+
+  switch (action.type) {
+    case 'SCREEN_CHANGED':
+      return Object.assign({}, state, { screen: action.payload });
+
+    default:
+      return state;
+  }
+};
+
+const store = Redux.createStore(reducer, initialState);
+ReduxMixin = PolymerRedux(store);
+</script>

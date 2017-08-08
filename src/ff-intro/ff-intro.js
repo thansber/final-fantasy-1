@@ -1,8 +1,8 @@
-class IntroElement extends ScreenMixin(Polymer.Element) {
+class IntroElement extends ScreenMixin(ReduxMixin(Polymer.Element)) {
   static get is() { return 'ff-intro'; }
 
   onScreenClosed() {
-    this.animations.forEach(a => a.cancel());
+    (this.animations || []).forEach(a => a.cancel());
   }
 
   onScreenOpened() {
@@ -30,13 +30,7 @@ class IntroElement extends ScreenMixin(Polymer.Element) {
   }
 
   _toMenu() {
-    this.dispatchEvent(new CustomEvent('ff-screen', {
-      bubbles: true,
-      composed: true,
-      detail: {
-        screen: 'openingMenu'
-      }
-    }));
+    this.dispatch('screenChanged', 'openingMenu');
   }
 }
 
