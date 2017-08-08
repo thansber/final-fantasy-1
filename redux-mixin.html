@@ -3,13 +3,37 @@
 
 <script>
 const initialState = {
+  party: [],
   screen: 'openingMenu'
 };
+
+const sampleParty = () => {
+  return [{
+    charClass: 'WM',
+    name: 'AAAA',
+    weapons: [], armor: [], spells: []
+  }, {
+    charClass: 'Th',
+    name: 'BBBB',
+    weapons: [], armor: [], spells: []
+  }, {
+    charClass: 'BB',
+    name: 'CCCC',
+    weapons: [], armor: [], spells: []
+  }, {
+    charClass: 'RM',
+    name: 'DDDD',
+    weapons: [], armor: [], spells: []
+  }];
+}
 
 const reducer = (state, action) => {
   if (!state) return initialState;
 
   switch (action.type) {
+    case 'LOAD_GAME':
+      console.log('TODO: load from actual saved game');
+      return Object.assign({}, state, { party: sampleParty() });
     case 'SCREEN_CHANGED':
       return Object.assign({}, state, { screen: action.payload });
 

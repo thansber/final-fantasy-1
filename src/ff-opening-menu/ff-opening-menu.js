@@ -3,9 +3,6 @@ class OpeningMenuElement extends ScreenMixin(ReduxMixin(Polymer.Element)) {
 
   static get properties() {
     return {
-      party: {
-        type: Object
-      },
       respondRate: {
         notify: true,
         type: Number,
@@ -19,31 +16,10 @@ class OpeningMenuElement extends ScreenMixin(ReduxMixin(Polymer.Element)) {
     return true;
   }
 
-  _loadSavedGame() {
-    console.log('TODO: load from actual saved game');
-    return [{
-      charClass: 'WM',
-      name: 'AAAA',
-      weapons: [], armor: [], spells: []
-    }, {
-      charClass: 'Th',
-      name: 'BBBB',
-      weapons: [], armor: [], spells: []
-    }, {
-      charClass: 'BB',
-      name: 'CCCC',
-      weapons: [], armor: [], spells: []
-    }, {
-      charClass: 'RM',
-      name: 'DDDD',
-      weapons: [], armor: [], spells: []
-    }];
-  }
-
   _next(e, detail) {
     if (detail.value === 'continue') {
       if (this._hasSavedGame()) {
-        this.dispatch('LOAD_GAME');
+        this.dispatch({ type: 'LOAD_GAME' });
         return;
       }
       this.dispatch('screenChanged', 'charSelect');
