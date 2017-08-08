@@ -1,0 +1,342 @@
+{
+  "FIRE": {
+    "level":1,
+    "target":"single",
+    "type":"damage",
+    "price":100,
+    "eff":10,
+    "acc":24,
+    "element":"fire",
+    "allowedClasses":"Ni RM RW BM BW"
+  },
+  "LIT": {
+    "level":1,
+    "target":"single",
+    "type":"damage",
+    "price":100,
+    "eff":10,
+    "acc":24,
+    "element":"lit",
+    "allowedClasses":"Ni RM RW BM BW"
+  },
+  "LOCK": {
+    "level":1,
+    "target":"single",
+    "type":"stat-down",
+    "price":100,
+    "eff":20,
+    "acc":64,
+    "stat":"spellEvasion",
+    "allowedClasses":"Ni RM RW BM BW"
+  },
+  "SLEP": {
+    "level":1,
+    "target":"all",
+    "type":"status-add",
+    "price":100,
+    "eff":0,
+    "acc":24,
+    "element":"status",
+    "status":"SLEEP",
+    "allowedClasses":"Ni RM RW BM BW"
+  },
+
+  "DARK": {
+    "level":2,
+    "target":"all",
+    "type":"status-add",
+    "price":400,
+    "eff":0,
+    "acc":24,
+    "element":"status",
+    "status":"BLIND",
+    "allowedClasses":"Ni RM RW BM BW"
+  },
+  "ICE": {
+    "level":2,
+    "target":"single",
+    "type":"damage",
+    "price":400,
+    "eff":20,
+    "acc":24,
+    "element":"ice",
+    "allowedClasses":"Ni RM RW BM BW"
+  },
+  "SLOW": {
+    "level":2,
+    "target":"all",
+    "type":"hit-multiplier-down",
+    "price":400,
+    "eff":0,
+    "acc":64,
+    "amount":-1,
+    "allowedClasses":"Ni RM RW BM BW"
+  },
+  "TMPR": {
+    "level":2,
+    "target":"single",
+    "type":"stat-up",
+    "price":400,
+    "eff":14,
+    "acc":0,
+    "stat":"spellAttack",
+    "allowedClasses":"Ni RM RW BM BW"
+  },
+
+  "FIR2": {
+    "level":3,
+    "target":"all",
+    "type":"damage",
+    "price":1500,
+    "eff":30,
+    "acc":24,
+    "element":"fire",
+    "allowedClasses":"Ni RM RW BM BW"
+  },
+  "HOLD": {
+    "level":3,
+    "target":"single",
+    "type":"status-add",
+    "price":1500,
+    "eff":0,
+    "acc":64,
+    "element":"status",
+    "status":"PARALYSIS",
+    "allowedClasses":"Ni RM RW BM BW"
+  },
+  "LIT2": {
+    "level":3,
+    "target":"all",
+    "type":"damage",
+    "price":1500,
+    "eff":30,
+    "acc":24,
+    "element":"lit",
+    "allowedClasses":"Ni RM RW BM BW"
+  },
+  "LOK2": {
+    "level":3,
+    "target":"all",
+    "type":"status-down",
+    "price":1500,
+    "eff":20,
+    "acc":40,
+    "stat":"spellEvasion",
+    "allowedClasses":"Ni RM RW BM BW"
+  },
+
+  "CONF": {
+    "level":4,
+    "target":"all",
+    "type":"status-add",
+    "price":4000,
+    "eff":0,
+    "acc":64,
+    "status":"CONFUSE",
+    "allowedClasses":"Ni RM RW BM BW"
+  },
+  "FAST": {
+    "level":4,
+    "target":"all",
+    "type":"hit-multiplier-up",
+    "price":4000,
+    "eff":0,
+    "acc":0,
+    "amount":1,
+    "allowedClasses":"Ni RM RW BM BW"
+  },
+  "ICE2": {
+    "level":4,
+    "target":"all",
+    "type":"damage",
+    "price":4000,
+    "eff":40,
+    "acc":24,
+    "element":"ice",
+    "allowedClasses":"Ni RM RW BM BW"
+  },
+  "SLP2": {
+    "level":4,
+    "target":"single",
+    "type":"status-add",
+    "price":4000,
+    "eff":0,
+    "acc":64,
+    "status":"SLEEP",
+    "allowedClasses":"Ni RM RW BM BW"
+  },
+
+  "BANE": {
+    "level":5,
+    "target":"all",
+    "type":"status-add",
+    "price":8000,
+    "eff":0,
+    "acc":40,
+    "element":"poison/stone",
+    "status":"DEAD",
+    "allowedClasses":"RW BM BW"
+  },
+  "FIR3": {
+    "level":5,
+    "target":"all",
+    "type":"damage",
+    "price":8000,
+    "eff":50,
+    "acc":24,
+    "element":"fire",
+    "allowedClasses":"RM RW BM BW"
+  },
+  "SLO2": {
+    "level":5,
+    "target":"single",
+    "type":"hit-multiplier-down",
+    "price":8000,
+    "eff":0,
+    "acc":64,
+    "amount":-1,
+    "allowedClasses":"RM RW BM BW"
+  },
+  "WARP": {
+    "level":5,
+    "target":"all",
+    "type":"teleport",
+    "price":8000,
+    "eff":0,
+    "acc":0,
+    "inBattle":false,
+    "allowedClasses":"RW BW"
+  },
+
+  "LIT3": {
+    "level":6,
+    "target":"all",
+    "type":"damage",
+    "price":20000,
+    "eff":60,
+    "acc":24,
+    "element":"lit",
+    "allowedClasses":"RW BM BW"
+  },
+  "QAKE": {
+    "level":6,
+    "target":"all",
+    "type":"status-add",
+    "price":20000,
+    "eff":0,
+    "acc":24,
+    "element":"earth",
+    "status":"DEAD",
+    "allowedClasses":"BM BW"
+  },
+  "RUB": {
+    "level":6,
+    "target":"single",
+    "type":"status-add",
+    "price":20000,
+    "eff":0,
+    "acc":24,
+    "element":"death",
+    "status":"DEAD",
+    "allowedClasses":"BM BW"
+  },
+  "STUN": {
+    "level":6,
+    "target":"single",
+    "type":"status-add-hp",
+    "price":20000,
+    "eff":0,
+    "acc":0,
+    "hpAffectsUnder":300,
+    "element":"status",
+    "status":"PARALYSIS",
+    "allowedClasses":"BM BW"
+  },
+
+  "BLND": {
+    "level":7,
+    "target":"single",
+    "type":"status-add-hp",
+    "price":45000,
+    "eff":0,
+    "acc":0,
+    "hpAffectsUnder":300,
+    "element":"status",
+    "status":"BLIND",
+    "allowedClasses":"BM BW"
+  },
+  "BRAK": {
+    "level":7,
+    "target":"single",
+    "type":"status-add",
+    "price":45000,
+    "eff":0,
+    "acc":64,
+    "element":"poison/stone",
+    "status":"STONE",
+    "allowedClasses":"BW"
+  },
+  "ICE3": {
+    "level":7,
+    "target":"all",
+    "type":"damage",
+    "price":45000,
+    "eff":70,
+    "acc":24,
+    "element":"ice",
+    "allowedClasses":"RW BM BW"
+  },
+  "SABR": {
+    "level":7,
+    "target":"self",
+    "type":"stat-up-multi",
+    "price":45000,
+    "eff":16,
+    "acc":40,
+    "stat":"spellAttack spellHit",
+    "allowedClasses":"BW"
+  },
+
+  "NUKE": {
+    "level":8,
+    "target":"all",
+    "type":"damage",
+    "price":60000,
+    "eff":100,
+    "acc":107,
+    "allowedClasses":"BW"
+  },
+  "STOP": {
+    "level":8,
+    "target":"all",
+    "type":"status-add",
+    "price":60000,
+    "eff":0,
+    "acc":48,
+    "element":"time",
+    "status":"PARALYSIS",
+    "allowedClasses":"BW"
+  },
+  "XXXX": {
+    "level":8,
+    "target":"single",
+    "type":"status-add",
+    "price":60000,
+    "eff":0,
+    "acc":0,
+    "element":"death",
+    "status":"DEAD",
+    "allowedClasses":"BW"
+  },
+  "ZAP!": {
+    "level":8,
+    "target":"all",
+    "type":"status-add",
+    "price":60000,
+    "eff":0,
+    "acc":32,
+    "element":"time",
+    "status":"DEAD",
+    "allowedClasses":"BW"
+  }
+}

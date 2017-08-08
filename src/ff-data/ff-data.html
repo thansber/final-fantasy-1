@@ -8,6 +8,10 @@
       url="../json/armor.json"
       last-response="{{ armorById }}"></iron-ajax>
     <iron-ajax
+      id="black-magic"
+      url="../json/black-magic.json"
+      last-response="{{ blackMagicById }}"></iron-ajax>
+    <iron-ajax
       id="items"
       url="../json/items.json"
       last-response="{{ itemsById }}"></iron-ajax>
@@ -19,6 +23,10 @@
       id="weapons"
       url="../json/weapons.json"
       last-response="{{ weaponsById }}"></iron-ajax>
+    <iron-ajax
+      id="white-magic"
+      url="../json/white-magic.json"
+      last-response="{{ whiteMagicById }}"></iron-ajax>
   </template>
 
   <script>
@@ -41,7 +49,7 @@
 
       static get observers() {
         return [
-          '_dataChanged(armorById, itemsById, statusesById, weaponsById)'
+          '_dataChanged(armorById, blackMagicById, itemsById, statusesById, weaponsById, whiteMagicById)'
         ];
       }
 
@@ -58,12 +66,14 @@
         return Object.keys(byId).map(id => Object.assign({ id }, byId[id]));
       }
 
-      _dataChanged(armorById, itemsById, statusesById, weaponsById) {
+      _dataChanged(armorById, blackMagicById, itemsById, statusesById, weaponsById, whiteMagicById) {
         let updated = Object.assign({}, this.data);
         this._addToData(updated, armorById, 'armor');
+        this._addToData(updated, blackMagicById, 'blackMagic');
         this._addToData(updated, itemsById, 'items');
         this._addToData(updated, statusesById, 'statuses');
         this._addToData(updated, weaponsById, 'weapons');
+        this._addToData(updated, whiteMagicById, 'whiteMagic');
         this.set('data', updated);
       }
 
