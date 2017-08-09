@@ -53,6 +53,8 @@ const reducer = (state, action) => {
       return Object.assign({}, state, { party: sampleParty() });
     case 'SCREEN_CHANGED':
       return Object.assign({}, state, { screen: action.payload });
+    case 'START_GAME':
+      return state;
 
     default:
       return state;

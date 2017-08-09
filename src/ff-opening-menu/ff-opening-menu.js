@@ -20,6 +20,7 @@ class OpeningMenuElement extends ScreenMixin(ReduxMixin(Polymer.Element)) {
     if (detail.value === 'continue') {
       if (this._hasSavedGame()) {
         this.dispatch({ type: 'LOAD_GAME' });
+        this.dispatch({ type: 'START_GAME' });
         return;
       }
       this.dispatch('screenChanged', 'charSelect');
