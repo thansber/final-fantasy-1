@@ -1,0 +1,30 @@
+{
+  "HEAL_POTION": {
+    "level":-1,
+    "target":"single",
+    "type":"healing-exact",
+    "eff":30,
+    "allowedClasses":"ALL"
+  },
+  "TENT": {
+    "level":-1,
+    "target":"all",
+    "type":"healing-exact",
+    "eff":30,
+    "allowedClasses":"ALL"
+  },
+  "CABIN": {
+    "level":-1,
+    "target":"all",
+    "type":"healing-exact",
+    "eff":60,
+    "allowedClasses":"ALL"
+  },
+  "HOUSE": {
+    "level":-1,
+    "target":"all",
+    "type":"healing-exact-spells",
+    "eff":120,
+    "allowedClasses":"ALL"
+  }
+}

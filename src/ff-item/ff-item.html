@@ -1,102 +1,112 @@
+<link rel="import" href="/bower_components/polymer/polymer-element.html">
+<link rel="import" href="/bower_components/shadycss/apply-shim.html">
+<link rel="import" href="/bower_components/polymer/lib/elements/custom-style.html">
+
 <dom-module id="ff-item">
   <template>
-    <style>
-      :host {
-        display: flex;
-        justify-content: space-between;
-        position: relative;
-        width: 100%;
-      }
+    <custom-style>
+      <style>
+        :host {
+          display: flex;
+          justify-content: space-between;
+          position: relative;
+          width: 100%;
+        }
 
-      #icon {
-        background-image: url(items.png);
-        background-position-y: 0;
-        background-repeat: no-repeat;
-        height: 16px;
-        width: 16px;
+        #icon {
+          background-image: url(items.png);
+          background-position-y: 0;
+          background-repeat: no-repeat;
+          height: 16px;
+          width: 16px;
 
-        @apply(--ff-item);
-      }
+          @apply(--ff-item);
+        }
 
-      #icon[type="knife"] {
-        background-position-x: 0px;
-      }
+        #icon[type="knife"] {
+          background-position-x: 0px;
+        }
 
-      #icon[type="hammer"] {
-        background-position-x: -16px;
-      }
+        #icon[type="hammer"] {
+          background-position-x: -16px;
+        }
 
-      #icon[type="mail"] {
-        background-position-x: -32px;
-      }
+        #icon[type="mail"] {
+          background-position-x: -32px;
+        }
 
-      #icon[type="axe"] {
-        background-position-x: -48px;
-      }
+        #icon[type="axe"] {
+          background-position-x: -48px;
+        }
 
-      #icon[type="gloves"] {
-        background-position-x: -64px;
-      }
+        #icon[type="gloves"] {
+          background-position-x: -64px;
+        }
 
-      #icon[type="headgear"] {
-        background-position-x: -80px;
-      }
+        #icon[type="headgear"] {
+          background-position-x: -80px;
+        }
 
-      #icon[type="potion"] {
-        background-position-x: -96px;
-      }
+        #icon[type="potion"] {
+          background-position-x: -96px;
+        }
 
-      #icon[type="bracelet"] {
-        background-position-x: -112px;
-      }
+        #icon[type="bracelet"] {
+          background-position-x: -112px;
+        }
 
-      #icon[type="robe"] {
-        background-position-x: -128px;
-      }
+        #icon[type="robe"] {
+          background-position-x: -128px;
+        }
 
-      #icon[type="staff"] {
-        background-position-x: -144px;
-      }
+        #icon[type="staff"] {
+          background-position-x: -144px;
+        }
 
-      #icon[type="nunchucks"] {
-        background-position-x: -160px;
-      }
+        #icon[type="nunchucks"] {
+          background-position-x: -160px;
+        }
 
-      #icon[type="shield"] {
-        background-position-x: -176px;
-      }
+        #icon[type="shield"] {
+          background-position-x: -176px;
+        }
 
-      #icon[type="sword"] {
-        background-position-x: -192px;
-      }
+        #icon[type="sword"] {
+          background-position-x: -192px;
+        }
 
-      #icon[type="rod"] {
-        background-position-x: -208px;
-      }
+        #icon[type="rod"] {
+          background-position-x: -208px;
+        }
+      </style>
+    </custom-style>
 
-    </style>
     <div id="item">[[ label ]]</div>
     <div id="icon" type$="[[ icon ]]" hidden="[[ noIcon ]]"></div>
   </template>
 
   <script>
-    Polymer({
-      is: 'ff-item',
-      properties: {
-        icon: {
-          readonly: true,
-          type: String
-        },
-        label: {
-          readonly: true,
-          type: String
-        },
-        noIcon: {
-          readonly: true,
-          type: Boolean
-        }
+    class ItemElement extends Polymer.Element {
+      static get is() { return 'ff-item'; }
 
+      static get properties() {
+        return {
+          icon: {
+            readonly: true,
+            type: String
+          },
+          label: {
+            readonly: true,
+            type: String
+          },
+          noIcon: {
+            readonly: true,
+            type: Boolean
+          }
+        };
       }
-    });
+    }
+
+    customElements.define(ItemElement.is, ItemElement);
   </script>
 </dom-module>

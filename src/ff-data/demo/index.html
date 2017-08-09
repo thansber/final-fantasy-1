@@ -35,7 +35,7 @@
     <dom-bind>
       <template id="template">
         <ff-data
-          fetch="armor black-magic items statuses weapons white-magic"
+          fetch="armor black-magic items item-magic statuses weapons white-magic"
           data="{{ data }}"></ff-data>
 
         <div id="container">
@@ -56,6 +56,13 @@
           <section>
             <h2>Items</h2>
             <template is="dom-repeat" items="[[ data.items.all ]]">
+              <p>[[ item.id ]]</p>
+            </template>
+          </section>
+
+          <section>
+            <h2>I.Magic</h2>
+            <template is="dom-repeat" items="[[ data.itemMagic.all ]]">
               <p>[[ item.id ]]</p>
             </template>
           </section>
