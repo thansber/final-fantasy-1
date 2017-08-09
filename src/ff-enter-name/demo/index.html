@@ -15,8 +15,44 @@
     </style>
   </head>
   <body>
+
+    <dom-module id="ff-enter-name-demo">
+      <template>
+        <style>
+          :host {
+            align-items: center;
+            display: flex;
+            height: 544px;
+            width: 100vw;
+          }
+          ff-enter-name {
+            margin: 0 auto;
+          }
+        </style>
+        <ff-enter-name
+          id="demo"
+          current-screen></ff-char-select>
+      </template>
+
+      <script>
+        class EnterNameDemoElement extends ReduxMixin(Polymer.Element) {
+          static get is() { return 'ff-enter-name-demo'; }
+
+          ready() {
+            super.ready();
+            this.dispatch({
+              type: 'CHAR_CLASS_SET',
+              charClass: 'Fi'
+            });
+          }
+        }
+
+        customElements.define(EnterNameDemoElement.is, EnterNameDemoElement);
+      </script>
+    </dom-module>
+
     <section>
-      <ff-enter-name current-screen></ff-enter-name>
+      <ff-enter-name-demo></ff-enter-name-demo>
     </section>
   </body>
 </html>
