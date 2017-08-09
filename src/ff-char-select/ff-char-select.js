@@ -30,6 +30,7 @@ class CharSelectElement extends ScreenMixin(CharClassMixin(ReduxMixin(Polymer.El
       charClass: this._selectedCharSelector().selected,
       charIndex: this.charIndex
     });
+    this.dispatch('screenChanged', 'enterName');
   }
 
   _nextCharClass() {

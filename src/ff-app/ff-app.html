@@ -5,6 +5,7 @@
 
 <link rel="import" href="../ff-intro/ff-intro.html">
 <link rel="import" href="../ff-opening-menu/ff-opening-menu.html">
+<link rel="import" href="../ff-char-select/ff-char-select.html">
 <link rel="import" href="ff-app-css.html">
 
 <dom-module id="ff-app">
@@ -13,7 +14,7 @@
 
     <iron-selector
       id="screens"
-      selected="[[ screen ]]"
+      selected="{{ screen }}"
       attr-for-selected="screen"
       selected-attribute="current-screen">
 
@@ -22,13 +23,12 @@
       <ff-opening-menu
         screen="openingMenu"
         class="layout vertical center-center"></ff-opening-menu>
+      <ff-char-select
+        screen="charSelect"
+        char-index="[[ party.length ]]"></ff-char-select>
     </iron-selector>
 <!--
     <div id="screens">
-      <ff-char-select flex screen="charSelect"
-        party="[[ party ]]"
-        char-index="[[ charIndex ]]"
-        on-ff-char-class-done="_onCharClassSelected"></ff-char-select>
       <ff-enter-name flex screen="enterName"
         on-ff-char-name-done="_onCharNameEntered"></ff-enter-name>
       <ff-map-screen flex screen="map"
@@ -62,6 +62,10 @@
 
       static get properties() {
         return {
+          party: {
+            statePath: 'party',
+            type: Array
+          },
           screen: {
             statePath: 'screen',
             type: String
