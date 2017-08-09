@@ -31,6 +31,10 @@ const reducer = (state, action) => {
   if (!state) return initialState;
 
   switch (action.type) {
+    case 'CHAR_CLASS_SET':
+      const party = state.party.slice(0);
+      party.push({ charClass: action.charClass });
+      return Object.assign({}, state, { party: party });
     case 'LOAD_GAME':
       console.log('TODO: load from actual saved game');
       return Object.assign({}, state, { party: sampleParty() });

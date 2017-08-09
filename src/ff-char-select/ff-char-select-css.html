@@ -6,10 +6,6 @@
     <custom-style>
       <style>
       :host {
-        --ff-selector-cursor: {
-          left: 40px;
-          top: 70px;
-        };
         margin-top: 40px;
       }
 
@@ -17,7 +13,11 @@
         height: 180px;
         margin: 25px 40px;
         width: 180px;
+      }
 
+      .iron-selected::before {
+        left: 40px;
+        top: 70px;
       }
       </style>
     </custom-style>
