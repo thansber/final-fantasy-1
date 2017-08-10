@@ -5,8 +5,9 @@
     <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=yes">
     <title>ff-map Demo</title>
     <script src="/bower_components/webcomponentsjs/webcomponents-lite.js"></script>
+    <link rel="import" href="/bower_components/polymer/lib/elements/dom-bind.html">
     <link rel="import" href="../ff-maps.html">
-    <link rel="import" href="../ff-map.html">
+    <!-- <link rel="import" href="../ff-map.html"> -->
 
     <style>
       ff-maps {
@@ -46,10 +47,8 @@
   </head>
   <body>
 
-    <template is="dom-bind">
-      <ff-maps id="maps"
-        map-id="{{ mapId }}"
-        map="{{map}}"></ff-maps>
+      <ff-maps id="maps" map-id="world"></ff-maps>
+        <!--
       <ff-map id="map"
         map="{{map}}"
         map-id="{{ mapId }}"
@@ -74,10 +73,10 @@
         </div>
         <div direction="down"><button id="down">Down</button></div>
       </div>
-
-    </template>
+-->
 
     <script>
+    /*
     window.addEventListener('WebComponentsReady', function(e) {
       var $maps = document.getElementById('maps');
       var $map = document.getElementById('map');
@@ -99,6 +98,7 @@
         });
       }
     });
+    */
     </script>
   </body>
 </html>
