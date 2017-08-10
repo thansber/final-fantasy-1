@@ -5,54 +5,55 @@
     <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=yes">
     <title>ff-char-walking Demo</title>
     <script src="/bower_components/webcomponentsjs/webcomponents-lite.js"></script>
+    <link rel="import" href="/bower_components/polymer/polymer-element.html">
     <link rel="import" href="/bower_components/iron-selector/iron-selector.html">
-    <link rel="import" href="../../behaviors/ff-char-class-behavior.html">
-    <link rel="import" href="../../behaviors/ff-vehicle-behavior.html">
-    <link rel="import" href="../ff-moving.html">
+    <link rel="import" href="../../mixins/ff-char-class-mixin.html">
+    <link rel="import" href="../ff-move-animation.html">
 
-    <style>
-      ff-moving {
-        height: 180px;
-        width: 180px;
-      }
 
-      section {
-        display: flex;
-        flex-direction: row;
-        margin-top: 2em;
-      }
-
-      #animate {
-        font-size: 200%;
-      }
-
-      iron-selector {
-        display: inline-block;
-        margin-right: 1em;
-      }
-
-      label {
-        cursor: pointer;
-        display: block;
-        font-size: 125%;
-        padding: 0.25em 0.5em;
-      }
-
-      label.iron-selected {
-        background-color: black;
-        color: white;
-      }
-    </style>
   </head>
   <body>
 
-    <dom-module id="ff-moving-demo">
+    <dom-module id="ff-move-animation-demo">
       <template>
-        <ff-moving
+        <style>
+          ff-move-animation {
+            height: 180px;
+            width: 180px;
+          }
+
+          section {
+            display: flex;
+            flex-direction: row;
+            margin-top: 2em;
+          }
+
+          #animate {
+            font-size: 200%;
+          }
+
+          iron-selector {
+            display: inline-block;
+            margin-right: 1em;
+          }
+
+          label {
+            cursor: pointer;
+            display: block;
+            font-size: 125%;
+            padding: 0.25em 0.5em;
+          }
+
+          label.iron-selected {
+            background-color: black;
+            color: white;
+          }
+        </style>
+        <ff-move-animation
           id="moving"
           movable-id="[[ charClass ]]"
-          direction="[[ direction ]]"></ff-moving>
-        <button id="animate" on-tap="_move">Move!</button>
+          direction="[[ direction ]]"></ff-move-animation>
+        <button id="animate">Move!</button>
 
         <section>
           <iron-selector selected="{{ charClass }}" attr-for-selected="char-class" id="charClassSelector">
@@ -71,19 +72,18 @@
       </template>
 
       <script>
-      (function(scope) {
-        scope.FF = scope.FF || {};
+        class MoveAnimationDemoElement extends CharClassMixin(Polymer.Element) {
+          static get is() { return 'ff-move-animation-demo'; }
 
-        Polymer({
-          is: 'ff-moving-demo',
+          static get properties() {
+            return {
 
-          behaviors: [
-            scope.FF.CharClassBehavior,
-            scope.FF.VehicleBehavior
-          ],
+            };
+          }
 
-          ready: function() {
-            this.$.charClassSelector.selected = 'fighter';
+          ready() {
+            super.ready();
+            this.$.charClassSelector.selected = 'Fi';
             this.$.directionSelector.selected = 'down';
 
             var movables = Object.keys(this.CharClasses).reduce((array, charClassId) => {
@@ -91,6 +91,7 @@
               return array;
             }, []);
 
+/*
             Object.keys(this.Vehicles).reduce((array, vehicleId) => {
               var vehicle = this.Vehicles[vehicleId];
               if (vehicle.index && vehicle.label) {
@@ -98,19 +99,18 @@
               }
               return array;
             }, movables);
-
+*/
             this.set('movables', movables);
-          },
 
-          _move: function() {
-            this.$.moving.walk();
+            this.$.animate.addEventListener('click', e => this.$.moving.walk());
           }
-        });
-      }(window));
+        }
+
+        customElements.define(MoveAnimationDemoElement.is, MoveAnimationDemoElement);
       </script>
     </dom-module>
 
-    <ff-moving-demo></ff-moving-demo>
+    <ff-move-animation-demo></ff-move-animation-demo>
 
   </body>
 </html>
