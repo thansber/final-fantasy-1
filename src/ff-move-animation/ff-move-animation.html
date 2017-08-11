@@ -1,8 +1,10 @@
 <link rel="import" href="/bower_components/polymer/polymer-element.html">
 <link rel="import" href="../mixins/ff-char-class-mixin.html">
+<link rel="import" href="../ff-data/ff-data.html">
 
 <dom-module id="ff-move-animation">
   <template>
+    <ff-data include="vehicles" data="{{ data }}"></ff-data>
     <canvas id="canvas"></canvas>
   </template>
 

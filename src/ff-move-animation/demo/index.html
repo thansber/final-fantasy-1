@@ -7,6 +7,7 @@
     <script src="/bower_components/webcomponentsjs/webcomponents-lite.js"></script>
     <link rel="import" href="/bower_components/polymer/polymer-element.html">
     <link rel="import" href="/bower_components/iron-selector/iron-selector.html">
+    <link rel="import" href="../../ff-data/ff-data.html">
     <link rel="import" href="../../mixins/ff-char-class-mixin.html">
     <link rel="import" href="../ff-move-animation.html">
 
@@ -49,6 +50,8 @@
             color: white;
           }
         </style>
+
+        <ff-data include="vehicles" data="{{ data }}"></ff-data>
         <ff-move-animation
           id="moving"
           movable-id="[[ charClass ]]"
@@ -77,19 +80,29 @@
 
           static get properties() {
             return {
-
+              data: Object,
+              isReady: Boolean
             };
+          }
+
+          static get observers() {
+            return ['_dataChanged(data, isReady)'];
+          }
+
+          _dataChanged(data, isReady) {
+            if (!data || !isReady) {
+              return;
+            }
+            this.set('movables', [
+              ...Object.values(this.CharClasses),
+              ...data.vehicles.all
+            ].filter(m => !!m.label));
           }
 
           ready() {
             super.ready();
             this.$.charClassSelector.selected = 'Fi';
             this.$.directionSelector.selected = 'down';
-
-            var movables = Object.keys(this.CharClasses).reduce((array, charClassId) => {
-              array.push(this.CharClasses[charClassId]);
-              return array;
-            }, []);
 
 /*
             Object.keys(this.Vehicles).reduce((array, vehicleId) => {
@@ -100,9 +113,9 @@
               return array;
             }, movables);
 */
-            this.set('movables', movables);
 
             this.$.animate.addEventListener('click', e => this.$.moving.walk());
+            this.isReady = true;
           }
         }
 

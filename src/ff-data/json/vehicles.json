@@ -1,0 +1,20 @@
+{
+  "Airship":{
+    "id":"Airship",
+    "label":"AIRSHIP",
+    "index":14
+  },
+  "Canoe":{
+    "id":"Canoe",
+    "label":"CANOE",
+    "index":13
+  },
+  "Foot":{
+    "id":"Foot"
+  },
+  "Ship":{
+    "id":"Ship",
+    "label":"SHIP",
+    "index":12
+  }
+}

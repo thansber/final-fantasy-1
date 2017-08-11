@@ -3,6 +3,7 @@ class MoveAnimationElement extends CharClassMixin(Polymer.Element) {
 
   static get properties() {
     return {
+      data: Object,
       direction: {
         type: String,
         value: 'down'
@@ -44,7 +45,7 @@ class MoveAnimationElement extends CharClassMixin(Polymer.Element) {
 
   static get observers() {
     return [
-      '_onCharacterSetup(movableId, direction, isReady)',
+      '_onCharacterSetup(movableId, direction, data, isReady)',
       '_onSheetLoaded(sheetLoaded)'
     ];
   }
@@ -55,9 +56,6 @@ class MoveAnimationElement extends CharClassMixin(Polymer.Element) {
     this.canvas = new Canvas(this.$.canvas);
     this.canvas.resize(1, 1);
     this._loadSheet();
-
-    this._movables = Object.assign({}, this.CharClasses/*, this.Vehicles*/);
-
     this.isReady = true;
   }
 
@@ -89,10 +87,12 @@ class MoveAnimationElement extends CharClassMixin(Polymer.Element) {
     this.sheet.src = this.resolveUrl('moving.png');
   }
 
-  _onCharacterSetup(movableId, direction, isReady) {
-    if (!this.isReady || !movableId) {
+  _onCharacterSetup(movableId, direction, data, isReady) {
+    if (!this.isReady || !movableId || !this.data) {
       return;
     }
+
+    this._movables = Object.assign({}, this.CharClasses, this.data.vehicles.byId);
     this.set('walkRow', this._movables[movableId].index);
     this.set('walkCol', this.walkColsByDirection[direction]);
     this._onSheetLoaded(this.sheetLoaded);

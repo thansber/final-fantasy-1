@@ -5,31 +5,35 @@
   <template>
     <iron-ajax
       id="armor"
-      url="../json/armor.json"
+      url="[[importPath]]/json/armor.json"
       last-response="{{ armorById }}"></iron-ajax>
     <iron-ajax
-      id="black-magic"
-      url="../json/black-magic.json"
+      id="blackMagic"
+      url="[[importPath]]/json/black-magic.json"
       last-response="{{ blackMagicById }}"></iron-ajax>
     <iron-ajax
       id="items"
-      url="../json/items.json"
+      url="[[importPath]]/json/items.json"
       last-response="{{ itemsById }}"></iron-ajax>
     <iron-ajax
-      id="item-magic"
-      url="../json/item-magic.json"
+      id="itemMagic"
+      url="[[importPath]]/json/item-magic.json"
       last-response="{{ itemMagicById }}"></iron-ajax>
     <iron-ajax
       id="statuses"
-      url="../json/statuses.json"
+      url="[[importPath]]/json/statuses.json"
       last-response="{{ statusesById }}"></iron-ajax>
     <iron-ajax
+      id="vehicles"
+      url="[[importPath]]/json/vehicles.json"
+      last-response="{{ vehiclesById }}"></iron-ajax>
+    <iron-ajax
       id="weapons"
-      url="../json/weapons.json"
+      url="[[importPath]]/json/weapons.json"
       last-response="{{ weaponsById }}"></iron-ajax>
     <iron-ajax
-      id="white-magic"
-      url="../json/white-magic.json"
+      id="whiteMagic"
+      url="[[importPath]]/json/white-magic.json"
       last-response="{{ whiteMagicById }}"></iron-ajax>
   </template>
 
@@ -41,11 +45,10 @@
         return {
           data: {
             notify: true,
-            type: Object,
-            value: {}
+            type: Object
           },
-          fetch: {
-            observer: '_fetchChanged',
+          include: {
+            observer: '_includeChanged',
             type: String
           }
         };
@@ -53,7 +56,7 @@
 
       static get observers() {
         return [
-          '_dataChanged(armorById, blackMagicById, itemsById, itemMagicById, statusesById, weaponsById, whiteMagicById)'
+          '_dataChanged(armorById, blackMagicById, itemsById, itemMagicById, statusesById, vehiclesById, weaponsById, whiteMagicById)'
         ];
       }
 
@@ -70,19 +73,19 @@
         return Object.keys(byId).map(id => Object.assign({ id }, byId[id]));
       }
 
-      _dataChanged(armorById, blackMagicById, itemsById, itemMagicById, statusesById, weaponsById, whiteMagicById) {
+      _dataChanged(...args) {
         let updated = Object.assign({}, this.data);
-        this._addToData(updated, armorById, 'armor');
-        this._addToData(updated, blackMagicById, 'blackMagic');
-        this._addToData(updated, itemsById, 'items');
-        this._addToData(updated, itemMagicById, 'itemMagic');
-        this._addToData(updated, statusesById, 'statuses');
-        this._addToData(updated, weaponsById, 'weapons');
-        this._addToData(updated, whiteMagicById, 'whiteMagic');
+        const byId = args.filter(Boolean);
+        const included = this.include.split(' ');
+        if (byId.length !== included.length) {
+          return;
+        }
+
+        included.forEach((key, i) => this._addToData(updated, byId[i], key));
         this.set('data', updated);
       }
 
-      _fetchChanged(newValue, oldValue) {
+      _includeChanged(newValue, oldValue) {
         if (!newValue) {
           return;
         }
