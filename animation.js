@@ -1,20 +1,25 @@
-class Animation {
+((scope) => {
 
-  constructor() {
-    this.queue = [];
-  }
+  scope.FF = scope.FF || {};
 
-  add(callback, args) {
-    this.queue.push(() => new Promise(resolve => resolve(callback.apply(undefined, args))));
-    return this;
-  }
+  scope.FF.Animation = class Animation {
 
-  delay(milliseconds) {
-    this.queue.push(() => new Promise(resolve => setTimeout(resolve, milliseconds)));
-    return this;
-  }
+    constructor() {
+      this.queue = [];
+    }
 
-  run() {
-    this.queue.reduce((promise, entry) => promise.then(entry), Promise.resolve());
+    add(callback, args) {
+      this.queue.push(() => new Promise(resolve => resolve(callback.apply(undefined, args))));
+      return this;
+    }
+
+    delay(milliseconds) {
+      this.queue.push(() => new Promise(resolve => setTimeout(resolve, milliseconds)));
+      return this;
+    }
+
+    run() {
+      this.queue.reduce((promise, entry) => promise.then(entry), Promise.resolve());
+    }
   }
-}
+})(window);
