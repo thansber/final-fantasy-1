@@ -1,4 +1,4 @@
-class MapsElement extends Polymer.Element {
+class MapsElement extends ReduxMixin(Polymer.Element) {
   static get is() { return 'ff-maps'; }
 
   static get properties() {
@@ -47,7 +47,11 @@ class MapsElement extends Polymer.Element {
         .filter(excludeFields)
         .reduce(copyField, {}));
     map.transitions = this._transitionsAsMap(mapData.transitions);
-    this.map = map;
+
+    this.dispatch({
+      type: 'MAP_LOADED',
+      map: map
+    });
   }
 
   _nestedValue(path) {

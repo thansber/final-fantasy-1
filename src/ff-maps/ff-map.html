@@ -1,6 +1,7 @@
-<link rel="import" href="../behaviors/ff-canvas-behavior.html">
-<link rel="import" href="../behaviors/ff-vehicle-behavior.html">
-<link rel="import" href="../ff-moving/ff-moving.html">
+<link rel="import" href="/bower_components/polymer/polymer-element.html">
+<link rel="import" href="/redux-mixin.html">
+<link rel="import" href="../mixins/ff-map-mixin.html">
+<link rel="import" href="../ff-move-animation/ff-move-animation.html">
 
 <dom-module id="ff-map">
   <template>
@@ -12,7 +13,7 @@
         width: 512px;
       };
 
-      ff-moving {
+      ff-move-animation {
         position: absolute;
         margin-left: -32px;
         left: 50%;
@@ -21,12 +22,12 @@
     </style>
 
     <canvas id="canvas"></canvas>
-    <ff-moving
+    <ff-move-animation
       id="moving"
-      movable-id="[[ charClass ]]"
-      direction="[[ facing ]]"></ff-moving>
+      direction="[[ facing ]]"></ff-move-animation>
 
   </template>
 
+  <script src="/canvas.js"></script>
   <script src="ff-map.js"></script>
 </dom-module>

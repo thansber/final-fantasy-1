@@ -1,0 +1,133 @@
+<script>
+MapMixin = (superClass) => class extends superClass {
+
+  constructor() {
+    super();
+  }
+
+  static get properties() {
+    return {
+      map: {
+        statePath: 'map',
+        type: Object
+      },
+      partyVehicles: {
+        statePath: 'partyVehicles',
+        type: Array
+      },
+      positionX: {
+        statePath: 'position.x',
+        type: Number
+      },
+      positionY: {
+        statePath: 'position.y',
+        type: Number
+      },
+      vehicle: {
+        statePath: 'vehicle',
+        type: String
+      },
+      vehiclePositions: {
+        statePath: 'vehiclePositions',
+        type: Object
+      }
+    };
+  }
+
+  isPassable(goingToPosition) {
+    let passable = false;
+    const leavingPosition = { x: this.positionX, y: this.positionY };
+    const goingToTile = this.map.definition[this._getTile(goingToPosition.y, goingToPosition.x)];
+    this._goingToVehicle = goingToTile.passableBy;
+
+    // If currently in airship can go anywhere
+    if (this._isInVehicle('Airship')) {
+      return true;
+    }
+
+    // If the tile we are going to is not passable, nothing more to check
+    if (!this._goingToVehicle) {
+      return false;
+    }
+
+    // If going to a river, party must own canoe
+    if (this._isGoingToVehicle('Canoe')) {
+      passable = this._hasVehicle('Canoe');
+      if (passable) {
+        this._enteringVehicle('Canoe', leavingPosition);
+      }
+      return passable;
+    }
+
+    // If going to ocean, ship must be on tile we are going to
+    if (this._isGoingToVehicle('Ship')) {
+      const isInShip = this._isInVehicle('Ship');
+      const isShipThere = this._arePositionsEqual(goingToPosition, this.vehiclePositions.Ship);
+
+      passable = isInShip || isShipThere;
+      if (passable && !isInShip) {
+        this._enteringVehicle('Ship');
+      }
+      return passable;
+    }
+
+    if (this._isGoingToVehicle('Foot')) {
+      if (this._isInVehicle('Ship')) {
+      // going from ship -> foot, make sure going to dock
+        passable = !!goingToTile.dockable;
+      } else {
+      // going from canoe->foot or foot->foot is always good
+        passable = true;
+      }
+
+      if (passable) {
+        this._enteringVehicle('Foot', leavingPosition);
+      }
+      return passable;
+    }
+  }
+
+  _arePositionsEqual(posA, posB) {
+    return posA.x === posB.x && posA.y === posB.y;
+  }
+
+  _enteringVehicle(newVehicle, leavingPosition) {
+    this.dispatch({
+      type: 'VEHICLE_CHANGE',
+      vehicle: newVehicle.id,
+      leavingPosition: leavingPosition
+    });
+  }
+
+  _getTile(y, x) {
+    var row = this.map.data[y];
+    if (!row) {
+      return this.map.filler;
+    }
+    return row[x] || this.map.filler;
+  }
+
+  _hasVehicle(vehicle) {
+    return this.partyVehicles.indexOf(vehicle) > -1;
+  }
+
+  _isGoingToVehicle(vehicle) {
+    return new RegExp(vehicle, 'i').test(this._goingToVehicle);
+  }
+
+  _isInVehicle(vehicle) {
+    return new RegExp(vehicle, 'i').test(this.vehicle);
+  }
+
+  _tileCoords(y, x) {
+    // ensures wrapped maps behave properly
+    var tileY = this.map.wrapsY ? y % this.map.rows : y;
+    var tileX = this.map.wrapsX ? x % this.map.cols : x;
+    var tile = this._getTile(tileY, tileX);
+    return {
+      x: this.map.definition[tile].x,
+      y: this.map.definition[tile].y
+    };
+  }
+}
+</script>

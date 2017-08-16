@@ -6,8 +6,9 @@
     <title>ff-map Demo</title>
     <script src="/bower_components/webcomponentsjs/webcomponents-lite.js"></script>
     <link rel="import" href="/bower_components/polymer/lib/elements/dom-bind.html">
+    <link rel="import" href="/redux-mixin.html">
     <link rel="import" href="../ff-maps.html">
-    <!-- <link rel="import" href="../ff-map.html"> -->
+    <link rel="import" href="../ff-map.html">
 
     <style>
       ff-maps {
@@ -25,29 +26,80 @@
         width: 3em;
       }
 
-      #directions {
-        display: flex;
-        flex-wrap: wrap;
-        margin-top: 1em;
-        width: 10em;
-      }
 
-      [direction] {
-        display: flex;
-        flex: 0 0 100%;
-        justify-content: center;
-        margin-top: 0.5em;
-      }
-
-      [direction="left-right"] {
-        justify-content: space-around;
-      }
 
     </style>
   </head>
   <body>
 
-      <ff-maps id="maps" map-id="world"></ff-maps>
+    <dom-module id="ff-maps-demo">
+      <template>
+        <style>
+          :host {
+            display: flex;
+          }
+          #directions {
+            flex-wrap: wrap;
+            margin-top: 1em;
+            width: 20em;
+          }
+
+          [direction] {
+            display: flex;
+            flex: 0 0 100%;
+            justify-content: center;
+            margin-top: 0.5em;
+          }
+
+          [direction="left-right"] {
+            justify-content: space-around;
+          }
+
+          button {
+            font-size: 200%;
+            width: 3em;
+          }
+        </style>
+
+        <ff-maps id="maps" map-id="world"></ff-maps>
+        <ff-map id="map" char-class="BB"></ff-map>
+
+        <div id="directions" on-click="_move">
+          <div direction="up"><button id="up">Up</button></div>
+          <div direction="left-right">
+            <button id="left">Left</button>
+            <button id="right">Right</button>
+          </div>
+          <div direction="down"><button id="down">Down</button></div>
+        </div>
+      </template>
+
+      <script>
+        class MapsDemoElement extends ReduxMixin(Polymer.Element) {
+          static get is() { return 'ff-maps-demo'; }
+
+          static get properties() {
+            return {
+            };
+          }
+
+          ready() {
+            super.ready();
+            this.dispatch({ type: 'LOAD_GAME' });
+          }
+
+          _move(e) {
+            if (/button/i.test(e.target.tagName)) {
+              this.dispatch({ type: 'MOVING', moving: e.target.id });
+            }
+          }
+        }
+
+        customElements.define(MapsDemoElement.is, MapsDemoElement);
+      </script>
+    </dom-module>
+
+    <ff-maps-demo></ff-maps-demo>
         <!--
       <ff-map id="map"
         map="{{map}}"
@@ -65,14 +117,7 @@
         <input id="posY" value="{{posY::input}}" type="number" maxlength="3" />
       </div>
 
-      <div id="directions">
-        <div direction="up"><button id="up">Up</button></div>
-        <div direction="left-right">
-          <button id="left">Left</button>
-          <button id="right">Right</button>
-        </div>
-        <div direction="down"><button id="down">Down</button></div>
-      </div>
+
 -->
 
     <script>
@@ -80,7 +125,7 @@
     window.addEventListener('WebComponentsReady', function(e) {
       var $maps = document.getElementById('maps');
       var $map = document.getElementById('map');
-      var buttons = document.getElementsByTagName('button');
+
       var posY = document.getElementById('posY');
       var posX = document.getElementById('posX');
 
