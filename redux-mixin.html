@@ -3,8 +3,19 @@
 
 <script>
 const initialState = {
+  map: null,
+  movableId: '',
+  moving: [],
   party: [],
-  screen: 'openingMenu'
+  partyVehicles: ['Foot'],
+  position: { x: 153, y: 165 },
+  screen: 'openingMenu',
+  vehicle: 'Foot',
+  vehiclePositions: {
+    Ship: { x: -1, y: -1 },
+    Airship: { x: -1, y: -1 }
+  },
+  worldMapPosition: { x: 153, y: 165 }
 };
 
 const sampleParty = () => {
@@ -39,23 +50,57 @@ const updateArray = (array, index, update) => {
 const reducer = (state, action) => {
   if (!state) return initialState;
 
+  let party;
+  let movingBuffer;
+
   switch (action.type) {
     case 'CHAR_CLASS_SET':
-      const party = state.party.slice();
+      party = state.party.slice();
       party.push({ charClass: action.charClass });
-      return Object.assign({}, state, { party: party });
+      return Object.assign({}, state, {
+        party: party,
+        movableId: party[0].charClass
+      });
     case 'CHAR_NAME_SET':
       return Object.assign({}, state, {
         party: updateArray(state.party, state.party.length - 1, { name: action.name })
       })
     case 'LOAD_GAME':
       console.log('TODO: load from actual saved game');
-      return Object.assign({}, state, { party: sampleParty() });
+      party = sampleParty();
+      return Object.assign({}, state, {
+        party: party,
+        movableId: party[0].charClass
+      });
+    case 'MAP_LOADED':
+      return Object.assign({}, state, { map: action.map });
+    case 'MOVING':
+      movingBuffer = state.moving.slice();
+      if (movingBuffer.length < 2) {
+        movingBuffer.push(action.moving);
+      }
+      return Object.assign({}, state, { moving: movingBuffer });
+    case 'POSITION_CHANGED':
+      return Object.assign({}, state, {
+        position: { x: action.x, y: action.y }
+      });
     case 'SCREEN_CHANGED':
       return Object.assign({}, state, { screen: action.payload });
     case 'START_GAME':
       return state;
-
+    case 'STOP_MOVING':
+      movingBuffer = state.moving.slice();
+      movingBuffer.shift();
+      return Object.assign({}, state, { moving: movingBuffer });
+    case 'STORE_WORLD_MAP_POSITION':
+      return Object.assign({}, state, {
+        worldMapPosition: {
+          x: action.x,
+          y: action.y
+        }
+      });
+    case 'VEHICLE_CHANGE':
+      // TODO: handle this
     default:
       return state;
   }
