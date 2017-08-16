@@ -3,6 +3,9 @@ BUGS
 - ff-selector
 -- :before CSS no longer working
 
+DESIGN
+======
+
 WORK
 ====
 - shops
@@ -32,4 +35,5 @@ WORK
 - movement
 -- check ship dock tile NE of pravoka with corner of land in regular game
 -- show ship/airship on world map
+-- handle sprite change on enter/leave vehicle
 -- test moving in vehicle
