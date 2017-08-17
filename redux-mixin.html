@@ -8,7 +8,7 @@ const initialState = {
   moving: [],
   party: [],
   partyVehicles: ['Foot'],
-  position: { x: 153, y: 165 },
+  position: { x: -1, y: -1 },
   screen: 'openingMenu',
   vehicle: 'Foot',
   vehiclePositions: {
@@ -52,6 +52,7 @@ const reducer = (state, action) => {
 
   let party;
   let movingBuffer;
+  let startPosition;
 
   switch (action.type) {
     case 'CHAR_CLASS_SET':
@@ -66,7 +67,7 @@ const reducer = (state, action) => {
         party: updateArray(state.party, state.party.length - 1, { name: action.name })
       })
     case 'LOAD_GAME':
-      console.log('TODO: load from actual saved game');
+      console.log('TODO: load state from actual saved game');
       party = sampleParty();
       return Object.assign({}, state, {
         party: party,
@@ -87,7 +88,13 @@ const reducer = (state, action) => {
     case 'SCREEN_CHANGED':
       return Object.assign({}, state, { screen: action.payload });
     case 'START_GAME':
-      return state;
+      // TODO: set position
+      startPosition = state.position;
+      if (startPosition.x < 0 || startPosition.y < 0) {
+        startPosition.x = state.worldMapPosition.x;
+        startPosition.y = state.worldMapPosition.y;
+      }
+      return Object.assign({}, state, { position: startPosition} );
     case 'STOP_MOVING':
       movingBuffer = state.moving.slice();
       movingBuffer.shift();

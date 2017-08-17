@@ -86,6 +86,7 @@
           ready() {
             super.ready();
             this.dispatch({ type: 'LOAD_GAME' });
+            this.dispatch({ type: 'START_GAME' });
           }
 
           _move(e) {
