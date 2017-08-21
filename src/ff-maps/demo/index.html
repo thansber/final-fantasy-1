@@ -25,9 +25,6 @@
         font-size: 125%;
         width: 3em;
       }
-
-
-
     </style>
   </head>
   <body>
@@ -61,7 +58,7 @@
           }
         </style>
 
-        <ff-maps id="maps" map-id="world"></ff-maps>
+        <ff-maps id="maps" map-id="{{ mapId }}"></ff-maps>
         <ff-map id="map" char-class="BB"></ff-map>
 
         <div id="directions" on-click="_move">
@@ -80,6 +77,10 @@
 
           static get properties() {
             return {
+              mapId: {
+                statePath: 'mapId',
+                type: String
+              }
             };
           }
 

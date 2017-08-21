@@ -130,10 +130,6 @@
       return y >= this.map.rows || x >= this.map.cols;
     }
 
-    _isWorldMap(mapId) {
-      return /world/.test(mapId);
-    }
-
     _move(directionOptions) {
       let pixelsMoved = 1;
       let moveId;
@@ -151,7 +147,7 @@
         if (pixelsMoved > this.canvas.scale) {
           clearInterval(moveId);
           this.dispatch({ type: 'STOP_MOVING' });
-          //this._onMovingDone(directionOptions);
+          this._onMovingDone();
         }
       };
 
@@ -165,6 +161,7 @@
       }
 
       this.facing = direction[0];
+      this.transition = null;
 
       const directionOptions = this.moveOptions[direction[0]];
       const goingToPosition = {
@@ -180,10 +177,21 @@
           x: goingToPosition.x,
           y: goingToPosition.y
         });
+
         this._move(directionOptions);
       } else {
         this.dispatch({ type: 'STOP_MOVING' });
         return;
+      }
+    }
+
+    _onMovingDone() {
+      const transition = this._findTransition(this.positionY, this.positionX);
+      if (transition) {
+        this.dispatch({
+          type: 'MAP_TRANSITION',
+          transition: transition
+        });
       }
     }
 
