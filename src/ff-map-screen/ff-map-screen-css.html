@@ -1,0 +1,38 @@
+<dom-module id="ff-map-screen-css">
+  <template>
+    <style>
+      :host {
+        overflow: hidden;
+        position: relative;
+      }
+
+      [transition] {
+        background-color: black;
+        height: 224px;
+        position: absolute;
+        transition: top 1s linear, bottom 1s linear;
+        width: 512px;
+      }
+
+      [transition][top] {
+        top: -51%;
+      }
+
+      :host([transitioning]) [transition][top] {
+        top: 0;
+      }
+
+      [transition][bottom] {
+        bottom: -51%;
+      }
+
+      :host([transitioning]) [transition][bottom] {
+        bottom: 0;
+      }
+
+      #map {
+        opacity: 1;
+      }
+    </style>
+  </template>
+</dom-module>

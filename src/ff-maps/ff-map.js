@@ -116,7 +116,10 @@
 
     _findTransition(y, x) {
       if (this.map.exitOnOutOfBounds && this._isOutOfBounds(y, x)) {
-        return { toWorldMap: true };
+        return {
+          map: 'world',
+          toWorldMap: true
+        };
       }
       var transitionsForY = this.map.transitions[y] || {};
       var transitions = transitionsForY[x] || {};

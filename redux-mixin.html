@@ -12,6 +12,8 @@
     partyVehicles: ['Foot'],
     position: { x: -1, y: -1 },
     screen: 'openingMenu',
+    transition: {},
+    transitioning: false,
     vehicle: 'Foot',
     vehiclePositions: {
       Ship: { x: -1, y: -1 },
@@ -53,6 +55,10 @@
     });
   }
 
+  const updateObject = (state, update) => {
+    return Object.assign({}, state, update);
+  }
+
   const reducer = (state, action) => {
     if (!state) return initialState;
 
@@ -66,18 +72,18 @@
         newState.party = state.party.slice();
         newState.party.push({ charClass: action.charClass });
         newState.movableId = newState.party[0].charClass
-        return Object.assign({}, state, newState);
+        return updateObject(state, newState);
       case 'CHAR_NAME_SET':
-        return Object.assign({}, state, {
+        return updateObject(state, {
           party: updateArray(state.party, state.party.length - 1, { name: action.name })
-        })
+        });
       case 'LOAD_GAME':
         console.log('TODO: load state from actual saved game');
         newState.party = sampleParty();
         newState.movableId = newState.party[0].charClass
-        return Object.assign({}, state, newState);
+        return updateObject(state, newState);
       case 'MAP_LOADED':
-        return Object.assign({}, state, { map: action.map });
+        return updateObject(state, { map: action.map });
       case 'MAP_TRANSITION':
         if (isWorldMap(state.mapId)) {
           newState.worldMapPosition = {
@@ -85,35 +91,56 @@
             y: state.position.y
           };
         }
+        newState.transition = updateObject(newState.transition, action.transition);
+        /*
         if (!action.transition.shop) {
           newState.mapId = action.transition.map;
+        }*/
+        newState.transitioning = true;
+        return updateObject(state, newState);
+      case 'MAP_TRANSITION_JUMP':
+        if (!state.transition.shop) {
+          newState.mapId = state.transition.map;
+
+          if (state.transition.toWorldMap) {
+            newState.position = {
+              x: state.worldMapPosition.x,
+              y: state.worldMapPosition.y
+            }
+          } else {
+            newState.position = {
+              x: state.transition.x,
+              y: state.transition.y
+            }
+          }
         }
-        debugger;
-        return Object.assign({}, state, newState);
+        newState.transitioning = false;
+        newState.transition = {};
+        return updateObject(state, newState);
       case 'MOVING':
         newState.moving = state.moving.slice();
         if (newState.moving.length < 2) {
           newState.moving.push(action.moving);
         }
-        return Object.assign({}, state, newState);
+        return updateObject(state, newState);
       case 'POSITION_CHANGED':
-        return Object.assign({}, state, {
+        return updateObject(state, {
           position: { x: action.x, y: action.y }
         });
       case 'SCREEN_CHANGED':
-        return Object.assign({}, state, { screen: action.payload });
+        return updateObject(state, { screen: action.payload });
       case 'START_GAME':
         newState.mapId = 'world';
-        newState.position = Object.assign({}, state.position);
+        newState.position = updateObject(state.position);
         if (newState.position.x < 0 || newState.position.y < 0) {
           newState.position.x = state.worldMapPosition.x;
           newState.position.y = state.worldMapPosition.y;
         }
-        return Object.assign({}, state, newState);
+        return updateObject(state, newState);
       case 'STOP_MOVING':
         newState.moving = state.moving.slice();
         newState.moving.shift();
-        return Object.assign({}, state, newState);
+        return updateObject(state, newState);
       case 'STORE_WORLD_MAP_POSITION':
         newState.worldMapPosition.x = action.x;
         newState.worldMapPosition.y = action.y;

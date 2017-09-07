@@ -1,68 +1,30 @@
+<link rel="import" href="/bower_components/polymer/polymer-element.html">
+<link rel="import" href="/redux-mixin.html">
+<link rel="import" href="../mixins/ff-map-mixin.html">
+<link rel="import" href="../mixins/ff-screen-mixin.html">
+<link rel="import" href="../ff-keyhandler/ff-keyhandler.html">
 <link rel="import" href="../ff-maps/ff-maps.html">
 <link rel="import" href="../ff-maps/ff-map.html">
-<link rel="import" href="../behaviors/ff-animation-behavior.html">
+<link rel="import" href="ff-map-screen-css.html">
 
 <dom-module id="ff-map-screen">
   <template>
+    <style include="ff-map-screen-css"></style>
 
-    <style is="custom-style">
-      :host {
-        position: relative;
-      }
+    <ff-maps map-id="[[ mapId ]]"></ff-maps>
+    <ff-map id="map"></ff-map>
 
-      [transition] {
-        background-color: black;
-        height: 224px;
-        position: absolute;
-        transition: top 1s linear, bottom 1s linear;
-        width: 512px;
-      }
-
-      [transition][top] {
-        top: -51%;
-      }
-
-      :host[transitioning] [transition][top] {
-        top: 0;
-      }
-
-      [transition][bottom] {
-        bottom: -51%;
-      }
-
-      :host[transitioning] [transition][bottom] {
-        bottom: 0;
-      }
-
-      #map {
-        opacity: 1;
-      }
-
-    </style>
-
-    <ff-maps map-id="[[ mapId ]]"
-      map="{{ map }}"></ff-maps>
-    <ff-map id="map"
-      map="{{ map }}"
-      map-id="[[ mapId ]]"
-      moving="{{ moving }}"
-      position-x="{{ posX }}"
-      position-y="{{ posY }}"
-      ship-position="[[ shipPosition ]]"
-      transition="{{ transition }}"
-      transports="[[ transports ]]"
-      vehicle="[[ vehicle ]]"
-      char-class="[[ charClass ]]"></ff-map>
-
-    <div transition top></div>
-    <div transition bottom></div>
+    <div transition top id="topTransition"></div>
+    <div transition bottom id="bottomTransition"></div>
 
     <ff-keyhandler
+      id="keyhandler"
       on-ff-up="_moveUp"
       on-ff-down="_moveDown"
       on-ff-left="_moveLeft"
       on-ff-right="_moveRight"></ff-keyhandler>
   </template>
 
+  <script src="/animation.js"></script>
   <script src="ff-map-screen.js"></script>
 </dom-module>

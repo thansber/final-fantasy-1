@@ -1,0 +1,52 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=yes">
+    <title>ff-map-screen Demo</title>
+    <script src="/bower_components/webcomponentsjs/webcomponents-lite.js"></script>
+    <link rel="import" href="/bower_components/polymer/lib/elements/dom-bind.html">
+    <link rel="import" href="/redux-mixin.html">
+    <link rel="import" href="../ff-map-screen.html">
+  </head>
+  <body>
+
+    <dom-module id="ff-map-screen-demo">
+      <template>
+        <style>
+          :host {
+            display: flex;
+          }
+        </style>
+
+        <ff-map-screen map-id="{{ mapId }}" current-screen></ff-map-screen>
+      </template>
+
+      <script>
+        class MapScreenDemoElement extends ReduxMixin(Polymer.Element) {
+          static get is() { return 'ff-map-screen-demo'; }
+
+          static get properties() {
+            return {
+              mapId: {
+                statePath: 'mapId',
+                type: String
+              }
+            };
+          }
+
+          ready() {
+            super.ready();
+            this.dispatch({ type: 'LOAD_GAME' });
+            this.dispatch({ type: 'START_GAME' });
+          }
+        }
+
+        customElements.define(MapScreenDemoElement.is, MapScreenDemoElement);
+      </script>
+    </dom-module>
+
+    <ff-map-screen-demo></ff-map-screen-demo>
+
+  </body>
+</html>
