@@ -6,6 +6,7 @@
     <title>ff-shop-party Demo</title>
     <script src="/bower_components/webcomponentsjs/webcomponents-lite.js"></script>
     <link rel="import" href="/bower_components/polymer/lib/elements/dom-bind.html">
+    <link rel="import" href="/redux-mixin.html">
     <link rel="import" href="../ff-shop-party.html">
 
     <style>
@@ -15,18 +16,39 @@
     </style>
   </head>
   <body>
+
+    <dom-module id="ff-shop-party-demo">
+      <template>
+        <ff-shop-party id="demo"></ff-shop-party>
+        <button id="rest" on-click="toggleRest">Rest Animation Toggle</button>
+        <button id="newParty" on-click="reloadParty">Reload Party</button>
+      </template>
+
+      <script>
+        class ShopPartyDemoElement extends ReduxMixin(Polymer.Element) {
+          static get is() { return 'ff-shop-party-demo'; }
+
+          ready() {
+            super.ready();
+            this.reloadParty();
+          }
+
+          reloadParty() {
+            this.dispatch({ type: 'LOAD_GAME' });
+          }
+
+          toggleRest(e) {
+            this.$.demo.resting = !this.$.demo.resting;
+          }
+        }
+
+        customElements.define(ShopPartyDemoElement.is, ShopPartyDemoElement);
+      </script>
+    </dom-module>
+
     <section>
-      <ff-shop-party id="demo"></ff-shop-party>
-      <button id="rest">Rest Animation Toggle</button>
+      <ff-shop-party-demo></ff-shop-party-demo>
     </section>
 
-    <script>
-      window.addEventListener('WebComponentsReady', (e) => {
-        document.getElementById('rest').addEventListener('click', (e) => {
-          const demo = document.getElementById('demo');
-          demo.resting = !demo.resting;
-        });
-      });
-    </script>
   </body>
 </html>

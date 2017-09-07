@@ -20,6 +20,11 @@
         position: relative;
       }
 
+      #remaining {
+        left: -4px;
+        position: relative;
+      }
+
       #leader,
       .third.char {
         top: 4px;
@@ -32,17 +37,17 @@
 
     <ff-char-image
       id="leader"
-      char-class="Fi"></ff-char-image>
+      char-class="[[ _charClassFor(party.*, 0) ]]"></ff-char-image>
     <div id="remaining">
       <ff-char-image
         class="second char"
-        char-class="BB"></ff-char-image>
+        char-class="[[ _charClassFor(party.*, 1) ]]"></ff-char-image>
       <ff-char-image
         class="third char"
-        char-class="WM"></ff-char-image>
+        char-class="[[ _charClassFor(party.*, 2) ]]"></ff-char-image>
       <ff-char-image
         class="fourth char"
-        char-class="BM"></ff-char-image>
+        char-class="[[ _charClassFor(party.*, 3) ]]"></ff-char-image>
   </template>
 
   <script>
@@ -61,6 +66,10 @@
             value: false
           }
         };
+      }
+
+      _charClassFor(change, index) {
+        return this.get('charClass', change.base[index]);
       }
     }
 
