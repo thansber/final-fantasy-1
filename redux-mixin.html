@@ -1,6 +1,6 @@
 <link rel="import" href="/bower_components/polymer-redux/polymer-redux.html">
 <script src="/node_modules/redux/dist/redux.js"></script>
-
+<script src="redux-utils.js"></script>
 <script>
 (() => {
   const initialState = {
@@ -24,26 +24,6 @@
 
   const isWorldMap = (mapId) => {
     return /world/.test(mapId);
-  }
-
-  const sampleParty = () => {
-    return [{
-      charClass: 'WM',
-      name: 'AAAA',
-      weapons: [], armor: [], spells: []
-    }, {
-      charClass: 'Th',
-      name: 'BBBB',
-      weapons: [], armor: [], spells: []
-    }, {
-      charClass: 'BB',
-      name: 'CCCC',
-      weapons: [], armor: [], spells: []
-    }, {
-      charClass: 'RM',
-      name: 'DDDD',
-      weapons: [], armor: [], spells: []
-    }];
   }
 
   const updateArray = (array, index, update) => {
