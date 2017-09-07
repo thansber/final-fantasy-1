@@ -136,6 +136,7 @@
           newState.position.x = state.worldMapPosition.x;
           newState.position.y = state.worldMapPosition.y;
         }
+        newState.screen = 'map';
         return updateObject(state, newState);
       case 'STOP_MOVING':
         newState.moving = state.moving.slice();
