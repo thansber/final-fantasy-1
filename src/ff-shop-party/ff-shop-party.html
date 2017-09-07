@@ -1,0 +1,69 @@
+<link rel="import" href="/bower_components/polymer/polymer-element.html">
+<link rel="import" href="/redux-mixin.html">
+<link rel="import" href="../ff-char-image/ff-char-image.html">
+
+<dom-module id="ff-shop-party">
+  <template>
+    <style>
+      :host {
+        align-items: center;
+        display: flex;
+        opacity: 1;
+        transition: opacity 0.6s linear;
+      }
+
+      :host([resting]) {
+        opacity: 0;
+      }
+
+      ff-char-image {
+        position: relative;
+      }
+
+      #leader,
+      .third.char {
+        top: 4px;
+      }
+
+      .second.char {
+        top: 8px;
+      }
+    </style>
+
+    <ff-char-image
+      id="leader"
+      char-class="Fi"></ff-char-image>
+    <div id="remaining">
+      <ff-char-image
+        class="second char"
+        char-class="BB"></ff-char-image>
+      <ff-char-image
+        class="third char"
+        char-class="WM"></ff-char-image>
+      <ff-char-image
+        class="fourth char"
+        char-class="BM"></ff-char-image>
+  </template>
+
+  <script>
+    class ShopPartyElement extends ReduxMixin(Polymer.Element) {
+      static get is() { return 'ff-shop-party'; }
+
+      static get properties() {
+        return {
+          party: {
+            statePath: 'party',
+            type: Array
+          },
+          resting: {
+            reflectToAttribute: true,
+            type: Boolean,
+            value: false
+          }
+        };
+      }
+    }
+
+    customElements.define(ShopPartyElement.is, ShopPartyElement);
+  </script>
+</dom-module>
