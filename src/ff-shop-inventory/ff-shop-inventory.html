@@ -1,0 +1,73 @@
+<link rel="import" href="/bower_components/polymer/polymer-element.html">
+<link rel="import" href="/redux-mixin.html">
+<link rel="import" href="../ff-bordered/ff-bordered.html">
+<link rel="import" href="../ff-selector/ff-selector.html">
+<link rel="import" href="../ff-item/ff-item.html">
+
+<dom-module id="ff-shop-inventory">
+  <template>
+    <style>
+      #inventory {
+        height: 356px;
+        position: absolute;
+        right: 0;
+        width: 162px;
+      }
+
+      ff-item {
+        height: 2em;
+      }
+
+      .priceRow {
+        display: flex;
+        height: 2em;
+        justify-content: space-between;
+      }
+    </style>
+
+    <ff-bordered id="inventory" hidden="[[ hidden ]]">
+      <ff-selector id="inventorySelector"
+        selectable=".item"
+        up-down-selects>
+        <template is="dom-repeat" items="[[ inventory ]]">
+          <ff-item class="item"
+            label="[[ item.desc ]]"
+            icon="[[ item.type ]]"
+            no-icon="[[ item.textOnly ]]"
+            price$="[[ item.price ]]"></ff-item>
+          <div class="priceRow">
+            <div class="level">[[ _itemLevel(item) ]]</div>
+            <div class="price">[[ item.price ]]</div>
+          </div>
+        </template>
+      </ff-selector>
+    </ff-bordered>
+  </template>
+
+  <script>
+    class ShopInventoryElement extends ReduxMixin(Polymer.Element) {
+      static get is() { return 'ff-shop-inventory'; }
+
+      static get properties() {
+        return {
+          hidden: {
+            type: Boolean,
+            value: false
+          },
+          inventory: {
+            type: Array
+          }
+        };
+      }
+
+      _itemLevel(item) {
+        if (!item.level) {
+          return '';
+        }
+        return 'L' + item.level;
+      }
+    }
+
+    customElements.define(ShopInventoryElement.is, ShopInventoryElement);
+  </script>
+</dom-module>

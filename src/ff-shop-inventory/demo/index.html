@@ -1,0 +1,68 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=yes">
+    <title>ff-shop-inventory Demo</title>
+    <script src="/bower_components/webcomponentsjs/webcomponents-lite.js"></script>
+    <link rel="import" href="/bower_components/polymer/lib/elements/dom-bind.html">
+    <link rel="import" href="/redux-mixin.html">
+    <link rel="import" href="../../ff-data/ff-data.html">
+    <link rel="import" href="../ff-shop-inventory.html">
+
+    <style>
+      body {
+        background-color: black;
+      }
+    </style>
+  </head>
+  <body>
+
+    <dom-module id="ff-shop-inventory-demo">
+      <template>
+        <ff-data
+          include="armor blackMagic items weapons whiteMagic"
+          data="{{ data }}"></ff-data>
+        <ff-shop-inventory id="demo"
+          inventory="[[ shopInventory ]]"></ff-shop-inventory>
+      </template>
+
+      <script>
+        class ShopInventoryDemoElement extends ReduxMixin(Polymer.Element) {
+          static get is() { return 'ff-shop-inventory-demo'; }
+
+          static get properties() {
+            return {
+              data: {
+                observer: '_dataLoaded',
+                type: Object
+              },
+              shopInventory: {
+                type: Object
+              }
+            };
+          }
+
+          ready() {
+            super.ready();
+
+            this._inventory = ["Wooden[R]", "Small[K]", "Wooden[N]", "Rapier", "Iron[H]"];
+          }
+
+          _dataLoaded(data) {
+            this.shopInventory = this._inventory.map(item => {
+              return Object.assign({ name: item}, data.weapons.byId[item]);
+            });
+          }
+        }
+
+        customElements.define(ShopInventoryDemoElement.is, ShopInventoryDemoElement);
+      </script>
+    </dom-module>
+
+    <section>
+      <ff-shop-inventory-demo></ff-shop-inventory-demo>
+    </section>
+
+  </body>
+</html>
