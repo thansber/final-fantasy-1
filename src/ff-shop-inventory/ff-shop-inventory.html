@@ -1,5 +1,6 @@
 <link rel="import" href="/bower_components/polymer/polymer-element.html">
 <link rel="import" href="/redux-mixin.html">
+<link rel="import" href="../mixins/ff-shop-selector-mixin.html">
 <link rel="import" href="../ff-bordered/ff-bordered.html">
 <link rel="import" href="../ff-selector/ff-selector.html">
 <link rel="import" href="../ff-item/ff-item.html">
@@ -8,7 +9,7 @@
   <template>
     <style>
       #inventory {
-        height: 356px;
+        height: 366px;
         position: absolute;
         right: 0;
         width: 162px;
@@ -20,7 +21,7 @@
 
       .priceRow {
         display: flex;
-        height: 2em;
+        height: 2.25em;
         justify-content: space-between;
       }
     </style>
@@ -45,7 +46,7 @@
   </template>
 
   <script>
-    class ShopInventoryElement extends ReduxMixin(Polymer.Element) {
+    class ShopInventoryElement extends ShopSelectorMixin(ReduxMixin(Polymer.Element)) {
       static get is() { return 'ff-shop-inventory'; }
 
       static get properties() {

@@ -1,0 +1,25 @@
+<script>
+ShopSelectorMixin = (superClass) => class extends superClass {
+
+  constructor() {
+    super();
+  }
+
+  activate() {
+    this._selector().selectIndex(0);
+    this._keyHandler().activate();
+  }
+
+  deactivate() {
+    this._keyHandler().deactivate();
+  }
+
+  _keyHandler() {
+    return this._selector().$.keyHandler;
+  }
+
+  _selector() {
+    return this.shadowRoot.querySelector('ff-selector');
+  }
+}
+</script>
