@@ -94,6 +94,10 @@
 
         ready() {
           super.ready();
+
+          this.$.selector.activateKeys();
+          this.$.selectorNoKeys.activateKeys();
+
           this.$.selector.selected = 0;
           this.$.selectorNoKeys.selected = 2;
 
