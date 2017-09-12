@@ -6,9 +6,7 @@
     <title>ff-shop-screen Demo</title>
     <script src="/bower_components/webcomponentsjs/webcomponents-lite.js"></script>
     <link rel="import" href="/bower_components/iron-selector/iron-selector.html">
-    <link rel="import" href="../../behaviors/ff-char-class-behavior.html">
-    <link rel="import" href="../../behaviors/ff-armor-behavior.html">
-    <link rel="import" href="../../behaviors/ff-weapon-behavior.html">
+    <link rel="import" href="/redux-mixin.html">
     <link rel="import" href="../../ff-maps/ff-maps.html">
     <link rel="import" href="../ff-shop-screen.html">
 
@@ -18,61 +16,54 @@
   <body>
 
     <dom-module id="ff-shop-screen-demo">
-      <style>
-        #main {
-          display: flex;
-        }
-
-        #shopScreen {
-          background-color: black;
-          display: block;
-          height: 448px;
-          width: 530px;
-        }
-
-        iron-selector {
-          border-color: black;
-          border-style: solid;
-          border-width: 1px;
-          border-bottom-width: 0;
-          margin-left: 2em;
-          height: 459px;
-        }
-
-        iron-selector div {
-          border-color: black;
-          border-style: solid;
-          border-width: 0;
-          border-bottom-width: 1px;
-          cursor: pointer;
-          color: black;
-          padding: 1em;
-          text-align: center;
-        }
-
-        iron-selector div.iron-selected {
-          background-color: black;
-          color: white;
-        }
-      </style>
       <template>
-        <ff-maps id="maps"
-          map="{{ map }}"
-          map-id="{{ town }}"></ff-maps>
+        <style>
+          #main {
+            display: flex;
+          }
+
+          #shopScreen {
+            background-color: black;
+            display: block;
+            height: 448px;
+            width: 530px;
+          }
+
+          iron-selector {
+            border-color: black;
+            border-style: solid;
+            border-width: 1px;
+            border-bottom-width: 0;
+            margin-left: 2em;
+            height: 459px;
+          }
+
+          iron-selector div {
+            border-color: black;
+            border-style: solid;
+            border-width: 0;
+            border-bottom-width: 1px;
+            cursor: pointer;
+            color: black;
+            padding: 1em;
+            text-align: center;
+          }
+
+          iron-selector div.iron-selected {
+            background-color: black;
+            color: white;
+          }
+        </style>
+
+        <ff-maps map-id="{{ town }}"></ff-maps>
 
         <div id="main">
           <ff-shop-screen
             current-screen
-            id="shopScreen"
-            party="[[ party ]]"
-            char-inventory-key="[[ _inventoryKey ]]"
-            shop="{{ shop }}"
-            shop-items="[[ inventory ]]"
-            on-ff-purchase="_onPurchase"></ff-shop-screen>
+            id="shopScreen"></ff-shop-screen>
           <iron-selector id="shopSelector"
             selected="{{ shop }}"
-            attr-for-selected="shop"
-            on-iron-select="_onShopSelect">
+            attr-for-selected="shop">
             <div shop="inn">Inn</div>
             <div shop="clinic">Clinic</div>
             <div shop="weapon" inventory-key="weapons">Weapon</div>
@@ -95,6 +86,35 @@
       </template>
 
       <script>
+      class ShopScreenDemoElement extends ReduxMixin(Polymer.Element) {
+        static get is() { return 'ff-shop-screen-demo'; }
+
+        static get properties() {
+          return {
+            shop: {
+              observer: '_shopChanged',
+              type: String
+            },
+            town: String
+          };
+        }
+
+        ready() {
+          super.ready();
+          this.dispatch({ type: 'LOAD_GAME' });
+
+          this.$.townSelector.selected = 'towns/coneria';
+          this.$.shopSelector.selected = 'inn';
+        }
+
+        _shopChanged(shop) {
+          this.dispatch({ type: 'ENTER_SHOP', shop: shop });
+        }
+
+      }
+
+      customElements.define(ShopScreenDemoElement.is, ShopScreenDemoElement);
+      /*
       (function(scope) {
         scope.FF = scope.FF || {};
 
@@ -170,6 +190,7 @@
           }
         });
       }(window));
+      */
       </script>
     </dom-module>
 

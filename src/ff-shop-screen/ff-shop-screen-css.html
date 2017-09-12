@@ -1,129 +1,104 @@
+<link rel="import" href="/bower_components/polymer/polymer-element.html">
+<link rel="import" href="/bower_components/shadycss/apply-shim.html">
+<link rel="import" href="/bower_components/polymer/lib/elements/custom-style.html">
 <link rel="import" href="../ff-styles/ff-styles.html">
 
 <dom-module id="ff-shop-screen-css">
   <template>
-    <style include="ff-styles" is="custom-style">
-    :host {
-      display: block;
-      flex-wrap: wrap;
-    }
+    <custom-style>
+      <style include="ff-styles">
+        :host {
+          display: block;
+          flex-wrap: wrap;
+        }
 
-    [hidden] {
-      display: none !important;
-    }
+        [hidden] {
+          display: none !important;
+        }
 
-    #top {
-      display: flex;
-      flex-direction: row;
-      position: relative;
-      width: 100%;
-    }
+        #top {
+          display: flex;
+          flex-direction: row;
+          position: relative;
+          width: 100%;
+        }
 
-    #conversation {
-      display: block;
-      height: 190px;
-      margin-top: 36px;
-      padding-bottom: 3em;
-      width: 160px;
-    }
+        #conversation {
+          display: block;
+          height: 190px;
+          margin-top: 36px;
+          padding-bottom: 3em;
+          width: 160px;
+        }
 
-    #counter {
-      display: flex;
-      flex-direction: column;
-      margin-left: 20px;
-    }
+        #counter {
+          display: flex;
+          flex-direction: column;
+          margin-left: 20px;
+        }
 
-    #shop-type {
-      align-items: center;
-      height: 60px;
-      margin-bottom: 16px;
-      margin-left: 16px;
-      width: 140px;
-    }
+        #shop-type {
+          align-items: center;
+          height: 60px;
+          margin-bottom: 16px;
+          margin-left: 16px;
+          width: 140px;
+        }
 
-    #transaction {
-      align-items: flex-end;
-      display: flex;
-    }
+        #transaction {
+          align-items: flex-end;
+          display: flex;
+        }
 
-    #shopkeeper {
-      background-repeat: no-repeat;
-      height: 128px;
-      width: 94px;
-    }
+        #shopkeeper {
+          background-repeat: no-repeat;
+          height: 128px;
+          width: 94px;
+        }
 
-    :host([shop="armor"]) #shopkeeper {
-      background-position-x: 0px;
-    }
+        :host([shop="armor"]) #shopkeeper {
+          background-position-x: 0px;
+        }
 
-    :host([shop="clinic"]) #shopkeeper {
-      background-position-x: -94px;
-    }
+        :host([shop="clinic"]) #shopkeeper {
+          background-position-x: -94px;
+        }
 
-    :host([shop="inn"]) #shopkeeper {
-      background-position-x: -188px;
-    }
+        :host([shop="inn"]) #shopkeeper {
+          background-position-x: -188px;
+        }
 
-    :host([shop="weapon"]) #shopkeeper {
-      background-position-x: -282px;
-    }
+        :host([shop="weapon"]) #shopkeeper {
+          background-position-x: -282px;
+        }
 
-    :host([shop="item"]) #shopkeeper {
-      background-position-x: -378px;
-    }
+        :host([shop="item"]) #shopkeeper {
+          background-position-x: -378px;
+        }
 
-    :host([shop="whitemagic"]) #shopkeeper,
-    :host([shop="whitemagic2"]) #shopkeeper {
-      background-position-x: -472px;
-    }
+        :host([shop="whitemagic"]) #shopkeeper,
+        :host([shop="whitemagic2"]) #shopkeeper {
+          background-position-x: -472px;
+        }
 
-    :host([shop="blackmagic"]) #shopkeeper,
-    :host([shop="blackmagic2"]) #shopkeeper {
-      background-position-x: -566px;
-    }
+        :host([shop="blackmagic"]) #shopkeeper,
+        :host([shop="blackmagic2"]) #shopkeeper {
+          background-position-x: -566px;
+        }
 
+        #bottom {
+          align-items: flex-end;
+          display: flex;
+          height: 168px;
+        }
 
-
-
-
-
-
-    #bottom {
-      align-items: flex-end;
-      display: flex;
-      height: 168px;
-    }
-
-    #bottom ff-bordered {
-      height: 100%;
-      margin-left: 90px;
-      width: 155px;
-    }
-
-    [not-shown] {
-      opacity: 0;
-    }
-
-    #decision {
-      --ff-selector-cursor: {
-        left: -34px;
-        top: 2px;
-      }
-    }
-
-    .choice {
-      margin-bottom: 1.25em;
-    }
-
-    #bottom #gold {
-      height: initial;
-      margin-left: 60px;
-      margin-bottom: 16px;
-      text-align: right;
-      width: 170px;
-    }
-
-
-    </style>
+        #bottom #gold {
+          height: initial;
+          margin-left: 60px;
+          text-align: right;
+          width: 170px;
+        }
+      </style>
+    </custom-style>
   </template>
 </dom-module>

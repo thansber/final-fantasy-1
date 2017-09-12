@@ -14,10 +14,6 @@
     position: { x: -1, y: -1 },
     screen: 'openingMenu',
     shop: {
-      choices: [
-        { label: 'Yes', to: 'resting' },
-        { label: 'No', to: 'leaving' }
-      ],
       inventory: [],
       type: ''
     },
@@ -72,6 +68,9 @@
             type: action.shop
           })
         });
+      case 'EXIT_SHOP':
+        console.log('TODO: exit shop redux logic');
+        return state;
       case 'LOAD_GAME':
         console.log('TODO: load state from actual saved game');
         newState.party = sampleParty();

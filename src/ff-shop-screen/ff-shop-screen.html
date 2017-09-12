@@ -1,75 +1,45 @@
-<link rel="import" href="../behaviors/ff-screen-behavior.html">
-<link rel="import" href="../behaviors/ff-char-class-behavior.html">
-<link rel="import" href="../behaviors/ff-shop-behavior.html">
-<link rel="import" href="../ff-bordered/ff-bordered.html">
+<link rel="import" href="/bower_components/polymer/polymer-element.html">
+<link rel="import" href="/redux-mixin.html">
+<link rel="import" href="../mixins/ff-screen-mixin.html">
 <link rel="import" href="../ff-bordered-text/ff-bordered-text.html">
-<link rel="import" href="../ff-char-image/ff-char-image.html">
-<link rel="import" href="../ff-item/ff-item.html">
-<link rel="import" href="../ff-selector/ff-selector.html">
-<link rel="import" href="ff-shop-inventory.html">
+<link rel="import" href="../ff-bordered/ff-bordered.html">
+<link rel="import" href="../ff-shop-party/ff-shop-party.html">
+<link rel="import" href="../ff-shop-inventory/ff-shop-inventory.html">
+<link rel="import" href="../ff-shop-decision/ff-shop-decision.html">
+<link rel="import" href="ff-inventory-loader.html">
+<link rel="import" href="ff-shop-states.html">
 <link rel="import" href="ff-shop-screen-css.html">
 
 <dom-module id="ff-shop-screen">
   <template>
     <style include="ff-shop-screen-css"></style>
 
-    <ff-shop-inventory
-      shop="[[ shop ]]"
-      items="[[ shopItems ]]"
-      shop-inventory="{{ _shopInventory }}"></ff-shop-inventory>
+    <ff-inventory-loader></ff-inventory-loader>
+    <ff-shop-states
+      state-id="[[ stateId ]]"
+      sign="{{ sign }}"
+      shop-state="{{ state }}"></ff-shop-states>
 
     <div id="top">
-      <ff-bordered-text id="conversation" text="[[ _conversation ]]"></ff-bordered-text>
+      <ff-bordered-text id="conversation" text="[[ shopkeeperSays ]]"></ff-bordered-text>
       <div id="counter">
-        <ff-bordered id="shop-type" color="purple">[[ _sign ]]</ff-bordered>
+        <ff-bordered id="shop-type" color="purple">[[ sign ]]</ff-bordered>
         <div id="transaction">
-          <div id="shopkeeper" style="background-image:url([[ shopkeepers ]])"></div>
-          <div id="party"> <!-- HANDLED -->
-            <ff-char-image
-              id="leader"
-              char-class="[[ _charClassFor(party.*, 0) ]]"></ff-char-image>
-            <div id="remaining">
-              <ff-char-image
-                class="second char"
-                char-class="[[ _charClassFor(party.*, 1) ]]"></ff-char-image>
-              <ff-char-image
-                class="third char"
-                char-class="[[ _charClassFor(party.*, 2) ]]"></ff-char-image>
-              <ff-char-image
-                class="fourth char"
-                char-class="[[ _charClassFor(party.*, 3) ]]"></ff-char-image>
-            </div>
-          </div>
+          <div id="shopkeeper" style="background-image:url([[ shopkeepersUrl ]])"></div>
+          <ff-shop-party></ff-shop-party>
         </div>
       </div>
-      <ff-bordered id="inventory" hidden="[[ !_showingInventory ]]"> <!-- HANDLED -->
-        <ff-selector id="inventorySelector"
-          selectable=".item"
-          up-down-selects>
-          <template is="dom-repeat" items="[[ _shopInventory ]]">
-            <ff-item class="item"
-              label="[[ item.desc ]]"
-              icon="[[ item.type ]]"
-              no-icon="[[ item.textOnly ]]"
-              price$="[[ item.price ]]"></ff-item>
-            <div class="priceRow">
-              <div class="level">[[ _itemLevel(item) ]]</div>
-              <div class="price">[[ item.price ]]</div>
-            </div>
-          </template>
-        </ff-selector>
-      </ff-bordered>
+      <ff-shop-inventory
+        id="shopInventory"
+        inventory="[[ shopInventory ]]"
+        hidden$="[[ !state.showInventory ]]"></ff-shop-inventory>
     </div>
+
     <div id="bottom">
-      <ff-bordered not-shown$="[[ _noChoices ]]">
-        <ff-selector id="decision"
-          selectable=".choice"
-          up-down-selects>
-          <template is="dom-repeat" items="[[ _choices ]]">
-            <div class="choice">[[ item.label ]]</div>
-          </template>
-        </ff-selector>
-      </ff-bordered>
+      <ff-shop-decision
+        id="shopDecision"
+        choices="[[ shopChoices ]]"
+        on-ff-selected="_choiceSelected"></ff-shop-decision>
       <ff-bordered id="gold" color="green">[[ gold ]] G</ff-bordered>
     </div>
   </template>

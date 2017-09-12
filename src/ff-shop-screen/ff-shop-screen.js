@@ -1,3 +1,123 @@
+class ShopScreenElement extends ScreenMixin(ReduxMixin(Polymer.Element)) {
+  static get is() { return 'ff-shop-screen'; }
+
+  static get properties() {
+    return {
+      gold: {
+        statePath: 'gold',
+        type: Number
+      },
+      party: {
+        statePath: 'party',
+        type: Object
+      },
+      shopChoices: {
+        type: Array
+      },
+      shopInventory: {
+        statePath: 'shop.inventory',
+        type: Array
+      },
+      shop: {
+        readonly: true,
+        reflectToAttribute: true,
+        statePath: 'shop.type',
+        type: String
+      },
+      shopkeeperSays: {
+        type: Array,
+        value: ['Welcome', '  ::', 'Stay,', 'to save', 'your', 'data.']
+      },
+      shopkeepersUrl: {
+        readonly: true,
+        type: String
+      },
+      state: {
+        observer: '_stateChanged',
+        type: Object
+      },
+      stateId: {
+        notify: true,
+        type: String
+      }
+    };
+  }
+
+  ready() {
+    super.ready();
+    this.shopkeepersUrl = this.resolveUrl('shopkeepers.png');
+  }
+
+  _buildChoices(state) {
+    if (state.charNameChoices) {
+      return this.party.map(c => ({ label: c.name }));
+    }
+    return state.choices || [];
+  }
+
+  _choiceSelected(e, detail) {
+    this._nextState(detail.value);
+  }
+
+  _getPrice(state) {
+    if (state.singleItem) {
+      return this.shopInventory[0];
+    }
+
+    return this.$.inventorySelector.selectedItem.getAttribute('price')
+  }
+
+  _nextState(choice) {
+    if (this.state.to) {
+      this.set('stateId', this.state.to);
+    } else {
+      this.set('stateId', this.shopChoices[choice].to);
+    }
+  }
+
+  _padPrice(price) {
+    return Array.from(Array(5 - ('' + price).length)).map(i => ' ').join('') + price;
+  }
+
+  _shopkeeperSaysPrice(price) {
+    this.set('shopkeeperSays', [this._padPrice(price), '', 'Gold', '', 'OK?']);
+    this._switchKeyHandler(this.$.shopDecision);
+  }
+
+  _stateChanged(state) {
+    this.showInventory = false;
+
+    if (state.exit) {
+      this.dispatch({ type: 'EXIT_SHOP' });
+      return;
+    }
+
+    if (state.askForPrice) {
+      //this._setTransactionItem(this._shopInventory);
+      this._shopkeeperSaysPrice(this._getPrice(state));
+    } else {
+      this.set('shopkeeperSays', state.conversation);
+    }
+
+    this._switchKeyHandler(state.inventoryActive
+        ? this.$.shopInventory
+        : this.$.shopDecision);
+
+    this.set('shopChoices', this._buildChoices(state));
+  }
+
+  _switchKeyHandler(newSelector) {
+    if (this._currentSelector) {
+      newSelector.deactivate();
+    }
+    newSelector.activate();
+    this._currentSelector = newSelector;
+  }
+
+}
+
+customElements.define(ShopScreenElement.is, ShopScreenElement);
+/*
 (function(scope) {
 
   scope.FF = scope.FF || {};
@@ -328,3 +448,4 @@
   });
 
  }(window));
+*/
