@@ -1,0 +1,82 @@
+<link rel="import" href="/bower_components/polymer/polymer-element.html">
+<link rel="import" href="/redux-mixin.html">
+<link rel="import" href="../mixins/ff-shop-mixin.html">
+<link rel="import" href="../ff-data/ff-data.html">
+
+<dom-module id="ff-inventory-loader">
+  <template>
+    <ff-data
+      include="armor blackMagic items weapons whiteMagic"
+      data="{{ data }}"></ff-data>
+  </template>
+
+  <script>
+    class InventoryLoaderElement extends ShopMixin(ReduxMixin(Polymer.Element)) {
+      static get is() { return 'ff-inventory-loader'; }
+
+      static get properties() {
+        return {
+          data: {
+            observer: '_dataLoaded',
+            type: Object
+          },
+          inventoryByShop: {
+            readonly: true,
+            type: Object
+          },
+          map: {
+            statePath: 'map',
+            type: String
+          },
+          shop: {
+            statePath: 'shop.type',
+            type: String
+          }
+        };
+      }
+
+      static get observers() {
+        return [
+          '_shopSet(map, shop, inventoryByShop)'
+        ];
+      }
+
+      ready() {
+        super.ready();
+      }
+
+      _dataLoaded(data) {
+        const mapping = {};
+        mapping[this.ShopIds.Armor] = data.armor.byId;
+        mapping[this.ShopIds.BlackMagic] = data.blackMagic.byId;
+        mapping[this.ShopIds.BlackMagic2] = data.blackMagic.byId;
+        mapping[this.ShopIds.Item] = data.items.byId;
+        mapping[this.ShopIds.Weapon] = data.weapons.byId;
+        mapping[this.ShopIds.WhiteMagic] = data.whiteMagic.byId;
+        mapping[this.ShopIds.WhiteMagic2] = data.whiteMagic.byId;
+
+        this.set('inventoryByShop', mapping);
+      }
+
+      _inventoryLoaded(inventory) {
+        this.dispatch({ type: 'SHOP_INVENTORY_LOADED', inventory: inventory });
+      }
+
+      _shopSet(map, shop, inventoryByShop) {
+        if (!map || !shop || !inventoryByShop) {
+          return;
+        }
+        const mapping = inventoryByShop[shop];
+        if (!mapping) {
+          this._inventoryLoaded(map.shopInventory[shop]);
+          return;
+        }
+
+        this._inventoryLoaded(map.shopInventory[shop]
+          .map(item => Object.assign({}, mapping[item])));
+      }
+    }
+
+    customElements.define(InventoryLoaderElement.is, InventoryLoaderElement);
+  </script>
+</dom-module>

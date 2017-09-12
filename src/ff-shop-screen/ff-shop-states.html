@@ -1,0 +1,122 @@
+<link rel="import" href="/bower_components/polymer/polymer-element.html">
+<link rel="import" href="/redux-mixin.html">
+
+<dom-module id="ff-shop-states">
+  <script>
+    class ShopStatesElement extends ShopMixin(ReduxMixin(Polymer.Element)) {
+      static get is() { return 'ff-shop-states'; }
+
+      static get properties() {
+        return {
+          shop: {
+            observer: '_shopChanged',
+            statePath: 'shop.type',
+            type: String
+          },
+          ShopsById: {
+            readonly: true,
+            type: Object,
+            value: {}
+          },
+          shopState: {
+            notify: true,
+            type: Object,
+          },
+          sign: {
+            notify: true,
+            type: String
+          },
+          stateId: {
+            type: String
+          }
+        };
+      }
+
+      static get observers() {
+        return [
+          '_loadState(shop, stateId)'
+        ];
+      }
+
+      ready() {
+        super.ready();
+
+        this._setupInn();
+      }
+
+      _setupInn() {
+        this._shopSetup({
+          id: this.ShopIds.Inn,
+          sign: 'INN',
+          states: {
+            start: {
+              back: 'leaving',
+              conversation: ['Welcome', '  ::', 'Stay,', 'to save', 'your', 'data.'],
+              choices: [
+                { label: 'Yes', to: 'buying' },
+                { label: 'No', to: 'leaving' }
+              ]
+            },
+            buying: {
+              askForPrice: true,
+              back: 'leaving',
+              choices: [
+                { label: 'Yes', to: 'resting' },
+                { label: 'No', to: 'leaving' }
+              ],
+              singleItem: true
+            },
+            resting: {
+              back: 'leaving',
+              conversation: ['Don\'t', 'forget,', 'if you', 'leave', 'your', 'game,'],
+              fire: { event: 'ff-resting', detail: { resting: true } },
+              to: 'leaving'
+            },
+            leaving: {
+              back: 'exit',
+              conversation: ['Hold', 'RESET', 'while', 'you', 'turn', 'POWER', 'off!!'],
+              fire: { event: 'ff-resting', detail: { resting: false } },
+              to: 'exit'
+            }
+          }
+        });
+      }
+
+      _loadShop(shopType) {
+        const shop = this.ShopsById[shopType];
+        if (!shop) {
+          throw 'No shop found for type [`${shopType}`]'
+        }
+        return shop;
+      }
+
+      _loadState(shopType, stateId) {
+        if (!shopType || !stateId) {
+          return;
+        }
+
+        if (stateId === 'exit') {
+          this.set('shopState', { exit: true });
+          return;
+        }
+
+        this.set('shopState', this._loadShop(shopType).states[stateId]);
+      }
+
+      _shopChanged(shopType) {
+        if (!shopType) {
+          return;
+        }
+
+        this.set('sign', this._loadShop(shopType).sign);
+        this._loadState(shopType, 'start');
+      }
+
+      _shopSetup(data) {
+        this.ShopsById[data.id] = data;
+      }
+    }
+
+    customElements.define(ShopStatesElement.is, ShopStatesElement);
+  </script>
+</dom-module>
