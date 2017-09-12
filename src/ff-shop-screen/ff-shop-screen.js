@@ -92,6 +92,10 @@ class ShopScreenElement extends ScreenMixin(ReduxMixin(Polymer.Element)) {
       return;
     }
 
+    if (state.resting) {
+      this.dispatch({ type: 'RESTED_AT_INN' });
+    }
+
     if (state.askForPrice) {
       //this._setTransactionItem(this._shopInventory);
       this._shopkeeperSaysPrice(this._getPrice(state));

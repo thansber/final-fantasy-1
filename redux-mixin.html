@@ -117,6 +117,9 @@
         return updateObject(state, {
           position: { x: action.x, y: action.y }
         });
+      case 'RESTED_AT_INN':
+        console.log('TODO: heal all and refill spell charges');
+        return state;
       case 'SCREEN_CHANGED':
         return updateObject(state, { screen: action.payload });
       case 'SHOP_INVENTORY_LOADED':

@@ -69,13 +69,12 @@
             resting: {
               back: 'leaving',
               conversation: ['Don\'t', 'forget,', 'if you', 'leave', 'your', 'game,'],
-              fire: { event: 'ff-resting', detail: { resting: true } },
+              resting: true,
               to: 'leaving'
             },
             leaving: {
               back: 'exit',
               conversation: ['Hold', 'RESET', 'while', 'you', 'turn', 'POWER', 'off!!'],
-              fire: { event: 'ff-resting', detail: { resting: false } },
               to: 'exit'
             }
           }
