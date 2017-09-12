@@ -26,7 +26,7 @@
       }
     </style>
 
-    <ff-bordered not-shown$="[[ _noChoices ]]">
+    <ff-bordered not-shown$="[[ noChoices ]]">
       <ff-selector id="decision"
         selectable=".choice"
         up-down-selects>
@@ -45,8 +45,16 @@
         return {
           choices: {
             type: Array
+          },
+          noChoices: {
+            computed: '_choicesChanged(choices)',
+            type: Boolean
           }
         };
+      }
+
+      _choicesChanged(choices) {
+        return !choices.length;
       }
     }
 
