@@ -7,6 +7,7 @@
 <link rel="import" href="../ff-shop-inventory/ff-shop-inventory.html">
 <link rel="import" href="../ff-shop-decision/ff-shop-decision.html">
 <link rel="import" href="ff-inventory-loader.html">
+<link rel="import" href="ff-shopkeepers.html">
 <link rel="import" href="ff-shop-states.html">
 <link rel="import" href="ff-shop-screen-css.html">
 
@@ -23,9 +24,9 @@
     <div id="top">
       <ff-bordered-text id="conversation" text="[[ shopkeeperSays ]]"></ff-bordered-text>
       <div id="counter">
-        <ff-bordered id="shop-type" color="purple">[[ sign ]]</ff-bordered>
+        <ff-bordered id="sign" color="purple">[[ sign ]]</ff-bordered>
         <div id="transaction">
-          <div id="shopkeeper" style="background-image:url([[ shopkeepersUrl ]])"></div>
+          <ff-shopkeepers></ff-shopkeepers>
           <ff-shop-party
             resting="[[ state.resting ]]"></ff-shop-party>
         </div>

@@ -20,17 +20,12 @@ class ShopScreenElement extends ScreenMixin(ReduxMixin(Polymer.Element)) {
       },
       shop: {
         readonly: true,
-        reflectToAttribute: true,
         statePath: 'shop.type',
         type: String
       },
       shopkeeperSays: {
         type: Array,
         value: ['Welcome', '  ::', 'Stay,', 'to save', 'your', 'data.']
-      },
-      shopkeepersUrl: {
-        readonly: true,
-        type: String
       },
       state: {
         observer: '_stateChanged',
@@ -41,11 +36,6 @@ class ShopScreenElement extends ScreenMixin(ReduxMixin(Polymer.Element)) {
         type: String
       }
     };
-  }
-
-  ready() {
-    super.ready();
-    this.shopkeepersUrl = this.resolveUrl('shopkeepers.png');
   }
 
   _buildChoices(state) {

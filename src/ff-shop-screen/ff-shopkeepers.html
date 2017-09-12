@@ -1,0 +1,72 @@
+<link rel="import" href="/bower_components/polymer/polymer-element.html">
+<link rel="import" href="/redux-mixin.html">
+
+<dom-module id="ff-shopkeepers">
+  <template>
+    <style>
+      #shopkeeper {
+        background-repeat: no-repeat;
+        height: 128px;
+        width: 94px;
+      }
+
+      :host([shop="armor"]) #shopkeeper {
+        background-position-x: 0px;
+      }
+
+      :host([shop="clinic"]) #shopkeeper {
+        background-position-x: -94px;
+      }
+
+      :host([shop="inn"]) #shopkeeper {
+        background-position-x: -188px;
+      }
+
+      :host([shop="weapon"]) #shopkeeper {
+        background-position-x: -282px;
+      }
+
+      :host([shop="item"]) #shopkeeper {
+        background-position-x: -378px;
+      }
+
+      :host([shop="whitemagic"]) #shopkeeper,
+      :host([shop="whitemagic2"]) #shopkeeper {
+        background-position-x: -472px;
+      }
+
+      :host([shop="blackmagic"]) #shopkeeper,
+      :host([shop="blackmagic2"]) #shopkeeper {
+        background-position-x: -566px;
+      }
+    </style>
+    <div id="shopkeeper" style="background-image:url([[ shopkeepersUrl ]])"></div>
+  </template>
+
+  <script>
+    class ShopKeepersElement extends ReduxMixin(Polymer.Element) {
+      static get is() { return 'ff-shopkeepers'; }
+
+      static get properties() {
+        return {
+          shop: {
+            reflectToAttribute: true,
+            statePath: 'shop.type',
+            type: String
+          },
+          shopkeepersUrl: {
+            readonly: true,
+            type: String
+          }
+        };
+      }
+
+      ready() {
+        super.ready();
+        this.shopkeepersUrl = this.resolveUrl('shopkeepers.png');
+      }
+    }
+
+    customElements.define(ShopKeepersElement.is, ShopKeepersElement);
+  </script>
+</dom-module>
