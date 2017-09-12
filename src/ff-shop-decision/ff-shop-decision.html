@@ -1,0 +1,55 @@
+<link rel="import" href="/bower_components/polymer/polymer-element.html">
+<link rel="import" href="../mixins/ff-shop-selector-mixin.html">
+<link rel="import" href="../ff-bordered/ff-bordered.html">
+<link rel="import" href="../ff-selector/ff-selector.html">
+
+<dom-module id="ff-shop-decision">
+  <template>
+    <style include="ff-cursor">
+      :host {
+        height: 100%;
+        margin-left: 90px;
+        width: 155px;
+      }
+
+      [not-shown] {
+        opacity: 0;
+      }
+
+      .choice.iron-selected::before {
+        left: -34px;
+        top: 2px;
+      }
+
+      .choice {
+        margin-bottom: 1.25em;
+      }
+    </style>
+
+    <ff-bordered not-shown$="[[ _noChoices ]]">
+      <ff-selector id="decision"
+        selectable=".choice"
+        up-down-selects>
+        <template is="dom-repeat" items="[[ choices ]]">
+          <div class="choice">[[ item.label ]]</div>
+        </template>
+      </ff-selector>
+    </ff-bordered>
+  </template>
+
+  <script>
+    class ShopDecisionElement extends ShopSelectorMixin(Polymer.Element) {
+      static get is() { return 'ff-shop-decision'; }
+
+      static get properties() {
+        return {
+          choices: {
+            type: Array
+          }
+        };
+      }
+    }
+
+    customElements.define(ShopDecisionElement.is, ShopDecisionElement);
+  </script>
+</dom-module>

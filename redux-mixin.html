@@ -4,6 +4,7 @@
 <script>
 (() => {
   const initialState = {
+    gold: 1000,
     map: null,
     mapId: '',
     movableId: '',
@@ -13,6 +14,10 @@
     position: { x: -1, y: -1 },
     screen: 'openingMenu',
     shop: {
+      choices: [
+        { label: 'Yes', to: 'resting' },
+        { label: 'No', to: 'leaving' }
+      ],
       inventory: [],
       type: ''
     },
@@ -61,6 +66,12 @@
         return updateObject(state, {
           party: updateArray(state.party, state.party.length - 1, { name: action.name })
         });
+      case 'ENTER_SHOP':
+        return updateObject(state, {
+          shop: updateObject(state.shop, {
+            type: action.shop
+          })
+        });
       case 'LOAD_GAME':
         console.log('TODO: load state from actual saved game');
         newState.party = sampleParty();
@@ -76,10 +87,6 @@
           };
         }
         newState.transition = updateObject(newState.transition, action.transition);
-        /*
-        if (!action.transition.shop) {
-          newState.mapId = action.transition.map;
-        }*/
         newState.transitioning = true;
         return updateObject(state, newState);
       case 'MAP_TRANSITION_JUMP':
@@ -113,6 +120,12 @@
         });
       case 'SCREEN_CHANGED':
         return updateObject(state, { screen: action.payload });
+      case 'SHOP_INVENTORY_LOADED':
+        return updateObject(state, {
+          shop: updateObject(state.shop, {
+            inventory: action.inventory
+          })
+        });
       case 'START_GAME':
         newState.mapId = 'world';
         newState.position = updateObject(state.position);

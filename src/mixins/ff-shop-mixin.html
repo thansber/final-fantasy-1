@@ -1,0 +1,29 @@
+<script>
+ShopMixin = (superClass) => class extends superClass {
+  constructor() {
+    super();
+  }
+
+  static get properties() {
+    return {
+      ShopIds: {
+        readonly: true,
+        type: Object,
+        value: function() {
+          return {
+            Armor: 'armor',
+            BlackMagic: 'blackmagic',
+            BlackMagic2: 'blackmagic2',
+            Clinic: 'clinic',
+            Inn: 'inn',
+            Item: 'item',
+            Weapon: 'weapon',
+            WhiteMagic: 'whitemagic',
+            WhiteMagic2: 'whitemagic2'
+          };
+        }
+      }
+    };
+  }
+}
+</script>
