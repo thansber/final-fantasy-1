@@ -7,7 +7,7 @@
 
 <dom-module id="ff-shop-inventory">
   <template>
-    <style>
+    <style include="ff-cursor">
       #inventory {
         height: 366px;
         position: absolute;
@@ -23,6 +23,11 @@
         display: flex;
         height: 2.25em;
         justify-content: space-between;
+      }
+
+      .item.iron-selected::before {
+        left: -34px;
+        top: 2px;
       }
     </style>
 

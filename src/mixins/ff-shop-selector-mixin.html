@@ -7,15 +7,20 @@ ShopSelectorMixin = (superClass) => class extends superClass {
 
   activate() {
     this._selector().selectIndex(0);
-    this._keyHandler().activate();
+    this.keyHandler().activate();
   }
 
   deactivate() {
-    this._keyHandler().deactivate();
+    this._selector().selected = null;
+    this.keyHandler().deactivate();
   }
 
-  _keyHandler() {
+  keyHandler() {
     return this._selector().$.keyHandler;
+  }
+
+  selectedItem() {
+    return this._selector().selectedItem;
   }
 
   _selector() {

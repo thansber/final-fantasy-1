@@ -15,10 +15,13 @@
   <template>
     <style include="ff-shop-screen-css"></style>
 
-    <ff-inventory-loader></ff-inventory-loader>
+    <ff-inventory-loader
+      char-items="{{ charItems }}"
+      inventory-for-char="{{ charInventory }}"></ff-inventory-loader>
     <ff-shop-states
       state-id="[[ stateId ]]"
       sign="{{ sign }}"
+      party-inventory-key="{{ partyInventoryKey }}"
       shop-state="{{ state }}"></ff-shop-states>
 
     <div id="top">
@@ -34,14 +37,23 @@
       <ff-shop-inventory
         id="shopInventory"
         inventory="[[ shopInventory ]]"
-        hidden$="[[ !state.showInventory ]]"></ff-shop-inventory>
+        hidden$="[[ !state.showInventory ]]"
+        on-ff-selected="_inventorySelected"
+        on-ff-back="_previousState"></ff-shop-inventory>
+      <ff-shop-inventory
+        id="charInventory"
+        inventory="[[ charInventory ]]"
+        hidden$="[[ !state.showCharInventory ]]"
+        on-ff-selected="_charInventorySelected"
+        on-ff-back="_previousState"></ff-shop-inventory>
     </div>
 
     <div id="bottom">
       <ff-shop-decision
         id="shopDecision"
         choices="[[ shopChoices ]]"
-        on-ff-selected="_choiceSelected"></ff-shop-decision>
+        on-ff-selected="_choiceSelected"
+        on-ff-back="_previousState"></ff-shop-decision>
       <ff-bordered id="gold" color="green">[[ gold ]] G</ff-bordered>
     </div>
   </template>

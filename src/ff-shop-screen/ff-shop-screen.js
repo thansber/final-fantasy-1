@@ -3,6 +3,13 @@ class ShopScreenElement extends ScreenMixin(ReduxMixin(Polymer.Element)) {
 
   static get properties() {
     return {
+      charInventory: {
+        type: Array
+      },
+      charItems: {
+        notify: true,
+        type: Array
+      },
       gold: {
         statePath: 'gold',
         type: Number
@@ -10,6 +17,9 @@ class ShopScreenElement extends ScreenMixin(ReduxMixin(Polymer.Element)) {
       party: {
         statePath: 'party',
         type: Object
+      },
+      partyInventoryKey: {
+        type: String
       },
       shopChoices: {
         type: Array
@@ -27,15 +37,36 @@ class ShopScreenElement extends ScreenMixin(ReduxMixin(Polymer.Element)) {
         type: Array,
         value: ['Welcome', '  ::', 'Stay,', 'to save', 'your', 'data.']
       },
-      state: {
-        observer: '_stateChanged',
-        type: Object
-      },
+      state: Object,
       stateId: {
         notify: true,
         type: String
+      },
+      transaction: {
+        readonly: true,
+        type: Object
       }
     };
+  }
+
+  static get observers() {
+    return [
+      '_stateChanged(state, shop)'
+    ];
+  }
+
+  constructor() {
+    super();
+    this._errorHandlers = {
+      anythingToSell: () => this._getCharInventory().length ? '' : 'nothingToSell',
+      money: () => this.transaction.item.price > this.gold ? 'notEnoughMoney' : '',
+      room: () => this._getCharInventory().length >= this.state.maxAllowed ? 'notEnoughRoom' : ''
+    }
+  }
+
+  primaryKeyHandler() {
+    this._currentSelector = this.$.shopDecision;
+    return this._currentSelector.keyHandler();
   }
 
   _buildChoices(state) {
@@ -45,8 +76,20 @@ class ShopScreenElement extends ScreenMixin(ReduxMixin(Polymer.Element)) {
     return state.choices || [];
   }
 
+  _charInventorySelected(e, detail) {
+    this.transaction.item = Object.assign({}, this.charInventory[detail.value]);
+    this._nextState();
+  }
+
   _choiceSelected(e, detail) {
+    if (this.state.charNameChoices) {
+      this.transaction.forChar = this.party[detail.value];
+    }
     this._nextState(detail.value);
+  }
+
+  _getCharInventory() {
+    return this.transaction.forChar[this.partyInventoryKey];
   }
 
   _getPrice(state) {
@@ -54,19 +97,36 @@ class ShopScreenElement extends ScreenMixin(ReduxMixin(Polymer.Element)) {
       return this.shopInventory[0];
     }
 
-    return this.$.inventorySelector.selectedItem.getAttribute('price')
+    return this._currentSelector.selectedItem().getAttribute('price')
+  }
+
+  _inventorySelected(e, detail) {
+    this.transaction.item = Object.assign({}, this.shopInventory[detail.value]);
+    this._nextState();
   }
 
   _nextState(choice) {
-    if (this.state.to) {
-      this.set('stateId', this.state.to);
-    } else {
-      this.set('stateId', this.shopChoices[choice].to);
+    const errorState = (this.state.transactionChecks || [])
+      .reduce((err, checkId) => err || this._errorHandlers[checkId](), '');
+
+    if (!errorState && this.state.finishTransaction) {
+      this.dispatch({
+        type: 'SHOP_TRANSACTION',
+        transaction: this.transaction
+      });
     }
+
+    this.set('stateId', errorState || this.state.to || this.shopChoices[choice].to);
   }
 
   _padPrice(price) {
     return Array.from(Array(5 - ('' + price).length)).map(i => ' ').join('') + price;
+  }
+
+  _previousState() {
+    if (this.state.back) {
+      this.set('stateId', this.state.back);
+    }
   }
 
   _shopkeeperSaysPrice(price) {
@@ -74,8 +134,10 @@ class ShopScreenElement extends ScreenMixin(ReduxMixin(Polymer.Element)) {
     this._switchKeyHandler(this.$.shopDecision);
   }
 
-  _stateChanged(state) {
-    this.showInventory = false;
+  _stateChanged(state, shop) {
+    if (!shop) {
+      return;
+    }
 
     if (state.exit) {
       this.dispatch({ type: 'EXIT_SHOP' });
@@ -86,23 +148,36 @@ class ShopScreenElement extends ScreenMixin(ReduxMixin(Polymer.Element)) {
       this.dispatch({ type: 'RESTED_AT_INN' });
     }
 
+    if (state.reset) {
+      this.transaction = { shop: this.shop };
+    }
+
+    if (state.sale) {
+      this.transaction.sale = true;
+    }
+
+    if (state.showCharInventory) {
+      this.set('charItems', this._getCharInventory());
+    }
+
     if (state.askForPrice) {
-      //this._setTransactionItem(this._shopInventory);
       this._shopkeeperSaysPrice(this._getPrice(state));
     } else {
       this.set('shopkeeperSays', state.conversation);
     }
 
-    this._switchKeyHandler(state.inventoryActive
-        ? this.$.shopInventory
-        : this.$.shopDecision);
-
+    this._switchKeyHandler(state.inventoryActive);
     this.set('shopChoices', this._buildChoices(state));
   }
 
-  _switchKeyHandler(newSelector) {
+  _switchKeyHandler(selectorType) {
+    const newSelector = {
+      'shop': this.$.shopInventory,
+      'char': this.$.charInventory
+    }[selectorType] || this.$.shopDecision;
+
     if (this._currentSelector) {
-      newSelector.deactivate();
+      this._currentSelector.deactivate();
     }
     newSelector.activate();
     this._currentSelector = newSelector;

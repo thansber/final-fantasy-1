@@ -1,5 +1,6 @@
 <link rel="import" href="/bower_components/polymer/polymer-element.html">
 <link rel="import" href="/redux-mixin.html">
+<link rel="import" href="../mixins/ff-shop-mixin.html">
 
 <dom-module id="ff-shop-states">
   <script>
@@ -8,6 +9,10 @@
 
       static get properties() {
         return {
+          partyInventoryKey: {
+            notify: true,
+            type: String,
+          },
           shop: {
             observer: '_shopChanged',
             statePath: 'shop.type',
@@ -42,6 +47,148 @@
         super.ready();
 
         this._setupInn();
+        this._setupItemShop();
+        this._setupWeaponShop();
+      }
+
+      _equipmentStates() {
+        return {
+          start: {
+            back: 'exit',
+            conversation: ['Welcome'],
+            choices: [
+              { label: 'Buy', to: 'buyingStart' },
+              { label: 'Sell', to: 'sellingStart' },
+              { label: 'Exit', to: 'exit' }
+            ],
+            reset: true
+          },
+          buyingStart: {
+            back: 'start',
+            conversation: ['What do', 'you', 'want?'],
+            inventoryActive: 'shop',
+            showInventory: true,
+            to: 'buyingConfirmPrice'
+          },
+          buyingConfirmPrice: {
+            askForPrice: true,
+            back: 'regretStart',
+            choices: [
+              { label: 'Yes', to: 'buyingForWhom' },
+              { label: 'No', to: 'regretStart' }
+            ],
+            showInventory: true
+          },
+          buyingForWhom: {
+            back: 'regretStart',
+            charNameChoices: true,
+            conversation: ['Who', 'will', 'take', 'it?'],
+            finishTransaction: true,
+            maxAllowed: 4,
+            showInventory: true,
+            to: 'thanks',
+            transactionChecks: ['money', 'room']
+          },
+          sellingStart: {
+            back: 'regretStart',
+            charNameChoices: true,
+            checkCharInventory: true,
+            conversation: ['Whose', 'item', 'do you', 'want to', 'sell?'],
+            sale: true,
+            to: 'sellingFromWhom',
+            transactionChecks: ['anythingToSell']
+          },
+          sellingFromWhom: {
+            back: 'regretStart',
+            conversation: ['Whose', 'item', 'do you', 'want to', 'sell?'],
+            inventoryActive: 'char',
+            showCharInventory: true,
+            to: 'sellingConfirmPrice'
+          },
+          sellingConfirmPrice: {
+            askForPrice: true,
+            back: 'regretStart',
+            choices: [
+              { label: 'Yes', to: 'thanks' },
+              { label: 'No', to: 'regretStart' }
+            ],
+            confirmPurchase: true,
+            finishTransaction: true,
+            showCharInventory: true
+          },
+          notEnoughMoney: {
+            conversation: ['You', 'can\'t', 'afford', 'that.'],
+            copyFrom: 'start'
+          },
+          notEnoughRoom: {
+            conversation: ['You', 'can\'t', 'carry', 'anymore'],
+            copyFrom: 'start'
+          },
+          nothingToSell: {
+            conversation: ['You', 'have', 'nothing', 'to sell', '  ::', 'Any-', 'thing', 'else?'],
+            copyFrom: 'start'
+          },
+          regretStart: {
+            conversation: ['Too bad', '::', 'Some-', 'thing', 'else?'],
+            copyFrom: 'start'
+          },
+          thanks: {
+            conversation: ['Thank', 'you!', 'What', 'else?'],
+            copyFrom: 'start'
+          }
+        };
+      }
+
+      _setupItemShop() {
+        this._shopSetup({
+          id: this.ShopIds.Item,
+          sign: 'ITEM',
+          states: {
+            start: {
+              back: 'exit',
+              conversation: ['Welcome'],
+              choices: [
+                { label: 'Buy', to: 'buyingStart' },
+                { label: 'Exit', to: 'exit' }
+              ],
+              partyInventory: true,
+              reset: true
+            },
+            buyingStart: {
+              back: 'start',
+              conversation: ['What do', 'you', 'want?'],
+              inventoryActive: 'shop',
+              showInventory: true,
+              to: 'buyingConfirmPrice'
+            },
+            buyingConfirmPrice: {
+              askForPrice: true,
+              back: 'regretStart',
+              choices: [
+                { label: 'Yes', to: 'thanks' },
+                { label: 'No', to: 'regretStart' }
+              ],
+              finishTransaction: true,
+              showInventory: true,
+              transactionChecks: ['money']
+            },
+            notEnoughMoney: {
+              conversation: ['You', 'can\'t', 'afford', 'that.'],
+              copyFrom: 'start',
+              showInventory: true
+            },
+            regretStart: {
+              conversation: ['Too bad', '::', 'Some-', 'thing', 'else?'],
+              copyFrom: 'start',
+              showInventory: true
+            },
+            thanks: {
+              conversation: ['Thank', 'you!', 'What', 'else?'],
+              copyFrom: 'start',
+              showInventory: true
+            }
+          }
+        });
       }
 
       _setupInn() {
@@ -81,10 +228,19 @@
         });
       }
 
+      _setupWeaponShop() {
+        this._shopSetup({
+          id: this.ShopIds.Weapon,
+          sign: 'WEAPON',
+          partyInventoryKey: 'weapons',
+          states: Object.assign({}, this._equipmentStates())
+        });
+      }
+
       _loadShop(shopType) {
         const shop = this.ShopsById[shopType];
         if (!shop) {
-          throw 'No shop found for type [`${shopType}`]'
+          throw `No shop found for type [${shopType}]`
         }
         return shop;
       }
@@ -107,12 +263,20 @@
           return;
         }
 
-        this.set('sign', this._loadShop(shopType).sign);
+        const shop = this._loadShop(shopType);
+        this.set('sign', shop.sign);
+        this.set('partyInventoryKey', shop.partyInventoryKey);
         this._loadState(shopType, 'start');
       }
 
       _shopSetup(data) {
         this.ShopsById[data.id] = data;
+        Object.keys(data.states).forEach(stateId => {
+          let state = data.states[stateId];
+          if (state.copyFrom) {
+            data.states[stateId] = Object.assign({}, data.states[state.copyFrom], state);
+          }
+        });
       }
     }
 

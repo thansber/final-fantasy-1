@@ -2,15 +2,15 @@ const sampleParty = () => {
   return [{
     charClass: randomCharClass(),
     name: 'AAAA',
-    weapons: [], armor: [], spells: []
+    weapons: ['Silver[K]', 'Mage[R]', 'Scimtar', 'Flame[S]'], armor: [], spells: []
   }, {
     charClass: randomCharClass(),
     name: 'BBBB',
-    weapons: [], armor: [], spells: []
+    weapons: [], armor: ['Silver[B]', 'Iron[G]', 'Opal[H]', 'Steel[A]'], spells: []
   }, {
     charClass: randomCharClass(),
     name: 'CCCC',
-    weapons: [], armor: [], spells: []
+    weapons: [], armor: [], spells: ['', '', '', '']
   }, {
     charClass: randomCharClass(),
     name: 'DDDD',

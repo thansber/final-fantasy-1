@@ -66,13 +66,13 @@
             attr-for-selected="shop">
             <div shop="inn">Inn</div>
             <div shop="clinic">Clinic</div>
-            <div shop="weapon" inventory-key="weapons">Weapon</div>
-            <div shop="armor" inventory-key="armor">Armor</div>
+            <div shop="weapon">Weapon</div>
+            <div shop="armor">Armor</div>
             <div shop="item">Item</div>
-            <div shop="blackmagic" inventory-key="spells">Black Magic</div>
-            <div shop="whitemagic" inventory-key="spells">White Magic</div>
-            <div shop="blackmagic2" inventory-key="spells">Black Magic 2</div>
-            <div shop="whitemagic2" inventory-key="spells">White Magic 2</div>
+            <div shop="blackmagic">Black Magic</div>
+            <div shop="whitemagic">White Magic</div>
+            <div shop="blackmagic2">Black Magic 2</div>
+            <div shop="whitemagic2">White Magic 2</div>
           </iron-selector>
 
           <iron-selector id="townSelector"
@@ -104,7 +104,7 @@
           this.dispatch({ type: 'LOAD_GAME' });
 
           this.$.townSelector.selected = 'towns/coneria';
-          this.$.shopSelector.selected = 'inn';
+          this.$.shopSelector.selected = 'weapon';
         }
 
         _shopChanged(shop) {

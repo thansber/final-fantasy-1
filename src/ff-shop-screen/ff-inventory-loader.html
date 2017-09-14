@@ -16,12 +16,19 @@
 
       static get properties() {
         return {
+          charItems: {
+            type: Array
+          },
           data: {
             observer: '_dataLoaded',
             type: Object
           },
           inventoryByShop: {
             readonly: true,
+            type: Object
+          },
+          inventoryForChar: {
+            notify: true,
             type: Object
           },
           map: {
@@ -37,6 +44,7 @@
 
       static get observers() {
         return [
+          '_loadCharInventory(charItems, shop, inventoryByShop)',
           '_shopSet(map, shop, inventoryByShop)'
         ];
       }
@@ -60,6 +68,17 @@
 
       _inventoryLoaded(inventory) {
         this.dispatch({ type: 'SHOP_INVENTORY_LOADED', inventory: inventory });
+      }
+
+      _loadCharInventory(charItems, shop, inventoryByShop) {
+        if (!shop || !charItems || !inventoryByShop) {
+          return;
+        }
+
+        this.set('inventoryForChar', charItems.map(item => {
+          let fullItem = inventoryByShop[shop][item];
+          return Object.assign({}, fullItem, { price: Math.floor(fullItem.price / 2) });
+        }));
       }
 
       _shopSet(map, shop, inventoryByShop) {
