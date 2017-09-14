@@ -1,0 +1,41 @@
+{
+  "id": "inn",
+  "sign": "INN",
+  "states": {
+    "start": {
+      "back": "leaving",
+      "conversation": ["Welcome", "  ::", "Stay,", "to save", "your", "data."],
+      "choices": [
+        { "label": "Yes", "to": "buying" },
+        { "label": "No", "to": "leaving" }
+      ],
+      "reset": true
+    },
+    "buying": {
+      "askForPrice": true,
+      "back": "leaving",
+      "choices": [
+        { "label": "Yes", "to": "resting" },
+        { "label": "No", "to": "leaving" }
+      ],
+      "finishTransaction": true,
+      "singleItem": true,
+      "transactionChecks": ["money"]
+    },
+    "resting": {
+      "back": "leaving",
+      "conversation": ["Don't", "forget,", "if you", "leave", "your", "game,"],
+      "resting": true,
+      "to": "leaving"
+    },
+    "leaving": {
+      "back": "exit",
+      "conversation": ["Hold", "RESET", "while", "you", "turn", "POWER", "off!!"],
+      "to": "exit"
+    },
+    "notEnoughMoney": {
+      "conversation": ["You", "can't", "afford", "that."],
+      "to": "exit"
+    }
+  }
+}

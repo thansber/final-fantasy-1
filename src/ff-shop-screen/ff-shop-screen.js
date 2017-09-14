@@ -85,6 +85,9 @@ class ShopScreenElement extends ScreenMixin(ReduxMixin(Polymer.Element)) {
     if (this.state.charNameChoices) {
       this.transaction.forChar = this.party[detail.value];
     }
+    if (this.state.singleItem) {
+      this.transaction.item = { price: this.shopInventory[0] };
+    }
     this._nextState(detail.value);
   }
 
@@ -135,7 +138,7 @@ class ShopScreenElement extends ScreenMixin(ReduxMixin(Polymer.Element)) {
   }
 
   _stateChanged(state, shop) {
-    if (!shop) {
+    if (!shop || !state) {
       return;
     }
 
