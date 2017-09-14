@@ -6,10 +6,21 @@
 <dom-module id="ff-shop-states">
   <template>
     <iron-ajax
+      id="equipment"
+      url="[[importPath]]json/equipment.json"
+      last-response="{{ equipmentShopData }}"
+      auto></iron-ajax>
+    <iron-ajax
       id="inn"
       url="[[importPath]]json/inn.json"
-      last-response="{{ innShopStates }}"
+      last-response="{{ innShopData }}"
       auto></iron-ajax>
+    <iron-ajax
+      id="item"
+      url="[[importPath]]json/item.json"
+      last-response="{{ itemShopData }}"
+      auto></iron-ajax>
+
   </template>
 
   <script>
@@ -47,169 +58,17 @@
       static get observers() {
         return [
           '_loadState(shop, stateId, statesByShop)',
-          '_setupShop(innShopStates)',
+          '_setupShops(equipmentShopData, innShopData, itemShopData)',
           '_shopChanged(shop, statesByShop)'
         ];
       }
 
-      ready() {
-        super.ready();
-
-        //this._setupInn();
-        //this._setupItemShop();
-        //this._setupWeaponShop();
-      }
-
-      _equipmentStates() {
-        return {
-          start: {
-            back: 'exit',
-            conversation: ['Welcome'],
-            choices: [
-              { label: 'Buy', to: 'buyingStart' },
-              { label: 'Sell', to: 'sellingStart' },
-              { label: 'Exit', to: 'exit' }
-            ],
-            reset: true
-          },
-          buyingStart: {
-            back: 'start',
-            conversation: ['What do', 'you', 'want?'],
-            inventoryActive: 'shop',
-            showInventory: true,
-            to: 'buyingConfirmPrice'
-          },
-          buyingConfirmPrice: {
-            askForPrice: true,
-            back: 'regretStart',
-            choices: [
-              { label: 'Yes', to: 'buyingForWhom' },
-              { label: 'No', to: 'regretStart' }
-            ],
-            showInventory: true
-          },
-          buyingForWhom: {
-            back: 'regretStart',
-            charNameChoices: true,
-            conversation: ['Who', 'will', 'take', 'it?'],
-            finishTransaction: true,
-            maxAllowed: 4,
-            showInventory: true,
-            to: 'thanks',
-            transactionChecks: ['money', 'room']
-          },
-          sellingStart: {
-            back: 'regretStart',
-            charNameChoices: true,
-            checkCharInventory: true,
-            conversation: ['Whose', 'item', 'do you', 'want to', 'sell?'],
-            sale: true,
-            to: 'sellingFromWhom',
-            transactionChecks: ['anythingToSell']
-          },
-          sellingFromWhom: {
-            back: 'regretStart',
-            conversation: ['Whose', 'item', 'do you', 'want to', 'sell?'],
-            inventoryActive: 'char',
-            showCharInventory: true,
-            to: 'sellingConfirmPrice'
-          },
-          sellingConfirmPrice: {
-            askForPrice: true,
-            back: 'regretStart',
-            choices: [
-              { label: 'Yes', to: 'thanks' },
-              { label: 'No', to: 'regretStart' }
-            ],
-            confirmPurchase: true,
-            finishTransaction: true,
-            showCharInventory: true
-          },
-          notEnoughMoney: {
-            conversation: ['You', 'can\'t', 'afford', 'that.'],
-            copyFrom: 'start'
-          },
-          notEnoughRoom: {
-            conversation: ['You', 'can\'t', 'carry', 'anymore'],
-            copyFrom: 'start'
-          },
-          nothingToSell: {
-            conversation: ['You', 'have', 'nothing', 'to sell', '  ::', 'Any-', 'thing', 'else?'],
-            copyFrom: 'start'
-          },
-          regretStart: {
-            conversation: ['Too bad', '::', 'Some-', 'thing', 'else?'],
-            copyFrom: 'start'
-          },
-          thanks: {
-            conversation: ['Thank', 'you!', 'What', 'else?'],
-            copyFrom: 'start'
+      _cloneShopStates(states) {
+        Object.keys(states).forEach(stateId => {
+          let state = states[stateId];
+          if (state.copyFrom) {
+            states[stateId] = Object.assign({}, states[state.copyFrom], state);
           }
-        };
-      }
-
-      _setupItemShop() {
-        this._shopSetup({
-          id: this.ShopIds.Item,
-          sign: 'ITEM',
-          states: {
-            start: {
-              back: 'exit',
-              conversation: ['Welcome'],
-              choices: [
-                { label: 'Buy', to: 'buyingStart' },
-                { label: 'Exit', to: 'exit' }
-              ],
-              partyInventory: true,
-              reset: true
-            },
-            buyingStart: {
-              back: 'start',
-              conversation: ['What do', 'you', 'want?'],
-              inventoryActive: 'shop',
-              showInventory: true,
-              to: 'buyingConfirmPrice'
-            },
-            buyingConfirmPrice: {
-              askForPrice: true,
-              back: 'regretStart',
-              choices: [
-                { label: 'Yes', to: 'thanks' },
-                { label: 'No', to: 'regretStart' }
-              ],
-              finishTransaction: true,
-              showInventory: true,
-              transactionChecks: ['money']
-            },
-            notEnoughMoney: {
-              conversation: ['You', 'can\'t', 'afford', 'that.'],
-              copyFrom: 'start',
-              showInventory: true
-            },
-            regretStart: {
-              conversation: ['Too bad', '::', 'Some-', 'thing', 'else?'],
-              copyFrom: 'start',
-              showInventory: true
-            },
-            thanks: {
-              conversation: ['Thank', 'you!', 'What', 'else?'],
-              copyFrom: 'start',
-              showInventory: true
-            }
-          }
-        });
-      }
-
-      _setupInn() {
-        this._shopSetup();
-      }
-
-      _setupWeaponShop() {
-        this._shopSetup({
-          id: this.ShopIds.Weapon,
-          sign: 'WEAPON',
-          partyInventoryKey: 'weapons',
-          states: Object.assign({}, this._equipmentStates())
         });
       }
 
@@ -235,7 +94,7 @@
       }
 
       _shopChanged(shopType, statesByShop) {
-        if (!shopType || !statesByShop) {
+        if (Array.from(arguments).some(d => !d)) {
           return;
         }
 
@@ -245,18 +104,28 @@
         this._loadState(shopType, 'start');
       }
 
-      _setupShop(...shopData) {
-        this.set('statesByShop', shopData.reduce((byId, shopStates) => {
+      _setupShops(...shopData) {
+        if (shopData.some(d => !d)) {
+          return;
+        }
+        const statesByShop = shopData.reduce((byId, shopStates) => {
           byId[shopStates.id] = Object.assign({}, shopStates);
-          let states = byId[shopStates.id].states;
-          Object.keys(states).forEach(stateId => {
-            let state = states[stateId];
-            if (state.copyFrom) {
-              states[stateId] = Object.assign({}, states[state.copyFrom], state);
-            }
-          });
+          this._cloneShopStates(byId[shopStates.id].states);
           return byId;
-        }, {}));
+        }, {});
+
+        statesByShop[this.ShopIds.Weapon] = Object.assign({}, statesByShop.equipment, {
+          id: this.ShopIds.Weapon,
+          sign: 'WEAPON',
+          partyInventoryKey: 'weapons'
+        });
+        statesByShop[this.ShopIds.Armor] = Object.assign({}, statesByShop.equipment, {
+          id: this.ShopIds.Armor,
+          sign: 'ARMOR',
+          partyInventoryKey: 'armor'
+        });
+
+        this.set('statesByShop', statesByShop);
       }
     }
 

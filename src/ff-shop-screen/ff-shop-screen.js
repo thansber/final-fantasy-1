@@ -109,7 +109,8 @@ class ShopScreenElement extends ScreenMixin(ReduxMixin(Polymer.Element)) {
   }
 
   _nextState(choice) {
-    const errorState = (this.state.transactionChecks || [])
+    const stateChoice = this.shopChoices[choice] || {};
+    let errorState = (this.state.transactionChecks || [])
       .reduce((err, checkId) => err || this._errorHandlers[checkId](), '');
 
     if (!errorState && this.state.finishTransaction) {
@@ -119,7 +120,12 @@ class ShopScreenElement extends ScreenMixin(ReduxMixin(Polymer.Element)) {
       });
     }
 
-    this.set('stateId', errorState || this.state.to || this.shopChoices[choice].to);
+    if (stateChoice.back) {
+      errorState = '';
+    }
+
+    const nextStateId = errorState || this.state.to || stateChoice.to;
+    this.set('stateId', nextStateId);
   }
 
   _padPrice(price) {

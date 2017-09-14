@@ -1,0 +1,49 @@
+{
+  "id": "item",
+  "sign": "ITEM",
+  "states": {
+    "start": {
+      "back": "exit",
+      "conversation": ["Welcome"],
+      "choices": [
+        { "label": "Buy", "to": "buyingStart" },
+        { "label": "Exit", "to": "exit" }
+      ],
+      "partyInventory": true,
+      "reset": true
+    },
+    "buyingStart": {
+      "back": "start",
+      "conversation": ["What do", "you", "want?"],
+      "inventoryActive": "shop",
+      "showInventory": true,
+      "to": "buyingConfirmPrice"
+    },
+    "buyingConfirmPrice": {
+      "askForPrice": true,
+      "back": "regretStart",
+      "choices": [
+        { "label": "Yes", "to": "thanks" },
+        { "label": "No", "to": "regretStart" }
+      ],
+      "finishTransaction": true,
+      "showInventory": true,
+      "transactionChecks": ["money"]
+    },
+    "notEnoughMoney": {
+      "conversation": ["You", "can't", "afford", "that."],
+      "copyFrom": "start",
+      "showInventory": true
+    },
+    "regretStart": {
+      "conversation": ["Too bad", "::", "Some-", "thing", "else?"],
+      "copyFrom": "start",
+      "showInventory": true
+    },
+    "thanks": {
+      "conversation": ["Thank", "you!", "What", "else?"],
+      "copyFrom": "start",
+      "showInventory": true
+    }
+  }
+}

@@ -16,15 +16,15 @@
       "back": "leaving",
       "choices": [
         { "label": "Yes", "to": "resting" },
-        { "label": "No", "to": "leaving" }
+        { "label": "No", "to": "leaving", "back": true }
       ],
-      "finishTransaction": true,
       "singleItem": true,
       "transactionChecks": ["money"]
     },
     "resting": {
       "back": "leaving",
       "conversation": ["Don't", "forget,", "if you", "leave", "your", "game,"],
+      "finishTransaction": true,
       "resting": true,
       "to": "leaving"
     },
