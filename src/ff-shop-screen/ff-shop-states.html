@@ -34,10 +34,6 @@
 
       static get properties() {
         return {
-          partyInventoryKey: {
-            notify: true,
-            type: String,
-          },
           shop: {
             statePath: 'shop.type',
             type: String
@@ -49,10 +45,6 @@
           shopState: {
             notify: true,
             type: Object,
-          },
-          sign: {
-            notify: true,
-            type: String
           },
           stateId: {
             type: String
@@ -104,8 +96,11 @@
         }
 
         const shop = this._loadShop(shopType);
-        this.set('sign', shop.sign);
-        this.set('partyInventoryKey', shop.partyInventoryKey);
+        this.dispatch({
+          type: 'SHOP_LOADED',
+          sign:  shop.sign,
+          partyInventoryKey: shop.partyInventoryKey
+        });
         this._loadState(shopType, 'start');
       }
 

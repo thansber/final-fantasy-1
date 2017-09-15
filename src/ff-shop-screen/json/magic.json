@@ -21,7 +21,7 @@
       "back": "regretStart",
       "choices": [
         { "label": "Yes", "to": "start" },
-        { "label": "No", "to": "regretStart" }
+        { "label": "No", "to": "regretStart", "back": true }
       ],
       "finishTransaction": true,
       "maxAllowed": 3,
