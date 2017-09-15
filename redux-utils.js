@@ -10,9 +10,13 @@ const sampleParty = () => {
     weapons: [], armor: ['Silver[B]', 'Iron[G]', 'Opal[H]', 'Steel[A]'], spells: [],
     status: []
   }, {
-    charClass: 'BM', //randomCharClass(),
+    charClass: 'WM', //randomCharClass(),
     name: 'CCCC',
-    weapons: [], armor: [], spells: [['LIT'],[],['FIR2','CUR2','LIT2']],
+    weapons: [], armor: [], spells: [
+      ['HARM','CURE'],
+      [],
+      ['FIR2','CUR2','LIT2']
+    ],
     status: []
   }, {
     charClass: randomCharClass(),

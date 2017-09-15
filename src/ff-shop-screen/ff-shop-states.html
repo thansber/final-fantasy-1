@@ -130,13 +130,35 @@
           partyInventoryKey: 'armor'
         });
 
-        statesByShop[this.ShopIds.BlackMagic] = Object.assign({}, statesByShop.magic, {
+        this._setupBlackMagicShops(statesByShop);
+        this._setupWhiteMagicShops(statesByShop);
+
+        this.set('statesByShop', statesByShop);
+      }
+
+      _setupBlackMagicShops(statesByShop) {
+        const blackMagicShop = {
           id: this.ShopIds.BlackMagic,
           sign: 'BMAGIC',
           partyInventoryKey: 'spells'
-        });
+        };
+        statesByShop[this.ShopIds.BlackMagic]
+          = Object.assign({}, statesByShop.magic, blackMagicShop);
+        statesByShop[this.ShopIds.BlackMagic2]
+          = Object.assign({}, statesByShop.magic, blackMagicShop);
+      }
 
-        this.set('statesByShop', statesByShop);
+      _setupWhiteMagicShops(statesByShop) {
+        const whiteMagicShop = {
+          id: this.ShopIds.WhiteMagic,
+          sign: 'WMAGIC',
+          partyInventoryKey: 'spells'
+        };
+
+        statesByShop[this.ShopIds.WhiteMagic]
+          = Object.assign({}, statesByShop.magic, whiteMagicShop);
+        statesByShop[this.ShopIds.WhiteMagic2]
+          = Object.assign({}, statesByShop.magic, whiteMagicShop);
       }
     }
 
