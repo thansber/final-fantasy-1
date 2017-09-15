@@ -1,0 +1,57 @@
+{
+  "id": "magic",
+  "states": {
+    "start": {
+      "back": "exit",
+      "charNameChoices": true,
+      "conversation": ["Who", "will", "learn", "the", "spell?"],
+      "reset": true,
+      "to": "buyingSpell"
+    },
+    "buyingSpell": {
+      "back": "regretStart",
+      "conversation": ["Who", "will", "learn", "the", "spell?"],
+      "inventoryActive": "shop",
+      "showInventory": true,
+      "to": "buyingConfirmPrice",
+      "transactionChecks": ["canLearnSpell", "alreadyKnowsSpell"]
+    },
+    "buyingConfirmPrice": {
+      "askForPrice": true,
+      "back": "regretStart",
+      "choices": [
+        { "label": "Yes", "to": "start" },
+        { "label": "No", "to": "regretStart" }
+      ],
+      "finishTransaction": true,
+      "maxAllowed": 3,
+      "showInventory": true,
+      "transactionChecks": ["money", "roomForSpell"]
+    },
+    "regretStart": {
+      "conversation": ["Too bad", "::", "Some-", "thing", "else?"],
+      "copyFrom": "start",
+      "showInventory": true
+    },
+    "alreadyKnowsSpell": {
+      "conversation": ["You", "already", "know", "that", "spell.", "Someone", "else?"],
+      "copyFrom": "start",
+      "showInventory": true
+    },
+    "cannotLearnSpell": {
+      "conversation": ["Sorry,", "You", "can't", "learn", "that.", "Someone", "else?"],
+      "copyFrom": "start",
+      "showInventory": true
+    },
+    "notEnoughMoney": {
+      "conversation": ["You", "can't", "afford", "that."],
+      "copyFrom": "start",
+      "showInventory": true
+    },
+    "notEnoughRoom": {
+      "conversation": ["This", "level", "spell", "is full", "  ::", "Someone", "else?"],
+      "copyFrom": "start",
+      "showInventory": true
+    }
+  }
+}

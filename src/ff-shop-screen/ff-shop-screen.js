@@ -1,4 +1,4 @@
-class ShopScreenElement extends ScreenMixin(ReduxMixin(Polymer.Element)) {
+class ShopScreenElement extends CharClassMixin(ScreenMixin(ReduxMixin(Polymer.Element))) {
   static get is() { return 'ff-shop-screen'; }
 
   static get properties() {
@@ -58,9 +58,22 @@ class ShopScreenElement extends ScreenMixin(ReduxMixin(Polymer.Element)) {
   constructor() {
     super();
     this._errorHandlers = {
-      anythingToSell: () => this._getCharInventory().length ? '' : 'nothingToSell',
-      money: () => this.transaction.item.price > this.gold ? 'notEnoughMoney' : '',
-      room: () => this._getCharInventory().length >= this.state.maxAllowed ? 'notEnoughRoom' : ''
+      alreadyKnowsSpell: () =>
+        this._getCharInventory().indexOf(this.transaction.item.name) > -1
+          ? 'alreadyKnowsSpell' : '',
+      anythingToSell: () =>
+        this._getCharInventory().length ? '' : 'nothingToSell',
+      canLearnSpell: () => {
+        const allowedClasses = this.transaction.item.allowedClasses;
+        const charClass = this.transaction.forChar.charClass;
+        return this.containsCharClass(allowedClasses, charClass) ? '' : 'cannotLearnSpell';
+      },
+      money: () =>
+        this.transaction.item.price > this.gold ? 'notEnoughMoney' : '',
+      room: () =>
+        this._getCharInventory().length >= this.state.maxAllowed ? 'notEnoughRoom' : '',
+      roomForSpell: () =>
+        this._getKnownSpellsForLevel().length >= this.state.maxAllowed ? 'notEnoughRoom' : ''
     }
   }
 
@@ -93,6 +106,10 @@ class ShopScreenElement extends ScreenMixin(ReduxMixin(Polymer.Element)) {
 
   _getCharInventory() {
     return this.transaction.forChar[this.partyInventoryKey];
+  }
+
+  _getKnownSpellsForLevel() {
+    return this._getCharInventory()[this.transaction.item.level - 1] || [];
   }
 
   _getPrice(state) {

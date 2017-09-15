@@ -20,6 +20,11 @@
       url="[[importPath]]json/item.json"
       last-response="{{ itemShopData }}"
       auto></iron-ajax>
+    <iron-ajax
+      id="magic"
+      url="[[importPath]]json/magic.json"
+      last-response="{{ magicShopData }}"
+      auto></iron-ajax>
 
   </template>
 
@@ -58,7 +63,7 @@
       static get observers() {
         return [
           '_loadState(shop, stateId, statesByShop)',
-          '_setupShops(equipmentShopData, innShopData, itemShopData)',
+          '_setupShops(equipmentShopData, innShopData, itemShopData, magicShopData)',
           '_shopChanged(shop, statesByShop)'
         ];
       }
@@ -123,6 +128,12 @@
           id: this.ShopIds.Armor,
           sign: 'ARMOR',
           partyInventoryKey: 'armor'
+        });
+
+        statesByShop[this.ShopIds.BlackMagic] = Object.assign({}, statesByShop.magic, {
+          id: this.ShopIds.BlackMagic,
+          sign: 'BMAGIC',
+          partyInventoryKey: 'spells'
         });
 
         this.set('statesByShop', statesByShop);

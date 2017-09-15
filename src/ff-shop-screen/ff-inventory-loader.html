@@ -92,7 +92,7 @@
         }
 
         this._inventoryLoaded(map.shopInventory[shop]
-          .map(item => Object.assign({}, mapping[item])));
+          .map(item => Object.assign({}, mapping[item], { name: item })));
       }
     }
 
