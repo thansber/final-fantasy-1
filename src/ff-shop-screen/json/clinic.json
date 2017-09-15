@@ -1,0 +1,36 @@
+{
+  "id": "clinic",
+  "sign": "CLINIC",
+  "states": {
+    "start": {
+      "back":"exit",
+      "conversation": ["Who","shall","be","revived","::"],
+      "deadCharChoices": true,
+      "initialChecks": ["anyoneDead"],
+      "reset": true,
+      "singleItem": true,
+      "to": "confirmPrice"
+    },
+    "confirmPrice": {
+      "askForPrice": true,
+      "back":"start",
+      "choices": [
+        { "label": "Yes", "to": "reviving" },
+        { "label": "No", "to": "start", "back": true }
+      ],
+      "singleItem": true,
+      "transactionChecks": ["money"]
+    },
+    "reviving": {
+      "back": "start",
+      "conversation": ["WARRIOR","::","Return","to","life!"],
+      "finishTransaction": true,
+      "to": "start"
+    },
+    "nobodyDead": {
+      "back":"exit",
+      "conversation": ["You do","not","need my","help","now."],
+      "to": "exit"
+    }
+  }
+}

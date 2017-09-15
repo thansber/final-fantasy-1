@@ -10,6 +10,10 @@ class ShopScreenElement extends CharClassMixin(ScreenMixin(ReduxMixin(Polymer.El
         notify: true,
         type: Array
       },
+      deadChars: {
+        statePath: 'deadChars',
+        type: Array
+      },
       gold: {
         statePath: 'gold',
         type: Number
@@ -66,6 +70,7 @@ class ShopScreenElement extends CharClassMixin(ScreenMixin(ReduxMixin(Polymer.El
       alreadyKnowsSpell: () =>
         this._getAllKnownSpells().indexOf(this.transaction.item.name) > -1
           ? 'alreadyKnowsSpell' : '',
+      anyoneDead: () => this.deadChars.length ? '' : 'nobodyDead',
       anythingToSell: () =>
         this._getCharInventory().length ? '' : 'nothingToSell',
       canLearnSpell: () => {
@@ -90,6 +95,8 @@ class ShopScreenElement extends CharClassMixin(ScreenMixin(ReduxMixin(Polymer.El
   _buildChoices(state) {
     if (state.charNameChoices) {
       return this.party.map(c => ({ label: c.name }));
+    } else if (state.deadCharChoices) {
+      return this.deadChars.map(c => ({ label: c }));
     }
     return state.choices || [];
   }
@@ -103,10 +110,18 @@ class ShopScreenElement extends CharClassMixin(ScreenMixin(ReduxMixin(Polymer.El
     if (this.state.charNameChoices) {
       this.transaction.forChar = this.party[detail.value];
     }
+    if (this.state.deadCharChoices) {
+      this.transaction.forChar =
+        this.party.filter(c => c.name === this.deadChars[detail.value])[0];
+    }
     if (this.state.singleItem) {
       this.transaction.item = { price: this.shopInventory[0] };
     }
     this._nextState(detail.value);
+  }
+
+  _errorState(checks) {
+    return (checks || []).reduce((err, checkId) => err || this._errorHandlers[checkId](), '');
   }
 
   _getAllKnownSpells() {
@@ -136,8 +151,7 @@ class ShopScreenElement extends CharClassMixin(ScreenMixin(ReduxMixin(Polymer.El
 
   _nextState(choice) {
     const stateChoice = this.shopChoices[choice] || {};
-    let errorState = (this.state.transactionChecks || [])
-      .reduce((err, checkId) => err || this._errorHandlers[checkId](), '');
+    let errorState = this._errorState(this.state.transactionChecks);
 
     if (!errorState && this.state.finishTransaction) {
       this.dispatch({
@@ -193,6 +207,12 @@ class ShopScreenElement extends CharClassMixin(ScreenMixin(ReduxMixin(Polymer.El
 
     if (state.showCharInventory) {
       this.set('charItems', this._getCharInventory());
+    }
+
+    let errorState = this._errorState(this.state.initialChecks);
+    if (errorState) {
+      this._nextState(errorState);
+      return;
     }
 
     if (state.askForPrice) {

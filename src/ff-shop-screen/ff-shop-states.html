@@ -6,6 +6,11 @@
 <dom-module id="ff-shop-states">
   <template>
     <iron-ajax
+      id="clinic"
+      url="[[importPath]]json/clinic.json"
+      last-response="{{ clinicShopData }}"
+      auto></iron-ajax>
+    <iron-ajax
       id="equipment"
       url="[[importPath]]json/equipment.json"
       last-response="{{ equipmentShopData }}"
@@ -55,7 +60,7 @@
       static get observers() {
         return [
           '_loadState(shop, stateId, statesByShop)',
-          '_setupShops(equipmentShopData, innShopData, itemShopData, magicShopData)',
+          '_setupShops(clinicShopData, equipmentShopData, innShopData, itemShopData, magicShopData)',
           '_shopChanged(shop, statesByShop)'
         ];
       }

@@ -9,7 +9,7 @@ DESIGN
 WORK
 ====
 - shops
-  - clinic shop flow
+  - clinic shop flow, confirm in game
   - handle transactions
     - gold
     - adding items to party
