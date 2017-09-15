@@ -10,6 +10,11 @@ WORK
 ====
 - shops
   - clinic shop flow
+  - handle transactions
+    - gold
+    - adding items to party
+    - adding equipment to chars
+    - adding spells to chars
 
 - fonts
 -- create battle menu font
